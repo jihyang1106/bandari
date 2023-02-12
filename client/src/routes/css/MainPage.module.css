@@ -1,0 +1,17 @@
+.mainPage {
+  margin-top: calc(7vh + 72px);
+}
+
+.mainPage section:first-child {
+  display: flex;
+}
+
+.mainPage section:first-child .mainImg {
+  width: 83vw;
+  display: flex;
+  justify-content: center;
+}
+
+.mainPage section:first-child .mainImg img {
+  height: calc(75vh + 120px);
+}
