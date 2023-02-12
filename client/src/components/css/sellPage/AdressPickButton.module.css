@@ -1,0 +1,25 @@
+.adressPickButton {
+    display: inline-block;
+    height: 38px;
+    background: #FFECE1;
+    border: none;
+    border-radius: 30px;
+    padding-left: 40px;
+    padding-right: 25px;
+    font-weight: 700;
+    color: #464646;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.adressPickButton img {
+    width: 18px;
+    height: 18px;
+    margin-left: -20px;
+}
+
+.adressPickButton:hover {
+    background: #F5A280; 
+    color: white;
+}
