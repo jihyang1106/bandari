@@ -1,0 +1,7 @@
+.myPage {
+  margin-top: calc(7vh + 72px);
+}
+
+.myPage section:first-child {
+  display: flex;
+}
