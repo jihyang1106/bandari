@@ -1,0 +1,18 @@
+.categoryButton {
+width: 70px;
+height: 38px;
+background: rgba( 255, 255, 255, 0 );
+border-radius: 30px;
+border: 1px solid #F5A280; 
+font-size: 15px;
+font-weight: 600;
+}
+
+.categoryButton:hover {
+    background: #F5A280;
+    color: white;
+    transform: scale(1.1);
+}
+
+
+/* ${color}; */
