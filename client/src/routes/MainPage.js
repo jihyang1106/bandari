@@ -1,13 +1,72 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 import styles from './css/MainPage.module.css';
 
 import Nav from '../components/Nav';
 import Category from '../components/Category';
+import Card from '../components/sellPage/Card';
 
 import PuppyMainImg from '../assets/PuppyMainImg.png';
+import CatMainImg from '../assets/CatMainImg.png';
+import BasicMainImg from '../assets/BasicMainImg.png';
+import { useNavigate } from 'react-router-dom';
+
+let datas = [
+  {
+    id: 1,
+    userID: '누구 님',
+    title: '고양이 이동장 팝니다.',
+    price: '25000',
+    location: '용산 어디어디 오디',
+    saleStatus: false,
+    likeStatus: false,
+    cardImg: '/Test.png',
+  },
+  {
+    id: 2,
+    userID: '누구 님',
+    title: '강아지 배변 패드 팝니다.',
+    price: '25000',
+    location: '용산 어디어디 오디',
+    saleStatus: false,
+    likeStatus: false,
+    cardImg: '/Test.png',
+  },
+  {
+    id: 3,
+    userID: '누구 님',
+    title: '사료 기호성 테스트 키트.',
+    price: '10000',
+    location: '어디어디 오디',
+    saleStatus: true,
+    likeStatus: true,
+    cardImg: '/Test.png',
+  },
+  {
+    id: 4,
+    userID: '누구 님',
+    title: '사료 기호성 테스트 키트.',
+    price: '10000',
+    location: '어디어디 오디',
+    saleStatus: true,
+    likeStatus: true,
+    cardImg: '/Test.png',
+  },
+];
 
 const MainPage = () => {
+  const isLoggedIn = useSelector((state) => state.user.user.isLoggedIn);
+  const btnState = useSelector((state) => state.typeSwitch.switchState);
+
+  console.log(isLoggedIn);
+
+  const navigate = useNavigate();
+
+  const moveSellPage = () => {
+    navigate('/sellPage');
+  };
+
   return (
     <>
       <Nav />
@@ -16,7 +75,9 @@ const MainPage = () => {
         <section>
           <Category />
           <div className={styles.mainImg}>
-            <img src={PuppyMainImg} alt="puppy" />
+            {btnState === 'basic' ? <img src={BasicMainImg} alt="basic" /> : ''}
+            {btnState === 'puppy' ? <img src={PuppyMainImg} alt="puppy" /> : ''}
+            {btnState === 'cat' ? <img src={CatMainImg} alt="cat" /> : ''}
           </div>
         </section>
         {/*두번째 메인페이지*/}
@@ -68,7 +129,27 @@ const MainPage = () => {
           </div>
         </section>
         {/*마지막 메인페이지*/}
-        <section></section>
+        <section>
+          <h1>인기글</h1>
+          <div className={styles.cards}>
+            {datas.map((data, index) => {
+              return (
+                <>
+                  <Card
+                    key={data.id}
+                    title={data.title}
+                    price={data.price}
+                    location={data.location}
+                    // saleStatus={list.saleStatus}
+                    // likeStatus={list.likeStatus}
+                    cardImg={data.cardImg}
+                  />
+                </>
+              );
+            })}
+          </div>
+          <span onClick={moveSellPage}>더보기</span>
+        </section>
       </div>
     </>
   );

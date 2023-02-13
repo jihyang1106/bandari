@@ -89,4 +89,32 @@
 
 /*마지막 메인페이지*/
 .mainPage section:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainPage section:last-child .cards {
+  display: flex;
+  width: 1200px;
+  justify-content: space-around;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.mainPage section:last-child > span {
+  cursor: pointer;
+}
+
+/*1200px이하*/
+@media screen and (max-width: 1200px) {
+  /*마지막 메인페이지*/
+  .mainPage section:last-child .cards {
+    display: flex;
+    width: 600px;
+    justify-content: space-around;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+  }
 }
