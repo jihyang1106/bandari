@@ -1,5 +1,5 @@
 const development = {
-  host: 'localhost',
+  host: process.env.PUBLIC_IP,
   database: process.env.DB,
   username: process.env.DBUSER,
   password: process.env.PASSWORD,
