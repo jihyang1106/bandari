@@ -1,3 +1,4 @@
+//판매글 이미지 테이블
 const img = (Sequelize, DataTypes) =>{
     return Sequelize.define(
         "img",

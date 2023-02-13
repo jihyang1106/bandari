@@ -1,3 +1,4 @@
+// 반려동물 용품 테이블
 const supplies = (Sequelize, DataTypes) =>{
     return Sequelize.define(
         "supplies",
