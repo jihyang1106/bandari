@@ -1,0 +1,38 @@
+.switchBtn {
+  display: flex;
+  background-color: rgb(211, 211, 211);
+  width: 200px;
+  margin-right: 20px;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10px;
+  height: 40px;
+}
+
+.switchBtn > button {
+  background-color: transparent;
+  border: none;
+  width: 55px;
+  font-size: 13px;
+  cursor: pointer;
+  height: 30px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.switchBtn > .puppyBtn.clicked {
+  background-color: #f5a280;
+  color: white;
+  font-weight: 600;
+}
+
+.switchBtn > .basicBtn.clicked {
+  background-color: white;
+  font-weight: 600;
+}
+
+.switchBtn > .catBtn.clicked {
+  background-color: #78aac3;
+  color: white;
+  font-weight: 600;
+}

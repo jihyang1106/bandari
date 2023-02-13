@@ -9,17 +9,29 @@
   height: 7vh;
 }
 
-.nav img {
+.nav > div:first-child {
+  display: flex;
+  align-items: center;
+}
+
+.nav > div > a > .logoIcon {
   width: 100px;
+  margin-right: 20px;
+}
+
+.nav > div > .typeIcon {
+  width: 45px;
+  height: 45px;
 }
 
 .nav .btns {
-  width: 125px;
+  width: 300px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.nav .btns button {
+.nav .btns > button {
   border: none;
   background-color: transparent;
   font-size: 15px;
