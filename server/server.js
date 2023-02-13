@@ -8,7 +8,7 @@ const path = require('path');
 /**dotenv 설정 */
 const dotenv = require('dotenv');
 dotenv.config({
-  path: path.join(__dirname, '../.env'),
+  path: path.join(__dirname, './.env'),
 });
 
 /**client와의 통신 */
