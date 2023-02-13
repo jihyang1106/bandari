@@ -1,3 +1,4 @@
+//글 좋아요 테이블
 const like = (Sequelize, DataTypes) =>{
     return Sequelize.define(
         "like",

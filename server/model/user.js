@@ -1,3 +1,4 @@
+//user 테이블
 const user = (Sequelize, DataTypes) =>{
     return Sequelize.define(
         "user",

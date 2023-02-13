@@ -1,3 +1,4 @@
+//반려동물 프로필 테이블
 const pet = (Sequelize, DataTypes) =>{
     return Sequelize.define(
         "pet",
