@@ -17,6 +17,11 @@ const Category = () => {
         </NavLink>
       </div>
       <div className={styles.link}>
+        <NavLink to="/donatePage">
+          <span>기부관련페이지</span>
+        </NavLink>
+      </div>
+      <div className={styles.link}>
         <NavLink to="/myPage">
           <span>마이페이지</span>
         </NavLink>

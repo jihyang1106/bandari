@@ -5,6 +5,7 @@ import MainPage from './MainPage';
 import SellPage from './SellPage';
 import MyPage from './MyPage';
 import ChatPage from './ChatPage';
+import DonatePage from './DonatePage';
 import ErrorPage from './ErrorPage';
 
 const AppRouter = () => {
@@ -15,7 +16,7 @@ const AppRouter = () => {
         <Route path="/sellPage" element={<SellPage />} />
         <Route path="/myPage" element={<MyPage />} />
         <Route path="/chatPage" element={<ChatPage />} />
-        <Route path="/errorPage" element={<ErrorPage />} />
+        <Route path="/donatePage" element={<DonatePage />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

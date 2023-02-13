@@ -4,6 +4,7 @@
   font-size: 20px;
   padding: 60px 34px;
   margin-left: 39px;
+  margin-top: calc(7vh + 72px);
 }
 
 .link {
