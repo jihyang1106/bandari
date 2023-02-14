@@ -1,15 +1,20 @@
-import React from 'react';
 import Card from './Card';
-// import CategoryButton from './CategoryButton.js';
-// import AdressPickButton from './AdressPickButton.js';
-import styles from '../css/sellPage/AvailCards.module.css';
 
-export default function AvailCards() {
+import styles from '../css/sellPage/AvailCards.module.css';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SellCategory from './SellCategory';
+import SalesFost from './SalesFost';
+// import $ from 'jquery';
+// import { useNavigate } from 'react-router-dom';
+
+export default function SellPageMain() {
+  // const navigate = useNavigate();
+
   // 서버 데이터 구축 되면, 요청
   // 임시데이터
   let data = [
     {
-      userID: '누구 님',
+      userID: 1,
       title: '고양이 이동장 팝니다.',
       price: '25000',
       location: '용산 어디어디 오디',
@@ -18,7 +23,7 @@ export default function AvailCards() {
       cardImg: '/Test.png',
     },
     {
-      userID: '누구 님',
+      userID: '2',
       title: '강아지 배변 패드 팝니다.',
       price: '25000',
       location: '용산 어디어디 오디',
@@ -27,7 +32,7 @@ export default function AvailCards() {
       cardImg: '/Test.png',
     },
     {
-      userID: '누구 님',
+      userID: '3',
       title: '사료 기호성 테스트 키트.',
       price: '10000',
       location: '어디어디 오디',
@@ -36,7 +41,7 @@ export default function AvailCards() {
       cardImg: '/Test.png',
     },
     {
-      userID: '누구 님',
+      userID: '4',
       title: '사료 기호성 테스트 키트.',
       price: '10000',
       location: '어디어디 오디',
@@ -45,7 +50,7 @@ export default function AvailCards() {
       cardImg: '/Test.png',
     },
     {
-      userID: '누구 님',
+      userID: '5',
       title: '사료 기호성 테스트 키트.',
       price: '10000',
       location: '어디어디 오디',
@@ -54,7 +59,7 @@ export default function AvailCards() {
       cardImg: '/Test.png',
     },
     {
-      userID: '누구 님',
+      userID: '6',
       title: '사료 기호성 테스트 키트.',
       price: '10000',
       location: '어디어디 오디',
@@ -64,38 +69,27 @@ export default function AvailCards() {
     },
   ];
 
+  // const onClickCard = () => {
+  //   navigator('/')
+  // }
+  // `'/${props.userID + 글번호}'`
+
+  // $(cardRef.current).click(() => {
+  //   navigate('http:/localhost:3000');
+  // });
+
   return (
     <>
-      {/* 카테고리 / 검색 / 판매하기 버튼 */}
-      {/* <div className={styles.AvailSaleContainer}>
-        <span className={styles.categoryButtonContainer}>
-          <AdressPickButton />
-          <CategoryButton text={'전체'} />
-          <CategoryButton text={'사료'} />
-          <CategoryButton text={'간식'} />
-          <CategoryButton text={'용품'} />
-        </span>
-        <span className={styles.shearchNav}>
-          <input type="text" className={styles.shearchInput} />
-          <CategoryButton text={'검색'} />
-          <button className={styles.saleButton}>판매하기</button>
-        </span>
-      </div> */}
-      {/* 리스트 > 제목, 가격, 위치, 판매 상태, 찜 상태, 사진 경로    위치는 위도 경도 location={Latitude/longitude} */}
-      <div className={styles.cardContainer}>
-        <div>
+      <div className={styles.AvailSaleContainer}>
+        {/* 판매 페이지 상단 카테고리  */}
+        <SellCategory />
+
+        {/* 판매 카드 글 리스트 */}
+        <div className={styles.cardContainer}>
           {data.map((list, index) => {
             return (
               <>
-                <Card
-                  key={index}
-                  title={list.title}
-                  price={list.price}
-                  location={list.location}
-                  // saleStatus={list.saleStatus}
-                  // likeStatus={list.likeStatus}
-                  cardImg={list.cardImg}
-                />
+                <Card key={index} list={list} />
               </>
             );
           })}

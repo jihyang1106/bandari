@@ -1,0 +1,106 @@
+.sellForm {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.sellForm input {
+    width: 70%;
+    height: 30px;
+    padding: 10px 10px;
+    border: none;
+    font-size: 15px;
+    border-bottom: 1px solid black;
+}
+
+.formSubTitle {
+    margin-right: 15px;
+}
+
+.marginBottom {
+    margin-bottom: 20px;
+}
+.submitButton {
+    margin: 15px 16%;
+    /* text-align: center; */
+}
+.submitButton button {
+    margin-left: 10px;
+    background: #F5A280;
+    border-radius: 30px;
+    font-weight: 1000;
+    border: none;
+    color: white;
+    font-size: 14px;
+    width: 80px;
+    height: 40px;
+}
+.submitButton button:hover {
+    transform: scale(1.2);
+}
+
+.sellImges {
+    width: 260px;
+    height: 250px;
+    background-color: #D9D9D9;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 30px;
+    font-weight: 1000;
+    margin-bottom: 30px;
+}
+
+.sellImges div {
+    line-height: 250px;
+}
+
+.sellImges div:hover {
+    transform: scale(1.5);
+}
+.sellForm p {
+  display: inline;
+}
+
+select {
+         /* width: 100%; 원하는 너비설정 */
+        height: 40px;
+        padding: .6em .1em; /* 여백으로 높이 설정 */
+        font-family: inherit;  /* 폰트 상속 */
+        background: url('../../../assets/SelectDropIcon.png') no-repeat 90% 50%; /* 네이티브 화살표 대체 */  
+        background-size: 10px;
+        border: 1px solid #999; 
+        border-radius: 40px; /* iOS 둥근모서리 제거 */
+        -webkit-appearance: none; /* 네이티브 외형 감추기 */
+        -moz-appearance: none;
+        appearance: none;
+        text-align: center;
+  }
+
+  /* IE 10, 11의 네이티브 화살표 숨기기 */
+  select::-ms-expand { 
+    display: none;
+  }
+ 
+  .sellForm label{
+    margin-bottom: 10px;
+  }
+  .selcet {
+    width: 25%;
+    color : rgb(37, 37, 37);
+    font-size: 15px;
+    padding: 10px 10px;
+ }
+
+ textarea {
+    width: 22%;
+    height: 8em;
+    border: 1px solid black;
+    border-radius: 12px;
+    resize: none;
+    padding: 1em 1em 1em 1em;
+    font-size: 15px;
+  }
+
+
+

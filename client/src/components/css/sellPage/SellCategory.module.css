@@ -1,0 +1,47 @@
+.categoryButtonContainer button{
+    margin-left: 10px;
+}
+
+.categoryButtonContainer button:active{
+    background-color: #F5A280;
+    color: white;
+}
+
+.categoryButtonContainer {
+    margin: auto;
+    display: inline-block;
+}
+
+/* 검색  */
+.shearchInput {
+    margin-left: inherit;
+    margin-right: 10px;
+    border: none;
+    border-bottom: 1px solid rgb(39, 39, 39);
+    height: 32px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.shearchInput:focus {
+    border: solid #F5A280;
+}
+
+.shearchNav {
+    margin-left: 5%;
+}
+
+/* 판매 버튼 */
+.saleButton {
+    background-color: rgba(0,0,0,0);
+    margin-left: 1%;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #F5A280;
+}
+
+.saleButton:hover {
+    transform: scale(1.1);
+}
