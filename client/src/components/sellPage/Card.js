@@ -2,13 +2,14 @@ import React from 'react';
 import styles from '../css/sellPage/Card.module.css';
 import LikeButton from './LikeButton';
 
-const Card = (list) => {
+const Card = ({ list }) => {
   console.log(list);
+  console.log(list.cardImg);
   return (
     <>
       <div className={styles.card}>
         <img
-          src={list.cardImg}
+          src={`/images/${list.cardImg}`}
           aria-label="cardImg"
           loading="lazy"
           alt="카드 이미지"
