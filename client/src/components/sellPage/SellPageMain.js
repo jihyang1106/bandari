@@ -1,10 +1,8 @@
 import Card from './Card';
 
 import styles from '../css/sellPage/AvailCards.module.css';
-// import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SellCategory from './SellCategory';
-import SalesFost from './SalesFost';
-// import $ from 'jquery';
+import testImg from '../../assets/Test.png';
 // import { useNavigate } from 'react-router-dom';
 
 export default function SellPageMain() {
@@ -20,7 +18,7 @@ export default function SellPageMain() {
       location: '용산 어디어디 오디',
       saleStatus: false,
       likeStatus: false,
-      cardImg: '/Test.png',
+      cardImg: { testImg },
     },
     {
       userID: '2',
@@ -29,7 +27,7 @@ export default function SellPageMain() {
       location: '용산 어디어디 오디',
       saleStatus: false,
       likeStatus: false,
-      cardImg: '/Test.png',
+      cardImg: { testImg },
     },
     {
       userID: '3',
@@ -38,7 +36,7 @@ export default function SellPageMain() {
       location: '어디어디 오디',
       saleStatus: true,
       likeStatus: true,
-      cardImg: '/Test.png',
+      cardImg: { testImg },
     },
     {
       userID: '4',
@@ -47,7 +45,7 @@ export default function SellPageMain() {
       location: '어디어디 오디',
       saleStatus: true,
       likeStatus: true,
-      cardImg: '/Test.png',
+      cardImg: { testImg },
     },
     {
       userID: '5',
@@ -56,7 +54,7 @@ export default function SellPageMain() {
       location: '어디어디 오디',
       saleStatus: true,
       likeStatus: true,
-      cardImg: '/Test.png',
+      cardImg: { testImg },
     },
     {
       userID: '6',
@@ -65,18 +63,9 @@ export default function SellPageMain() {
       location: '어디어디 오디',
       saleStatus: true,
       likeStatus: true,
-      cardImg: '/Test.png',
+      cardImg: { testImg },
     },
   ];
-
-  // const onClickCard = () => {
-  //   navigator('/')
-  // }
-  // `'/${props.userID + 글번호}'`
-
-  // $(cardRef.current).click(() => {
-  //   navigate('http:/localhost:3000');
-  // });
 
   return (
     <>
