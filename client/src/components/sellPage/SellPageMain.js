@@ -81,7 +81,6 @@ export default function SellPageMain(props) {
         {!isSale ? (
           <div className={styles.cardContainer}>
             {data.map((list, index) => {
-              console.log(list);
               return (
                 <>
                   <Card key={index} list={list} />
