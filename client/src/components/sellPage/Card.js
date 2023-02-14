@@ -3,7 +3,7 @@ import styles from '../css/sellPage/Card.module.css';
 import LikeButton from './LikeButton';
 
 const Card = (list) => {
-  console.log('list', list);
+  // console.log('list', list);
   const listData = list.list;
   return (
     <>

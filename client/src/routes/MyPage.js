@@ -4,6 +4,7 @@ import styles from './css/MyPage.module.css';
 
 import Nav from '../components/Nav';
 import Category from '../components/Category';
+import MyPageMain from '../components/MyPageMain';
 
 const MyPage = () => {
   return (
@@ -12,7 +13,7 @@ const MyPage = () => {
       <div className={styles.myPage}>
         <section>
           <Category />
-          마이페이지
+          <MyPageMain />
         </section>
       </div>
     </>
