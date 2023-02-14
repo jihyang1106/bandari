@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <script>
+ /**
+ * JSON형태로 받아와 사용하는 경우
+ */ 
+// http://www.geoplugin.net/json.gp?ip=xx.xx.xx.xx
+$.getJSON('http://www.geoplugin.net/json.gp?ip='+ '61.75.14.51', function(data){
+    let str = '';
+    str += data['geoplugin_region']+'\n'; // data의 부분출력 예
+    str += data['geoplugin_city']+'\n'; // data의 부분출력 예
+    str += data['geoplugin_request']+'\n'; // ip 출력
+    console.log(str);
+    console.log(data); // 더 많은 데이터 출력
+})
+    </script>
+</body>
+</html>

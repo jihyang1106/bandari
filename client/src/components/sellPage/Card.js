@@ -2,12 +2,13 @@ import React from 'react';
 import styles from '../css/sellPage/Card.module.css';
 import LikeButton from './LikeButton';
 
-export default function Card(props) {
+const Card = ({ list }) => {
+  console.log({ list });
   return (
     <>
       <div className={styles.card}>
         <img
-          src={props.cardImg}
+          src={list.cardImg}
           aria-label="cardImg"
           loading="lazy"
           alt="카드 이미지"
@@ -17,14 +18,14 @@ export default function Card(props) {
           <span>판매 완료</span>
         </div>
         <div className={styles.cardFooter}>
-          <h3>{props.title}</h3>
-          <p>{props.price} 원</p>
-          <p>위치: {props.location}</p>
+          <h3>{list.title}</h3>
+          <p>{list.price} 원</p>
+          <p>위치: {list.location}</p>
           <LikeButton />
         </div>
       </div>
     </>
   );
-}
+};
 
-//props.children
+export default Card;
