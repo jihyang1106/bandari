@@ -1,0 +1,70 @@
+.chatRoom{
+    width: 35vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chatRoom.basic{
+background-color: #EFEFEF;
+}
+
+.chatRoom.puppy{
+    background-color: #FFECE1;
+}
+
+.chatRoom.cat{
+    background-color:  #E8F4FF;
+}
+
+.chatRoom > .item{
+    background-color: white;
+    width: 90%;
+    height: 100px;
+    margin-top: 20px;
+    border-radius: 10px;
+    display: flex;
+    position: relative;
+}
+
+.chatRoom > .item > div:first-child{
+    display: flex;
+    align-items: center;
+}
+
+
+.chatRoom > .item > div:first-child h1{
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.chatRoom > .item > div:first-child span{
+    font-size: 12px;
+}
+.chatRoom > .item > div:first-child>img{
+    width: 80px;
+    height: 80px;
+}
+
+.chatRoom > .item > button{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.chatRoom > .item > button.basic{
+    background-color:  #EFEFEF;
+}
+
+.chatRoom > .item > button.puppy{
+    background-color: #E8F4FF;
+}
+
+.chatRoom > .item > button.cat{
+    background-color: #FFECE1;
+}

@@ -1,0 +1,25 @@
+.chatList{
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+    width: 24vw;
+    margin: 5px 0;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.chatList> img{
+    width: 80px;
+    height: 80px;
+}
+
+.chatList h1{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.chatList span{
+    font-size: 13px;
+}
