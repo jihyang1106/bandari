@@ -10,3 +10,19 @@
 .link {
   margin-bottom: 30px;
 }
+
+
+.category > .link > a.active.basic > span{
+  font-weight: 600;
+color: black;
+}
+
+.category > .link > a.active.puppy > span{
+  font-weight: 600;
+color: #f5a280;
+}
+
+.category > .link > a.active.cat > span{
+  font-weight: 600;
+color: #78aac3;
+}

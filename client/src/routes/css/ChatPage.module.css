@@ -1,6 +1,45 @@
 .chatPage {
 }
 
-.chatPage section:first-child {
+.chatPage>section {
   display: flex;
+  align-items: baseline;
+}
+
+
+.chatPage >section>.chats{
+  display: flex;
+  justify-content: space-between;
+  width: 70vw;
+  padding: 0 30px;
+  height: 75vh;
+}
+
+.chatPage >section>.chats .chatList.basic{
+  background-color: rgb(230, 230, 230);
+}
+
+.chatPage >section>.chats .chatList.puppy{
+  background-color: #fddecc;
+}
+
+.chatPage >section>.chats .chatList.cat{
+  background-color:  #bcd4e0;
+
+}
+.chatPage >section>.chats .chatList{
+  width: 30vw;
+}
+
+
+.chatPage >section>.chats .chatList>h1{
+  font-size: 20px;
+  font-weight: 600;
+  margin: 20px;
+}
+
+.chatPage >section>.chats .chatList > div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
