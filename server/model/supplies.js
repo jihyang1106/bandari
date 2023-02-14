@@ -22,7 +22,7 @@ const supplies = (Sequelize, DataTypes) => {
         allowNull: false,
       },
       location: {
-        type: DataTypes.STRING(5),
+        type: DataTypes.STRING(10),
         allowNull: false,
       },
       category: {
