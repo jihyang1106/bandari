@@ -135,15 +135,7 @@ const MainPage = () => {
             {datas.map((data, index) => {
               return (
                 <>
-                  <Card
-                    key={data.id}
-                    title={data.title}
-                    price={data.price}
-                    location={data.location}
-                    // saleStatus={list.saleStatus}
-                    // likeStatus={list.likeStatus}
-                    cardImg={data.cardImg}
-                  />
+                  <Card key={data.id} list={data} />
                 </>
               );
             })}
