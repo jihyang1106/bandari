@@ -31,6 +31,11 @@ const Nav = () => {
     }
   }, [btnState]);
 
+  /**로그인 클릭시 실행되는 함수*/
+  const onClickLogin = () => {
+    console.log('로그인하는함수');
+  };
+
   console.log(btnState);
   return (
     <div className={styles.nav}>
@@ -57,7 +62,7 @@ const Nav = () => {
       <div className={styles.btns}>
         <SwitchBtn />
 
-        <button>Login</button>
+        <button onClick={onClickLogin}>Login</button>
       </div>
     </div>
   );
