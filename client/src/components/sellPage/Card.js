@@ -2,8 +2,8 @@ import React from 'react';
 import styles from '../css/sellPage/Card.module.css';
 import LikeButton from './LikeButton';
 
-const Card = ({ list }) => {
-  console.log({ list });
+const Card = (list) => {
+  console.log(list);
   return (
     <>
       <div className={styles.card}>
