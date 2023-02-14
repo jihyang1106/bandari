@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../css/sellPage/SellForm.module.css';
 
-export default function SellForm() {
+export default function SellForm({ setIsSale }) {
   return (
     <>
       {/* 판매글 폼 */}
@@ -48,7 +48,13 @@ export default function SellForm() {
 
         {/* 취소 완료 버튼 */}
         <div className={`${styles.submitButton} ${styles.marginBottom}`}>
-          <button>취소</button>
+          <button
+            onClick={() => {
+              setIsSale(false);
+            }}
+          >
+            취소
+          </button>
           <button onClick={() => {}}>완료</button>
         </div>
       </form>

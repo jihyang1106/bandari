@@ -1,9 +1,11 @@
 .sellForm {
     margin: auto;
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    height: 700px;
 }
 .sellForm input {
     width: 70%;
@@ -98,8 +100,10 @@ select {
     border: 1px solid black;
     border-radius: 12px;
     resize: none;
-    padding: 1em 1em 1em 1em;
+    /* padding: 1em 1em 1em 1em; */
+    padding: 2em 1em 10em;
     font-size: 15px;
+    overflow: hidden;
   }
 
 
