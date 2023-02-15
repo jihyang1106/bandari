@@ -18,7 +18,7 @@ const user = (Sequelize, DataTypes) => {
       },
       petId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {
