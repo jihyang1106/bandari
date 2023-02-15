@@ -1,70 +1,166 @@
-.chatRoom{
-    width: 35vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.chatRoom {
+  width: 35vw;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
-.chatRoom.basic{
-background-color: #EFEFEF;
+.chatRoom.basic {
+  background-color: #efefef;
 }
 
-.chatRoom.puppy{
-    background-color: #FFECE1;
+.chatRoom.puppy {
+  background-color: #ffece1;
 }
 
-.chatRoom.cat{
-    background-color:  #E8F4FF;
+.chatRoom.cat {
+  background-color: #e8f4ff;
 }
 
-.chatRoom > .item{
-    background-color: white;
-    width: 90%;
-    height: 100px;
-    margin-top: 20px;
-    border-radius: 10px;
-    display: flex;
-    position: relative;
+/*채팅 상품부분*/
+.chatRoom > .item {
+  background-color: white;
+  width: 90%;
+  height: 100px;
+  margin-top: 20px;
+  border-radius: 10px;
+  display: flex;
+  position: relative;
 }
 
-.chatRoom > .item > div:first-child{
-    display: flex;
-    align-items: center;
+.chatRoom > .item > div:first-child {
+  display: flex;
+  align-items: center;
 }
 
-
-.chatRoom > .item > div:first-child h1{
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 10px;
+.chatRoom > .item > div:first-child h1 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
-.chatRoom > .item > div:first-child span{
-    font-size: 12px;
+.chatRoom > .item > div:first-child span {
+  font-size: 12px;
 }
-.chatRoom > .item > div:first-child>img{
-    width: 80px;
-    height: 80px;
-}
-
-.chatRoom > .item > button{
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    border: none;
-    cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 20px;
+.chatRoom > .item > div:first-child > img {
+  width: 80px;
+  height: 80px;
 }
 
-.chatRoom > .item > button.basic{
-    background-color:  #EFEFEF;
+.chatRoom > .item > button {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 20px;
 }
 
-.chatRoom > .item > button.puppy{
-    background-color: #E8F4FF;
+.chatRoom > .item > button.basic {
+  background-color: #efefef;
 }
 
-.chatRoom > .item > button.cat{
-    background-color: #FFECE1;
+.chatRoom > .item > button.puppy {
+  background-color: #e8f4ff;
+}
+
+.chatRoom > .item > button.cat {
+  background-color: #ffece1;
+}
+
+/*채팅 내용부분*/
+.chatRoom .chatpage {
+  height: 55vh;
+}
+
+.chatRoom .chatpage > .container {
+  width: 329px;
+  height: 50vh;
+  padding: 35px 23px;
+}
+
+.myChat {
+  display: flex;
+  justify-content: right;
+  margin-bottom: 20px;
+}
+.myChat div {
+  width: 221px;
+  height: 100%;
+  padding: 20px 10px;
+  border-radius: 30px 30px 0px 30px;
+  font-size: 13px;
+  text-align: left;
+  color: rgb(41, 41, 41);
+}
+
+.myChat.basic div {
+  background-color: rgb(41, 41, 41);
+  color: white;
+}
+
+.myChat.puppy div {
+  background-color: #e8f4ff;
+}
+
+.myChat.cat div {
+  background-color: #ffece1;
+}
+.otherChat {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 20px;
+}
+.otherChat div {
+  width: 221px;
+  height: 100%;
+  padding: 20px 10px;
+  border-radius: 30px 30px 30px 0px;
+  font-size: 13px;
+  background-color: white;
+}
+
+.chatRoom > .inputSection {
+  display: flex;
+  margin-top: 16px;
+  position: absolute;
+  bottom: 10px;
+}
+
+.chatRoom > .inputSection input {
+  width: 258px;
+  height: 20px;
+  border: none;
+  background-color: #ffffff;
+  border-radius: 42px;
+  margin-right: 5px;
+  font-size: 15px;
+  padding: 10px;
+  outline: none;
+}
+
+.chatRoom > .inputSection button {
+  width: 92px;
+  height: 40px;
+  border: none;
+  border-radius: 42px;
+  cursor: pointer;
+  font-weight: 600;
+  color: rgb(54, 54, 54);
+}
+
+.chatRoom > .inputSection button.basic {
+  background-color: rgb(41, 41, 41);
+  color: white;
+}
+
+.chatRoom > .inputSection button.puppy {
+  background-color: #e8f4ff;
+}
+
+.chatRoom > .inputSection button.cat {
+  background-color: #ffece1;
 }

@@ -40,13 +40,14 @@ function App() {
   // axios.defaults.baseURL = 'http://localhost:5000';
   // axios.defaults.baseURL = 'http://35.174.208.128:5000';
 
-  GetLocation(dispatch);
+  useEffect(() => {
+    GetLocation(dispatch);
+  });
   return (
     <>
       {init ? (
         <>
           <AppRouter />
-          test
         </>
       ) : (
         'Initializing...'
