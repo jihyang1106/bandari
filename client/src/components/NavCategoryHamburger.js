@@ -1,32 +1,25 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { useSelector } from 'react-redux';
-
-import styles from './css/Category.module.css';
-
-import CategoryHamburger from './CategoryHamburger';
+import styles from './css/NavCategoryHamburger.module.css';
 import HamburgerIcon from '../assets/HamburgerIcon.png';
 
-const Category = () => {
-  const swtichType = useSelector((state) => state.typeSwitch.switchState);
-  const [categoryType, setCategoryType] = useState('');
+const NavCategoryHamburger = ({ categoryType }) => {
   const HamburgerDivRef = useRef();
 
-  useEffect(() => {
-    if (swtichType === 'basic') {
-      setCategoryType('basic');
-    } else if (swtichType === 'puppy') {
-      setCategoryType('puppy');
-    } else {
-      setCategoryType('cat');
-    }
-  }, [swtichType]);
+  const onClickOpenCategory = () => {
+    console.log(HamburgerDivRef.current.classList);
+    HamburgerDivRef.current.classList.toggle(`${styles.open}`);
+  };
 
   return (
-    <div className={styles.category}>
-      <CategoryHamburger categoryType={categoryType} />
-      <div className={styles.categoryOpened}>
+    <div className={styles.categoryHamburger}>
+      <img
+        src={HamburgerIcon}
+        alt="HamburgerIcon"
+        onClick={onClickOpenCategory}
+      />
+      <div ref={HamburgerDivRef} className={styles.HamburgerDiv}>
         <div className={styles.link}>
           <NavLink
             to="/sellPage"
@@ -72,4 +65,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default NavCategoryHamburger;

@@ -7,6 +7,10 @@
   margin-top: calc(7vh + 72px);
 }
 
+.nav .btns > .categoryHamburger {
+  display: none;
+}
+
 .categoryHamburger {
   display: none;
 }
@@ -14,43 +18,34 @@
   margin-bottom: 30px;
 }
 
-.category > .categoryOpened > .link > a.active.basic > span {
+.category > .categoryOpened > .link > a.active.basic > span,
+.categoryHamburger > .HamburgerDiv > .link > a.active.basic > span {
   font-weight: 600;
   color: black;
 }
 
-.category > .categoryOpened > .link > a.active.puppy > span {
+.category > .categoryOpened > .link > a.active.puppy > span,
+.categoryHamburger > .HamburgerDiv > .link > a.active.puppy > span {
   font-weight: 600;
   color: #f5a280;
 }
 
-.category > .categoryOpened > .link > a.active.cat > span {
+.category > .categoryOpened > .link > a.active.cat > span,
+.categoryHamburger > .HamburgerDiv > .link > a.active.cat > span {
   font-weight: 600;
   color: #78aac3;
 }
 
-@media (max-width: 1500px) {
-  .categoryHamburger {
-    display: block;
-    margin-left: 39px;
-    width: 10vw;
-    margin-top: calc(7vh + 72px);
-  }
-
+/*1200px이하*/
+@media screen and (max-width: 1200px) {
   .categoryOpened {
     display: none;
   }
+}
 
-  .categoryHamburger img {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-  }
-
-  .categoryHamburger > .HamburgerDiv {
+/*900px이하*/
+@media screen and (max-width: 900px) {
+  .categoryHamburger {
     display: none;
-  }
-  .categoryHamburger > .HamburgerDiv.open {
-    display: block;
   }
 }
