@@ -107,8 +107,28 @@
   cursor: pointer;
 }
 
+/*1500px이하*/
+@media screen and (max-width: 1500px) {
+  /*첫 메인페이지*/
+  .mainPage section:first-child .mainImg img {
+    height: calc(50vh + 120px);
+    z-index: -1;
+  }
+}
+
 /*1200px이하*/
 @media screen and (max-width: 1200px) {
+  /*첫 메인페이지*/
+  .mainPage section:first-child .mainImg {
+    width: 100vw;
+  }
+
+  .mainPage section:first-child .mainImg img {
+    width: 90vw;
+    height: auto;
+    z-index: -1;
+  }
+
   /*마지막 메인페이지*/
   .mainPage section:last-child .cards {
     display: flex;
@@ -117,4 +137,8 @@
     margin-bottom: 50px;
     flex-wrap: wrap;
   }
+}
+
+/*900px이하*/
+@media screen and (max-width: 900px) {
 }

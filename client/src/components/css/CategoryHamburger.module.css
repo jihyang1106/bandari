@@ -1,0 +1,45 @@
+.categoryHamburger {
+  display: none;
+}
+
+/*1200px이하*/
+@media screen and (max-width: 1200px) {
+  .categoryHamburger {
+    position: absolute;
+    display: block;
+    margin-left: 70px;
+    width: 20vw;
+    margin-top: calc(7vh + 72px);
+    z-index: 10;
+  }
+
+  .categoryHamburger img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+
+  .categoryHamburger > .HamburgerDiv {
+    display: none;
+  }
+  .categoryHamburger > .HamburgerDiv.open {
+    display: block;
+  }
+
+  .categoryHamburger > .HamburgerDiv {
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 25px;
+  }
+
+  .categoryHamburger > .HamburgerDiv > .link {
+    margin-bottom: 15px;
+  }
+}
+
+/*1200px이하*/
+@media screen and (max-width: 900px) {
+  .categoryHamburger {
+    display: none;
+  }
+}
