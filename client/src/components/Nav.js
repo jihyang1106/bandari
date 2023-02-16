@@ -41,10 +41,10 @@ const Nav = () => {
 
   /**로그인 클릭시 실행되는 함수*/
 
-  let CLIENT_ID = process.env.REACT_APP_KAKAO_CLIENTID;
-  let REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECTURI;
+  const CLIENT_ID = process.env.REACT_APP_KAKAO_CLIENTID;
+  const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECTURI;
   const onClickLogin = () => {
-    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=http://localhost:5000/kakao/code`;
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`;
     window.location.href = kakaoAuthUrl;
   };
 
