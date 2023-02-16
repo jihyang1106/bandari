@@ -10,116 +10,155 @@ const sequelize = new Sequelize(
   config
 );
 
-
-
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.user = require("./user")(sequelize, Sequelize)
-db.pet = require("./pet")(sequelize, Sequelize)
-db.supplies = require("./supplies")(sequelize, Sequelize)
-db.img = require("./img")(sequelize, Sequelize)
-db.like = require("./like")(sequelize, Sequelize)
+db.user = require('./user')(sequelize, Sequelize);
+db.pet = require('./pet')(sequelize, Sequelize);
+db.supplies = require('./supplies')(sequelize, Sequelize);
+db.img = require('./img')(sequelize, Sequelize);
+db.like = require('./like')(sequelize, Sequelize);
+db.room = require('./room')(sequelize, Sequelize);
+db.chat = require('./chat')(sequelize, Sequelize);
 
+// user 삭제 => pet 삭제
 db.user.hasMany(db.pet, {
-  foreignKey : "id",
-  constraints 
-})
+  foreignKey: 'userId',
+  sourceKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
+db.pet.belongsTo(db.user, {
+  foreignKey: 'userId',
+  targetKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
 
-// -------user.petId-------
-// db.user.hasMany(db.pet,{
-//   foreignKey: "id",
-//   sourcekey:"petId",
-//   onDelete:"casacade",
-//   onUpdate:"casacade"
-// });
+// user 삭제 => supplies 삭제
+db.user.hasMany(db.supplies, {
+  foreignKey: 'userId',
+  sourceKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
+db.supplies.belongsTo(db.user, {
+  foreignKey: 'userId',
+  targetKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
 
-// db.pet.belongsTo(db.user,{
-//   foreignKey: "id",
-//   sourcekey:"petId",
-//   onDelete:"casacade",
-//   onUpdate:"cascade"
-// });
+// user 삭제 => like 삭제
+db.user.hasMany(db.like, {
+  foreignKey: 'userId',
+  sourceKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
+db.like.belongsTo(db.user, {
+  foreignKey: 'userId',
+  targetKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
 
-// // -------supplies.petId-----
+// user 삭제 => room 삭제
+db.user.hasMany(db.room, {
+  foreignKey: 'userId',
+  sourceKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
+db.room.belongsTo(db.user, {
+  foreignKey: 'userId',
+  targetKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
 
-// db.supplies.hasMany(db.pet,{
-//   foreignKey: "id",
-//   sourcekey:"petId",
-//   onDelete:"casacade",
-//   onUpdate:"casacade"
-// });
+// user 삭제 => room 삭제
+db.user.hasMany(db.room, {
+  foreignKey: 'otherId',
+  sourceKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
+db.room.belongsTo(db.user, {
+  foreignKey: 'otherId',
+  targetKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
 
-// db.pet.belongsTo(db.supplies,{
-//   foreignKey: "id",
-//   sourcekey:"petId",
-//   onDelete:"casacade",
-//   onUpdate:"casacade"
-// });
+// user 삭제 => chat 삭제
+db.user.hasMany(db.chat, {
+  foreignKey: 'userId',
+  sourceKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
+db.chat.belongsTo(db.user, {
+  foreignKey: 'otherId',
+  targetKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
 
-// // ----supplies.userId-------
+// supplies 삭제 => img 삭제
+db.supplies.hasMany(db.img, {
+  foreignKey: 'suppliesId',
+  sourceKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
+db.img.belongsTo(db.supplies, {
+  foreignKey: 'suppliesId',
+  targetKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
 
-// db.supplies.hasMany(db.user,{
-//   foreignKey: "id",
-//   sourcekey:"userId",
-//   onDelete:"casacade",
-//   onUpdate:"casacade"
-// });
+// supplies 삭제 => like 삭제
+db.supplies.hasMany(db.like, {
+  foreignKey: 'suppliesId',
+  sourceKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
+db.like.belongsTo(db.supplies, {
+  foreignKey: 'suppliesId',
+  targetKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
 
-// db.user.belongsTo(db.supplies,{
-//   foreignKey: "id",
-//   sourcekey:"userId",
-//   onDelete:"casacade",
-//   onUpdate:"casacade"
-// });
+// supplies 삭제 => room 삭제
+db.supplies.hasMany(db.room, {
+  foreignKey: 'suppliesId',
+  sourceKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
+db.room.belongsTo(db.supplies, {
+  foreignKey: 'suppliesId',
+  targetKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
 
-// // ------img.suppliesId--------
-
-// db.img.hasMany(db.supplies,{
-//   foreignKey: "id",
-//   sourcekey:"suppliesId",
-//   onDelete:"casacade",
-//   onUpdate:"casacade"
-// });
-
-// db.supplies.belongsTo(db.img,{
-//   foreignKey: "id",
-//   sourcekey:"suppliesId",
-//   onDelete:"casacade",
-//   onUpdate:"casacade"
-// });
-
-// // ------like.userId---------
-
-// db.like.hasMany(db.user,{
-//   foreignKey: "id",
-//   sourcekey:"userId",
-//   onDelete:"casacade",
-//   onUpdate:"casacade"
-// });
-
-// db.user.belongsTo(db.like,{
-//   foreignKey: "id",
-//   sourcekey:"userId",
-//   onDelete:"casacade",
-//   onUpdate:"casacade"
-// });
-
-// // ------like.suppliesId-------
-
-// db.like.hasMany(db.supplies,{
-//   foreignKey: "id",
-//   sourcekey:"suppliesId",
-//   onDelete:"casacade",
-//   onUpdate:"casacade"
-// });
-
-// db.supplies.belongsTo(db.like,{
-//   foreignKey: "id",
-//   sourcekey:"suppliesId",
-//   onDelete:"casacade",
-//   onUpdate:"casacade"
-// });
-
+// room 삭제 => chat 삭제
+db.room.hasMany(db.chat, {
+  foreignKey: 'roomId',
+  sourceKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
+db.chat.belongsTo(db.room, {
+  foreignKey: 'roomId',
+  targetKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
 
 module.exports = db;
