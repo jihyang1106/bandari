@@ -6,12 +6,10 @@ import { useSelector } from 'react-redux';
 import styles from './css/Category.module.css';
 
 import CategoryHamburger from './CategoryHamburger';
-import HamburgerIcon from '../assets/HamburgerIcon.png';
 
 const Category = () => {
   const swtichType = useSelector((state) => state.typeSwitch.switchState);
   const [categoryType, setCategoryType] = useState('');
-  const HamburgerDivRef = useRef();
 
   useEffect(() => {
     if (swtichType === 'basic') {

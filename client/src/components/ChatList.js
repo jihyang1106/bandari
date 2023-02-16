@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 
 import TestImg from '../assets/TestImg1.jpg';
 import styles from './css/ChatList.module.css';

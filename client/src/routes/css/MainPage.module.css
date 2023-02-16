@@ -43,11 +43,12 @@
 }
 
 .mainPage section:nth-child(2) .sellImg {
-  width: 400px;
-  height: 400px;
-  background-color: #f3cd86;
+  width: 800px;
   margin-right: 70px;
 }
+
+
+
 
 .mainPage section:nth-child(2) div:last-child {
   display: flex;
@@ -81,9 +82,7 @@
 }
 
 .mainPage section:nth-child(4) .locationImg {
-  width: 550px;
-  height: 700px;
-  background-color: #f3cd86;
+  width: 800px;
   margin-right: 70px;
 }
 
@@ -105,6 +104,21 @@
 
 .mainPage section:last-child > span {
   cursor: pointer;
+}
+
+/*1800px이하*/
+@media screen and (max-width: 1800px) {
+  /*두번째 메인페이지*/
+  .mainPage section:nth-child(2) .sellImg {
+    width: 45vw;
+    margin-right: 70px;
+  }
+  
+  .mainPage section:nth-child(4) .locationImg {
+    width: 45vw;
+    margin-right: 70px;
+  }
+  
 }
 
 /*1500px이하*/

@@ -1,14 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './css/ChatRoom.module.css';
 
 import TestImg from '../assets/TestImg1.jpg';
 
-const ChatRoom = ({ chatData, categoryType }) => {
+const ChatRoom = ({ chatData, categoryType, chatRef }) => {
   const inputRef = useRef();
 
   /*전송이벤트 */
   const btnSend = () => {
     const inputText = inputRef.current.value;
+    console.log('채팅입력후 전송하는 이벤트');
     console.log(inputText);
   };
 
@@ -19,9 +20,19 @@ const ChatRoom = ({ chatData, categoryType }) => {
     }
   };
 
-  console.log(chatData);
+  const onClickCheckSoldOut = () => {
+    console.log('판매완료버튼누름');
+  };
+
+  const onClickExit = () => {
+    console.log('채팅종료버튼누름');
+  };
+
   return (
-    <div className={`${styles.chatRoom} ${styles[`${categoryType}`]}`}>
+    <div
+      className={`${styles.chatRoom} ${styles[`${categoryType}`]}`}
+      ref={chatRef}
+    >
       {/**상품정보창 */}
       <div className={styles.item}>
         <div>
@@ -31,9 +42,22 @@ const ChatRoom = ({ chatData, categoryType }) => {
             <span>{chatData.content}</span>
           </div>
         </div>
-        <button className={` ${styles[`${categoryType}`]}`}>
-          판매완료확인
-        </button>
+        {/**상품정보 */}
+        <div>
+          <button
+            className={`${styles.checkSoldBtn} ${styles[`${categoryType}`]}`}
+            onClick={onClickCheckSoldOut}
+          >
+            판매완료확인
+          </button>
+          <button
+            className={`${styles.exitBtn} ${styles[`${categoryType}`]}`}
+            onClick={onClickExit}
+          >
+            채팅종료
+          </button>
+        </div>
+        {/**버튼2개 */}
       </div>
       {/**카톡내용창 */}
       <div className={styles.chatpage}>

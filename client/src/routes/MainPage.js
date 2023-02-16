@@ -10,6 +10,9 @@ import Card from '../components/Card';
 import PuppyMainImg from '../assets/PuppyMainImg.png';
 import CatMainImg from '../assets/CatMainImg.png';
 import BasicMainImg from '../assets/BasicMainImg.png';
+import SellMainImg from '../assets/SellMainImg.png';
+import LocationMainImg from '../assets/LocationMainImg.png';
+
 import { useNavigate } from 'react-router-dom';
 
 let datas = [
@@ -82,7 +85,7 @@ const MainPage = () => {
         </section>
         {/*두번째 메인페이지*/}
         <section>
-          <div className={styles.sellImg}>판매사진캡쳐이미지들</div>
+          <img src={SellMainImg} alt="" className={styles.sellImg} />
           <div>
             <h1>
               반려동물
@@ -114,7 +117,7 @@ const MainPage = () => {
         </section>
         {/*네번째 메인페이지*/}
         <section>
-          <div className={styles.locationImg}>위치기반이미지</div>
+          <img src={LocationMainImg} className={styles.locationImg} alt="" />
           <div>
             <h1>
               내 근처에서

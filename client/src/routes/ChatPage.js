@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import styles from './css/ChatPage.module.css';
@@ -32,8 +32,12 @@ const chatDatas = [
 const ChatPage = () => {
   const [selectChat, setSelectChat] = useState(false);
   const [selectedChat, setSelectedChat] = useState({});
+  const [selected, setSelected] = useState(false);
   const swtichType = useSelector((state) => state.typeSwitch.switchState);
   const [categoryType, setCategoryType] = useState('');
+  const chatRoomRef = useRef();
+  const closeBtnRef = useRef();
+
   useEffect(() => {
     if (swtichType === 'basic') {
       setCategoryType('basic');
@@ -46,8 +50,20 @@ const ChatPage = () => {
 
   const onClickChatData = (chatData) => {
     console.log('채팅클릭');
+    if (chatRoomRef.current) {
+      chatRoomRef.current.classList.remove(`${styles.transparent}`);
+    }
+    closeBtnRef.current.classList.remove(`${styles.transparent}`);
     setSelectChat(true);
     setSelectedChat(chatData);
+    setSelected(true);
+  };
+
+  const onClickClose = () => {
+    console.log('눌림');
+    chatRoomRef.current.classList.add(`${styles.transparent}`);
+    closeBtnRef.current.classList.add(`${styles.transparent}`);
+    setSelected(false);
   };
 
   return (
@@ -57,7 +73,18 @@ const ChatPage = () => {
         <section>
           <Category />
           <div className={styles.chats}>
-            <div className={`${styles.chatList} ${styles[`${categoryType}`]}`}>
+            <button
+              className={`${styles.closeBtn} ${styles.transparent}`}
+              onClick={onClickClose}
+              ref={closeBtnRef}
+            >
+              X
+            </button>
+            <div
+              className={`${styles.chatList} ${styles[`${categoryType}`]} ${
+                styles[`${selected}`]
+              }`}
+            >
               <h1>채팅목록</h1>
               <div>
                 {chatDatas.map((chatData, index) => {
@@ -71,9 +98,13 @@ const ChatPage = () => {
               </div>
             </div>
             {selectChat ? (
-              <ChatRoom chatData={selectedChat} categoryType={categoryType} />
+              <ChatRoom
+                chatData={selectedChat}
+                categoryType={categoryType}
+                chatRef={chatRoomRef}
+              />
             ) : (
-              <img src="" alt="" />
+              <div className={styles.chatEmptyDiv}>채팅을 선택하세요</div>
             )}
           </div>
         </section>

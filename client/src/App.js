@@ -5,9 +5,8 @@ import AppRouter from './routes/AppRouter';
 import axios from 'axios';
 import { useEffect } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUserInfo } from './store/module/user';
-import { setUserLocation } from './store/module/location';
 import GetLocation from './components/js/GetLocation';
 
 function App() {
