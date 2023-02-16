@@ -34,14 +34,6 @@ const supplies = (Sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: Sequelize.fn('current_date'),
       },
-      userId: {
-        type: DataTypes.STRING(40),
-        allowNull: false,
-      },
-      petId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       cover: {
         type: DataTypes.STRING(30),
         allowNull: false,
@@ -49,6 +41,19 @@ const supplies = (Sequelize, DataTypes) => {
       likeCount: {
         type: DataTypes.INTEGER,
         allowNull: true,
+      },
+      deal: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+      },
+      userId: {
+        type: DataTypes.STRING(40),
+        allowNull: false,
+      },
+      petId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
     },
     {
