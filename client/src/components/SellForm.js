@@ -1,20 +1,25 @@
 import React, { useRef, useState } from 'react';
 import styles from './css/SellForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 // slick-carousel css
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import axios from 'axios';
+
 // import $ from 'jquery';
 export default function SellForm({ setIsSale }) {
   const [imgState, setImgState] = useState([]);
 
+  const navigate = useNavigate();
   const userLocation = useSelector((state) => state.location.userLocation);
   const petSelectRef = useRef();
   const categorySelectRef = useRef();
   const formInfoRef = useRef();
   const imgRef = useRef();
+
   function onCompleteBtn() {
     console.log('판매 글쓰기 완료 버튼 눌림');
     console.log('imgLists', imgRef.current.files);
@@ -37,6 +42,8 @@ export default function SellForm({ setIsSale }) {
     //   })
     //   .then((response) => {});
   }
+
+  // slick-carousel settings
   const settings = {
     dots: true,
     infinite: true,
@@ -44,7 +51,7 @@ export default function SellForm({ setIsSale }) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  // 미리보기 기능
+  // 이미지 미리보기 기능
   const saveImgFile = () => {
     const imgLists = imgRef.current.files;
     let imageUrlLists = [...imgState];
@@ -55,7 +62,7 @@ export default function SellForm({ setIsSale }) {
       }
       setImgState(imageUrlLists);
     } else {
-      alert('4개 까지만 등록 가능');
+      alert('이미지는 최대 4개 까지 등록 가능');
     }
   };
   // 반려동물 번호 로 정보 요청 > name 값 가져오기
@@ -66,28 +73,17 @@ export default function SellForm({ setIsSale }) {
     // 업로드 버튼 다시 눌렀을때 미리보기 날림
     setImgState([]);
   }
+
+  // 취소 버튼
+  function onResetPage() {
+    navigate('/sellPage');
+  }
   return (
     <>
       {/* 판매글 폼 */}
       <form className={styles.sellForm} ref={formInfoRef}>
-        {/* 클릭시 이미지 업로드 */}
+        {/* 업로드 된 이미지 미리보기 슬라이드 */}
         <div className={`${styles.sellImges} ${styles.marginBottom}`}>
-          {/* {imgState && (
-            <img
-              src={imgState}
-              alt="미리보기 이미지"
-              className={`${styles.sellImges} ${styles.marginBottom}`}
-            />
-          )} */}
-          {/* <label
-            className={styles.imgLabel}
-            onClick={() => {
-              onImgUpload();
-            }}
-            htmlFor="inputFile"
-          >
-            +
-          </label> */}
           <div>
             <Slider {...settings}>
               {imgState.map((images, index) => {
@@ -102,25 +98,17 @@ export default function SellForm({ setIsSale }) {
               })}
             </Slider>
           </div>
-          {/* 
-​
-            <div>
-              {imgState && (
-                <img
-                  src={imgState}
-                  alt="미리보기 이미지"
-                  className={`${styles.sellImges} ${styles.marginBottom}`}
-                />
-              )}
-            </div>
- */}
+
+          {/* 클릭시 이미지 업로드 */}
           <label
             className={styles.imgLabel}
             onClick={() => {
               onImgUpload();
             }}
             htmlFor="inputFile"
-          ></label>
+          >
+            +
+          </label>
           <input
             type="file"
             id="inputFile"
@@ -147,11 +135,14 @@ export default function SellForm({ setIsSale }) {
             type="text"
             name="price"
             placeholder="가격을 입력해주세요"
+            // pattern="/[0-9]/"
             required
           />
         </div>
         {/* 선택 selectBox */}
-        <label htmlFor="category">카테고리</label>
+        <label htmlFor="category" className={styles.marginRight}>
+          카테고리
+        </label>
         <select
           name="sellFormCategory"
           ref={categorySelectRef}
@@ -161,7 +152,9 @@ export default function SellForm({ setIsSale }) {
           <option value="snak">간식</option>
           <option value="supplies">용품</option>
         </select>
-        <label htmlFor="petSellcet">반려동물 선택</label>
+        <label htmlFor="petSellcet" className={styles.marginRight}>
+          사용한 내 새꾸
+        </label>
         <select
           name="sellFormPetSellect"
           ref={petSelectRef}
@@ -175,7 +168,7 @@ export default function SellForm({ setIsSale }) {
             );
           })}
         </select>
-        <p className={styles.marginBottom}>설명</p>
+        <p className={`${styles.marginRight}`}>설명</p>
         <textarea
           name="content"
           placeholder="내용을 입력해 주세요."
@@ -185,7 +178,7 @@ export default function SellForm({ setIsSale }) {
         <div className={`${styles.submitButton} ${styles.marginBottom}`}>
           <button
             onClick={() => {
-              setIsSale(false);
+              onResetPage();
             }}
           >
             취소
@@ -202,3 +195,20 @@ export default function SellForm({ setIsSale }) {
     </>
   );
 }
+
+// {/* {imgState && (
+//   <img
+//     src={imgState}
+//     alt="미리보기 이미지"
+//     className={`${styles.sellImges} ${styles.marginBottom}`}
+//   />
+// )} */}
+// {/* <label
+//   className={styles.imgLabel}
+//   onClick={() => {
+//     onImgUpload();
+//   }}
+//   htmlFor="inputFile"
+// >
+//   +
+// </label> */}

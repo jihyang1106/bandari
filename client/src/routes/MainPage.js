@@ -63,7 +63,6 @@ const MainPage = () => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
   console.log(isLoggedIn);
-  console.log('뭐냐 얜?', isLoggedIn);
 
   const navigate = useNavigate();
 

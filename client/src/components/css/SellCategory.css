@@ -1,4 +1,13 @@
-.switchBtn {
+    /* padding: 36px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: calc(100vw - 70px);
+    height: 7vh; */
+
+.changeBtn {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -40,6 +49,23 @@
     margin-left: 5%;
 }
 
+/* 검색 버튼 */
+.serchBtn {
+    width: 70px;
+    height: 38px;
+    background: #F5A280; 
+    border-radius: 30px;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+}
+.serchBtn:hover {
+    background-color: transparent;
+    color: black;
+}
+
+
 /* 판매 버튼 */
 .saleButton {
     background-color: rgba(0,0,0,0);
@@ -55,7 +81,7 @@
     transform: scale(1.1);
 }
 
-
+/* 카테고리 버튼  */
 .categoryButton {
     width: 70px;
     height: 38px;
@@ -66,70 +92,49 @@
     font-weight: 600;
     }
     
-/* .categoryButton:hover {
-        background: #F5A280;
-        color: white;
-        transform: scale(1.1);
-    
-} */
-
-.serchBtn {
-    background-color: #F5A280;
-    color: white;
-    
-}
-
-.serchBtn:hover {
-    background-color: transparent;
-    color: black;
-}
-
-.switchBtn > .basicBtn.clicked {
+/* active 버튼 */
+.changeBtn > .basicBtn.clicked {
     background-color: #F5A280;
     color: white;
     font-weight: 600;
 }
 
-.switchBtn > .peedBtn.clicked {
+.changeBtn > .peedBtn.clicked {
     background-color: #F5A280;
     color: white;
     font-weight: 600;
 }
 
-.switchBtn > .snakBtn.clicked {
+.changeBtn > .snakBtn.clicked {
     background-color: #F5A280;
     color: white;
     font-weight: 600;
 }
 
-.switchBtn > .productBtn.clicked {
+.changeBtn > .productBtn.clicked {
     background-color: #F5A280;
     color: white;
     font-weight: 600;
 }
 
+/* 주소 버튼 */
 .adressPickButton {
-    display: inline-block;
-    height: 38px;
+    display: inline;
     background: #FFECE1;
     border: none;
     border-radius: 30px;
-    padding-left: 40px;
-    padding-right: 25px;
-    font-weight: 700;
     color: #464646;
-    width: 200px;
     line-height: 40px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 7px 20px;
 }
 
+/* 주소 아이콘 */
 .adressPickButton img {
-    width: 18px;
-    height: 18px;
-    margin-left: -20px;
-    
+    height: 15px;
+    margin-right: 5px;
 }
 
 .adressPickButton:hover {
