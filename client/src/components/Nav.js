@@ -9,7 +9,7 @@ import logo from '../assets/Logo.png';
 import DogIcon from '../assets/DogIcon.png';
 import CatIcon from '../assets/CatIcon.png';
 import BasicIcon from '../assets/BasicIcon.png';
-
+import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 const Nav = () => {
@@ -32,7 +32,9 @@ const Nav = () => {
   }, [btnState]);
 
   /**로그인 클릭시 실행되는 함수*/
-  const onClickLogin = () => {
+  const onClickLogin = async () => {
+    const login = await axios.get('http://localhost:5000/getLogin/kakao');
+    if (login.status !== 200) return alert('통신에러');
     console.log('로그인하는함수');
   };
 
