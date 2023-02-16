@@ -7,6 +7,7 @@ const REDIRECT_URI = process.env.KAKAO_REDIRECTURI;
 const CLIENT_SECRET = process.env.KAKAO_CLIENTSECRET;
 
 exports.kakaoCode = async (req, res) => {
+
   // 로그인 후 받은 인가 코드로 토큰을 받기위한 요청을 카카오 서버로 보냄
   token = await axios({
     method: 'POST',
@@ -22,6 +23,7 @@ exports.kakaoCode = async (req, res) => {
       client_secret: CLIENT_SECRET,
     },
   }).then((res) => {
+
     // 토큰을 받아옴
     const ACESS_TOKEN = res.data.access_token
     const APP_ADMIN_KEY = 
@@ -36,6 +38,7 @@ exports.kakaoCode = async (req, res) => {
         `Bearer ${ACCESS_TOKEN}/KakaoAK ${APP_ADMIN_KEY}`
       }
     })
+
   });
 };
 
