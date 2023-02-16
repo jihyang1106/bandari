@@ -1,7 +1,7 @@
-//판매글 이미지 테이블
-const img = (Sequelize, DataTypes) => {
+// 반려동물 용품 테이블
+const room = (Sequelize, DataTypes) => {
   return Sequelize.define(
-    'img',
+    'room',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -13,25 +13,21 @@ const img = (Sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      img1: {
-        type: DataTypes.STRING(30),
+      userId: {
+        type: DataTypes.STRING(40),
         allowNull: false,
       },
-      img2: {
-        type: DataTypes.STRING(30),
-        allowNull: true,
-      },
-      img3: {
-        type: DataTypes.STRING(30),
-        allowNull: true,
+      otherId: {
+        type: DataTypes.STRING(40),
+        allowNull: false,
       },
     },
     {
-      tablename: 'img',
+      tablename: 'room',
       freezeTableName: true,
       timestamps: false,
     }
   );
 };
 
-module.exports = img;
+module.exports = room;

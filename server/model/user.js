@@ -1,3 +1,5 @@
+const pet = require('./pet');
+
 //user 테이블
 const user = (Sequelize, DataTypes) => {
   return Sequelize.define(
@@ -14,10 +16,6 @@ const user = (Sequelize, DataTypes) => {
       },
       phone: {
         type: DataTypes.STRING(15),
-        allowNull: true,
-      },
-      petId: {
-        type: DataTypes.INTEGER,
         allowNull: true,
       },
     },
