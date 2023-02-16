@@ -1,8 +1,20 @@
 const express = require('express');
 const app = express();
 const test = require('./routes/test');
+const session = require('express-session');
 
 app.use('/api', test);
+
+app.use(
+  session({
+    secret: '1234',
+    resave: false,
+    saveUnitialized: true,
+  })
+);
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const path = require('path');
 /**dotenv 설정 */
