@@ -40,6 +40,10 @@ const ConnectDB = async () => {
 // DB와 연결 및 동기화
 ConnectDB();
 
+const router = require("./routes/kakao")
+
+app.use('/', router)
+
 app.listen(process.env.PORT, () => {
   console.log(`server port ${process.env.PORT} open`);
 });
