@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
-// import CategoryButton from './CategoryButton.js';
-import AdressPickButton from './AdressPickButton.js';
-import styles from './css/SellCategory.module.css';
 
-import { useNavigate } from 'react-router-dom';
+import locationIcon from '../assets/Location.png';
+import './css/SellCategory.css';
+
+// import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 
 import {
@@ -83,13 +83,14 @@ export default function SellCategory({ setIsSale }) {
     <>
       {/* 상단 카테고리, 검색 & 판매 버튼 누르면, 판매 글 폼 열림 */}
       <>
-        <span
-          className={`${styles.categoryButtonContainer} ${styles.switchBtn}`}
-        >
-          <AdressPickButton />
+        <span className="categoryButtonContainer switchBtn">
+          <div className="adressPickButton">
+            <img src={locationIcon} alt="주소지 버튼 아이콘" />
+            성북구 창경궁로 35다길
+          </div>
           <button
             ref={basicBtnRef}
-            className={`${styles.categoryButton} ${styles.basicBtn}`}
+            className="categoryButton basicBtn"
             value="basic"
             onClick={clickedBtn}
           >
@@ -97,7 +98,7 @@ export default function SellCategory({ setIsSale }) {
           </button>
           <button
             ref={peedBtnRef}
-            className={`${styles.categoryButton} ${styles.peedBtn}`}
+            className="categoryButton peedBtn"
             value="peed"
             onClick={clickedBtn}
           >
@@ -105,7 +106,7 @@ export default function SellCategory({ setIsSale }) {
           </button>
           <button
             ref={snackBtnRef}
-            className={`${styles.categoryButton} ${styles.snakBtn}`}
+            className="categoryButton snakBtn"
             value="snack"
             onClick={clickedBtn}
           >
@@ -113,21 +114,19 @@ export default function SellCategory({ setIsSale }) {
           </button>
           <button
             ref={productBtnRef}
-            className={`${styles.categoryButton} ${styles.productBtn}`}
+            className="categoryButton productBtn"
             value="product"
             onClick={clickedBtn}
           >
             용품
           </button>
         </span>
-        <span className={styles.shearchNav}>
-          <input type="text" className={styles.shearchInput} />
-          <button className={`${styles.categoryButton} ${styles.serchBtn}`}>
-            검색
-          </button>
+        <span className="shearchNav">
+          <input type="text" className="shearchInput" />
+          <button className="categoryButton serchBtn">검색</button>
 
           <button
-            className={styles.saleButton}
+            className="saleButton"
             onClick={() => {
               sellButton();
             }}
