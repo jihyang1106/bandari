@@ -1,15 +1,12 @@
 import React, { useRef, useState } from 'react';
 import styles from './css/SellForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 // slick-carousel css
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
-
-import axios from 'axios';
-
-// import $ from 'jquery';
 
 export default function SellForm({ setIsSale }) {
   const [imgState, setImgState] = useState([]);
@@ -19,6 +16,7 @@ export default function SellForm({ setIsSale }) {
   const categorySelectRef = useRef();
   const formInfoRef = useRef();
   const imgRef = useRef();
+
 
   function onCompleteBtn() {
     console.log('판매 글쓰기 완료 버튼 눌림');
@@ -42,6 +40,30 @@ export default function SellForm({ setIsSale }) {
     //   .then((response) => {});
   }
 
+
+  // setCoverFile(e.target.files[0]);
+  const uploadChange = (e) => {
+    const arr = [...img, ...e.target.files];
+    setImg(arr);
+  };
+
+  /**이미지 업로드 구현 */
+  const onImgUpload = async () => {
+    console.log(img);
+    // const formData = new FormData();
+    // formData.append('cover', cover);
+    // await axios
+    //   .post('/upload', formData, {
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data',
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   });
+  };
+
+  /**  슬라이드 세팅 */
   const settings = {
     dots: true,
     infinite: true,
@@ -69,16 +91,17 @@ export default function SellForm({ setIsSale }) {
   // 반려동물 번호 로 정보 요청 > name 값 가져오기
   let petData = [{ name: '보리' }, { name: '수남' }, { name: '밤이' }];
 
-  function onImgUpload() {
-    console.log('판매 폼 이미지 업로드 버튼 눌림');
-    // 업로드 버튼 다시 눌렀을때 미리보기 날림
-    setImgState([]);
-  }
   return (
     <>
+        <div>
+          <input type="file" name="img" onChange={uploadChange} multiple />
+          <button onClick={onImgUpload}>업로드</button>
+        </div>
       {/* 판매글 폼 */}
       <form className={styles.sellForm} ref={formInfoRef}>
         {/* 클릭시 이미지 업로드 */}
+        {/* <div className={`${styles.sellImges} ${styles.marginBottom}`}>
+          <div
         <div className={`${styles.sellImges} ${styles.marginBottom}`}>
           {/* {imgState && (
             <img
@@ -110,18 +133,6 @@ export default function SellForm({ setIsSale }) {
               })}
             </Slider>
           </div>
-          {/* 
-
-            <div>
-              {imgState && (
-                <img
-                  src={imgState}
-                  alt="미리보기 이미지"
-                  className={`${styles.sellImges} ${styles.marginBottom}`}
-                />
-              )}
-            </div>
- */}
 
           <label
             className={styles.imgLabel}

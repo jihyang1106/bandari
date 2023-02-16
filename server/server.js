@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
-const test = require('./routes/test');
-const session = require('express-session');
 
-app.use('/api', test);
+/**morgan 설정 */
+const morgan = require('morgan');
+app.use(morgan('dev')); // 로그
+
 
 app.use(
   session({
@@ -27,7 +28,7 @@ dotenv.config({
 const cors = require('cors');
 app.use(
   cors({
-    origin: ['http://35.174.208.128:3000', 'http://localhost:3000'],
+    origin: ['http://13.124.185.47:3000', 'http://localhost:3000'],
     credentials: true,
   })
 );
@@ -53,8 +54,10 @@ const ConnectDB = async () => {
 ConnectDB();
 
 const router = require('./routes/user/kakao');
+const uploadRouter = require('./routes/upload');
 
 app.use('/', router);
+app.use('/', uploadRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`server port ${process.env.PORT} open`);
