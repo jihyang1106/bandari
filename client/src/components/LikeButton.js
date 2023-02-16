@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import styles from '../css/sellPage/LikeButton.module.css';
-import noneLike from '../../assets/NoneClikeLikeButton.png';
-import clickedLike from '../../assets/ClikedLikeButton.png';
+import styles from './css/LikeButton.module.css';
+import noneLike from '../assets/NoneClikeLikeButton.png';
+import clickedLike from '../assets/ClikedLikeButton.png';
 
 export default function LikeButton() {
   const [likeState, setLikeState] = useState(false);

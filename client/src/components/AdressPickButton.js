@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from '../css/sellPage/AdressPickButton.module.css';
-import locationIcon from '../../assets/Location.png';
+import styles from './css/AdressPickButton.module.css';
+import locationIcon from '../assets/Location.png';
 
 export default function AdressPickButton() {
   return (

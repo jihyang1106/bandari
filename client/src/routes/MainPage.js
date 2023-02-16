@@ -5,7 +5,7 @@ import styles from './css/MainPage.module.css';
 
 import Nav from '../components/Nav';
 import Category from '../components/Category';
-import Card from '../components/sellPage/Card';
+import Card from '../components/Card';
 
 import PuppyMainImg from '../assets/PuppyMainImg.png';
 import CatMainImg from '../assets/CatMainImg.png';

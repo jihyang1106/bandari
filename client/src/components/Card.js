@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../css/sellPage/Card.module.css';
+import styles from './css/Card.module.css';
 import LikeButton from './LikeButton';
 
 const Card = (list) => {
