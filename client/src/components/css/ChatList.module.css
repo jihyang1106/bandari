@@ -23,3 +23,10 @@
 .chatList span{
     font-size: 13px;
 }
+
+  /*1000px이하*/
+  @media screen and (max-width: 1000px) {
+    .chatList{
+        width: 60vw;
+    }
+  }

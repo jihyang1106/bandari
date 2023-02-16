@@ -1,6 +1,12 @@
 .chatPage {
 }
 
+
+.chatPage .transparent{
+  display: none;
+}
+
+
 .chatPage>section {
   display: flex;
   align-items: baseline;
@@ -13,6 +19,23 @@
   width: 70vw;
   padding: 0 30px;
   height: 75vh;
+  position: relative;
+}
+
+.chatPage >section>.chats > .closeBtn{
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: white;
+  font-weight: 600;
+  background-color: rgb(255, 96, 96);
+  position: absolute;
+  top: 15px;
+  right: 45px;
+  z-index: 100;
 }
 
 .chatPage >section>.chats .chatList.basic{
@@ -43,3 +66,97 @@
   flex-direction: column;
   align-items: center;
 }
+
+
+.chatPage >section>.chats > .chatEmptyDiv{
+  width: 35vw;
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*1200px이하*/
+@media screen and (max-width: 1200px) {
+
+  .chatPage>section {
+    display: flex;
+    align-items: normal;
+  }
+
+  .chatPage >section>.chats{
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    padding: 0 30px;
+    position: relative;
+    margin-top: calc(7vh + 72px + 36px);
+  }
+
+  .chatPage >section>.chats > .closeBtn{
+    top: 15px;
+    right: 45px;
+  }
+
+ .chatPage >section>.chats .chatList{
+      margin-right: 30px;
+    height: 75vh;
+    margin-left: 135px;
+    width: 40vw;
+  }
+  
+  
+
+}
+
+/*1000px이하*/
+@media screen and (max-width: 1000px) {
+  .chatPage{
+    height: calc(93vh - 36px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chatPage >section{
+    position: relative;
+  }
+
+  .chatPage >section>.chats {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+  }
+
+  .chatPage >section>.chats .chatList{
+    width: 70vw;
+    margin-right: 0px;
+    margin-left: 0px;
+    
+  }
+
+  /*채팅이 선택된경우*/
+  .chatPage >section>.chats .chatList.true{
+    display: none;
+  }
+    /*채팅이 선택되지 않은경우*/
+    .chatPage >section>.chats .chatList.false{
+      display: block;
+    }
+
+    .chatPage >section>.chats > .chatEmptyDiv{
+display: none;
+    }
+
+    .chatPage >section>.chats > .closeBtn{
+    
+    
+    }
+  
+
+
+}
+

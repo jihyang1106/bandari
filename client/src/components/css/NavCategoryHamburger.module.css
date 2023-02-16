@@ -2,15 +2,32 @@
   display: none;
 }
 
-/*900px이하*/
-@media screen and (max-width: 900px) {
+
+.categoryHamburger > .HamburgerDiv > .link > a.active.basic > span{
+  font-weight: 600;
+  color: black;
+}
+
+.categoryHamburger > .HamburgerDiv > .link > a.active.puppy > span{
+  font-weight: 600;
+  color: #f5a280;
+}
+
+.categoryHamburger > .HamburgerDiv > .link > a.active.cat > span {
+  font-weight: 600;
+  color: #78aac3;
+}
+
+
+/*1000px이하*/
+@media screen and (max-width: 1000px) {
   .categoryHamburger {
     display: block;
-    width: 20vw;
     z-index: 10;
     position: fixed;
     right: 30px;
     text-align: end;
+    margin-top: 15px;
   }
 
   .categoryHamburger img {
@@ -38,7 +55,7 @@
 }
 
 /*600px이하*/
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 600px) {
   .categoryHamburger {
     display: block;
     width: 20vw;
