@@ -1,19 +1,45 @@
 import React, { useRef, useState } from 'react';
 import styles from './css/SellForm.module.css';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
+// slick-carousel css
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick';
+
 export default function SellForm({ setIsSale }) {
-  const checkSelectRef = useRef();
-  const [img, setImg] = useState([]); // 커버 이미지
-  // console.log(img);
+  const [imgState, setImgState] = useState([]);
+  const userLocation = useSelector((state) => state.location.userLocation);
+
+  const petSelectRef = useRef();
+  const categorySelectRef = useRef();
+  const formInfoRef = useRef();
+  const imgRef = useRef();
+
+
   function onCompleteBtn() {
     console.log('판매 글쓰기 완료 버튼 눌림');
-    // if (checkSelectRef.current.value === '') {
-    //   alert('사용한 반려동물을 선택 해주세요~');
-    //   checkSelectRef.current.focus();
-    //   return;
-    // }
+    const form = formInfoRef.current;
+    const datas = {
+      title: form.title.value,
+      price: form.price.value,
+      content: form.content.value,
+      category: categorySelectRef.current.value,
+      usePet: petSelectRef.current.value,
+      deal: true,
+      userId: '임시아이디',
+      location:
+        userLocation.region_2depth_name + ' ' + userLocation.region_3depth_name,
+    };
+    console.log('판매 폼 데이터 :', datas);
+    // axios
+    //   .post('/sellPage/sellForm', {
+    //     datas,
+    //   })
+    //   .then((response) => {});
   }
+
 
   // setCoverFile(e.target.files[0]);
   const uploadChange = (e) => {
@@ -37,39 +63,121 @@ export default function SellForm({ setIsSale }) {
     //   });
   };
 
+  /**  슬라이드 세팅 */
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
+  // 미리보기 기능
+  const saveImgFile = () => {
+    const imgLists = imgRef.current.files;
+    let imageUrlLists = [...imgState];
+
+    if (imgLists.length < 5) {
+      for (let i = 0; i < imgLists.length; i++) {
+        const currentImageUrl = URL.createObjectURL(imgLists[i]);
+        imageUrlLists.push(currentImageUrl);
+      }
+      setImgState(imageUrlLists);
+    } else {
+      alert('4개 까지만 등록 가능');
+    }
+  };
+
+  // 반려동물 번호 로 정보 요청 > name 값 가져오기
+  let petData = [{ name: '보리' }, { name: '수남' }, { name: '밤이' }];
+
   return (
     <>
-      {/* 판매글 폼 */}
-      <form className={styles.sellForm}>
-        {/* 클릭시 이미지 업로드 */}
-        {/* <div className={`${styles.sellImges} ${styles.marginBottom}`}>
-          <div
-            onClick={() => {
-              onImgUpload();
-            }}
-          >
-            +
-          </div>
-        </div> */}
-
         <div>
           <input type="file" name="img" onChange={uploadChange} multiple />
           <button onClick={onImgUpload}>업로드</button>
         </div>
+      {/* 판매글 폼 */}
+      <form className={styles.sellForm} ref={formInfoRef}>
+        {/* 클릭시 이미지 업로드 */}
+        {/* <div className={`${styles.sellImges} ${styles.marginBottom}`}>
+          <div
+        <div className={`${styles.sellImges} ${styles.marginBottom}`}>
+          {/* {imgState && (
+            <img
+              src={imgState}
+              alt="미리보기 이미지"
+              className={`${styles.sellImges} ${styles.marginBottom}`}
+            />
+          )} */}
+          {/* <label
+            className={styles.imgLabel}
+            onClick={() => {
+              onImgUpload();
+            }}
+            htmlFor="inputFile"
+          >
+            +
+          </label> */}
+          <div>
+            <Slider {...settings}>
+              {imgState.map((images, index) => {
+                return (
+                  <img
+                    key={index}
+                    src={images}
+                    alt={`${images}-${index}`}
+                    className={`${styles.sellImges} ${styles.marginBottom}`}
+                  ></img>
+                );
+              })}
+            </Slider>
+          </div>
+
+          <label
+            className={styles.imgLabel}
+            onClick={() => {
+              onImgUpload();
+            }}
+            htmlFor="inputFile"
+          ></label>
+
+          <input
+            type="file"
+            id="inputFile"
+            accept="image/*"
+            style={{ display: 'none' }}
+            onChange={saveImgFile}
+            ref={imgRef}
+            multiple
+          />
+        </div>
+
         {/* 제목, 가격 input */}
         <div className={styles.marginBottom}>
           <p className={styles.formSubTitle}>제목</p>
-          <input type="text" placeholder="제목을 입력해주세요" required />
+          <input
+            type="text"
+            name="title"
+            placeholder="제목을 입력해주세요"
+            required
+          />
         </div>
         <div className={styles.marginBottom}>
           <p className={styles.formSubTitle}>가격</p>
-          <input type="text" placeholder="가격을 입력해주세요" required />
+          <input
+            type="text"
+            name="price"
+            placeholder="가격을 입력해주세요"
+            required
+          />
         </div>
 
         {/* 선택 selectBox */}
         <label for="category">카테고리</label>
         <select
           name="sellFormCategory"
+          ref={categorySelectRef}
           className={`${styles.selcet} ${styles.marginBottom}`}
         >
           <option value="feed">사료</option>
@@ -80,15 +188,24 @@ export default function SellForm({ setIsSale }) {
         <label for="petSellcet">반려동물 선택</label>
         <select
           name="sellFormPetSellect"
-          ref={checkSelectRef}
+          ref={petSelectRef}
           className={`${styles.selcet} ${styles.marginBottom}`}
         >
-          <option value="supplies">보리</option>
-          <option value="feed">수남</option>
+          {petData.map((pet, index) => {
+            return (
+              <option key={index} value={pet.name}>
+                {pet.name}
+              </option>
+            );
+          })}
         </select>
 
         <p className={styles.marginBottom}>설명</p>
-        <textarea placeholder="내용을 입력해 주세요." required></textarea>
+        <textarea
+          name="content"
+          placeholder="내용을 입력해 주세요."
+          required
+        ></textarea>
 
         {/* 취소 완료 버튼 */}
         <div className={`${styles.submitButton} ${styles.marginBottom}`}>
@@ -111,3 +228,55 @@ export default function SellForm({ setIsSale }) {
     </>
   );
 }
+
+// const Images = () => {
+//   const [showImages, setShowImages] = useState([]);
+
+//   // 이미지 상대경로 저장
+//   const handleAddImages = (event) => {
+//     const imageLists = event.target.files;
+//     let imageUrlLists = [...showImages];
+
+//     for (let i = 0; i < imageLists.length; i++) {
+//       const currentImageUrl = URL.createObjectURL(imageLists[i]);
+//       imageUrlLists.push(currentImageUrl);
+//     }
+
+//     if (imageUrlLists.length > 10) {
+//       imageUrlLists = imageUrlLists.slice(0, 10);
+//     }
+
+//     setShowImages(imageUrlLists);
+//   };
+
+//   // X버튼 클릭 시 이미지 삭제
+//   const handleDeleteImage = (id) => {
+//     setShowImages(showImages.filter((_, index) => index !== id));
+//   };
+
+//   return (
+//     <div className={classes.addPicture}>
+//       <label
+//         htmlFor="input-file"
+//         className={classes.addButton}
+//         onChange={handleAddImages}
+//       >
+//         <input
+//           type="file"
+//           id="input-file"
+//           multiple
+//           className={classes.addButton}
+//         />
+//         <Plus fill="#646F7C" />
+//         <span>사진추가</span>
+//       </label>
+//       // 저장해둔 이미지들을 순회하면서 화면에 이미지 출력
+//       {showImages.map((image, id) => (
+//         <div className={classes.imageContainer} key={id}>
+//           <img src={image} alt={`${image}-${id}`} />
+//           <Delete onClick={() => handleDeleteImage(id)} />
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };

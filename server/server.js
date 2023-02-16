@@ -1,8 +1,21 @@
 const express = require('express');
 const app = express();
+
 /**morgan 설정 */
 const morgan = require('morgan');
 app.use(morgan('dev')); // 로그
+
+
+app.use(
+  session({
+    secret: '1234',
+    resave: false,
+    saveUnitialized: true,
+  })
+);
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const path = require('path');
 /**dotenv 설정 */
