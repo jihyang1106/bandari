@@ -58,7 +58,7 @@ let datas = [
 const MainPage = () => {
   const isLoggedIn = useSelector((state) => state.user.user.isLoggedIn);
   const btnState = useSelector((state) => state.typeSwitch.switchState);
-
+  const userLocation = useSelector((state) => state.location.userLocation);
   console.log(isLoggedIn);
 
   const navigate = useNavigate();
@@ -135,15 +135,7 @@ const MainPage = () => {
             {datas.map((data, index) => {
               return (
                 <>
-                  <Card
-                    key={data.id}
-                    title={data.title}
-                    price={data.price}
-                    location={data.location}
-                    // saleStatus={list.saleStatus}
-                    // likeStatus={list.likeStatus}
-                    cardImg={data.cardImg}
-                  />
+                  <Card key={data.id} list={data} />
                 </>
               );
             })}

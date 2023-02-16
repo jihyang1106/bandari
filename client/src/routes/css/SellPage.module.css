@@ -3,4 +3,4 @@
 
 .sellPage section:first-child {
   display: flex;
-  align-items: stretch; }
+  align-items: flex-end }

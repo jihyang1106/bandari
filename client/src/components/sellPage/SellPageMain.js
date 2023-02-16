@@ -2,11 +2,15 @@ import Card from './Card';
 
 import styles from '../css/sellPage/AvailCards.module.css';
 import SellCategory from './SellCategory';
-import testImg from '../../assets/Test.png';
+import { useState } from 'react';
+import SellForm from './SellForm';
 // import { useNavigate } from 'react-router-dom';
 
-export default function SellPageMain() {
+export default function SellPageMain(props) {
   // const navigate = useNavigate();
+
+  // setIsSale 값이 false면 상품 판매 목록, 기본틀 true면 판매 글쓰기가 보임
+  const [isSale, setIsSale] = useState(false);
 
   // 서버 데이터 구축 되면, 요청
   // 임시데이터
@@ -18,7 +22,7 @@ export default function SellPageMain() {
       location: '용산 어디어디 오디',
       saleStatus: false,
       likeStatus: false,
-      cardImg: { testImg },
+      cardImg: 'Test.png',
     },
     {
       userID: '2',
@@ -27,7 +31,7 @@ export default function SellPageMain() {
       location: '용산 어디어디 오디',
       saleStatus: false,
       likeStatus: false,
-      cardImg: { testImg },
+      cardImg: 'Test.png',
     },
     {
       userID: '3',
@@ -36,7 +40,7 @@ export default function SellPageMain() {
       location: '어디어디 오디',
       saleStatus: true,
       likeStatus: true,
-      cardImg: { testImg },
+      cardImg: 'Test.png',
     },
     {
       userID: '4',
@@ -45,7 +49,7 @@ export default function SellPageMain() {
       location: '어디어디 오디',
       saleStatus: true,
       likeStatus: true,
-      cardImg: { testImg },
+      cardImg: 'Test.png',
     },
     {
       userID: '5',
@@ -54,7 +58,7 @@ export default function SellPageMain() {
       location: '어디어디 오디',
       saleStatus: true,
       likeStatus: true,
-      cardImg: { testImg },
+      cardImg: 'Test.png',
     },
     {
       userID: '6',
@@ -63,7 +67,7 @@ export default function SellPageMain() {
       location: '어디어디 오디',
       saleStatus: true,
       likeStatus: true,
-      cardImg: { testImg },
+      cardImg: 'Test.png',
     },
   ];
 
@@ -71,18 +75,22 @@ export default function SellPageMain() {
     <>
       <div className={styles.AvailSaleContainer}>
         {/* 판매 페이지 상단 카테고리  */}
-        <SellCategory />
+        <SellCategory setIsSale={setIsSale} />
 
         {/* 판매 카드 글 리스트 */}
-        <div className={styles.cardContainer}>
-          {data.map((list, index) => {
-            return (
-              <>
-                <Card key={index} list={list} />
-              </>
-            );
-          })}
-        </div>
+        {!isSale ? (
+          <div className={styles.cardContainer}>
+            {data.map((list, index) => {
+              return (
+                <>
+                  <Card key={index} list={list} />
+                </>
+              );
+            })}
+          </div>
+        ) : (
+          <SellForm setIsSale={setIsSale} />
+        )}
       </div>
     </>
   );
