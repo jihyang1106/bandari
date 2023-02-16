@@ -1,8 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './css/SellForm.module.css';
+import axios from 'axios';
 
 export default function SellForm({ setIsSale }) {
   const checkSelectRef = useRef();
+  const [img, setImg] = useState([]); // 커버 이미지
+  // console.log(img);
   function onCompleteBtn() {
     console.log('판매 글쓰기 완료 버튼 눌림');
     // if (checkSelectRef.current.value === '') {
@@ -12,15 +15,34 @@ export default function SellForm({ setIsSale }) {
     // }
   }
 
-  function onImgUpload() {
-    console.log('판매 폼 이미지 업로드 버튼 눌림');
-  }
+  // setCoverFile(e.target.files[0]);
+  const uploadChange = (e) => {
+    const arr = [...img, ...e.target.files];
+    setImg(arr);
+  };
+
+  /**이미지 업로드 구현 */
+  const onImgUpload = async () => {
+    console.log(img);
+    // const formData = new FormData();
+    // formData.append('cover', cover);
+    // await axios
+    //   .post('/upload', formData, {
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data',
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   });
+  };
+
   return (
     <>
       {/* 판매글 폼 */}
       <form className={styles.sellForm}>
         {/* 클릭시 이미지 업로드 */}
-        <div className={`${styles.sellImges} ${styles.marginBottom}`}>
+        {/* <div className={`${styles.sellImges} ${styles.marginBottom}`}>
           <div
             onClick={() => {
               onImgUpload();
@@ -28,8 +50,12 @@ export default function SellForm({ setIsSale }) {
           >
             +
           </div>
-        </div>
+        </div> */}
 
+        <div>
+          <input type="file" name="img" onChange={uploadChange} multiple />
+          <button onClick={onImgUpload}>업로드</button>
+        </div>
         {/* 제목, 가격 input */}
         <div className={styles.marginBottom}>
           <p className={styles.formSubTitle}>제목</p>
