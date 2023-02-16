@@ -1,6 +1,32 @@
 .sellPage {
+
 }
 
 .sellPage section:first-child {
   display: flex;
-  align-items: flex-end }
+    align-items: center;
+    }
+
+  .AvailSaleContainer {
+    width: 100%;
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.AvailSaleContainer button,input{
+    margin: 0;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+.cardContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+    margin-top: 20px;
+}
+
+
