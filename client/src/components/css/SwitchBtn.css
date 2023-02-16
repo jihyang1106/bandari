@@ -35,3 +35,13 @@
   color: white;
   font-weight: 600;
 }
+
+/*600px이하*/
+@media screen and (max-width: 720px) {
+  .switchBtn {
+    background-color: rgb(211, 211, 211);
+    width: 180px;
+    border-radius: 10px;
+    height: 35px;
+  }
+}

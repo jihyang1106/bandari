@@ -6,17 +6,21 @@ import axios from 'axios';
 import styles from './css/Nav.module.css';
 
 import SwitchBtn from './SwitchBtn';
+import NavCategoryHamburger from './NavCategoryHamburger';
 
 import logo from '../assets/Logo.png';
 import DogIcon from '../assets/DogIcon.png';
 import CatIcon from '../assets/CatIcon.png';
 import BasicIcon from '../assets/BasicIcon.png';
 
+import HamburgerIcon from '../assets/HamburgerIcon.png';
+
 import GetLocation from './js/GetLocation';
 
 const Nav = () => {
   const isLoggedIn = useSelector((state) => state.user.user.isLoggedIn);
   const dispatch = useDispatch();
+  const HamburgerDivRef = useRef();
 
   const [swtichType, setSwitchType] = useState('');
   const btnState = useSelector((state) => state.typeSwitch.switchState);
@@ -45,6 +49,12 @@ const Nav = () => {
   };
 
   /**클릭시 위치얻기 실행되는 함수 */
+
+  /*카테고리 열기 함수*/
+  const onClickOpenCategory = () => {
+    console.log(HamburgerDivRef.current.classList);
+    HamburgerDivRef.current.classList.toggle(`${styles.open}`);
+  };
 
   console.log(btnState);
   return (
@@ -81,6 +91,7 @@ const Nav = () => {
 
         <button onClick={onClickLogin}>Login</button>
       </div>
+      <NavCategoryHamburger categoryType={btnState} />
     </div>
   );
 };

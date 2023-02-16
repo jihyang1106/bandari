@@ -1,5 +1,5 @@
 var express = require('express');
-var controller = require('../controller/login');
+var controller = require('../controller/user/login');
 const router = express.Router();
 
 router.get('/kakao/code', controller.kakaoCode);
