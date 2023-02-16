@@ -20,6 +20,10 @@
     margin-right: 15px;
 }
 
+.marginBottom:nth-child(2) {
+    margin-top: 50px;
+}
+
 .marginBottom {
     margin-bottom: 20px;
 }
@@ -43,23 +47,17 @@
 }
 
 .sellImges {
-    width: 260px;
+    width: 250px;
     height: 250px;
     background-color: #D9D9D9;
     text-align: center;
     border-radius: 10px;
-    font-size: 30px;
     font-weight: 1000;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
+    object-fit: cover;
 }
 
-.sellImges div {
-    line-height: 250px;
-}
 
-.sellImges div:hover {
-    transform: scale(1.5);
-}
 .sellForm p {
   display: inline;
 }
@@ -84,9 +82,23 @@ select {
     display: none;
   }
  
-  .sellForm label{
-    margin-bottom: 10px;
-  }
+ .imgLabel{
+    width: 50px;
+    height: 50px;
+    background-color: aqua;
+    position: absolute;
+    /* margin-top: 200px; */
+    color: blueviolet;
+    font-size: 50px;
+    margin-left: 150px;
+    margin-top: -50px;
+}
+
+
+.sellImges label:hover {
+    transform: scale(1.5);
+}
+
   .selcet {
     width: 25%;
     color : rgb(37, 37, 37);
