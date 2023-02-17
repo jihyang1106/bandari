@@ -11,7 +11,7 @@ const GetLocation = (dispatch) => {
 
   // 알아낸 좌표를 kakaoAPI 요청
   const success = (position) => {
-    console.log(position.coords.latitude, position.coords.longitude);
+    // console.log(position.coords.latitude, position.coords.longitude);
     const y = position.coords.latitude;
     const x = position.coords.longitude;
     axios
@@ -24,8 +24,8 @@ const GetLocation = (dispatch) => {
         }
       )
       .then((res) => {
-        console.log(res.data.documents[0].address.address_name);
-        console.log(res.data.documents[0].address);
+        // console.log(res.data.documents[0].address.address_name);
+        // console.log(res.data.documents[0].address);
         dispatch(setUserLocation(res.data.documents[0].address, true));
       })
       .catch((e) => {

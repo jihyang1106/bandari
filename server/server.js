@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
+const session = require('express-session');
 
 /**morgan 설정 */
 const morgan = require('morgan');
 app.use(morgan('dev')); // 로그
-
 
 app.use(
   session({
@@ -38,7 +38,7 @@ app.use(express.json()); // json 파싱, 유저가 보낸 데이터 출력하기
 app.use(express.urlencoded({ extended: true })); // uri 파싱
 
 // DB 연결 성공 여부
-const { sequelize } = require('./model/index');
+const { sequelize, supplies } = require('./model/index');
 // 다른 require문은 일단 생략
 const ConnectDB = async () => {
   try {
@@ -54,10 +54,10 @@ const ConnectDB = async () => {
 ConnectDB();
 
 const router = require('./routes/user/kakao');
-const uploadRouter = require('./routes/upload');
+const suppliesRouter = require('./routes/supplies');
 
 app.use('/', router);
-app.use('/', uploadRouter);
+app.use('/', suppliesRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`server port ${process.env.PORT} open`);
