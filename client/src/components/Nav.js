@@ -41,12 +41,35 @@ const Nav = () => {
 
   const CLIENT_ID = process.env.REACT_APP_KAKAO_CLIENTID;
   const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECTURI;
-  const onClickLogin = () => {
-    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`;
-    window.location.href = kakaoAuthUrl;
+  const LOGOUT_REDIRECT_URI  = process.env.REACT_APP_KAKAO_LOGOUT_REDIRECTURI
+  const onClickLogin = async() => {
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=http://localhost:5000/kakao/code`;
+      window.location.href = kakaoAuthUrl;
+
+      const data = kakaoAuthUrl.data
+      console.log(data)
   };
+  // const onClickLogin = async() => {
+  //     const kakaoLogin = await axios({
+  //       method:'get',
+  //       url:'kakao/login',
+  //     headers:'Access-Control-Allow-Origin'})
+  //     if(kakaoLogin.status !== 200) return alert('통신에러')
+  //       .then((res)=>{
+  //         console.log(res.data)
+  //          window.location.href = "/"
+  //       })
+  //     //window.location.href = kakaoAuthUrl;
+  // };
+
+
 
   /**클릭시 위치얻기 실행되는 함수 */
+
+  const onClickLogout = async() =>{
+    const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=http://localhost:5000/kakao/logout`
+    window.location.href = kakaoLogoutUrl
+  }
 
   /*카테고리 열기 함수*/
   const onClickOpenCategory = () => {
@@ -86,6 +109,7 @@ const Nav = () => {
         <SwitchBtn />
 
         <button onClick={onClickLogin}>Login</button>
+        <button onClick={onClickLogout}>Logout</button>
       </div>
       <NavCategoryHamburger categoryType={btnState} />
     </div>

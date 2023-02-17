@@ -2,9 +2,13 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 
+
 /**morgan 설정 */
 const morgan = require('morgan');
 app.use(morgan('dev')); // 로그
+
+
+// express-session 설정
 
 app.use(
   session({
@@ -17,6 +21,7 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
 const path = require('path');
 /**dotenv 설정 */
 const dotenv = require('dotenv');
@@ -26,6 +31,7 @@ dotenv.config({
 
 /**client와의 통신 */
 const cors = require('cors');
+app.use(cors());
 app.use(
   cors({
     origin: ['http://13.124.185.47:3000', 'http://localhost:3000'],

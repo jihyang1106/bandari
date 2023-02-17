@@ -11,6 +11,7 @@ import { setPets } from './store/module/pets';
 import GetLocation from './components/js/GetLocation';
 
 function App() {
+  
   const [init, setInit] = useState(true);
 
   const dispatch = useDispatch();

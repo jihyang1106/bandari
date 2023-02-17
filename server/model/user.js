@@ -1,7 +1,7 @@
 const pet = require('./pet');
 
 //user 테이블
-const user = (Sequelize, DataTypes) => {
+const User = (Sequelize, DataTypes) => {
   return Sequelize.define(
     'user',
     {
@@ -27,4 +27,4 @@ const user = (Sequelize, DataTypes) => {
   );
 };
 
-module.exports = user;
+module.exports = User;
