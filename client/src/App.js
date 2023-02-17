@@ -10,6 +10,7 @@ import { setUserInfo } from './store/module/user';
 import GetLocation from './components/js/GetLocation';
 
 function App() {
+  
   const [init, setInit] = useState(true);
 
   const dispatch = useDispatch();

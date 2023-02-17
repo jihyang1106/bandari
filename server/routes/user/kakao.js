@@ -1,9 +1,9 @@
 var express = require('express');
-var controller = require('../../controller/user/login');
+var controller = require('../../controller/login');
 const router = express.Router();
 
 router.get('/kakao/code', controller.kakaoCode);
+router.get('/kakao/logout', controller.kakaoLogout);
+// router.get('http://localhost:3000', controller.isLogin)
 
-router.delete('/logout/kakao', controller.viewKakaoLogout);
-router.delete('/kakao/logout', controller.kakaoLogout);
 module.exports = router;

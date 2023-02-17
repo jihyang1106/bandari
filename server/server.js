@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
+const session = require('express-session');
 
 /**morgan 설정 */
 const morgan = require('morgan');
 app.use(morgan('dev')); // 로그
 
-
+// express-session 설정
 app.use(
   session({
     secret: '1234',
@@ -26,6 +27,7 @@ dotenv.config({
 
 /**client와의 통신 */
 const cors = require('cors');
+app.use(cors());
 app.use(
   cors({
     origin: ['http://13.124.185.47:3000', 'http://localhost:3000'],
