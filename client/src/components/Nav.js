@@ -27,8 +27,6 @@ const Nav = () => {
   const userLocation = useSelector((state) => state.location.userLocation);
   const haveLocation = useSelector((state) => state.location.haveLocation);
 
-  console.log(userLocation, haveLocation);
-
   useEffect(() => {
     if (btnState === 'basic') {
       setSwitchType('기본');
@@ -52,11 +50,9 @@ const Nav = () => {
 
   /*카테고리 열기 함수*/
   const onClickOpenCategory = () => {
-    console.log(HamburgerDivRef.current.classList);
     HamburgerDivRef.current.classList.toggle(`${styles.open}`);
   };
 
-  console.log(btnState);
   return (
     <div className={styles.nav}>
       <div>

@@ -1,5 +1,5 @@
 body {
-  width: 100%
+  width: 100%;
 }
 .card {
   display: inline-block;
@@ -80,4 +80,24 @@ body {
   font-weight: 600;
   margin: 0;
   margin-bottom: 14px;
+}
+
+/*1000px이하*/
+@media screen and (max-width: 1000px) {
+  .sellPage {
+  }
+
+  .sellPage > section > .AvailSaleContainer {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .sellPage > section > .AvailSaleContainer > .cardContainer {
+    width: 75vw;
+    margin-left: 0px;
+    justify-content: center;
+  }
 }

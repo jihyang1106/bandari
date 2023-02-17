@@ -1,3 +1,5 @@
+import React, { useRef, useState, useEffect } from 'react';
+
 import styles from './css/SellPage.module.css';
 
 import Nav from '../components/Nav';
@@ -69,6 +71,14 @@ const SellPage = (props) => {
     },
   ];
 
+  useEffect(() => {
+    getData();
+  }, []);
+
+  /*판매글 가져오는 함수* */
+  const getData = () => {
+    console.log('판매글가져오는함수');
+  };
   return (
     <>
       <Nav />
@@ -79,11 +89,7 @@ const SellPage = (props) => {
             <SellCategory />
             <div className={styles.cardContainer}>
               {data.map((list, index) => {
-                return (
-                  <>
-                    <Card key={index} list={list} />
-                  </>
-                );
+                return <Card key={index} list={list} />;
               })}
             </div>
           </div>

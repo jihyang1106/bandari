@@ -33,10 +33,17 @@ const ChatPage = () => {
   const [selectChat, setSelectChat] = useState(false);
   const [selectedChat, setSelectedChat] = useState({});
   const [selected, setSelected] = useState(false);
-  const swtichType = useSelector((state) => state.typeSwitch.switchState);
   const [categoryType, setCategoryType] = useState('');
+
+  const swtichType = useSelector((state) => state.typeSwitch.switchState);
+  const user = useSelector((state) => state.user.user.data); /*유저데이터* */
+
   const chatRoomRef = useRef();
   const closeBtnRef = useRef();
+
+  useEffect(() => {
+    getChats();
+  }, []);
 
   useEffect(() => {
     if (swtichType === 'basic') {
@@ -47,6 +54,11 @@ const ChatPage = () => {
       setCategoryType('cat');
     }
   }, [swtichType]);
+
+  /**채팅정보가져오기 */
+  const getChats = () => {
+    console.log(`채팅정보가져오기, user : ${user}`);
+  };
 
   const onClickChatData = (chatData) => {
     console.log('채팅클릭');
@@ -90,6 +102,7 @@ const ChatPage = () => {
                 {chatDatas.map((chatData, index) => {
                   return (
                     <ChatList
+                      key={index}
                       chatData={chatData}
                       onClickChatData={onClickChatData}
                     />

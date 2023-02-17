@@ -84,13 +84,20 @@ export default function SellCategory({ setIsSale }) {
   return (
     <>
       {/* 상단 카테고리, 검색 & 판매 버튼 누르면, 판매 글 폼 열림 */}
-      <>
+      <div>
         <span className="categoryButtonContainer">
           <div className="adressPickButton">
             <img src={locationIcon} alt="주소지 버튼 아이콘" />
-            {userLocation.region_2depth_name +
-              ' ' +
-              userLocation.region_3depth_name}
+            {userLocation ? (
+              <>
+                {' '}
+                {userLocation.region_2depth_name +
+                  ' ' +
+                  userLocation.region_3depth_name}
+              </>
+            ) : (
+              <>전체</>
+            )}
           </div>
           <span className="changeBtn">
             <button
@@ -111,7 +118,7 @@ export default function SellCategory({ setIsSale }) {
             </button>
             <button
               ref={snackBtnRef}
-              className="categoryButton snakBtn"
+              className="categoryButton snackBtn"
               value="snack"
               onClick={clickedBtn}
             >
@@ -127,9 +134,9 @@ export default function SellCategory({ setIsSale }) {
             </button>
           </span>
         </span>
-        <span className="shearchNav">
-          <input type="text" className="shearchInput" />
-          <button className="serchBtn">검색</button>
+        <span className="searchNav">
+          <input type="text" className="searchInput" />
+          <button className="searchBtn">검색</button>
 
           <button
             className="saleButton"
@@ -140,7 +147,7 @@ export default function SellCategory({ setIsSale }) {
             판매하기
           </button>
         </span>
-      </>
+      </div>
     </>
   );
 }
