@@ -12,6 +12,7 @@ import CatMainImg from '../assets/CatMainImg.png';
 import BasicMainImg from '../assets/BasicMainImg.png';
 import SellMainImg from '../assets/SellMainImg.png';
 import LocationMainImg from '../assets/LocationMainImg.png';
+import UpIcon from '../assets/UpIcon.png';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -68,6 +69,10 @@ const MainPage = () => {
 
   const moveSellPage = () => {
     navigate('/sellPage');
+  };
+
+  const onClickGoUp = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -145,6 +150,7 @@ const MainPage = () => {
           </div>
           <span onClick={moveSellPage}>더보기</span>
         </section>
+        <img src={UpIcon} alt="" onClick={onClickGoUp} id={styles.goUpIcon} />
       </div>
     </>
   );

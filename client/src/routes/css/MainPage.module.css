@@ -18,6 +18,15 @@
   height: 100vh;
 }
 
+.mainPage #goUpIcon {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  bottom: 30px;
+  right: 30px;
+  cursor: pointer;
+}
+
 /*첫 메인페이지*/
 .mainPage section:first-child {
   display: flex;
@@ -46,9 +55,6 @@
   width: 800px;
   margin-right: 70px;
 }
-
-
-
 
 .mainPage section:nth-child(2) div:last-child {
   display: flex;
@@ -113,12 +119,11 @@
     width: 45vw;
     margin-right: 70px;
   }
-  
+
   .mainPage section:nth-child(4) .locationImg {
     width: 45vw;
     margin-right: 70px;
   }
-  
 }
 
 /*1500px이하*/
@@ -138,7 +143,7 @@
   }
 
   .mainPage section:first-child .mainImg img {
-    width: 90vw;
+    width: 80vw;
     height: auto;
     z-index: -1;
   }

@@ -1,0 +1,20 @@
+.slick-list {
+  height: 100%;
+}
+
+.slider {
+  margin-bottom: 100px;
+  width: 70vw;
+}
+
+@media screen and (max-width: 1200px) {
+  .slider {
+    margin-bottom: 100px;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .slider {
+    width: 65vw;
+  }
+}

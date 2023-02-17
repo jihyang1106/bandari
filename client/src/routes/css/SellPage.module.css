@@ -1,30 +1,93 @@
 .sellPage {
-
 }
 
 .sellPage section:first-child {
   display: flex;
-    align-items: center;
-    }
-
-  .AvailSaleContainer {
-    width: 100%;
-    text-align: center;
+  align-items: center;
 }
 
-.AvailSaleContainer button,input{
-    margin: 0;
-    margin-bottom: 10px;
-    margin-left: 5px;
+.AvailSaleContainer {
+  width: 100%;
+  text-align: center;
+}
+
+.AvailSaleContainer button,
+input {
+  margin-bottom: 10px;
 }
 
 .cardContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    align-content: center;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  margin-top: 20px;
 }
 
+/*1500px이하*/
+@media screen and (max-width: 1500px) {
+  .sellPage > section > .AvailSaleContainer > div:first-child {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0px;
+  }
+}
 
+/*1200px이하*/
+@media screen and (max-width: 1200px) {
+  .sellPage section:first-child {
+    display: flex;
+    align-items: normal;
+  }
+
+  .sellPage > section > .AvailSaleContainer {
+    margin-top: calc(7vh + 72px + 36px);
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sellPage > section > .AvailSaleContainer > div:first-child {
+    width: 70vw;
+    margin-left: 50px;
+  }
+
+  .sellPage > section > .AvailSaleContainer > .cardContainer {
+    width: 70vw;
+    margin-left: 50px;
+    justify-content: center;
+  }
+}
+
+/*1000px이하*/
+@media screen and (max-width: 1000px) {
+  .sellPage {
+  }
+
+  .sellPage > section > .AvailSaleContainer {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .sellPage > section > .AvailSaleContainer > .cardContainer {
+    width: 75vw;
+    margin-left: 0px;
+  }
+}
+
+/*500px이하*/
+@media screen and (max-width: 500px) {
+  .sellPage > section > .AvailSaleContainer {
+    margin-top: 20px;
+  }
+
+  .sellPage > section > .AvailSaleContainer > div:first-child {
+    margin-left: 0px;
+    width: 85vw;
+  }
+}

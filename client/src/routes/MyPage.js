@@ -5,6 +5,7 @@ import styles from './css/MyPage.module.css';
 import Nav from '../components/Nav';
 import Category from '../components/Category';
 import Card from '../components/Card';
+import CustomSlider from '../components/CustomSlider';
 
 const MyPage = (props) => {
   function onUserDelete() {
@@ -62,7 +63,7 @@ const MyPage = (props) => {
       <div className={styles.myPage}>
         <section>
           <Category />
-          <form className={styles.MyPageForm}>
+          <div className={styles.MyPageContainer}>
             {/* 제목, 가격 데이터 */}
             <div>
               <p className={styles.subTitle}>마이 페이지</p>
@@ -99,35 +100,17 @@ const MyPage = (props) => {
             <section>
               <h1 className={styles.titleIndex}>찜</h1>
               <div className={styles.cards}>
-                {data.map((data, index) => {
-                  return (
-                    <>
-                      <Card key={data.id} list={data} />
-                    </>
-                  );
-                })}
+                <CustomSlider datas={data} />
               </div>
 
               <h1 className={styles.titleIndex}>판매</h1>
               <div className={styles.cards}>
-                {data.map((data, index) => {
-                  return (
-                    <>
-                      <Card key={data.id} list={data} />
-                    </>
-                  );
-                })}
+                <CustomSlider datas={data} />
               </div>
 
               <h1 className={styles.titleIndex}>구매</h1>
               <div className={styles.cards}>
-                {data.map((data, index) => {
-                  return (
-                    <>
-                      <Card key={data.id} list={data} />
-                    </>
-                  );
-                })}
+                <CustomSlider datas={data} />
               </div>
 
               <button
@@ -139,7 +122,7 @@ const MyPage = (props) => {
                 회원 탈퇴
               </button>
             </section>
-          </form>
+          </div>
         </section>
       </div>
     </>
