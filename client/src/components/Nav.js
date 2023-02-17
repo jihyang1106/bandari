@@ -27,7 +27,7 @@ const Nav = () => {
   const userLocation = useSelector((state) => state.location.userLocation);
   const haveLocation = useSelector((state) => state.location.haveLocation);
 
-  console.log(userLocation, haveLocation);
+  // console.log(userLocation, haveLocation);
 
   useEffect(() => {
     if (btnState === 'basic') {
@@ -56,7 +56,7 @@ const Nav = () => {
     HamburgerDivRef.current.classList.toggle(`${styles.open}`);
   };
 
-  console.log(btnState);
+  // console.log(btnState);
   return (
     <div className={styles.nav}>
       <div>
