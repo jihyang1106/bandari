@@ -1,11 +1,9 @@
 .sellForm {
-    margin: auto;
-    margin-top: 50px;
+    margin: 100px auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
     flex-wrap: nowrap;
-    height: 700px;
+    align-items: center;
 }
 .sellForm input {
     width: 70%;
@@ -25,11 +23,15 @@
 }
 
 .marginBottom {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 .submitButton {
-    margin: 15px 16%;
-    /* text-align: center; */
+    margin-top: 15px;
+}
+.submitButton button:nth-child(1){
+    background-color: transparent;
+    color: black;
+    border: 1px solid #F5A280;
 }
 .submitButton button {
     margin-left: 10px;
@@ -49,7 +51,7 @@
 .sellImges {
     width: 250px;
     height: 250px;
-    background-color: #D9D9D9;
+    background-color: #e8e8e8;
     text-align: center;
     border-radius: 10px;
     font-weight: 1000;
@@ -85,38 +87,44 @@ select {
  .imgLabel{
     width: 50px;
     height: 50px;
-    background-color: aqua;
-    position: absolute;
-    /* margin-top: 200px; */
-    color: blueviolet;
-    font-size: 50px;
-    margin-left: 150px;
-    margin-top: -50px;
+    top: 315px;
+    background-color: #F5A280;
+    border-radius: 25px;
+    position: fixed;
+    margin-left: 60px;
+    line-height: 50px;
+    color: white;
+    font-size: 30px;
 }
+
 
 
 .sellImges label:hover {
-    transform: scale(1.5);
+    transform: scale(1.3);
+   
 }
 
-  .selcet {
-    width: 25%;
+.selcet {
+    width: 100%;
     color : rgb(37, 37, 37);
     font-size: 15px;
     padding: 10px 10px;
  }
 
  textarea {
-    width: 22%;
-    height: 8em;
+    width: 89%;
+    height: 10em;
     border: 1px solid black;
     border-radius: 12px;
     resize: none;
-    /* padding: 1em 1em 1em 1em; */
-    padding: 2em 1em 10em;
+    padding: 2em 1em 1em;
     font-size: 15px;
     overflow: hidden;
   }
 
+.marginRight {
+    margin-right: auto;
+    margin-bottom: 10px;
+}
 
 

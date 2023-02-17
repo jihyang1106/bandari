@@ -3,9 +3,6 @@ import React, { useRef, useState, useEffect } from 'react';
 import locationIcon from '../assets/Location.png';
 import './css/SellCategory.css';
 
-// import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
-
 import {
   setStateBasic,
   setSatatePeed,
@@ -13,20 +10,25 @@ import {
   setStateProduct,
 } from '../store/module/sellCategorySwitch';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function SellCategory({ setIsSale }) {
   const basicBtnRef = useRef();
   const peedBtnRef = useRef();
   const snackBtnRef = useRef();
   const productBtnRef = useRef();
+
   const [swtichType, setSwitchType] = useState('');
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const btnState = useSelector((state) => state.sellCategorySwitch.switchState);
+  const userLocation = useSelector((state) => state.location.userLocation);
 
   const sellButton = () => {
     console.log('sellButton 판매 버튼 눌림');
-    setIsSale(true);
+    navigate('/sellForm', { replace: false });
+    // setIsSale(true);
   };
 
   useEffect(() => {
@@ -83,47 +85,51 @@ export default function SellCategory({ setIsSale }) {
     <>
       {/* 상단 카테고리, 검색 & 판매 버튼 누르면, 판매 글 폼 열림 */}
       <>
-        <span className="categoryButtonContainer switchBtn">
+        <span className="categoryButtonContainer">
           <div className="adressPickButton">
             <img src={locationIcon} alt="주소지 버튼 아이콘" />
-            성북구 창경궁로 35다길
+            {userLocation.region_2depth_name +
+              ' ' +
+              userLocation.region_3depth_name}
           </div>
-          <button
-            ref={basicBtnRef}
-            className="categoryButton basicBtn"
-            value="basic"
-            onClick={clickedBtn}
-          >
-            전체
-          </button>
-          <button
-            ref={peedBtnRef}
-            className="categoryButton peedBtn"
-            value="peed"
-            onClick={clickedBtn}
-          >
-            사료
-          </button>
-          <button
-            ref={snackBtnRef}
-            className="categoryButton snakBtn"
-            value="snack"
-            onClick={clickedBtn}
-          >
-            간식
-          </button>
-          <button
-            ref={productBtnRef}
-            className="categoryButton productBtn"
-            value="product"
-            onClick={clickedBtn}
-          >
-            용품
-          </button>
+          <span className="changeBtn">
+            <button
+              ref={basicBtnRef}
+              className="categoryButton basicBtn"
+              value="basic"
+              onClick={clickedBtn}
+            >
+              전체
+            </button>
+            <button
+              ref={peedBtnRef}
+              className="categoryButton peedBtn"
+              value="peed"
+              onClick={clickedBtn}
+            >
+              사료
+            </button>
+            <button
+              ref={snackBtnRef}
+              className="categoryButton snakBtn"
+              value="snack"
+              onClick={clickedBtn}
+            >
+              간식
+            </button>
+            <button
+              ref={productBtnRef}
+              className="categoryButton productBtn"
+              value="product"
+              onClick={clickedBtn}
+            >
+              용품
+            </button>
+          </span>
         </span>
         <span className="shearchNav">
           <input type="text" className="shearchInput" />
-          <button className="categoryButton serchBtn">검색</button>
+          <button className="serchBtn">검색</button>
 
           <button
             className="saleButton"
