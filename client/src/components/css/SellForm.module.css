@@ -57,6 +57,7 @@
     font-weight: 1000;
     margin-bottom: 0px;
     object-fit: cover;
+    position: relative;
 }
 
 
@@ -87,10 +88,10 @@ select {
  .imgLabel{
     width: 50px;
     height: 50px;
-    top: 315px;
+    top: 190px;
     background-color: #F5A280;
     border-radius: 25px;
-    position: fixed;
+    position: absolute;
     margin-left: 60px;
     line-height: 50px;
     color: white;
