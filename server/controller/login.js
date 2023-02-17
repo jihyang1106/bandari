@@ -74,6 +74,7 @@ let userResponse = (ACESS_TOKEN) => {
 };
 
 exports.kakaoLogout = (req,res) =>{
+  console.log("유저세션:",req.session.user)
   req.session.destroy( (err) =>{
     if(err) throw err;
      res.redirect("http://localhost:3000/")
@@ -89,85 +90,4 @@ exports.kakaoLogout = (req,res) =>{
 //     res.send({isLoginfalse})
 //   }
 // }
-//app.destroy("/logout",(req,res)=>{
- //   res.sessoin.destroy(function(err){ //세션 안의 값을 삭제
-//       if (err) throw err
-  //      res.send("로그아웃 성공")
-  //  })
-//})
 
-
-
-
-
-// function linkUser(session, provider, userData) {
-//   let result = false;
-//   if (session.userData) {
-//     if (session.userData[provider]) {
-//       return result;
-//     }
-
-//     session.userData[provider] = userData;
-//   } else {
-//     session.userData = {
-//       [provider]: userData
-//     };
-//   }
-
-//   result = true;
-
-//   return result;
-// }
-
-
-// exports.kakaoCode = async (req, res) => {
-//   // 로그인 후 받은 인가 코드로 토큰을 받기위한 요청을 카카오 서버로 보냄
-//   const { session, query } = req;
-//   const { code } = query;
-//   let getToken;
-
-//   getToken = await axios({
-//     method: 'POST',
-//     url: 'https://kauth.kakao.com/oauth/token',
-//     headers: {
-//       'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-//     },
-//     data: {
-//       grant_type: 'authorization_code',
-//       client_id: CLIENT_ID,
-//       redirect_uri: REDIRECT_URI,
-//       code: code,
-//       client_secret: CLIENT_SECRET,
-//     },
-//   });
-//   console.log(getToken.data)
-//   const { ACESS_TOKEN } = getToken.data
-//   let userToken;
-
-//   userToken = await axios({
-//       method: 'get',
-//       url: 'https://kapi.kakao.com/v2/user/me',
-//       headers: {
-//         Authorization: `Bearer ${ACESS_TOKEN}`,
-//         'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-//       },
-//     }).then((res) => {
-//       console.log(res);
-//     });
- 
-
-//   const userData = {
-//     ...getToken.data,
-//     ...userToken.data,
-//   };
-//   const result = linkUser(session, 'kakao', userData);
-//   res.redirect("http://localhost:3000")
-// }
-
-exports.kakaoLogin = async (req, res) => {
-  await axios({}).then((res) => {});
-};
-
-exports.viewKakaoLogout = () => {};
-
-exports.kakaoLogout = () => {};

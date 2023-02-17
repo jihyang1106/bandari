@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const session = require('express-session');
+const cookieParser = require("cookie-parser")
+
 
 /**morgan 설정 */
 const morgan = require('morgan');
@@ -17,6 +19,7 @@ app.use(
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 
 const path = require('path');
 /**dotenv 설정 */
