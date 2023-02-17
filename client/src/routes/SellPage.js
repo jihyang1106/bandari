@@ -1,20 +1,18 @@
+import React, { useRef, useState, useEffect } from 'react';
+
 import styles from './css/SellPage.module.css';
 
 import Nav from '../components/Nav';
 import Category from '../components/Category';
 import Card from '../components/Card';
-import SellForm from '../components/SellForm';
 import SellCategory from '../components/SellCategory';
 
-import { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 
 const SellPage = (props) => {
   // const navigate = useNavigate();
 
-  // setIsSale 값이 false면 상품 판매 목록, true면 판매 글쓰기 폼
-  const [isSale, setIsSale] = useState(false);
   // 임시데이터
   let data = [
     {
@@ -73,6 +71,14 @@ const SellPage = (props) => {
     },
   ];
 
+  useEffect(() => {
+    getData();
+  }, []);
+
+  /*판매글 가져오는 함수* */
+  const getData = () => {
+    console.log('판매글가져오는함수');
+  };
   return (
     <>
       <Nav />
@@ -80,23 +86,12 @@ const SellPage = (props) => {
         <section>
           <Category />
           <div className={styles.AvailSaleContainer}>
-            {/* 판매 페이지 상단 카테고리  */}
-            {!isSale && <SellCategory setIsSale={setIsSale} />}
-
-            {/* 판매 카드 글 리스트 */}
-            {!isSale ? (
-              <div className={styles.cardContainer}>
-                {data.map((list, index) => {
-                  return (
-                    <>
-                      <Card key={index} list={list} />
-                    </>
-                  );
-                })}
-              </div>
-            ) : (
-              <SellForm setIsSale={setIsSale} />
-            )}
+            <SellCategory />
+            <div className={styles.cardContainer}>
+              {data.map((list, index) => {
+                return <Card key={index} list={list} />;
+              })}
+            </div>
           </div>
         </section>
       </div>

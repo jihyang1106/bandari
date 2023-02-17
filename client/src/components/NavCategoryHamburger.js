@@ -12,6 +12,11 @@ const NavCategoryHamburger = ({ categoryType }) => {
     HamburgerDivRef.current.classList.toggle(`${styles.open}`);
   };
 
+  /**로그인 클릭시 실행되는 함수 */
+  const onClickLogin = () => {
+    console.log('로그인클릭시');
+  };
+
   return (
     <div className={styles.categoryHamburger}>
       <img
@@ -20,6 +25,9 @@ const NavCategoryHamburger = ({ categoryType }) => {
         onClick={onClickOpenCategory}
       />
       <div ref={HamburgerDivRef} className={styles.HamburgerDiv}>
+        <button onClick={onClickLogin} id={styles.loginBtn}>
+          Login
+        </button>
         <div className={styles.link}>
           <NavLink
             to="/sellPage"

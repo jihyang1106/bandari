@@ -5,147 +5,166 @@
   display: flex;
 }
 
-
-.MyPageForm {
-    /* margin: auto; */
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-top: 10%;
+.MyPageContainer {
+  /* margin: auto; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: calc(7vh + 72px);
 }
 
 .title {
-    font-size: 20px;
-    font-weight: 900;
+  font-size: 20px;
+  font-weight: 900;
 }
 .subTitle:nth-child(1) {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 40PX;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 40px;
 }
 
 /* 회원 정보 수정 */
-.subTitle:nth-child(3){
-    font-size: 15px;
-    font-weight: 500;
+.subTitle:nth-child(3) {
+  font-size: 15px;
+  font-weight: 500;
 }
-.subTitle{
-    font-size: 20px;
-    font-weight: 500;
-    margin: 20px 0;
+.subTitle {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 20px 0;
 }
 
 .titleIndex {
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 25px;
-    /* margin-bottom: 30px; */
-    /* margin-left: 2%; */
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 25px;
+  /* margin-bottom: 30px; */
+  /* margin-left: 2%; */
 }
 
-.marginBottom, .titleIndex {
-    margin-bottom: 40px;
+.marginBottom,
+.titleIndex {
+  margin-bottom: 40px;
 }
-.MyPageForm input {
-    width: 70%;
-    height: 30px;
-    padding: 10px 10px;
-    border: none;
-    font-size: 15px;
-    border-bottom: 1px solid black;
+.MyPageContainer input {
+  width: 70%;
+  height: 30px;
+  padding: 10px 10px;
+  border: none;
+  font-size: 15px;
+  border-bottom: 1px solid black;
 }
 
 .formSubTitle {
-    margin-right: 15px;
-    display: inline;
+  margin-right: 15px;
+  display: inline;
 }
 
 .submitButton button {
-    background: #F5A280;
-    border-radius: 30px;
-    font-weight: 1000;
-    border: none;
-    color: white;
-    font-size: 14px;
-    width: 100px;
-    height: 40px;
-    margin-top: 25px;
-    margin-left: 15px;
+  background: #f5a280;
+  border-radius: 30px;
+  font-weight: 1000;
+  border: none;
+  color: white;
+  font-size: 14px;
+  width: 100px;
+  height: 40px;
+  margin-top: 25px;
+  margin-left: 15px;
 }
 .submitButton button:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .petImges {
-    width: 100px;
-    height: 160px;
-    background-color: #D9D9D9;
-    text-align: center;
-    border-radius: 10px;
-    font-size: 30px;
-    font-weight: 1000;
-    margin-bottom: 30px;
-    position: absolute;
-    display: inline;
-    margin-left: 15px;
+  width: 100px;
+  height: 160px;
+  background-color: #d9d9d9;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 30px;
+  font-weight: 1000;
+  margin-bottom: 30px;
+  position: absolute;
+  display: inline;
+  margin-left: 15px;
 }
 
 .petImges div {
-    line-height: 160px;
-
+  line-height: 160px;
 }
 
 .petImges div:hover {
-    transform: scale(1.5);
+  transform: scale(1.5);
 }
-
 
 .sellectedPet {
-    box-sizing: border-box;
-    width: 450px;
-    height: 160px;
-    left: 569px;
-    top: 766px;
-    border: 1px solid #F5A280;
-    border-radius: 20px;
-    padding: 10px 10px;
-    display: inline-block;
+  box-sizing: border-box;
+  width: 450px;
+  height: 160px;
+  left: 569px;
+  top: 766px;
+  border: 1px solid #f5a280;
+  border-radius: 20px;
+  padding: 10px 10px;
+  display: inline-block;
 }
 
-
 .petImg {
-    width: 150px;
-    height: 140px;
-    background-color: #ffe7c7;
-    position: absolute;
-    border-radius: 10px; 
+  width: 150px;
+  height: 140px;
+  background-color: #ffe7c7;
+  position: absolute;
+  border-radius: 10px;
 }
 
 .petInfo {
-    margin-left: 160px;
+  margin-left: 160px;
 }
 
 .petInfo p {
-    margin-top: 15px;
-    font-size: 12px;
-    font-weight: 500;
+  margin-top: 15px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
-.petInfo p:nth-child(1){
-    font-size: 16px;
-    font-weight: 600;
+.petInfo p:nth-child(1) {
+  font-size: 16px;
+  font-weight: 600;
 }
-
 
 .cards {
-    margin-left: -2%;
+  width: 70vw;
 }
 
 .deleteButton {
-    background: none;
-    border: none;
-    text-align: center;
-    font-size: 14px;
-    margin: 85px 38%;
+  background: none;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  margin: 85px 38%;
+}
+
+/*1200px이하*/
+@media screen and (max-width: 1200px) {
+  .myPage section:first-child {
+    display: flex;
+    align-items: normal;
+  }
+
+  .MyPageContainer {
+    align-items: center;
+    margin-top: calc(7vh + 72px + 36px);
+  }
+
+  .MyPageContainer > div,
+  .MyPageContainer > section {
+    width: 70vw;
+    margin-left: 70px;
+  }
+
+  .cards {
+    margin-left: -2%;
+  }
 }

@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { setUserInfo } from './store/module/user';
+import { setPets } from './store/module/pets';
 import GetLocation from './components/js/GetLocation';
 
 function App() {
@@ -21,13 +22,23 @@ function App() {
   };
 
   /*유저 위치정보*/
-
   if (userInfo.userId) {
     dispatch(setUserInfo(userInfo, true));
   } else {
     dispatch(setUserInfo(userInfo, false));
   }
 
+  /* 펫 정보 */
+  const pets = {
+    pets: sessionStorage.getItem('pets'),
+  };
+
+  /*펫 정보*/
+  if (pets) {
+    for (let i = 0; i < pets.length; i++) {
+      setPets(pets[i]);
+    }
+  }
   /* Api 요청 실행 예제 */
   // const callApi = async () => {
   //   axios.get('/api').then((res) => console.log(res.data.test));

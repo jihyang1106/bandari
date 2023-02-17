@@ -4,7 +4,6 @@ import TestImg from '../assets/TestImg1.jpg';
 import styles from './css/ChatList.module.css';
 
 const ChatList = ({ chatData, onClickChatData }) => {
-  console.log(chatData);
   return (
     <div
       onClick={() => {

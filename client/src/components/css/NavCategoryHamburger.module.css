@@ -2,13 +2,21 @@
   display: none;
 }
 
+.categoryHamburger #loginBtn {
+  border: none;
+  background-color: transparent;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
 
-.categoryHamburger > .HamburgerDiv > .link > a.active.basic > span{
+.categoryHamburger > .HamburgerDiv > .link > a.active.basic > span {
   font-weight: 600;
   color: black;
 }
 
-.categoryHamburger > .HamburgerDiv > .link > a.active.puppy > span{
+.categoryHamburger > .HamburgerDiv > .link > a.active.puppy > span {
   font-weight: 600;
   color: #f5a280;
 }
@@ -17,7 +25,6 @@
   font-weight: 600;
   color: #78aac3;
 }
-
 
 /*1000px이하*/
 @media screen and (max-width: 1000px) {

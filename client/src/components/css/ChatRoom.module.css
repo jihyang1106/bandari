@@ -19,8 +19,6 @@
   background-color: #e8f4ff;
 }
 
-
-
 /*채팅 상품부분*/
 .chatRoom > .item {
   background-color: white;
@@ -33,74 +31,67 @@
   position: relative;
 }
 
-.chatRoom >  .item > div:first-child {
+.chatRoom > .item > div:first-child {
   display: flex;
   align-items: center;
 }
 
 .chatRoom > .item > div:first-child img {
-    width: 80px;
-    height: 80px;
-  }
+  width: 80px;
+  height: 80px;
+}
 
-.chatRoom > .item > div:first-child  h1 {
+.chatRoom > .item > div:first-child h1 {
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
-.chatRoom > .item > div:first-child  div span {
+.chatRoom > .item > div:first-child div span {
   font-size: 12px;
 }
 
-.chatRoom > .item > div:last-child{
-    display: flex;
-    justify-content: center;
-    margin-top: 5px;
+.chatRoom > .item > div:last-child {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
 }
 
-
-
 .chatRoom > .item > div:last-child .checkSoldBtn {
-    right: 10px;
-    bottom: 10px;
-    width: 40%;
-    border: none;
-    cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 20px;
-    margin-right: 20px;
+  right: 10px;
+  bottom: 10px;
+  width: 40%;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin-right: 20px;
+}
 
-  }
-  
-  .chatRoom > .item > div:last-child .checkSoldBtn.basic,
-  .chatRoom > .item > div:last-child .exitBtn.basic
-   {
-    background-color: #efefef;
-  }
-  
-  .chatRoom > .item > div:last-child .checkSoldBtn.puppy,
-  .chatRoom > .item > div:last-child .exitBtn.puppy
-   {
-    background-color: #e8f4ff;
-  }
-  
-  .chatRoom > .item > div:last-child .checkSoldBtn.cat,
-  .chatRoom > .item > div:last-child .exitBtn.cat
-  {
-    background-color: #ffece1;
-  }
+.chatRoom > .item > div:last-child .checkSoldBtn.basic,
+.chatRoom > .item > div:last-child .exitBtn.basic {
+  background-color: #efefef;
+}
 
+.chatRoom > .item > div:last-child .checkSoldBtn.puppy,
+.chatRoom > .item > div:last-child .exitBtn.puppy {
+  background-color: #e8f4ff;
+}
 
-  .chatRoom > .item > div:last-child .exitBtn{
-    right: 10px;
-    bottom: 10px;
-    border: none;
-    cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 20px; 
-    width: 40%;   
-  }
+.chatRoom > .item > div:last-child .checkSoldBtn.cat,
+.chatRoom > .item > div:last-child .exitBtn.cat {
+  background-color: #ffece1;
+}
+
+.chatRoom > .item > div:last-child .exitBtn {
+  right: 10px;
+  bottom: 10px;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 20px;
+  width: 40%;
+}
 
 /*채팅 내용부분*/
 .chatRoom .chatpage {
@@ -196,46 +187,80 @@
   background-color: #ffece1;
 }
 
-
-
 /*1200px이하*/
 @media screen and (max-width: 1200px) {
-    .chatRoom{
-        width: 40vw;
-    }
-
-      .chatRoom > .inputSection input {
-        width: 90%;
-        margin-right: 20px;
-      }
-      
-      .chatRoom > .inputSection button {
-        width:90px;
-      }
+  .chatRoom {
+    width: 40vw;
   }
 
-  /*1000px이하*/
+  .chatRoom > .inputSection input {
+    width: 90%;
+    margin-right: 20px;
+  }
+
+  .chatRoom > .inputSection button {
+    width: 90px;
+  }
+}
+
+/*1000px이하*/
 @media screen and (max-width: 1000px) {
-    .chatRoom{
-        width: 70vw;
-        margin-left: 0;
-    }
-
-
-    .chatRoom > .inputSection input {
-        width: 45vw;
-        margin-right: 20px;
-      }
-      
-      .chatRoom > .inputSection button {
-        width:90px;
-      }
+  .chatRoom {
+    width: 70vw;
+    margin-left: 0;
   }
-  
 
-  
-    /*900px이하*/
-@media screen and (max-width: 900px) {
-
+  .chatRoom > .inputSection input {
+    width: 45vw;
+    margin-right: 20px;
   }
-  
+
+  .chatRoom > .inputSection button {
+    width: 90px;
+  }
+}
+
+/*500px 이하*/
+@media screen and (max-width: 500px) {
+  .chatRoom {
+    width: 85vw;
+  }
+
+  .chatRoom > .item {
+    margin-top: 10px;
+    height: 85px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .chatRoom > .item > div:last-child {
+    flex-direction: column;
+  }
+  .chatRoom > .item > div:last-child .checkSoldBtn,
+  .chatRoom > .item > div:last-child .exitBtn {
+    width: 100px;
+    padding: 5px 0;
+    font-size: 12px;
+  }
+  .chatRoom > .item > div:last-child .checkSoldBtn {
+    margin-bottom: 5px;
+  }
+
+  .chatRoom > .item > div:first-child h1 {
+    font-size: 13px;
+  }
+  .chatRoom .chatpage > .container {
+    height: 50vh;
+    padding: 20px 0;
+  }
+
+  .myChat div {
+    width: 180px;
+    padding: 15px 10px;
+  }
+
+  .otherChat div {
+    width: 180px;
+    padding: 15px 10px;
+  }
+}

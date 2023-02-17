@@ -1,138 +1,173 @@
-.switchBtn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-weight: 500;
+/* padding: 36px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: calc(100vw - 70px);
+    height: 7vh; */
+
+.changeBtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .categoryButtonContainer {
-    margin: auto;
-    display: inline-block;
+  margin: auto;
+  display: inline-block;
 }
 
-.categoryButtonContainer button{
-    margin-left: 10px;
+.categoryButtonContainer button {
+  margin-left: 10px;
 }
 
-.categoryButtonContainer button:active{
-    background-color: #F5A280;
-    color: white;
+.categoryButtonContainer button:active {
+  background-color: #f5a280;
+  color: white;
 }
-
-
 
 /* 검색  */
-.shearchInput {
-    margin-left: inherit;
-    margin-right: 10px;
-    border: none;
-    border-bottom: 1px solid rgb(39, 39, 39);
-    height: 32px;
-    font-size: 15px;
-    font-weight: 600;
+.searchInput {
+  margin-left: inherit;
+  margin-right: 10px;
+  border: none;
+  border-bottom: 1px solid rgb(39, 39, 39);
+  height: 32px;
+  font-size: 15px;
+  font-weight: 600;
+  outline: none;
 }
 
-.shearchInput:focus {
-    border: solid #F5A280;
+.searchNav {
+  margin-left: 5%;
 }
 
-.shearchNav {
-    margin-left: 5%;
+/* 검색 버튼 */
+.searchBtn {
+  width: 70px;
+  height: 38px;
+  background: #f5a280;
+  border-radius: 30px;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+}
+.serchBtn:hover {
+  background-color: transparent;
+  color: black;
 }
 
 /* 판매 버튼 */
 .saleButton {
-    background-color: rgba(0,0,0,0);
-    margin-left: 1%;
-    border: none;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 22px;
-    color: #F5A280;
+  background-color: rgba(0, 0, 0, 0);
+  margin-left: 1%;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  color: #f5a280;
+  cursor: pointer;
 }
 
 .saleButton:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
-
+/* 카테고리 버튼  */
 .categoryButton {
-    width: 70px;
-    height: 38px;
-    background: rgba( 255, 255, 255, 0 );
-    border-radius: 30px;
-    border: 1px solid #F5A280; 
-    font-size: 15px;
-    font-weight: 600;
-    }
-    
-/* .categoryButton:hover {
-        background: #F5A280;
-        color: white;
-        transform: scale(1.1);
-    
-} */
-
-.serchBtn {
-    background-color: #F5A280;
-    color: white;
-    
+  width: 70px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 30px;
+  border: 1px solid #f5a280;
+  font-size: 15px;
+  font-weight: 600;
 }
 
-.serchBtn:hover {
-    background-color: transparent;
-    color: black;
+/* active 버튼 */
+.changeBtn > .basicBtn.clicked {
+  background-color: #f5a280;
+  color: white;
+  font-weight: 600;
 }
 
-.switchBtn > .basicBtn.clicked {
-    background-color: #F5A280;
-    color: white;
-    font-weight: 600;
+.changeBtn > .peedBtn.clicked {
+  background-color: #f5a280;
+  color: white;
+  font-weight: 600;
 }
 
-.switchBtn > .peedBtn.clicked {
-    background-color: #F5A280;
-    color: white;
-    font-weight: 600;
+.changeBtn > .snackBtn.clicked {
+  background-color: #f5a280;
+  color: white;
+  font-weight: 600;
 }
 
-.switchBtn > .snakBtn.clicked {
-    background-color: #F5A280;
-    color: white;
-    font-weight: 600;
+.changeBtn > .productBtn.clicked {
+  background-color: #f5a280;
+  color: white;
+  font-weight: 600;
 }
 
-.switchBtn > .productBtn.clicked {
-    background-color: #F5A280;
-    color: white;
-    font-weight: 600;
-}
-
+/* 주소 버튼 */
 .adressPickButton {
-    display: inline-block;
-    height: 38px;
-    background: #FFECE1;
-    border: none;
-    border-radius: 30px;
-    padding-left: 40px;
-    padding-right: 25px;
-    font-weight: 700;
-    color: #464646;
-    width: 200px;
-    line-height: 40px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
+  display: inline;
+  background: #ffece1;
+  border: none;
+  border-radius: 30px;
+  color: #464646;
+  line-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 7px 20px;
 }
 
+/* 주소 아이콘 */
 .adressPickButton img {
-    width: 18px;
-    height: 18px;
-    margin-left: -20px;
-    
+  height: 15px;
+  margin-right: 5px;
 }
 
 .adressPickButton:hover {
-    background: #F5A280; 
-    color: white;
+  background: #f5a280;
+  color: white;
+}
+
+/*1500px이하*/
+@media screen and (max-width: 1500px) {
+  .categoryButtonContainer {
+    margin-top: 30px;
+  }
+
+  .searchNav {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+
+/*500px이하*/
+@media screen and (max-width: 500px) {
+  .categoryButtonContainer {
+    font-size: 13px;
+  }
+
+  .categoryButton {
+    font-size: 13px;
+    height: 30px;
+  }
+
+  .searchBtn {
+    font-size: 13px;
+    height: 30px;
+  }
+
+  /* 판매 버튼 */
+  .saleButton {
+    font-size: 15px;
+    margin-top: 10px;
+  }
 }
