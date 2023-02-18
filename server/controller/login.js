@@ -29,33 +29,26 @@ exports.kakaoCode = async (req, res) => {
   })
     .then((res) => {
       // 토큰을 받아옴
-       ACESS_TOKEN = res.data.access_token;
+      ACESS_TOKEN = res.data.access_token;
       //토큰으로 사용자 정보를 받아오는 함수
       return userResponse(ACESS_TOKEN);
     })
     // 함수를 통해 받아온 유저 정보
     .then((res) => {
       //console.log('유저 정보', user);
-
       userData = {
         id: res.kakao_account.email,
         nickname: res.kakao_account.profile.nickname,
       };
+
       console.log('DB에 들어갈 유저정보', userData);
-       user.findOne({ where: { id: userData.id } })
-      .then((result)=>{
-        if(result){
-          req.session.user = userData 
-          console.log("세션1",req.session.user)         
-      }
-      else {
-        user.create(userData);
-        req.session.user = userData
-        console.log("세션2",req.session.user)        
-      }
-  })
-    })
-    res.redirect('http://localhost:3000')
+      user.findOne({ where: { id: userData.id } }).then((result) => {
+        if (result == null) {
+          user.create(userData);
+        }
+      });
+    });
+  res.redirect('http://localhost:3000');
 };
 //토큰으로 사용자 정보를 받아오는 함수
 let userResponse = (ACESS_TOKEN) => {
@@ -73,21 +66,25 @@ let userResponse = (ACESS_TOKEN) => {
   });
 };
 
-exports.kakaoLogout = (req,res) =>{
-  console.log("유저세션:",req.session.user)
-  req.session.destroy( (err) =>{
-    if(err) throw err;
-     res.redirect("http://localhost:3000/")
+exports.kakaoLogout = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) throw err;
+    userData = false;
+    res.redirect('http://localhost:3000');
+  });
+};
+
+exports.isLogin = (req, res) => {
+  if (userData !== false) {
+    console.log('유저데이터1', userData);
+    res.send({ isLogin: userData.id });
+  } else {
+    console.log('유저데이터2', userData);
+    res.send({ isLogin: false });
   }
-    
-  )
-}
+};
 
-// exports.isLogin = (req,res) =>{
-//   if(req.session.user) {
-//     res.send({isLogin:req.session.user.id})
-//   }else{
-//     res.send({isLoginfalse})
-//   }
-// }
-
+exports.delUserData = (req, res) => {
+  userData = null;
+  console.log('유저데이터', userData);
+};

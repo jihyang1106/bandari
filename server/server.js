@@ -2,11 +2,9 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 
-
 /**morgan 설정 */
 const morgan = require('morgan');
 app.use(morgan('dev')); // 로그
-
 
 // express-session 설정
 
@@ -20,7 +18,6 @@ app.use(
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 const path = require('path');
 /**dotenv 설정 */
