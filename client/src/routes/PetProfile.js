@@ -1,25 +1,29 @@
 import styles from './css/PetProfile.module.css';
-// import styles from './css/PetProfile.module.css';
 
 import Nav from '../components/Nav';
 import Category from '../components/Category';
 
 import React, { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import $ from 'jquery';
 
 const PetProfile = () => {
-  const [imgState, setImgState] = useState([]);
+  const [imgState, setImgState] = useState();
 
   const navigate = useNavigate();
   const imgRef = useRef();
   const formInfoRef = useRef();
-  const categorySelectRef = useRef();
+  const genderRef = useRef();
+  const yyRef = useRef();
+  const mmRef = useRef();
+  const ddRef = useRef();
+  const typeRef = useRef();
+  const kindRef = useRef();
+  const weightRef = useRef();
 
-  // 이미지 미리보기 기능
+  // 이미지 미리보기 함수
   const saveImgFile = () => {
     const file = imgRef.current.files[0];
     const reader = new FileReader();
@@ -32,7 +36,7 @@ const PetProfile = () => {
   async function onCompleteBtn() {
     const form = formInfoRef.current;
     const formData = new FormData();
-
+    
     // 데이터
     const datas = {
       name: form.name.value,
@@ -41,7 +45,6 @@ const PetProfile = () => {
       weight: form.weight.value,
       petType: form.type.value,
       petSpeices: form.kind.value,
-      content: form.content.value,
       info: form.content.value,
       userId: 'test@naver.com',
     };
@@ -62,24 +65,20 @@ const PetProfile = () => {
       .then((res) => {
         console.log('res.data', res.data);
       });
-    // await axios
-    //   .post('pet/insert', {
-    //     data: formData,
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   });
   }
 
+  /** 업로드 버튼 클릭 시 이전 값 초기화  */
   function onImgUpload() {
-    console.log('판매 폼 이미지 업로드 버튼 눌림');
     // 업로드 버튼 다시 눌렀을때 미리보기 날림
     setImgState([]);
   }
+
   // 취소 버튼
   function onResetPage() {
     navigate('/');
   }
+
+  // 연, 월, 일 셀랙트 박스 값
   $(document).ready(function () {
     var now = new Date();
     var year = now.getFullYear();
@@ -121,15 +120,12 @@ const PetProfile = () => {
             encType="multipart/form-data"
           >
             {/* 업로드 된 이미지 미리보기 슬라이드 */}
-            <div className={`${styles.petImg} ${styles.marginBottom}`}>
+            <div className={`${styles.petImg}`}>
               {imgState && (
-                <img
-                  src={imgState}
-                  alt="미리보기 이미지"
-                  className={`${styles.petImg} ${styles.marginBottom}`}
-                />
+                <img src={imgState} alt="" className={`${styles.petImg}`} />
               )}
 
+              {/* 업로드 클릭 버튼 */}
               <label
                 className={styles.imgLabel}
                 onClick={onImgUpload}
@@ -149,10 +145,10 @@ const PetProfile = () => {
               />
             </div>
 
-            {/* 제목, 가격 input */}
-            <div className={styles.marginBottom}>
+            <div className={styles.petPrifDisplay}>
               <p className={styles.formSubTitle}>이름</p>
               <input
+                className={styles.inputWidth}
                 type="text"
                 name="name"
                 placeholder="이름을 입력해주세요"
@@ -160,11 +156,12 @@ const PetProfile = () => {
               />
             </div>
 
-            <div className={styles.marginBottom}>
-              <span className={styles.formSubTitle}>성별</span>
+            <div className={styles.petPrifDisplay}>
+              <p className={styles.formSubTitle}>성별</p>
+
               <select
-                className={`${styles.selcetBirth} ${styles.formSubTitle}`}
-                ref={categorySelectRef}
+                className={`${styles.selcet}`}
+                ref={genderRef}
                 name="gender"
               >
                 <option value="남아">남아</option>
@@ -172,58 +169,52 @@ const PetProfile = () => {
               </select>
             </div>
 
-            {/* 선택 selectBox */}
-            <div>
-              <label htmlFor="category" className={styles.formSubTitle}>
-                나이
-              </label>
-              <select
-                name="yy"
-                id="year"
-                ref={categorySelectRef}
-                className={`${styles.selcetBirth} ${styles.marginBottom}`}
-              ></select>
+            <div className={styles.petPrifDisplay}>
+              <p className={styles.formSubTitle}>나이</p>
+              <div>
+                <div className={styles.siasiadl}>
+                  <select
+                    name="yy"
+                    id="year"
+                    ref={yyRef}
+                    className={styles.selcetBirth}
+                  ></select>
 
-              <select
-                name="mm"
-                id="month"
-                ref={categorySelectRef}
-                className={`${styles.selcetBirth} ${styles.marginBottom}`}
-              ></select>
+                  <select
+                    name="mm"
+                    id="month"
+                    ref={mmRef}
+                    className={styles.selcetBirth}
+                  ></select>
 
-              <select
-                name="dd"
-                id="day"
-                ref={categorySelectRef}
-                className={`${styles.selcetBirth} ${styles.marginBottom}`}
-              ></select>
+                  <select
+                    name="dd"
+                    id="day"
+                    ref={ddRef}
+                    className={styles.selcetBirth}
+                  ></select>
+                </div>
+              </div>
             </div>
 
-            <label
-              htmlFor="category"
-              className={`${styles.formSubTitle} ${styles.marginBottom}`}
-            >
-              분류
-            </label>
-            <select
-              name="type"
-              ref={categorySelectRef}
-              className={`${styles.selcet} ${styles.marginBottom}`}
-            >
-              <option value="강아지">강아지</option>
-              <option value="고양이">고양이</option>
-            </select>
-
-            <div className={styles.marginBottom}>
-              <span className={`${styles.formSubTitle}`}>견.묘종</span>
+            <div className={styles.petPrifDisplay}>
+              <p className={styles.formSubTitle}>분류</p>
+              <select name="type" ref={typeRef} className={styles.selcet}>
+                <option value="강아지">강아지</option>
+                <option value="고양이">고양이</option>
+              </select>
+            </div>
+            <div className={styles.petPrifDisplay}>
+              <p className={styles.formSubTitle}>견.묘종</p>
               <input
+                className={styles.inputWidth}
                 type="text"
                 name="kind"
+                ref={kindRef}
                 placeholder="예) 세상에 하나뿐인 믹스"
                 required
               />
             </div>
-
             <label
               htmlFor="category"
               className={`${styles.formSubTitle} ${styles.marginBottom}`}
