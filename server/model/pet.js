@@ -18,14 +18,14 @@ const pet = (Sequelize, DataTypes) => {
         allowNull: false,
       },
       age: {
-        type: DataTypes.STRING(10),
+        type: DataTypes.STRING(15),
         allowNull: false,
       },
       weight: {
         type: DataTypes.STRING(10),
         allowNull: false,
       },
-      petSpecies: {
+      petSpeices: {
         type: DataTypes.STRING(30),
         allowNull: false,
       },
@@ -34,10 +34,10 @@ const pet = (Sequelize, DataTypes) => {
         allowNull: false,
       },
       petImg: {
-        type: DataTypes.STRING(30),
+        type: DataTypes.STRING(100),
         allowNull: false,
       },
-      Info: {
+      info: {
         type: DataTypes.STRING(50),
         allowNull: true,
       },
