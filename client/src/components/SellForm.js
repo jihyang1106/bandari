@@ -9,8 +9,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 
-// import $ from 'jquery';
-export default function SellForm({ setIsSale }) {
+export default function SellForm() {
   const [imgState, setImgState] = useState([]);
 
   const navigate = useNavigate();

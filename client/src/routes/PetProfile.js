@@ -1,24 +1,28 @@
 import styles from './css/PetProfile.module.css';
-// import styles from './css/PetProfile.module.css';
 
 import Nav from '../components/Nav';
 import Category from '../components/Category';
 
 import React, { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import $ from 'jquery';
 
 const PetProfile = () => {
-  const [imgState, setImgState] = useState([]);
+  const [imgState, setImgState] = useState();
 
   const navigate = useNavigate();
   const imgRef = useRef();
   const formInfoRef = useRef();
-  const categorySelectRef = useRef();
+  const genderRef = useRef();
+  const yyRef = useRef();
+  const mmRef = useRef();
+  const ddRef = useRef();
+  const typeRef = useRef();
+  const kindRef = useRef();
+  const weightRef = useRef();
 
-  // 이미지 미리보기 기능
+  // 이미지 미리보기 함수
   const saveImgFile = () => {
     const file = imgRef.current.files[0];
     const reader = new FileReader();
@@ -31,28 +35,41 @@ const PetProfile = () => {
   function onCompleteBtn() {
     console.log('펫 프로필 등록 버튼');
     const form = formInfoRef.current;
+    const formData = new FormData();
+    // 파일
+    const img = imgRef.current.files[0];
+    formData.append('img', img[0]);
+    console.log(img);
+    //데이터
     const datas = {
-      petName: form.name.value,
-      gender: form.gender.value,
-      age: form.yy.value + form.mm.value + form.dd.value,
-      type: form.type.value,
-      kind: form.kind.valu,
-      weight: form.weight.value,
-      content: form.content.value,
+      name: form.name.value,
+      gender: genderRef.current.value,
+      age: `${yyRef.current.value} ${mmRef.current.value} ${ddRef.current.value}`,
+      petType: typeRef.current.value,
+      petSpecies: kindRef.current.value,
+      weight: weightRef.current.value,
+      info: form.content.value,
     };
+    formData.append('data', JSON.stringify(datas));
 
-    console.log('팻 프로필 데이터 :', datas);
+    // formData의 value 확인
+    for (var value of formData.values()) {
+      console.log(' formData의 value 확인', value);
+    }
   }
 
+  /** 업로드 버튼 클릭 시 이전 값 초기화  */
   function onImgUpload() {
-    console.log('판매 폼 이미지 업로드 버튼 눌림');
     // 업로드 버튼 다시 눌렀을때 미리보기 날림
     setImgState([]);
   }
+
   // 취소 버튼
   function onResetPage() {
     navigate('/');
   }
+
+  // 연, 월, 일 셀랙트 박스 값
   $(document).ready(function () {
     var now = new Date();
     var year = now.getFullYear();
@@ -90,15 +107,12 @@ const PetProfile = () => {
           <Category />
           <form className={styles.petProfileForm} ref={formInfoRef}>
             {/* 업로드 된 이미지 미리보기 슬라이드 */}
-            <div className={`${styles.petImg} ${styles.marginBottom}`}>
+            <div className={`${styles.petImg}`}>
               {imgState && (
-                <img
-                  src={imgState}
-                  alt="미리보기 이미지"
-                  className={`${styles.petImg} ${styles.marginBottom}`}
-                />
+                <img src={imgState} alt="" className={`${styles.petImg}`} />
               )}
 
+              {/* 업로드 클릭 버튼 */}
               <label
                 className={styles.imgLabel}
                 onClick={() => {
@@ -119,10 +133,10 @@ const PetProfile = () => {
               />
             </div>
 
-            {/* 제목, 가격 input */}
-            <div className={styles.marginBottom}>
+            <div className={styles.petPrifDisplay}>
               <p className={styles.formSubTitle}>이름</p>
               <input
+                className={styles.inputWidth}
                 type="text"
                 name="name"
                 placeholder="이름을 입력해주세요"
@@ -130,11 +144,12 @@ const PetProfile = () => {
               />
             </div>
 
-            <div className={styles.marginBottom}>
-              <span className={styles.formSubTitle}>성별</span>
+            <div className={styles.petPrifDisplay}>
+              <p className={styles.formSubTitle}>성별</p>
+
               <select
-                className={`${styles.selcetBirth} ${styles.formSubTitle}`}
-                ref={categorySelectRef}
+                className={`${styles.selcet}`}
+                ref={genderRef}
                 name="gender"
               >
                 <option value="man">남아</option>
@@ -142,85 +157,79 @@ const PetProfile = () => {
               </select>
             </div>
 
-            {/* 선택 selectBox */}
-            <div>
-              <label htmlFor="category" className={styles.formSubTitle}>
-                나이
-              </label>
-              <select
-                name="yy"
-                id="year"
-                ref={categorySelectRef}
-                className={`${styles.selcetBirth} ${styles.marginBottom}`}
-              ></select>
+            <div className={styles.petPrifDisplay}>
+              <p className={styles.formSubTitle}>나이</p>
+              <div>
+                <div className={styles.siasiadl}>
+                  <select
+                    name="yy"
+                    id="year"
+                    ref={yyRef}
+                    className={styles.selcetBirth}
+                  ></select>
 
-              <select
-                name="mm"
-                id="month"
-                ref={categorySelectRef}
-                className={`${styles.selcetBirth} ${styles.marginBottom}`}
-              ></select>
+                  <select
+                    name="mm"
+                    id="month"
+                    ref={mmRef}
+                    className={styles.selcetBirth}
+                  ></select>
 
-              <select
-                name="dd"
-                id="day"
-                ref={categorySelectRef}
-                className={`${styles.selcetBirth} ${styles.marginBottom}`}
-              ></select>
+                  <select
+                    name="dd"
+                    id="day"
+                    ref={ddRef}
+                    className={styles.selcetBirth}
+                  ></select>
+                </div>
+              </div>
             </div>
 
-            <label
-              htmlFor="category"
-              className={`${styles.formSubTitle} ${styles.marginBottom}`}
-            >
-              분류
-            </label>
-            <select
-              name="type"
-              ref={categorySelectRef}
-              className={`${styles.selcet} ${styles.marginBottom}`}
-            >
-              <option value="">강아지</option>
-              <option value="">고양이</option>
-            </select>
+            <div className={styles.petPrifDisplay}>
+              <p className={styles.formSubTitle}>분류</p>
+              <select name="type" ref={typeRef} className={styles.selcet}>
+                <option value="dog">강아지</option>
+                <option value="cat">고양이</option>
+              </select>
+            </div>
 
-            <div className={styles.marginBottom}>
-              <span className={`${styles.formSubTitle}`}>견.묘종</span>
+            <div className={styles.petPrifDisplay}>
+              <p className={styles.formSubTitle}>견.묘종</p>
               <input
+                className={styles.inputWidth}
                 type="text"
                 name="kind"
+                ref={kindRef}
                 placeholder="예) 세상에 하나뿐인 믹스"
                 required
               />
             </div>
 
-            <label
-              htmlFor="category"
-              className={`${styles.formSubTitle} ${styles.marginBottom}`}
-            >
-              몸무게
-            </label>
-            <select
-              name="weight"
-              ref={categorySelectRef}
-              className={`${styles.selcet} ${styles.marginBottom}`}
-            >
-              <option value=""> 1 - 3 kg </option>
-              <option value=""> 4 - 7 kg </option>
-              <option value=""> 8 - 11 kg </option>
-              <option value=""> 12 - 14 kg </option>
-              <option value=""> 15 - 18 kg </option>
-              <option value=""> 19 kg 이상 </option>
-            </select>
+            <div className={styles.petPrifDisplay}>
+              <label htmlFor="weight" className={styles.formSubTitle}>
+                몸무게
+              </label>
+              <select name="weight" ref={weightRef} className={styles.selcet}>
+                <option value="1 - 3 kg"> 1 - 3 kg </option>
+                <option value="4 - 7 kg"> 4 - 7 kg </option>
+                <option value="8 - 11 kg"> 8 - 11 kg </option>
+                <option value="12 - 14 kg"> 12 - 14 kg </option>
+                <option value="15 - 18 kg"> 15 - 18 kg </option>
+                <option value="19 kg 이상"> 19 kg 이상 </option>
+              </select>
+            </div>
 
-            <p className={`${styles.marginRight} ${styles.block}`}>설명</p>
-            <textarea
-              name="content"
-              placeholder="내용을 입력해 주세요."
-              required
-            ></textarea>
+            <div className={styles.petPrifDisplay}>
+              <p className={`${styles.formSubTitle}`}>설명</p>
+              <textarea
+                name="content"
+                placeholder="내용을 입력해 주세요."
+                required
+              ></textarea>
+            </div>
+
             {/* 취소 완료 버튼 */}
-            <div className={`${styles.submitButton} ${styles.marginBottom}`}>
+            <div className={`${styles.submitButton}`}>
               <button
                 onClick={() => {
                   onResetPage();
@@ -229,6 +238,7 @@ const PetProfile = () => {
                 취소
               </button>
               <button
+                type="button"
                 onClick={() => {
                   onCompleteBtn();
                 }}
