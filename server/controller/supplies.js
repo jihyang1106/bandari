@@ -39,9 +39,9 @@ const upload = multer({
 //   res.send(true);
 // });
 
-/** 업로드 여러개 */
-(exports.postInsert = upload.array('img')),
-  async (req, res) => {
-    console.log(req.body);
-    console.log(req.files);
-  };
+
+// 좋아요 조회
+// exports.getLikeCount = async (req, res) => {
+//   await
+// }
+
