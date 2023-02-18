@@ -14,15 +14,15 @@ const img = (Sequelize, DataTypes) => {
         allowNull: false,
       },
       img1: {
-        type: DataTypes.STRING(30),
+        type: DataTypes.STRING(100),
         allowNull: false,
       },
       img2: {
-        type: DataTypes.STRING(30),
+        type: DataTypes.STRING(100),
         allowNull: true,
       },
       img3: {
-        type: DataTypes.STRING(30),
+        type: DataTypes.STRING(100),
         allowNull: true,
       },
     },

@@ -53,7 +53,7 @@ export default function SellForm() {
     const img = imgRef.current.files;
     // 파일
     for (var i = 0; i < img.length; i++) {
-      formData.append('img', img[i]);
+      formData.append(`img`, img[i]);
     }
 
     //데이터
@@ -64,10 +64,11 @@ export default function SellForm() {
       location: `${userLocation.region_2depth_name} ${userLocation.region_3depth_name}`,
       category: categorySelectRef.current.value,
       deal: true,
-      petId: petSelectRef.current.value,
+      // petId: petSelectRef.current.value,
+      petId: 126,
       userId: 'test@naver.com',
     };
-    formData.append('data', JSON.stringify(datas));
+    formData.append('datas', JSON.stringify(datas));
 
     // formData의 value 확인
     for (var value of formData.values()) {
@@ -75,7 +76,7 @@ export default function SellForm() {
     }
 
     await axios
-      .post('/supplies/insert', formData, {
+      .post('supplies/insert', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
