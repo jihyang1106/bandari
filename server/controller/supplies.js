@@ -5,6 +5,8 @@ const router = express.Router();
 const path = require('path');
 const fs = require('fs');
 const axios = require('axios');
+const { Op } = require('sequelize');
+const user = require('../model/user');
 
 try {
   fs.readdirSync('../client/public/uploads');
@@ -37,23 +39,9 @@ const upload = multer({
 //   res.send(true);
 // });
 
-/** 업로드 여러개 */
-exports.postInsert = async (req, res) => {
-  await axios.post(
-    '/supplies/upload',
-    upload.array('img'),
-    async (req, res) => {
-      console.log('req.file', req.files);
-      console.log('req.body', JSON.parse(req.body.data));
-
-      // const result = await User.create({});
-      // console.log(result);
-      res.send(true);
-    }
-  );
-};
 
 // 좋아요 조회
 // exports.getLikeCount = async (req, res) => {
 //   await
 // }
+

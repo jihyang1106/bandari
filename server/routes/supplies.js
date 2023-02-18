@@ -1,8 +1,9 @@
-let express = require('express');
-let controller = require('../controller/supplies');
+const express = require('express');
+const supplies = require('../controller/supplies');
 const router = express.Router();
 
-router.post('/insert', controller.postInsert);
+// 용품 글 등록
+router.post('/insert', supplies.postInsert);
 
 // router.get('/getLikeCount', controller.getLikeCount);
 

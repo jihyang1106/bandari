@@ -5,6 +5,7 @@ import Category from '../components/Category';
 
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import $ from 'jquery';
 
@@ -32,30 +33,38 @@ const PetProfile = () => {
     };
   };
 
-  function onCompleteBtn() {
-    console.log('펫 프로필 등록 버튼');
+  async function onCompleteBtn() {
     const form = formInfoRef.current;
     const formData = new FormData();
-    // 파일
-    const img = imgRef.current.files[0];
-    formData.append('img', img[0]);
-    console.log(img);
-    //데이터
+    
+    // 데이터
     const datas = {
       name: form.name.value,
-      gender: genderRef.current.value,
-      age: `${yyRef.current.value} ${mmRef.current.value} ${ddRef.current.value}`,
-      petType: typeRef.current.value,
-      petSpecies: kindRef.current.value,
-      weight: weightRef.current.value,
+      gender: form.gender.value,
+      age: `${form.yy.value}년${form.mm.value}월${form.dd.value}일생`,
+      weight: form.weight.value,
+      petType: form.type.value,
+      petSpeices: form.kind.value,
       info: form.content.value,
+      userId: 'test@naver.com',
     };
-    formData.append('data', JSON.stringify(datas));
+    formData.append('datas', JSON.stringify(datas));
+    // 이미지
+    formData.append('petImg', imgRef.current.files[0]);
 
-    // formData의 value 확인
     for (var value of formData.values()) {
-      console.log(' formData의 value 확인', value);
+      console.log('form.data value', value);
     }
+
+    await axios
+      .post('pet/insert', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((res) => {
+        console.log('res.data', res.data);
+      });
   }
 
   /** 업로드 버튼 클릭 시 이전 값 초기화  */
@@ -79,7 +88,7 @@ const PetProfile = () => {
         : '0' + (now.getMonth() + 1);
     var day = now.getDate() > 9 ? '' + now.getDate() : '0' + now.getDate();
     //년도 selectbox만들기
-    for (var i = 1900; i <= year; i++) {
+    for (var i = 2000; i <= year; i++) {
       $('#year').append('<option value="' + i + '">' + i + '년</option>');
     }
 
@@ -105,7 +114,11 @@ const PetProfile = () => {
       <div className={styles.petProfile}>
         <section>
           <Category />
-          <form className={styles.petProfileForm} ref={formInfoRef}>
+          <form
+            className={styles.petProfileForm}
+            ref={formInfoRef}
+            encType="multipart/form-data"
+          >
             {/* 업로드 된 이미지 미리보기 슬라이드 */}
             <div className={`${styles.petImg}`}>
               {imgState && (
@@ -115,9 +128,7 @@ const PetProfile = () => {
               {/* 업로드 클릭 버튼 */}
               <label
                 className={styles.imgLabel}
-                onClick={() => {
-                  onImgUpload();
-                }}
+                onClick={onImgUpload}
                 htmlFor="inputFile"
               >
                 +
@@ -126,6 +137,7 @@ const PetProfile = () => {
               <input
                 type="file"
                 id="inputFile"
+                name="petImg"
                 accept="image/*"
                 style={{ display: 'none' }}
                 onChange={saveImgFile}
@@ -152,8 +164,8 @@ const PetProfile = () => {
                 ref={genderRef}
                 name="gender"
               >
-                <option value="man">남아</option>
-                <option value="femail">여아</option>
+                <option value="남아">남아</option>
+                <option value="여아">여아</option>
               </select>
             </div>
 
@@ -188,11 +200,10 @@ const PetProfile = () => {
             <div className={styles.petPrifDisplay}>
               <p className={styles.formSubTitle}>분류</p>
               <select name="type" ref={typeRef} className={styles.selcet}>
-                <option value="dog">강아지</option>
-                <option value="cat">고양이</option>
+                <option value="강아지">강아지</option>
+                <option value="고양이">고양이</option>
               </select>
             </div>
-
             <div className={styles.petPrifDisplay}>
               <p className={styles.formSubTitle}>견.묘종</p>
               <input
@@ -204,47 +215,35 @@ const PetProfile = () => {
                 required
               />
             </div>
+            <label
+              htmlFor="category"
+              className={`${styles.formSubTitle} ${styles.marginBottom}`}
+            >
+              몸무게
+            </label>
+            <select
+              name="weight"
+              ref={categorySelectRef}
+              className={`${styles.selcet} ${styles.marginBottom}`}
+            >
+              <option value="1 - 3 kg"> 1 - 3 kg </option>
+              <option value="4 - 7 kg"> 4 - 7 kg </option>
+              <option value="8 - 11 kg"> 8 - 11 kg </option>
+              <option value="12 - 14 kg"> 12 - 14 kg </option>
+              <option value="15 - 18 kg"> 15 - 18 kg </option>
+              <option value="19 kg 이상"> 19 kg 이상 </option>
+            </select>
 
-            <div className={styles.petPrifDisplay}>
-              <label htmlFor="weight" className={styles.formSubTitle}>
-                몸무게
-              </label>
-              <select name="weight" ref={weightRef} className={styles.selcet}>
-                <option value="1 - 3 kg"> 1 - 3 kg </option>
-                <option value="4 - 7 kg"> 4 - 7 kg </option>
-                <option value="8 - 11 kg"> 8 - 11 kg </option>
-                <option value="12 - 14 kg"> 12 - 14 kg </option>
-                <option value="15 - 18 kg"> 15 - 18 kg </option>
-                <option value="19 kg 이상"> 19 kg 이상 </option>
-              </select>
-            </div>
-
-            <div className={styles.petPrifDisplay}>
-              <p className={`${styles.formSubTitle}`}>설명</p>
-              <textarea
-                name="content"
-                placeholder="내용을 입력해 주세요."
-                required
-              ></textarea>
-            </div>
-
+            <p className={`${styles.marginRight} ${styles.block}`}>설명</p>
+            <textarea
+              name="content"
+              placeholder="내용을 입력해 주세요."
+              required
+            ></textarea>
             {/* 취소 완료 버튼 */}
-            <div className={`${styles.submitButton}`}>
-              <button
-                onClick={() => {
-                  onResetPage();
-                }}
-              >
-                취소
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  onCompleteBtn();
-                }}
-              >
-                완료
-              </button>
+            <div className={`${styles.submitButton} ${styles.marginBottom}`}>
+              <button onClick={onResetPage}>취소</button>
+              <button onClick={onCompleteBtn}>완료</button>
             </div>
           </form>
         </section>

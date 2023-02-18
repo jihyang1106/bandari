@@ -1,17 +1,13 @@
 .sellForm {
 }
-
 .sellForm section:first-child {
   display: flex;
 }
-
-
 .sellForm {
-    /* margin: auto; */
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-top: 10%;
+  /* margin: auto; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 10%;
 }
-
