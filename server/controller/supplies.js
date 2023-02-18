@@ -1,13 +1,3 @@
-const express = require('express');
-const multer = require('multer');
-const moment = require('moment');
-const router = express.Router();
-const path = require('path');
-const fs = require('fs');
-const axios = require('axios');
-const { Op } = require('sequelize');
-const user = require('../model/user');
-
 const { supplies } = require('../model');
 
 // 용품 판매글 조회
