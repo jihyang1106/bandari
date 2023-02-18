@@ -1,71 +1,68 @@
 .sellForm {
-    margin: 100px auto;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
+  margin: 100px auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 .sellForm input {
-    width: 70%;
-    height: 30px;
-    padding: 10px 10px;
-    border: none;
-    font-size: 15px;
-    border-bottom: 1px solid black;
+  width: 70%;
+  height: 30px;
+  padding: 10px 10px;
+  border: none;
+  font-size: 15px;
+  border-bottom: 1px solid black;
 }
-
 .formSubTitle {
+
     margin-right: 15px;
-}
+    font-weight: 800;
 
+}
 .marginBottom:nth-child(2) {
-    margin-top: 50px;
+  margin-top: 50px;
 }
-
 .marginBottom {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 .submitButton {
-    margin-top: 15px;
+  margin-top: 15px;
 }
-.submitButton button:nth-child(1){
-    background-color: transparent;
-    color: black;
-    border: 1px solid #F5A280;
+.submitButton button:nth-child(1) {
+  background-color: transparent;
+  color: black;
+  border: 1px solid #f5a280;
 }
 .submitButton button {
-    margin-left: 10px;
-    background: #F5A280;
-    border-radius: 30px;
-    font-weight: 1000;
-    border: none;
-    color: white;
-    font-size: 14px;
-    width: 80px;
-    height: 40px;
+  margin-left: 10px;
+  background: #f5a280;
+  border-radius: 30px;
+  font-weight: 1000;
+  border: none;
+  color: white;
+  font-size: 14px;
+  width: 80px;
+  height: 40px;
 }
 .submitButton button:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
-
 .sellImges {
-    width: 250px;
-    height: 250px;
-    background-color: #e8e8e8;
-    text-align: center;
-    border-radius: 10px;
-    font-weight: 1000;
-    margin-bottom: 0px;
-    object-fit: cover;
-    position: relative;
+  width: 250px;
+  height: 250px;
+  background-color: #e8e8e8;
+  text-align: center;
+  border-radius: 10px;
+  font-weight: 1000;
+  margin-bottom: 0px;
+  object-fit: cover;
+  position: relative;
 }
-
-
 .sellForm p {
   display: inline;
 }
-
 select {
+
          /* width: 100%; 원하는 너비설정 */
         height: 40px;
         padding: .6em .1em; /* 여백으로 높이 설정 */
@@ -93,19 +90,17 @@ select {
     border-radius: 25px;
     position: absolute;
     margin-left: 60px;
-    line-height: 50px;
+    line-height: 45px;
     color: white;
     font-size: 30px;
 }
 
 
-
 .sellImges label:hover {
-    transform: scale(1.3);
-   
+  transform: scale(1.3);
 }
-
 .selcet {
+
     width: 100%;
     color : rgb(37, 37, 37);
     font-size: 15px;
@@ -118,14 +113,13 @@ select {
     border: 1px solid black;
     border-radius: 12px;
     resize: none;
-    padding: 2em 1em 1em;
+    padding: 1em;
     font-size: 15px;
     overflow: hidden;
   }
 
+
 .marginRight {
-    margin-right: auto;
-    margin-bottom: 10px;
+  margin-right: auto;
+  margin-bottom: 10px;
 }
-
-

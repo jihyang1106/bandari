@@ -1,5 +1,42 @@
-.myPage {
+.myPage button{
+  cursor: pointer;
 }
+
+.myPage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*탈퇴버튼*/
+.myPage >button{
+  border: none;
+  background-color: transparent;
+  margin: 70px 0;
+} 
+
+.myPage.true {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  
+}
+
+
+.myPage.true > section{
+  filter: blur(2.5px) ;
+  backdrop-filter: blur(0.5px) grayscale(30%);
+}
+
+
+.myPage.true >div{
+  position: fixed;
+  margin: 0 auto;
+  left: 50%;
+  top: 50%;
+  transform: translate( -50%, -50% );
+}
+
 
 .myPage section:first-child {
   display: flex;
@@ -11,29 +48,83 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  margin-top: calc(7vh + 72px);
+  margin-top: calc(7vh + 72px + 60px);
+}
+
+
+.MyPageContainer h2{
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.MyPageContainer > div > h1{
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.MyPageContainer > div > h2{
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.MyPageContainer > div > p{
+  font-size: 12px;
+  margin-bottom: 10px;
 }
 
 .title {
   font-size: 20px;
   font-weight: 900;
 }
-.subTitle:nth-child(1) {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 40px;
+
+.MyPageContainer > div:first-child > p{
+  cursor: pointer;
 }
 
-/* 회원 정보 수정 */
-.subTitle:nth-child(3) {
-  font-size: 15px;
-  font-weight: 500;
+
+/*등록된 반려동물 정보*/
+.myPetsInfo{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 }
-.subTitle {
-  font-size: 20px;
-  font-weight: 500;
-  margin: 20px 0;
+
+.myPetsInfo > div{
+  display: flex;
+  margin-top: 10px;
 }
+
+  
+.myPetsInfo> div > button{
+  height: 160px;
+  width: 80px;
+  font-size: 30px;
+  border-radius: 20px;
+  color: white;
+}
+
+
+
+.myPetsInfo.basic > div > button{
+  border: 1px solid rgb(46, 46, 46);
+  background-color: rgb(46, 46, 46);
+}
+
+.myPetsInfo.puppy > div > button{
+  border: 1px solid #F5A280;
+  background-color: #F5A280;
+}
+
+.myPetsInfo.cat > div > button{
+  border: 1px solid #78AAC3;
+  background-color: #78AAC3;
+}
+
+
+
+
 
 .titleIndex {
   font-size: 16px;
@@ -47,107 +138,15 @@
 .titleIndex {
   margin-bottom: 40px;
 }
-.MyPageContainer input {
-  width: 70%;
-  height: 30px;
-  padding: 10px 10px;
-  border: none;
-  font-size: 15px;
-  border-bottom: 1px solid black;
-}
 
-.formSubTitle {
-  margin-right: 15px;
-  display: inline;
-}
 
-.submitButton button {
-  background: #f5a280;
-  border-radius: 30px;
-  font-weight: 1000;
-  border: none;
-  color: white;
-  font-size: 14px;
-  width: 100px;
-  height: 40px;
-  margin-top: 25px;
-  margin-left: 15px;
-}
-.submitButton button:hover {
-  transform: scale(1.2);
-}
-
-.petImges {
-  width: 100px;
-  height: 160px;
-  background-color: #d9d9d9;
-  text-align: center;
-  border-radius: 10px;
-  font-size: 30px;
-  font-weight: 1000;
-  margin-bottom: 30px;
-  position: absolute;
-  display: inline;
-  margin-left: 15px;
-}
-
-.petImges div {
-  line-height: 160px;
-}
-
-.petImges div:hover {
-  transform: scale(1.5);
-}
-
-.sellectedPet {
-  box-sizing: border-box;
-  width: 450px;
-  height: 160px;
-  left: 569px;
-  top: 766px;
-  border: 1px solid #f5a280;
-  border-radius: 20px;
-  padding: 10px 10px;
-  display: inline-block;
-}
-
-.petImg {
-  width: 150px;
-  height: 140px;
-  background-color: #ffe7c7;
-  position: absolute;
-  border-radius: 10px;
-}
-
-.petInfo {
-  margin-left: 160px;
-}
-
-.petInfo p {
-  margin-top: 15px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.petInfo p:nth-child(1) {
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.cards {
-  width: 70vw;
-}
-
-.deleteButton {
-  background: none;
-  border: none;
-  text-align: center;
-  font-size: 14px;
-  margin: 85px 38%;
-}
 
 /*1200px이하*/
 @media screen and (max-width: 1200px) {
+  .myPage{
+    align-items: normal;
+  }
+
   .myPage section:first-child {
     display: flex;
     align-items: normal;
@@ -167,4 +166,32 @@
   .cards {
     margin-left: -2%;
   }
+}
+
+
+/*1000px이하*/
+@media screen and (max-width: 1000px) {
+  .sellectedPet {
+    width: 50vw;
+  }
+  
+}
+
+
+/*500px이하*/
+@media screen and (max-width: 500px) {
+  .MyPageContainer {
+    margin-top: 36px;
+  }
+  
+  .MyPageContainer > div,
+  .MyPageContainer > section {
+    width: 80vw;
+    margin-left: 0px;
+  }
+
+  .MyPageContainer > div > h1{
+    font-size: 15px;
+  }
+  
 }

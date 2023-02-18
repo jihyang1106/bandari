@@ -1,0 +1,102 @@
+.displayfalse{
+    display: none;
+  }
+
+  .displaytrue{
+    display: block;
+  }
+
+.editModal{
+    position: relative;
+    width: 400px;
+    height: 500px;
+    top: 0;
+    left: 0;
+}
+
+.editModal >button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+    border: none;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.modalForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    width: 400px;
+    height: 500px;
+}
+
+.modalForm.basic {
+background-color: rgb(73, 73, 73);
+}
+
+
+.modalForm.puppy {
+    background-color: #F5A280;
+}
+    
+
+.modalForm.cat {
+        background-color: #78AAC3;
+}
+        
+.modalForm h1{
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 50px;
+}
+
+.modalForm.basic h1{
+    color: white;
+}
+.modalForm.puppy h1{
+    color: rgb(35, 35, 35);
+}
+.modalForm.cat h1{
+    color: rgb(35, 35, 35);
+}
+    
+
+.modalForm > div{
+    display: flex;
+    width: 300px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalForm > div label{
+    width: 100px;
+}
+
+.modalForm.basic > div label{
+    color: white;
+}
+.modalForm > div input{
+    height: 30px;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+}
+
+.modalForm > div:last-child input{
+    width: 70px;
+    background-color: white;
+    margin-top: 100px;
+    cursor: pointer;
+}
+
+.modalForm > div:last-child input:first-child{
+    margin-right: 10px;
+}

@@ -16,8 +16,10 @@ app.use(
   })
 );
 
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 
 const path = require('path');
 /**dotenv 설정 */
@@ -58,9 +60,11 @@ ConnectDB();
 
 const router = require('./routes/user/kakao');
 const suppliesRouter = require('./routes/supplies');
+const petRouter = require('./routes/pet');
 
 app.use('/', router);
-app.use('/', suppliesRouter);
+app.use('/supplies', suppliesRouter);
+app.use('/pet', petRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`server port ${process.env.PORT} open`);

@@ -75,7 +75,7 @@ export default function SellForm() {
     }
 
     await axios
-      .post('/insert', formData, {
+      .post('/supplies/insert', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -159,12 +159,17 @@ export default function SellForm() {
             type="number"
             name="price"
             placeholder="가격을 입력해주세요"
+            step="1000"
+            min="1000"
             // pattern="/[0-9]/"
             required
           />
         </div>
         {/* 선택 selectBox */}
-        <label htmlFor="category" className={styles.marginRight}>
+        <label
+          htmlFor="category"
+          className={`${styles.formSubTitle} ${styles.marginRight}`}
+        >
           카테고리
         </label>
         <select
@@ -176,7 +181,10 @@ export default function SellForm() {
           <option value="간식">간식</option>
           <option value="용품">용품</option>
         </select>
-        <label htmlFor="petSellcet" className={styles.marginRight}>
+        <label
+          htmlFor="petSellcet"
+          className={`${styles.formSubTitle} ${styles.marginRight}`}
+        >
           사용한 내 새꾸
         </label>
         <select
@@ -192,7 +200,7 @@ export default function SellForm() {
             );
           })}
         </select>
-        <p className={`${styles.marginRight}`}>설명</p>
+        <p className={`${styles.formSubTitle} ${styles.marginRight}`}>설명</p>
         <textarea
           name="content"
           placeholder="내용을 입력해 주세요."
