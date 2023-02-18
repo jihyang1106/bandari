@@ -1,7 +1,6 @@
-import { createContext, useState } from 'react';
+import { createContext, useRef, useState } from 'react';
 
 import AppRouter from './routes/AppRouter';
-
 import axios from 'axios';
 import { useEffect } from 'react';
 
@@ -9,9 +8,9 @@ import { useDispatch } from 'react-redux';
 import { setUserInfo } from './store/module/user';
 import { setPets } from './store/module/pets';
 import GetLocation from './components/js/GetLocation';
-
+import isLogin from './components/js/isLogin';
+import delUserData from './components/js/delisLogin';
 function App() {
-  
   const [init, setInit] = useState(true);
 
   const dispatch = useDispatch();
@@ -53,7 +52,9 @@ function App() {
 
   useEffect(() => {
     GetLocation(dispatch);
-  });
+    isLogin();
+    delUserData();
+  }, []);
   return (
     <>
       {init ? (
