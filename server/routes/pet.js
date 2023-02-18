@@ -1,30 +1,47 @@
 const express = require('express');
-const pet = require('../controller/pet');
+const petController = require('../controller/pet');
 const router = express.Router();
+/**db */
+const { pet } = require('../model');
+
+/** 파일 관련 */
 const multer = require('multer');
 const moment = require('moment');
-const axios = require('axios');
+const fs = require('fs');
 const path = require('path');
-const Pet = require('../model/pet');
 
+// upload 할 petImg 폴더 없을 시 생성
+try {
+  fs.readdirSync('../client/public/petImg');
+} catch (err) {
+  console.error('upload할 petImg 폴더가 없습니다. 폴더를 생성합니다.');
+  fs.mkdirSync('../client/public/petImg');
+}
+
+// multer
 const petUpload = multer({
   storage: multer.diskStorage({
     destination(req, file, done) {
-      console.log('destination');
-      done(null, '../client/public/uploads');
+      // 저장되는 path
+      done(null, '../client/public/petImg');
     },
     filename(req, file, done) {
+      const datas = JSON.parse(req.body.datas);
       const ext = path.extname(file.originalname);
-      done(null, `petImg${moment().format('YYYYMMDDHHmmss')}${ext}`); // 저장되는 파일명
+      done(null, `${datas.userId}_${moment().format('YYYYMMDDHHmmss')}${ext}`); // 저장되는 파일명
     },
   }),
 });
 
 // 펫 프로필 등록
-router.post('/insert', petUpload.single('petImg'), (req, res) => {
-  console.log('프론트에서 넘어온 값', JSON.parse(req.body.datas));
-  console.log('파일', req.file);
-  res.send(true);
+router.post('/insert', petUpload.single('petImg'), async (req, res) => {
+  const datas = JSON.parse(req.body.datas);
+  const petImg = req.file.filename;
+  datas.petImg = `${petImg}`;
+  // console.log(datas);
+  const result = await pet.create(datas);
+  // console.log(result);
+  res.send(result);
 });
 
 module.exports = router;
