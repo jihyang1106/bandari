@@ -52,3 +52,8 @@ exports.postInsert = async (req, res) => {
     }
   );
 };
+
+// 좋아요 조회
+// exports.getLikeCount = async (req, res) => {
+//   await
+// }

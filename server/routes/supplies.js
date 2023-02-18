@@ -4,4 +4,6 @@ const router = express.Router();
 
 router.post('/insert', controller.postInsert);
 
+// router.get('/getLikeCount', controller.getLikeCount);
+
 module.exports = router;

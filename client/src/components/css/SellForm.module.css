@@ -16,6 +16,7 @@
 
 .formSubTitle {
     margin-right: 15px;
+    font-weight: 800;
 }
 
 .marginBottom:nth-child(2) {
@@ -93,7 +94,7 @@ select {
     border-radius: 25px;
     position: absolute;
     margin-left: 60px;
-    line-height: 50px;
+    line-height: 45px;
     color: white;
     font-size: 30px;
 }
@@ -118,7 +119,7 @@ select {
     border: 1px solid black;
     border-radius: 12px;
     resize: none;
-    padding: 2em 1em 1em;
+    padding: 1em;
     font-size: 15px;
     overflow: hidden;
   }
