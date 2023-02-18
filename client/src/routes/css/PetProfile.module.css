@@ -1,23 +1,20 @@
 .petProfile {
   /* border: 3px solid orange; */
 }
-
 .petProfile section:first-child {
   display: flex;
   /* border: 3px solid orange; */
   /* background: #999; */
 }
-
 .petProfileForm {
   /* width: 50%;
-    display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-    */
+      display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+      */
   margin: 0 auto;
   margin-top: 10%;
 }
-
 .petProfileForm input {
   height: 30px;
   width: 60px;
@@ -26,25 +23,21 @@
   font-size: 15px;
   border-bottom: 1px solid black;
 }
-
 .formSubTitle {
   display: inline;
   margin: 15px 15px 0 0;
   font-weight: 1000;
   width: 60px;
 }
-
 .marginBottom:nth-child(2) {
 }
-
 /* .marginBottom {
-  margin-bottom: 30px;
-} */
+    margin-bottom: 30px;
+  } */
 .submitButton {
   margin: 15px auto;
   display: table;
 }
-
 .submitButton button {
   margin-left: 10px;
   background: #f5a280;
@@ -56,17 +49,14 @@
   width: 80px;
   height: 40px;
 }
-
 .submitButton button:nth-child(1) {
   background-color: transparent;
   color: black;
   border: 1px solid #f5a280;
 }
-
 .submitButton button:hover {
   transform: scale(1.2);
 }
-
 .petGender {
   margin-left: 20px;
   background: transparent;
@@ -78,12 +68,10 @@
   width: 100px;
   height: 40px;
 }
-
 /* .petGender:hover {
-      background: #F5A280;
-      color: white;
-} */
-
+        background: #F5A280;
+        color: white;
+  } */
 .petImg {
   width: 250px;
   height: 250px;
@@ -96,15 +84,12 @@
   object-fit: cover;
   display: block;
 }
-
 .block {
   display: block;
 }
-
 .petProfile p:last-child {
   display: block;
 }
-
 .select {
   /* width: 100%; 원하는 너비설정 */
   height: 40px;
@@ -119,12 +104,10 @@
   appearance: none;
   text-align: center;
 }
-
 /* IE 10, 11의 네이티브 화살표 숨기기 */
 select::-ms-expand {
   display: none;
 }
-
 .imgLabel {
   width: 50px;
   height: 50px;
@@ -133,34 +116,29 @@ select::-ms-expand {
   border-radius: 25px;
   position: absolute;
   right: 10px;
-  line-height: 50px;
+  line-height: 45px;
   color: white;
   font-size: 30px;
   text-align: center;
 }
-
 .imgLabel label:hover {
   transform: scale(1.3);
 }
-
 .selcetBirth {
   display: flex;
   flex-direction: row;
-
   width: 90px;
   margin-left: 10px;
   color: rgb(37, 37, 37);
   font-size: 15px;
   padding-right: 10px;
 }
-
 .petPrifDisplay .selcet {
   width: 40%;
   color: rgb(37, 37, 37);
   font-size: 15px;
   margin: auto;
 }
-
 textarea {
   width: 89%;
   height: 10em;
@@ -171,32 +149,25 @@ textarea {
   font-size: 15px;
   overflow: hidden;
 }
-
 .marginRight {
   margin-right: auto;
   margin-bottom: 10px;
 }
-
 /* body {
-position: absolute; left: 0;
-} */
-
+  position: absolute; left: 0;
+  } */
 /* .petGender, .selcet, .submitButton {
-    margin: 10px auto;
-} */
-
+      margin: 10px auto;
+  } */
 .siasiadl {
   display: flex;
-
   flex-direction: row;
 }
-
 .petPrifDisplay {
   display: flex;
   flex-direction: row;
   margin: 15px 0 30px 0;
 }
-
 .petPrifDisplay .inputWidth {
   width: 250px;
 }
