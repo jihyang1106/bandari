@@ -8,68 +8,11 @@ import Card from '../components/Card';
 import SellCategory from '../components/SellCategory';
 
 // import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
 
-const SellPage = (props) => {
+const SellPage = () => {
+  const [sell, setSell] = useState([]);
   // const navigate = useNavigate();
-
-  // 임시데이터
-  let data = [
-    {
-      userID: 1,
-      title: '고양이 이동장 팝니다.',
-      price: '25000',
-      location: '용산 어디어디 오디',
-      saleStatus: false,
-      likeStatus: false,
-      cardImg: 'Test.png',
-    },
-    {
-      userID: '2',
-      title: '강아지 배변 패드 팝니다.',
-      price: '25000',
-      location: '용산 어디어디 오디',
-      saleStatus: false,
-      likeStatus: false,
-      cardImg: 'Test.png',
-    },
-    {
-      userID: '3',
-      title: '사료 기호성 테스트 키트.',
-      price: '10000',
-      location: '어디어디 오디',
-      saleStatus: true,
-      likeStatus: true,
-      cardImg: 'Test.png',
-    },
-    {
-      userID: '4',
-      title: '사료 기호성 테스트 키트.',
-      price: '10000',
-      location: '어디어디 오디',
-      saleStatus: true,
-      likeStatus: true,
-      cardImg: 'Test.png',
-    },
-    {
-      userID: '5',
-      title: '사료 기호성 테스트 키트.',
-      price: '10000',
-      location: '어디어디 오디',
-      saleStatus: true,
-      likeStatus: true,
-      cardImg: 'Test.png',
-    },
-    {
-      userID: '6',
-      title: '사료 기호성 테스트 키트.',
-      price: '10000',
-      location: '어디어디 오디',
-      saleStatus: true,
-      likeStatus: true,
-      cardImg: 'Test.png',
-    },
-  ];
 
   useEffect(() => {
     getData();
@@ -78,6 +21,12 @@ const SellPage = (props) => {
   /*판매글 가져오는 함수* */
   const getData = () => {
     console.log('판매글가져오는함수');
+    axios.get('supplies/getData').then((res) => {
+      // console.log('판매글 데이터 : ', res.data);
+      // console.log('판매글 데이터 : ', res.data[0]);
+      // console.log('판매글 데이터 : ', res.data.length);
+      setSell(res.data);
+    });
   };
   return (
     <>
@@ -88,7 +37,7 @@ const SellPage = (props) => {
           <div className={styles.AvailSaleContainer}>
             <SellCategory />
             <div className={styles.cardContainer}>
-              {data.map((list, index) => {
+              {sell.map((list, index) => {
                 return <Card key={index} list={list} />;
               })}
             </div>

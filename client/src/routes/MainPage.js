@@ -5,7 +5,7 @@ import styles from './css/MainPage.module.css';
 
 import Nav from '../components/Nav';
 import Category from '../components/Category';
-import Card from '../components/Card';
+import CustomCardSlider from '../components/CustomCardSlider';
 
 import PuppyMainImg from '../assets/PuppyMainImg.png';
 import CatMainImg from '../assets/CatMainImg.png';
@@ -140,13 +140,7 @@ const MainPage = () => {
         <section>
           <h1>인기글</h1>
           <div className={styles.cards}>
-            {datas.map((data, index) => {
-              return (
-                <>
-                  <Card key={data.id} list={data} />
-                </>
-              );
-            })}
+            <CustomCardSlider datas={datas} />
           </div>
           <span onClick={moveSellPage}>더보기</span>
         </section>

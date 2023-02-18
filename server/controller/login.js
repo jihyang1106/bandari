@@ -36,20 +36,15 @@ exports.kakaoCode = async (req, res) => {
     // 함수를 통해 받아온 유저 정보
     .then((res) => {
       //console.log('유저 정보', user);
-
       userData = {
         id: res.kakao_account.email,
         nickname: res.kakao_account.profile.nickname,
       };
+
       console.log('DB에 들어갈 유저정보', userData);
       user.findOne({ where: { id: userData.id } }).then((result) => {
-        if (result) {
-          req.session.user = userData;
-          console.log('세션1', req.session.user);
-        } else {
+        if (result == null) {
           user.create(userData);
-          req.session.user = userData;
-          console.log('세션2', req.session.user);
         }
       });
     });
@@ -72,17 +67,24 @@ let userResponse = (ACESS_TOKEN) => {
 };
 
 exports.kakaoLogout = (req, res) => {
-  console.log('유저세션:', req.session.user);
   req.session.destroy((err) => {
     if (err) throw err;
-    res.redirect('http://localhost:3000/');
+    userData = false;
+    res.redirect('http://localhost:3000');
   });
 };
 
-// exports.isLogin = (req,res) =>{
-//   if(req.session.user) {
-//     res.send({isLogin:req.session.user.id})
-//   }else{
-//     res.send({isLoginfalse})
-//   }
-// }
+exports.isLogin = (req, res) => {
+  if (userData !== false) {
+    console.log('유저데이터1', userData);
+    res.send({ isLogin: userData.id });
+  } else {
+    console.log('유저데이터2', userData);
+    res.send({ isLogin: false });
+  }
+};
+
+exports.delUserData = (req, res) => {
+  userData = null;
+  console.log('유저데이터', userData);
+};

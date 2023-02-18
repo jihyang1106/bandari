@@ -41,35 +41,31 @@ const Nav = () => {
 
   const CLIENT_ID = process.env.REACT_APP_KAKAO_CLIENTID;
   const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECTURI;
-  const LOGOUT_REDIRECT_URI  = process.env.REACT_APP_KAKAO_LOGOUT_REDIRECTURI
-  const onClickLogin = async() => {
+  const LOGOUT_REDIRECT_URI = process.env.REACT_APP_KAKAO_LOGOUT_REDIRECTURI;
+  const onClickLogin = async () => {
     const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=http://localhost:5000/kakao/code`;
-      window.location.href = kakaoAuthUrl;
-
-      const data = kakaoAuthUrl.data
-      console.log(data)
+    await (window.location.href = kakaoAuthUrl);
+    // if (sessionStorage.getItem('userData') === false);
+    // return isLogin();
   };
-  // const onClickLogin = async() => {
-  //     const kakaoLogin = await axios({
-  //       method:'get',
-  //       url:'kakao/login',
-  //     headers:'Access-Control-Allow-Origin'})
-  //     if(kakaoLogin.status !== 200) return alert('통신에러')
-  //       .then((res)=>{
-  //         console.log(res.data)
-  //          window.location.href = "/"
-  //       })
-  //     //window.location.href = kakaoAuthUrl;
-  // };
-
-
 
   /**클릭시 위치얻기 실행되는 함수 */
 
-  const onClickLogout = async() =>{
-    const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=http://localhost:5000/kakao/logout`
-    window.location.href = kakaoLogoutUrl
-  }
+  const onClickLogout = async () => {
+    const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=http://localhost:5000/kakao/logout`;
+    await (window.location.href = kakaoLogoutUrl);
+    // if (sessionStorage.getItem('userData') !== false);
+    // return isLogin();
+  };
+  const isLogin = async () => {
+    axios({
+      method: 'get',
+      url: 'http://localhost:5000/isLogin',
+    }).then((res) => {
+      console.log(res.data.isLogin);
+      sessionStorage.setItem('userdata', res.data.isLogin);
+    });
+  };
 
   /*카테고리 열기 함수*/
   const onClickOpenCategory = () => {
@@ -110,6 +106,7 @@ const Nav = () => {
 
         <button onClick={onClickLogin}>Login</button>
         <button onClick={onClickLogout}>Logout</button>
+        <button onClick={isLogin}>isLogin</button>
       </div>
       <NavCategoryHamburger categoryType={btnState} />
     </div>

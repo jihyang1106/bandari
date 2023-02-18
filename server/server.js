@@ -16,6 +16,11 @@ app.use(
   })
 );
 
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
 const path = require('path');
 /**dotenv 설정 */
 const dotenv = require('dotenv');
