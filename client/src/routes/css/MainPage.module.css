@@ -93,22 +93,28 @@
 }
 
 /*마지막 메인페이지*/
-.mainPage section:last-child {
+.mainPage>section:nth-child(5) {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.mainPage section:last-child .cards {
+.mainPage section:nth-child(5) .cards {
   display: flex;
-  width: 1200px;
+  width: 70vw;
   justify-content: space-around;
   margin-bottom: 50px;
   flex-wrap: wrap;
 }
 
-.mainPage section:last-child > span {
+.mainPage section:nth-child(5) .cards >div{
+  width: 70vw;
+  display: flex;
+  justify-content: center;
+}
+
+.mainPage section:nth-child(5) > span {
   cursor: pointer;
 }
 

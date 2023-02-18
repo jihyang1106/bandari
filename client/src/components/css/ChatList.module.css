@@ -24,14 +24,21 @@
   font-size: 13px;
 }
 
-/*1000px이하*/
-@media screen and (max-width: 1000px) {
+/*1200px이하*/
+@media screen and (max-width: 1200px) {
   .chatList {
-    width: 65vw;
+    width: 32vw;
   }
 }
 
 /*1000px이하*/
+@media screen and (max-width: 1000px) {
+  .chatList {
+    width: 60vw;
+  }
+}
+
+/*500px이하*/
 @media screen and (max-width: 500px) {
   .chatList {
     padding: 10px 15px;

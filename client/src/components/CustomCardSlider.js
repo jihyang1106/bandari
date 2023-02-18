@@ -3,15 +3,15 @@ import styled, { keyframes, css } from 'styled-components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import styles from './css/CustomSlider.module.css';
+import styles from './css/CustomCardSlider.module.css';
 
 import Card from './Card';
 
 export const StyledSlider = styled(Slider)`
-  height: 280px; //슬라이드 컨테이너 영역
+  height: 300px; //슬라이드 컨테이너 영역
   .slick-list {
     //슬라이드 스크린
-    width: 70vw;
+    width: 50vw;
     height: 100%;
     margin: 0;
     overflow-x: hidden;
@@ -45,7 +45,14 @@ export const StyledSlider = styled(Slider)`
   }
 
   .slick-next {
-    right: -45px;
+    right: -35px;
+  }
+
+  @media screen and (max-width: 2200px) {
+    .slick-list {
+      //슬라이드 스크린
+      width: 70vw;
+    }
   }
 
   @media screen and (max-width: 1500px) {
