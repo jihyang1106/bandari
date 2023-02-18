@@ -76,15 +76,12 @@ exports.kakaoLogout = (req, res) => {
 
 exports.isLogin = (req, res) => {
   if (userData !== false) {
-    console.log('유저데이터1', userData);
-    res.send({ isLogin: userData.id });
+    console.log('로그인 유저데이터', userData);
+    res.send({ isLogin: userData.id, userName: userData.nickname });
+    userData = {}
   } else {
-    console.log('유저데이터2', userData);
-    res.send({ isLogin: false });
+    console.log('로그아웃 유저데이터', userData);
+    res.send({ isLogin: false, userName: false });
+    userData = {}
   }
-};
-
-exports.delUserData = (req, res) => {
-  userData = null;
-  console.log('유저데이터', userData);
 };

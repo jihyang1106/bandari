@@ -1,24 +1,23 @@
 const initialState = {
   user: {
-    isLoggedIn: false,
-    data: null,
+    isLogin: false,
+    userName: false
   },
 };
 
-function setUserInfo(userInfo, isLoggedIn) {
+function setUserInfo(data) {
   return {
     type: 'SETUSERINFO',
-    userInfo,
-    isLoggedIn,
+    data
   };
 }
 
-function logout() {
-  sessionStorage.clear();
-  return {
-    type: 'LOGOUT',
-  };
-}
+// function logout() {
+//   sessionStorage.clear();
+//   return {
+//     type: 'LOGOUT',
+//   };
+// }
 
 function user(state = initialState, action) {
   switch (action.type) {
@@ -26,22 +25,21 @@ function user(state = initialState, action) {
       return {
         ...state,
         user: {
-          isLoggedIn: action.isLoggedIn,
-          data: action.userInfo,
+          data: action.payload,
         },
       };
-    case 'LOGOUT':
-      return {
-        ...state,
-        user: {
-          isLoggedIn: false,
-          data: null,
-        },
-      };
+    // case 'LOGOUT':
+    //   return {
+    //     ...state,
+    //     user: {
+    //       isLoggedIn: false,
+    //       data: null,
+    //     },
+    //   };
     default:
       return state;
   }
 }
 
 export default user;
-export { setUserInfo, logout };
+export { setUserInfo };

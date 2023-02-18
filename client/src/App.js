@@ -9,7 +9,7 @@ import { setUserInfo } from './store/module/user';
 import { setPets } from './store/module/pets';
 import GetLocation from './components/js/GetLocation';
 import isLogin from './components/js/isLogin';
-import delUserData from './components/js/delisLogin';
+
 function App() {
   const [init, setInit] = useState(true);
 
@@ -20,12 +20,26 @@ function App() {
     userId: sessionStorage.getItem('user_id'),
   };
 
+  /*로그인 여부 확인 함수*/
+  const isLogin = () => {
+    axios({
+      method: 'get',
+      url: 'http://localhost:5000/kakao/isLogin',
+    }).then((res) => {
+      //로그인 여부 세션스토리지 저장
+      sessionStorage.setItem('userData', res.data.isLogin);
+      //로그인 여부 리덕스 저장 로그인 했을때isLogin:id, userName:이름 로그아웃 했을때 false
+      dispatch({type:'SETUSERINFO',payload:{isLogin:res.data.isLogin, userName:res.data.userName}})
+      
+    });
+  };
+
   /*유저 위치정보*/
-  if (userInfo.userId) {
-    dispatch(setUserInfo(userInfo, true));
-  } else {
-    dispatch(setUserInfo(userInfo, false));
-  }
+  // if (userInfo.userId) {
+  //   dispatch(setUserInfo(userInfo, true));
+  // } else {
+  //   dispatch(setUserInfo(userInfo, false));
+  // }
 
   /* 펫 정보 */
   const pets = {
@@ -53,7 +67,6 @@ function App() {
   useEffect(() => {
     GetLocation(dispatch);
     isLogin();
-    delUserData();
   }, []);
   return (
     <>
