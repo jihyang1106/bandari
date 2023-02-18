@@ -29,7 +29,7 @@ exports.kakaoCode = async (req, res) => {
   })
     .then((res) => {
       // 토큰을 받아옴
-       ACESS_TOKEN = res.data.access_token;
+      ACESS_TOKEN = res.data.access_token;
       //토큰으로 사용자 정보를 받아오는 함수
       return userResponse(ACESS_TOKEN);
     })
@@ -42,20 +42,18 @@ exports.kakaoCode = async (req, res) => {
         nickname: res.kakao_account.profile.nickname,
       };
       console.log('DB에 들어갈 유저정보', userData);
-       user.findOne({ where: { id: userData.id } })
-      .then((result)=>{
-        if(result){
-          req.session.user = userData 
-          console.log("세션1",req.session.user)         
-      }
-      else {
-        user.create(userData);
-        req.session.user = userData
-        console.log("세션2",req.session.user)        
-      }
-  })
-    })
-    res.redirect('http://localhost:3000')
+      user.findOne({ where: { id: userData.id } }).then((result) => {
+        if (result) {
+          req.session.user = userData;
+          console.log('세션1', req.session.user);
+        } else {
+          user.create(userData);
+          req.session.user = userData;
+          console.log('세션2', req.session.user);
+        }
+      });
+    });
+  res.redirect('http://localhost:3000');
 };
 //토큰으로 사용자 정보를 받아오는 함수
 let userResponse = (ACESS_TOKEN) => {
@@ -73,15 +71,13 @@ let userResponse = (ACESS_TOKEN) => {
   });
 };
 
-exports.kakaoLogout = (req,res) =>{
-  console.log("유저세션:",req.session.user)
-  req.session.destroy( (err) =>{
-    if(err) throw err;
-     res.redirect("http://localhost:3000/")
-  }
-    
-  )
-}
+exports.kakaoLogout = (req, res) => {
+  console.log('유저세션:', req.session.user);
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.redirect('http://localhost:3000/');
+  });
+};
 
 // exports.isLogin = (req,res) =>{
 //   if(req.session.user) {
@@ -90,4 +86,3 @@ exports.kakaoLogout = (req,res) =>{
 //     res.send({isLoginfalse})
 //   }
 // }
-

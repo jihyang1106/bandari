@@ -3,7 +3,6 @@ const petController = require('../controller/pet');
 const router = express.Router();
 /**db */
 const { pet } = require('../model');
-
 /** 파일 관련 */
 const multer = require('multer');
 const moment = require('moment');
