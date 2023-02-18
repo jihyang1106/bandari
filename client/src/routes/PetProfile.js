@@ -36,7 +36,7 @@ const PetProfile = () => {
   async function onCompleteBtn() {
     const form = formInfoRef.current;
     const formData = new FormData();
-    
+
     // 데이터
     const datas = {
       name: form.name.value,
@@ -215,33 +215,36 @@ const PetProfile = () => {
                 required
               />
             </div>
-            <label
-              htmlFor="category"
-              className={`${styles.formSubTitle} ${styles.marginBottom}`}
-            >
-              몸무게
-            </label>
-            <select
-              name="weight"
-              ref={categorySelectRef}
-              className={`${styles.selcet} ${styles.marginBottom}`}
-            >
-              <option value="1 - 3 kg"> 1 - 3 kg </option>
-              <option value="4 - 7 kg"> 4 - 7 kg </option>
-              <option value="8 - 11 kg"> 8 - 11 kg </option>
-              <option value="12 - 14 kg"> 12 - 14 kg </option>
-              <option value="15 - 18 kg"> 15 - 18 kg </option>
-              <option value="19 kg 이상"> 19 kg 이상 </option>
-            </select>
 
-            <p className={`${styles.marginRight} ${styles.block}`}>설명</p>
-            <textarea
-              name="content"
-              placeholder="내용을 입력해 주세요."
-              required
-            ></textarea>
+            <div className={styles.petPrifDisplay}>
+              <label htmlFor="category" className={`${styles.formSubTitle}`}>
+                몸무게
+              </label>
+              <select
+                name="weight"
+                ref={weightRef}
+                className={`${styles.selcet}`}
+              >
+                <option value="1 - 3 kg"> 1 - 3 kg </option>
+                <option value="4 - 7 kg"> 4 - 7 kg </option>
+                <option value="8 - 11 kg"> 8 - 11 kg </option>
+                <option value="12 - 14 kg"> 12 - 14 kg </option>
+                <option value="15 - 18 kg"> 15 - 18 kg </option>
+                <option value="19 kg 이상"> 19 kg 이상 </option>
+              </select>
+            </div>
+
+            <div className={styles.petPrifDisplay}>
+              <p className={`${styles.formSubTitle}`}>설명</p>
+              <textarea
+                name="content"
+                placeholder="내용을 입력해 주세요."
+                required
+              ></textarea>
+            </div>
+
             {/* 취소 완료 버튼 */}
-            <div className={`${styles.submitButton} ${styles.marginBottom}`}>
+            <div className={`${styles.submitButton}`}>
               <button onClick={onResetPage}>취소</button>
               <button onClick={onCompleteBtn}>완료</button>
             </div>
