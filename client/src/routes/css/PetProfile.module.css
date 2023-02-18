@@ -171,3 +171,11 @@ textarea {
 .petPrifDisplay .inputWidth {
   width: 250px;
 }
+
+.alret {
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 15px;
+  color: #999;
+}

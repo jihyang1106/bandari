@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import styles from './css/Card.module.css';
 
@@ -14,32 +15,61 @@ import axios from 'axios';
 
 const Card = (list) => {
   // likeState 눌렸는지 여부 > likeStateImg 이미지 변경
-  const [likeState, setLikeState] = useState(false);
+  const [likeState, setLikeState] = useState(list.list.deal);
   const [likeStateImg, setLikeStateImg] = useState(noneLike);
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(list.list.likeCount);
+
+  //  const userLocation = useSelector((state) => state.location.userLocation);
+  // const location =
+  //   userLocation.region_2depth_name + ' ' + userLocation.region_3depth_name;
 
   // 찜 on / off
   const onLikeButton = () => {
-    if (likeState === false) {
+    if (list.list.deal === false) {
       //찜 안된 상태
       alert('찜을 하시겠습니까?');
       setLikeStateImg(clickedLike);
-      setLikeCount(likeCount + 1);
+      setLikeCount(list.list.likeCount + 1);
+      list.list.deal = true;
+
+      axios
+        .post('supplies/postLikePlus', {
+          id: list.list.id,
+          likeCount: likeCount + 1,
+          deal: list.list.deal,
+        })
+        .then((res) => {
+          console.log(res);
+        });
     } else {
       // 찜한 상태
       alert('찜을 해제 하시겠습니까?');
       setLikeStateImg(noneLike);
-      setLikeCount(likeCount - 1);
+      setLikeCount(list.list.likeCount);
+      list.list.deal = false;
+      axios
+        .post('supplies/postLikeminus', {
+          id: list.list.id,
+          likeCount: likeCount - 1,
+          deal: list.list.deal,
+        })
+        .then((res) => {
+          console.log(res);
+        });
     }
   };
 
-  // console.log('list', list);
+  console.log('판매 글 list', list);
+  console.log('판매 글 list.list.likeCount', list.list.likeCount);
+  console.log('likeCount : ', { likeCount });
+  console.log('likeState : ', { likeState });
+
   const listData = list.list;
   return (
     <>
       <div className={styles.card}>
         <img
-          src={`/images/${listData.cardImg}`}
+          src={`/images/${listData.cover}`}
           aria-label="cardImg"
           loading="lazy"
           alt="카드 이미지"
@@ -51,7 +81,20 @@ const Card = (list) => {
         <div className={styles.cardFooter}>
           <h3>{listData.title}</h3>
           <p>{listData.price} 원</p>
-          <p>위치: {listData.location}</p>
+          <p>
+            {/* {' '}
+            {userLocation ? (
+              <>
+                {' '}
+                {userLocation.region_2depth_name +
+                  ' ' +
+                  userLocation.region_3depth_name}
+              </>
+            ) : (
+              <>전체</>
+            )} */}
+            {listData.location}
+          </p>
         </div>
         <div className={styles.likeButton}>
           <div className={styles.likeCount}>{likeCount}</div>
