@@ -32,7 +32,7 @@ const petUpload = multer({
   }),
 });
 
-// 펫 프로필 등록
+//펫 프로필 등록
 router.post('/insert', petUpload.single('petImg'), async (req, res) => {
   const datas = JSON.parse(req.body.datas);
   const petImg = req.file.filename;

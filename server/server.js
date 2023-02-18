@@ -62,7 +62,7 @@ const router = require('./routes/user/kakao');
 const suppliesRouter = require('./routes/supplies');
 const petRouter = require('./routes/pet');
 
-app.use('/', router);
+app.use('/kakao', router);
 app.use('/supplies', suppliesRouter);
 app.use('/pet', petRouter);
 
