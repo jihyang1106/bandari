@@ -1,13 +1,74 @@
 const express = require('express');
-const supplies = require('../controller/supplies');
+const supplilesController = require('../controller/supplies');
 const router = express.Router();
+/** db */
+const { supplies, img } = require('../model');
+/** 파일 관련 */
+const multer = require('multer');
+const moment = require('moment');
+const fs = require('fs');
+const path = require('path');
+
+// upload 할 img 폴더 없을 시 생성
+try {
+  fs.readdirSync('../client/public/uploadImg');
+} catch (err) {
+  console.error('upload할 upload 폴더가 없습니다. 폴더를 생성합니다.');
+  fs.mkdirSync('../client/public/uploadImg');
+}
+
+// multer
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, done) {
+      // 저장되는 path
+      done(null, '../client/public/uploadImg');
+    },
+    filename(req, file, done) {
+      const ext = path.extname(file.originalname);
+      const origin = file.originalname.substring(
+        0,
+        file.originalname.lastIndexOf('.')
+      );
+      done(null, `${origin}-${moment().format('YYYYMMDDHHmmss')}${ext}`); // 저장되는 파일명
+    },
+  }),
+});
 
 // 용품 글 등록
-//router.post('/insert', supplies.postInsert);
+router.post('/insert', upload.array('img'), async (req, res) => {
+  const datas = JSON.parse(req.body.datas);
+  const imgData = {};
+  req.files.forEach((el, i) => {
+    switch (i) {
+      case 0:
+        datas.cover = el.filename;
+        return;
+      case 1:
+        imgData.img1 = el.filename;
+        return;
+      case 2:
+        imgData.img2 = el.filename;
+        return;
+      case 3:
+        imgData.img3 = el.filename;
+        return;
+    }
+  });
+  console.log(imgData);
+  // 판매용품 글 등록
+  const result = await supplies.create(datas);
+  if (result) imgData.suppliesId = result.dataValues.id;
+  // 이미지 등록
+  const uploadResult = await img.create(imgData);
+  console.log(uploadResult);
 
-router.get('/getData', supplies.getData);
+  res.send(uploadResult);
+});
 
-router.post('/postLikePlus', supplies.postLikePlus);
-router.post('/postLikeminus', supplies.postLikeminus);
+router.get('/getData', supplilesController.getData);
+
+router.post('/postLikePlus', supplilesController.postLikePlus);
+router.post('/postLikeminus', supplilesController.postLikeminus);
 
 module.exports = router;
