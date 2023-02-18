@@ -171,6 +171,7 @@ const PetProfile = () => {
 
             <div className={styles.petPrifDisplay}>
               <p className={styles.formSubTitle}>나이</p>
+
               <div>
                 <div className={styles.siasiadl}>
                   <select
@@ -194,6 +195,9 @@ const PetProfile = () => {
                     className={styles.selcetBirth}
                   ></select>
                 </div>
+                <p className={styles.alret}>
+                  생년월일을 모르면, 임의로 부탁드립니다.
+                </p>
               </div>
             </div>
 
