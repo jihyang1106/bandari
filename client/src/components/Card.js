@@ -59,10 +59,10 @@ const Card = (list) => {
     }
   };
 
-  console.log('판매 글 list', list);
-  console.log('판매 글 list.list.likeCount', list.list.likeCount);
-  console.log('likeCount : ', { likeCount });
-  console.log('likeState : ', { likeState });
+  // console.log('판매 글 list', list);
+  // console.log('판매 글 list.list.likeCount', list.list.likeCount);
+  // console.log('likeCount : ', { likeCount });
+  // console.log('likeState : ', { likeState });
 
   const listData = list.list;
   return (

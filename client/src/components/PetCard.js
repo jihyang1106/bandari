@@ -7,7 +7,7 @@ import styles from './css/PetCard.module.css';
 const PetCard = ({ pet }) => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const navigate = useNavigate();
-  console.log(pet);
+  // console.log(pet);
 
   /**펫정보수정이동*/
   const onClickEditPetInfo = () => {

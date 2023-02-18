@@ -7,7 +7,6 @@ const morgan = require('morgan');
 app.use(morgan('dev')); // 로그
 
 // express-session 설정
-
 app.use(
   session({
     secret: '1234',
@@ -15,11 +14,6 @@ app.use(
     saveUnitialized: true,
   })
 );
-
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
 
 const path = require('path');
 /**dotenv 설정 */
