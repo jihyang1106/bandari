@@ -75,7 +75,7 @@ export default function SellForm() {
     }
 
     await axios
-      .post('/insert', formData, {
+      .post('/supplies/insert', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
