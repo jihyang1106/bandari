@@ -1,14 +1,14 @@
 const initialState = {
   user: {
     isLogin: false,
-    userName: false
+    userName: false,
   },
 };
 
 function setUserInfo(data) {
   return {
     type: 'SETUSERINFO',
-    data
+    data,
   };
 }
 

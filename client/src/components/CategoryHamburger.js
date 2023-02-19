@@ -8,7 +8,7 @@ const NavCategoryHamburger = ({ categoryType }) => {
   const HamburgerDivRef = useRef();
 
   const onClickOpenCategory = () => {
-    console.log(HamburgerDivRef.current.classList);
+    // console.log(HamburgerDivRef.current.classList);
     HamburgerDivRef.current.classList.toggle(`${styles.open}`);
   };
 

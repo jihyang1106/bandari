@@ -27,7 +27,6 @@ const Nav = () => {
   const userLocation = useSelector((state) => state.location.userLocation);
   const haveLocation = useSelector((state) => state.location.haveLocation);
 
-
   useEffect(() => {
     if (btnState === 'basic') {
       setSwitchType('기본');
@@ -39,26 +38,21 @@ const Nav = () => {
   }, [btnState]);
 
   /**로그인 클릭시 실행되는 함수*/
-
   const CLIENT_ID = process.env.REACT_APP_KAKAO_CLIENTID;
   const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECTURI;
   const LOGOUT_REDIRECT_URI = process.env.REACT_APP_KAKAO_LOGOUT_REDIRECTURI;
   const onClickLogin = async () => {
     const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=http://localhost:5000/kakao/code`;
     await (window.location.href = kakaoAuthUrl);
-
   };
   /**로그아웃 클릭시 실행되는 함수*/
   const onClickLogout = async () => {
+    sessionStorage.removeItem('userData');
     const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=http://localhost:5000/kakao/logout`;
     await (window.location.href = kakaoLogoutUrl);
-
   };
 
   /**클릭시 위치얻기 실행되는 함수 */
-
-
-
 
   /*카테고리 열기 함수*/
   const onClickOpenCategory = () => {

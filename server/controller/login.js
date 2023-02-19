@@ -78,10 +78,10 @@ exports.isLogin = (req, res) => {
   if (userData !== false) {
     console.log('로그인 유저데이터', userData);
     res.send({ isLogin: userData.id, userName: userData.nickname });
-    userData = {}
+    userData = {};
   } else {
     console.log('로그아웃 유저데이터', userData);
     res.send({ isLogin: false, userName: false });
-    userData = {}
+    userData = {};
   }
 };
