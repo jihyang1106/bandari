@@ -7,6 +7,9 @@ import Nav from '../components/Nav';
 import Category from '../components/Category';
 import ChatList from '../components/ChatList';
 import ChatRoom from '../components/ChatRoom';
+import { useLocation } from 'react-router-dom';
+
+import axios from 'axios';
 
 const chatDatas = [
   {
@@ -34,16 +37,29 @@ const ChatPage = () => {
   const [selectedChat, setSelectedChat] = useState({});
   const [selected, setSelected] = useState(false);
   const [categoryType, setCategoryType] = useState('');
-
   const swtichType = useSelector((state) => state.typeSwitch.switchState);
-  const user = useSelector((state) => state.user.user.data); /*유저데이터* */
+
+  // 내가 만든 채팅방, 상대방이 만든 채팅방 구분
+  const [iCreate, setICreate] = useState([]);
+  const [otherCreate, setOtherCreate] = useState([]);
+  // 글 용품 id
+  const [suppliesId, setSupliesId] = useState([]);
+
+  // 현재 로그인 한 유저
+  const userId = useSelector((state) => state.user.user.isLogin);
+  console.log('userId', userId);
 
   const chatRoomRef = useRef();
   const closeBtnRef = useRef();
 
-  useEffect(() => {
-    getChats();
-  }, []);
+  // useEffect(() => {
+  //   getChats();
+  // }, []);
+
+  /** SalesDetail에서 넘어온 데이터 값 */
+  const location = useLocation();
+  const result = location.state;
+  console.log('salesDatail에서 넘어온 데이터', result);
 
   useEffect(() => {
     if (swtichType === 'basic') {
@@ -56,9 +72,29 @@ const ChatPage = () => {
   }, [swtichType]);
 
   /**채팅정보가져오기 */
-  const getChats = () => {
-    console.log(`채팅정보가져오기, user : ${user}`);
-  };
+  // const getChats = () => {
+  //   console.log(`채팅정보가져오기, user : ${userId}`);
+  // };
+
+  // 채팅 페이지 렌더 시 현재 로그인한 유저의 room에 있는 데이터 가져오기
+
+  useEffect(() => {
+    axios.get('/room/getData', { params: { id: userId } }).then((res) => {
+      // if (res.data.userId) {
+      //   setICreate(res.data.userId);
+
+      //   suppliesId = res.data.userId.suppliesId;
+      // } else if (res.data.otherId) {
+      //   setOtherCreate(res.data.otherId);
+      //   suppliesId = res.data.otherId.suppliesId;
+      // }
+      console.log('resdata', res.data);
+    });
+  }, []);
+
+  console.log('내가 만든 채팅방', iCreate);
+  console.log('상대방이 만든 채팅방', otherCreate);
+  console.log(suppliesId);
 
   const onClickChatData = (chatData) => {
     console.log('채팅클릭');
