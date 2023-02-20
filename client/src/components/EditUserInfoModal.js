@@ -3,10 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 import styles from './css/EditUserInfoModal.module.css';
-
-
 
 const EditUserInfoModal = ({ display, setDisplay }) => {
   const userId = useSelector((state) => state.user.user.isLogin);
@@ -25,21 +22,19 @@ const EditUserInfoModal = ({ display, setDisplay }) => {
     const phoneNum = userPhoneNumberRef.current.value; //변경폰번호
 
     console.log('회원정보수정 완료버튼클릭');
-    console.log(userId)
+    console.log(userId);
     axios({
-      method:'patch',
-      url:'/mypage/patchUser',
+      method: 'patch',
+      url: '/mypage/patchUser',
       data: {
-        userName:name,
-        userPhoneNumber:phoneNum,
-        userId:userId
-      }
-    }).then((res)=>{
-      alert('사용자 변경 완료')
-      window.location.href = 'http://localhost:3000/myPage'
-    })
-
-
+        userName: name,
+        userPhoneNumber: phoneNum,
+        userId: userId,
+      },
+    }).then((res) => {
+      alert('사용자 변경 완료');
+      window.location.href = 'http://localhost:3000/myPage';
+    });
   };
   return (
     <div className={`${styles.editModal} ${styles[`display${display}`]}`}>

@@ -48,12 +48,12 @@ const SalesFost = () => {
               <div className={`${styles.sellImges}`}>
                 <Slider {...settings}>
                   <img
-                    src={`/images/${datas.cover}`}
+                    src={`/uploadImg/${datas.cover}`}
                     alt="대표 사진"
                     className={styles.sellImges}
                   />
                   <img
-                    src={`/images/${datas.cover}`}
+                    src={`/uploadImg/${datas.cover}`}
                     alt="대표 사진"
                     className={styles.sellImges}
                   />
