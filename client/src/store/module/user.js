@@ -18,7 +18,7 @@ function setUserInfo(data) {
 //     type: 'LOGOUT',
 //   };
 // }
-
+console.log('res.data.isLogin', user.isLogin);
 function user(state = initialState, action) {
   switch (action.type) {
     case 'SETUSERINFO':

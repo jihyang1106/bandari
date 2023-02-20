@@ -10,6 +10,7 @@ import CustomCardSlider from '../components/CustomCardSlider';
 import CustomPetSlider from '../components/CustomPetSlider';
 
 import TestImg from '../assets/TestImg1.jpg';
+import { useNavigate } from 'react-router-dom';
 
 let data = [
   {
@@ -96,6 +97,7 @@ let pets = [
 const MyPage = (props) => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const [displayModal, setDisplayModal] = useState(false);
+  const navigate = useNavigate();
 
   function onUserDelete() {
     console.log('회원 탈퇴 버튼 눌림');
@@ -104,6 +106,7 @@ const MyPage = (props) => {
   /**펫 추가 이벤트 */
   function petAddUpload() {
     console.log('마이페이지 내 새꾸 프로필 추가)');
+    navigate('/petProfile');
   }
 
   /**회원정보수정모달 */

@@ -3,15 +3,9 @@
 }
 .petProfile section:first-child {
   display: flex;
-  /* border: 3px solid orange; */
-  /* background: #999; */
+
 }
 .petProfileForm {
-  /* width: 50%;
-      display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-      */
   margin: 0 auto;
   margin-top: 10%;
 }
@@ -29,11 +23,7 @@
   font-weight: 1000;
   width: 60px;
 }
-.marginBottom:nth-child(2) {
-}
-/* .marginBottom {
-    margin-bottom: 30px;
-  } */
+
 .submitButton {
   margin: 15px auto;
   display: table;
@@ -116,7 +106,7 @@ select::-ms-expand {
   border-radius: 25px;
   position: absolute;
   right: 10px;
-  line-height: 45px;
+  line-height: 50px;
   color: white;
   font-size: 30px;
   text-align: center;
@@ -153,12 +143,7 @@ textarea {
   margin-right: auto;
   margin-bottom: 10px;
 }
-/* body {
-  position: absolute; left: 0;
-  } */
-/* .petGender, .selcet, .submitButton {
-      margin: 10px auto;
-  } */
+
 .siasiadl {
   display: flex;
   flex-direction: row;

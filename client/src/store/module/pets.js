@@ -3,6 +3,7 @@ const initialState = {
 };
 
 function setPets(pet) {
+  console.log('pet', pet);
   return {
     type: 'SETPETS',
     pet,
@@ -10,7 +11,7 @@ function setPets(pet) {
 }
 
 function pets(state = initialState, action) {
-  switch (action.type) {
+  switch (('pet 액션 타입 :', action.type)) {
     case 'SETPETS':
       return {};
     default:
