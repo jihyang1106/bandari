@@ -43,4 +43,6 @@ router.post('/insert', petUpload.single('petImg'), async (req, res) => {
   res.send(result);
 });
 
+router.get('/getData', petController.getData);
+
 module.exports = router;
