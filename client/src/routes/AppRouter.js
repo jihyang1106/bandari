@@ -11,8 +11,13 @@ import SellForm from './SellForm';
 import PetProfile from './PetProfile';
 import EditPetInfo from './EditPetInfo';
 import SalesDetail from './SalesDetail';
+import { useSelector } from 'react-redux';
+
 
 const AppRouter = () => {
+  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
+
+  console.log('여기는 오바', isLoggedIn);
   return (
     <BrowserRouter>
       <Routes>
