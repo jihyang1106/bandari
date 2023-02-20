@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styles from './css/SellForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 // slick-carousel css
@@ -11,6 +11,10 @@ import Slider from 'react-slick';
 
 export default function SellForm() {
   const [imgState, setImgState] = useState([]);
+
+  const location = useLocation();
+  // sellpage location.state 에서 파라미터 취득
+  // const id = location.state.id;
 
   const navigate = useNavigate();
   const userLocation = useSelector((state) => state.location.userLocation);

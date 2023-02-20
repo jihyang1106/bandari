@@ -48,6 +48,18 @@ const PetProfile = () => {
       info: form.content.value,
       userId: 'test@naver.com',
     };
+    console.log('datas : ', datas);
+    if (
+      datas.name === '' ||
+      datas.petSpeices === '' ||
+      datas.info === '' ||
+      imgRef.current.files[0] === undefined
+    ) {
+      alert('정보를 입력하시고, 이미지 등록해주세요~');
+
+      return;
+    }
+    // console.log('ddddddddddddddd', form.data.value);
     formData.append('datas', JSON.stringify(datas));
     // 이미지
     formData.append('petImg', imgRef.current.files[0]);
@@ -64,7 +76,12 @@ const PetProfile = () => {
       })
       .then((res) => {
         console.log('res.data', res.data);
-      });
+
+        alert(
+          `수고하셨습니다. ${form.name.value}(이)의 소중한 정보가 등록되었습니다.`
+        );
+      })
+      .then(navigate('/'));
   }
 
   /** 업로드 버튼 클릭 시 이전 값 초기화  */
@@ -250,7 +267,9 @@ const PetProfile = () => {
             {/* 취소 완료 버튼 */}
             <div className={`${styles.submitButton}`}>
               <button onClick={onResetPage}>취소</button>
-              <button onClick={onCompleteBtn}>완료</button>
+              <button type="button" onClick={onCompleteBtn}>
+                완료
+              </button>
             </div>
           </form>
         </section>
