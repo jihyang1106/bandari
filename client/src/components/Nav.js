@@ -18,11 +18,11 @@ import HamburgerIcon from '../assets/HamburgerIcon.png';
 import GetLocation from './js/GetLocation';
 
 const Nav = () => {
-  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
   const dispatch = useDispatch();
   const HamburgerDivRef = useRef();
 
   const [swtichType, setSwitchType] = useState('');
+  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
   const haveLocation = useSelector((state) => state.location.haveLocation);

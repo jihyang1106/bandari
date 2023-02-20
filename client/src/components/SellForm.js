@@ -28,8 +28,9 @@ export default function SellForm() {
   // slick-carousel settings
   const settings = {
     dots: true,
+    autoplay: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
@@ -74,7 +75,7 @@ export default function SellForm() {
       category: categorySelectRef.current.value,
       deal: true,
       // petId: petSelectRef.current.value,
-      petId: petId,
+      petId: 153,
       userId: userId,
     };
     formData.append('datas', JSON.stringify(datas));

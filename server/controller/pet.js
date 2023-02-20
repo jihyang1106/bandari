@@ -7,3 +7,17 @@ exports.getData = async (req, res) => {
   console.log(result);
   res.send(result);
 };
+
+// 마이페이지 펫 체크
+exports.checkPet = async (req, res) => {
+  console.log('마이페이지 펫 체크 :', req.body.userID);
+  const result = await pet
+    .findAll({
+      where: { userId: req.body.userID },
+      raw: true,
+    })
+    .then((result) => {
+      console.log('값 오나융?ㅠㅠㅠ:', result);
+      res.send(result);
+    });
+};

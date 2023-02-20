@@ -45,4 +45,7 @@ router.post('/insert', petUpload.single('petImg'), async (req, res) => {
 
 router.get('/getData', petController.getData);
 
+// 마이페이지 펫 정보 조회
+router.post('/checkPet', petController.checkPet);
+
 module.exports = router;
