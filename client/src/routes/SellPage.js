@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, withRouter } from 'react-router-dom';
 
 import styles from './css/SellPage.module.css';
@@ -21,7 +21,9 @@ import axios from 'axios';
 const SellPage = () => {
   const btnState = useSelector((state) => state.sellCategorySwitch.switchState);
   const [sell, setSell] = useState([]);
-  const [ser, setSer] = useState([]);
+  // 검색창 값
+  const [ser, setSer] = useState('');
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -38,11 +40,8 @@ const SellPage = () => {
       setSell(sell);
     }
   }, [btnState]);
-  // console.log(
-  //   'asd',
-  //   sell.filter((data) => data.category === 'peed')
-  // );
 
+  // console.log('sell 리스트 :', sell)
   /*판매글 가져오는 함수* */
   const getData = () => {
     axios.get('supplies/getData').then((res) => {
@@ -56,6 +55,13 @@ const SellPage = () => {
     getData();
   }, []);
 
+  console.log('검색값 판매페이지에 들어오나요 ser :', ser);
+  // const searched = sell.filter((item) =>
+  //   item.id.toUpperCase().includes(ser.toUpperCase())
+  // );
+  // console.log('필터 되니?', searched);
+  // console.log(sell.filter((item) => {}));
+
   return (
     <>
       <Nav />
@@ -63,11 +69,14 @@ const SellPage = () => {
         <section>
           <Category />
           <div className={styles.AvailSaleContainer}>
-            <SellCategory />
+            <SellCategory setSer={setSer} />
+            {/* SellCategory 검색 값*/}
+            <input value={ser} />
             <div className={styles.cardContainer}>
               {sell.map((list, index) => {
                 return <Card key={index} list={list} />;
               })}
+              {/* {ser.length === '' && } */}
             </div>
           </div>
         </section>

@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import locationIcon from '../assets/Location.png';
 import './css/SellCategory.css';
@@ -9,17 +11,20 @@ import {
   setStateSnack,
   setStateProduct,
 } from '../store/module/sellCategorySwitch';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
-export default function SellCategory(getSearch) {
+import axios from 'axios';
+
+export default function SellCategory(props) {
   const basicBtnRef = useRef();
   const peedBtnRef = useRef();
   const snackBtnRef = useRef();
   const productBtnRef = useRef();
 
   const [swtichType, setSwitchType] = useState('');
+  // 클라이언트의 서치 상태 값
   const [search, setSearch] = useState('');
+  // db에서 가져온 서치 값
+  const [searchData, setSearchData] = useState([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -73,16 +78,25 @@ export default function SellCategory(getSearch) {
     }
   };
 
+  // 서치 값
   const onChangeSearch = (e) => {
     e.preventDefault();
-    // if(search === null || search === '') {
-
-    // }
-
     setSearch(e.target.value);
-    // getSearch(search);
   };
 
+  // db에 검색 값 조회
+  const onSerch = () => {
+    console.log('검색값 :', search);
+    axios
+      .post('supplies/postSearch', {
+        searchData: search,
+      })
+      .then((res) => {
+        console.log('판매 카테고리 검색 결과 값 :', res.data);
+        setSearchData(res.data);
+        props.setSer(searchData);
+      });
+  };
   return (
     <>
       {/* 상단 카테고리, 검색 & 판매 버튼 누르면, 판매 글 폼 열림 */}
@@ -143,7 +157,15 @@ export default function SellCategory(getSearch) {
             value={search}
             onChange={onChangeSearch}
           />
-          <button className="searchBtn">검색</button>
+          {/* 서치값 sellpage 컴포넌트로 값을 보내는 중 */}
+          <button
+            className="searchBtn"
+            onClick={() => {
+              onSerch();
+            }}
+          >
+            검색
+          </button>
 
           <button
             className="saleButton"
