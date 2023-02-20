@@ -10,8 +10,9 @@ import ErrorPage from './ErrorPage';
 import SellForm from './SellForm';
 import PetProfile from './PetProfile';
 import EditPetInfo from './EditPetInfo';
-import SalesFost from './SalesFost';
+import SalesDetail from './SalesDetail';
 import { useSelector } from 'react-redux';
+
 
 const AppRouter = () => {
   const isLoggedIn = useSelector((state) => state.user.user.isLogin);
@@ -23,8 +24,8 @@ const AppRouter = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/sellForm" element={<SellForm />} />
         <Route path="/sellPage" element={<SellPage />} />
-        <Route path="/salesFost" element={<SalesFost />} />
-        {/* <Route path="/salesFost/:id" element={<SalesFost />} /> */}
+        <Route path="/salesDetail" element={<SalesDetail />} />
+        {/* <Route path="/salesDetail/:id" element={<SalesDetail />} /> */}
         <Route path="/petProfile" element={<PetProfile />} />
         <Route path="/myPage" element={<MyPage />} />
         <Route path="/chatPage" element={<ChatPage />} />

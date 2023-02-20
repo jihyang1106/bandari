@@ -18,6 +18,7 @@ export default function SellForm() {
 
   const navigate = useNavigate();
   const userLocation = useSelector((state) => state.location.userLocation);
+  const userId = useSelector((state) => state.user.user.isLogin);
 
   const petSelectRef = useRef();
   const categorySelectRef = useRef();
@@ -48,7 +49,7 @@ export default function SellForm() {
     }
   };
 
-  const userId = sessionStorage.getItem('userData');
+  // const userId = sessionStorage.getItem('userData');
   const petId = sessionStorage.getItem('petData');
 
   /**판매 글쓰기 완료 함수 */

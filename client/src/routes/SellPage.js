@@ -28,7 +28,6 @@ const SellPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getData();
     if (btnState === 'peed') {
       sell.filter((data) => data.category === 'peed');
       setSell(sell);
