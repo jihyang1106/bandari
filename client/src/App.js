@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { setUserInfo } from './store/module/user';
 import { setPets } from './store/module/pets';
 import GetLocation from './components/js/GetLocation';
-import isLogin from './components/js/isLogin';
+
 
 function App() {
   const [init, setInit] = useState(true);
@@ -28,13 +28,26 @@ function App() {
     }).then((res) => {
       //로그인 여부 세션스토리지 저장
       sessionStorage.setItem('userData', res.data.isLogin);
-      //로그인 여부 리덕스 저장 로그인 했을때isLogin:id, userName:이름 로그아웃 했을때 false\
-      dispatch({
-        type: 'SETUSERINFO',
-        payload: { isLogin: res.data.isLogin, userName: res.data.userName },
-      });
+
+      //로그인 여부 리덕스 저장 로그인 했을때isLogin:id, userName:이름 로그아웃 했을때 false
+      dispatch({type:'SETUSERINFO',isLogin:res.data.isLogin, userName:res.data.userName})
+      
+
     });
   };
+
+  /*브라우저 종료시 로그아웃 상태로 만드는 함수*/
+  const cleanUp = () =>{
+    axios({
+      method:'get',
+      url:'/kakao/cleanUp'
+    })
+    // sessionStorage.setItem('userData', false);
+    // dispatch({type:'SETUSERINFO',payload:{isLogin:false, userName:false}})
+  }
+  window.addEventListener('unload', ()=>{
+    cleanUp()
+  });
 
   /*유저 위치정보*/
   // if (userInfo.userId) {
@@ -70,6 +83,7 @@ function App() {
   useEffect(() => {
     GetLocation(dispatch);
     isLogin();
+    
   }, []);
   return (
     <>

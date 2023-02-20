@@ -41,13 +41,14 @@ exports.kakaoCode = async (req, res) => {
         nickname: res.kakao_account.profile.nickname,
       };
 
-      console.log('DB에 들어갈 유저정보', userData);
+      console.log('토큰에서 받아온 kakao 유저정보', userData);
       user.findOne({ where: { id: userData.id } }).then((result) => {
         if (result == null) {
           user.create(userData);
         }
       });
     });
+    ///req.session.user = userData
   res.redirect('http://localhost:3000');
 };
 //토큰으로 사용자 정보를 받아오는 함수
@@ -70,6 +71,7 @@ exports.kakaoLogout = (req, res) => {
   req.session.destroy((err) => {
     if (err) throw err;
     userData = false;
+
     res.redirect('http://localhost:3000');
   });
 };
@@ -78,10 +80,15 @@ exports.isLogin = (req, res) => {
   if (userData !== false) {
     console.log('로그인 유저데이터', userData);
     res.send({ isLogin: userData.id, userName: userData.nickname });
-    userData = {};
   } else {
     console.log('로그아웃 유저데이터', userData);
     res.send({ isLogin: false, userName: false });
-    userData = {};
   }
 };
+
+exports.cleanUp = (req,res) =>{
+  userData = {
+    id:false, 
+    nickname:false
+  }
+}
