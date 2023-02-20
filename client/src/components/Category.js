@@ -8,6 +8,7 @@ import styles from './css/Category.module.css';
 import CategoryHamburger from './CategoryHamburger';
 
 const Category = () => {
+  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
   const swtichType = useSelector((state) => state.typeSwitch.switchState);
   const [categoryType, setCategoryType] = useState('');
 
@@ -36,6 +37,30 @@ const Category = () => {
           </NavLink>
         </div>
         <div className={styles.link}>
+          {/* {!isLoggedIn ? (
+            <>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? `${styles.active} ${styles[`${categoryType}`]}`
+                    : ''
+                }
+              >
+                <span>채팅</span>
+                {alert('로그인 하셔야 이용이 가능합니다.')}
+              </NavLink>
+            </>
+          ) : (
+            <NavLink
+              to="/chatPage"
+              className={({ isActive }) =>
+                isActive ? `${styles.active} ${styles[`${categoryType}`]}` : ''
+              }
+            >
+              <span>채팅</span>
+            </NavLink>
+          )} */}
           <NavLink
             to="/chatPage"
             className={({ isActive }) =>

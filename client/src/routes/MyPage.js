@@ -96,6 +96,7 @@ let pets = [
 
 const MyPage = (props) => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
+
   const [displayModal, setDisplayModal] = useState(false);
   const navigate = useNavigate();
 

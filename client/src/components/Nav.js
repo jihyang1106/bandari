@@ -18,7 +18,7 @@ import HamburgerIcon from '../assets/HamburgerIcon.png';
 import GetLocation from './js/GetLocation';
 
 const Nav = () => {
-  const isLoggedIn = useSelector((state) => state.user.user.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
   const dispatch = useDispatch();
   const HamburgerDivRef = useRef();
 
@@ -90,9 +90,11 @@ const Nav = () => {
           <span className={styles.allowLocationSpan}>위치를 허용해주세요</span>
         )}
         <SwitchBtn />
-
-        <button onClick={onClickLogin}>Login</button>
-        <button onClick={onClickLogout}>Logout</button>
+        {!isLoggedIn ? (
+          <button onClick={onClickLogin}>Login</button>
+        ) : (
+          <button onClick={onClickLogout}>Logout</button>
+        )}
       </div>
       <NavCategoryHamburger categoryType={btnState} />
     </div>
