@@ -3,8 +3,18 @@ const { img } = require('../model');
 
 // 용품 판매글 조회
 exports.getData = async (req, res) => {
-  const result = await supplies.findAll();
-  const resultImg = await img.findAll();
+  const result = await supplies.findAll({
+    include: [
+       {
+         model: img,
+         required:false
+       }
+    ]
+    //  where: {'$img.img1$': { [Op.ne]: null }},
+});
+  // const result = await supplies.findAll();
+  // const resultImg = await img.findAll();
+  console.log(result)
   res.send(result);
 };
 
