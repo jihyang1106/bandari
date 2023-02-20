@@ -25,6 +25,11 @@ input {
   margin-top: 20px;
 }
 
+.unstyledButton {
+  border: none;
+  background-color: transparent;
+}
+
 /*1500px이하*/
 @media screen and (max-width: 1500px) {
   .sellPage > section > .AvailSaleContainer > div:first-child {

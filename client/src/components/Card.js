@@ -7,11 +7,7 @@ import noneLike from '../assets/NoneClikeLikeButton.png';
 import clickedLike from '../assets/ClikedLikeButton.png';
 
 import axios from 'axios';
-
-// 용품 PK 아이디 조회
-// axios.get('/getLikeCount').then((res) => {
-//   console.log(res);
-// });
+import { Link, useNavigate } from 'react-router-dom';
 
 const Card = (list) => {
   // likeState 눌렸는지 여부 > likeStateImg 이미지 변경
@@ -19,11 +15,12 @@ const Card = (list) => {
   const [likeStateImg, setLikeStateImg] = useState(noneLike);
   const [likeCount, setLikeCount] = useState(list.list.likeCount);
 
+  const navigate = useNavigate();
+
   //  const userLocation = useSelector((state) => state.location.userLocation);
   // const location =
   //   userLocation.region_2depth_name + ' ' + userLocation.region_3depth_name;
 
-  // 찜 on / off
   const onLikeButton = () => {
     if (list.list.deal === false) {
       //찜 안된 상태
@@ -41,6 +38,7 @@ const Card = (list) => {
         .then((res) => {
           console.log(res);
         });
+      return;
     } else {
       // 찜한 상태
       alert('찜을 해제 하시겠습니까?');
@@ -56,18 +54,25 @@ const Card = (list) => {
         .then((res) => {
           console.log(res);
         });
+      return;
     }
   };
-
+  // 카드 컴포넌트 클릭 함수
+  const goToDetail = () => {
+    navigate('/salesFost', { state: { ...list.list } });
+    console.log('카드 클릭 해당 글 상세페이지 이동 정보:', { ...list.list });
+  };
   // console.log('판매 글 list', list);
-  // console.log('판매 글 list.list.likeCount', list.list.likeCount);
-  // console.log('likeCount : ', { likeCount });
-  // console.log('likeState : ', { likeState });
 
   const listData = list.list;
   return (
     <>
-      <div className={styles.card}>
+      <div
+        className={styles.card}
+        onClick={() => {
+          goToDetail(this);
+        }}
+      >
         <img
           src={`/images/${listData.cover}`}
           aria-label="cardImg"
@@ -107,6 +112,7 @@ const Card = (list) => {
           />
         </div>
       </div>
+      {/* <Link to={`/postView/${list.list.id}`}>{list.list.title}</Link> */}
     </>
   );
 };

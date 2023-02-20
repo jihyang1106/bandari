@@ -28,9 +28,11 @@ function App() {
     }).then((res) => {
       //로그인 여부 세션스토리지 저장
       sessionStorage.setItem('userData', res.data.isLogin);
+
       //로그인 여부 리덕스 저장 로그인 했을때isLogin:id, userName:이름 로그아웃 했을때 false
       dispatch({type:'SETUSERINFO',isLogin:res.data.isLogin, userName:res.data.userName})
       
+
     });
   };
 
@@ -61,6 +63,7 @@ function App() {
 
   /*펫 정보*/
   if (pets) {
+    console.log('pets', pets);
     for (let i = 0; i < pets.length; i++) {
       setPets(pets[i]);
     }

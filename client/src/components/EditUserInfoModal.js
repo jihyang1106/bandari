@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
+
+import { useNavigate } from 'react-router-dom';
+
 import styles from './css/EditUserInfoModal.module.css';
 
 
@@ -10,6 +12,7 @@ const EditUserInfoModal = ({ display, setDisplay }) => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userNameRef = useRef();
   const userPhoneNumberRef = useRef();
+  const navigate = useNavigate();
 
   const onClickCloseModal = () => {
     setDisplay(false);
@@ -19,6 +22,7 @@ const EditUserInfoModal = ({ display, setDisplay }) => {
   const onClickEditUserInfo = () => {
     const name = userNameRef.current.value; //변경이름
     const phoneNum = userPhoneNumberRef.current.value; //변경폰번호
+
     console.log('회원정보수정 완료버튼클릭');
     console.log(userId)
     axios({
@@ -33,6 +37,7 @@ const EditUserInfoModal = ({ display, setDisplay }) => {
       alert('사용자 변경 완료')
       window.location.href = 'http://localhost:3000/myPage'
     })
+
 
   };
   return (

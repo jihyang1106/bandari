@@ -30,18 +30,22 @@ function sellCategorySwitch(state = initialState, action) {
   switch (action.type) {
     case 'SETSTATEBASIC':
       return {
+        ...state,
         switchState: 'basic',
       };
     case 'SETSTATEPEED':
       return {
+        ...state,
         switchState: 'peed',
       };
     case 'SETSTATESNACK':
       return {
+        ...state,
         switchState: 'snack',
       };
     case 'SETSATEPRODUCT':
       return {
+        ...state,
         switchState: 'product',
       };
     default:

@@ -12,13 +12,14 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-export default function SellCategory({ setIsSale }) {
+export default function SellCategory(getSearch) {
   const basicBtnRef = useRef();
   const peedBtnRef = useRef();
   const snackBtnRef = useRef();
   const productBtnRef = useRef();
 
   const [swtichType, setSwitchType] = useState('');
+  const [search, setSearch] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -72,14 +73,15 @@ export default function SellCategory({ setIsSale }) {
     }
   };
 
-  // const navigate = useNavigate();
-  // const goToFost = () => {
-  //   navigate('/', {
-  //     state: {
-  //       // suppliesID: 글 번호
-  //     },
-  //   });
-  // };
+  const onChangeSearch = (e) => {
+    e.preventDefault();
+    // if(search === null || search === '') {
+
+    // }
+
+    setSearch(e.target.value);
+    // getSearch(search);
+  };
 
   return (
     <>
@@ -135,7 +137,12 @@ export default function SellCategory({ setIsSale }) {
           </span>
         </span>
         <span className="searchNav">
-          <input type="text" className="searchInput" />
+          <input
+            type="text"
+            className="searchInput"
+            value={search}
+            onChange={onChangeSearch}
+          />
           <button className="searchBtn">검색</button>
 
           <button
