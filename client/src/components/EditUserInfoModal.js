@@ -2,13 +2,14 @@ import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import styles from './css/EditUserInfoModal.module.css';
 
 
 
 const EditUserInfoModal = ({ display, setDisplay }) => {
-  const userId = useSelector((state) => state.user.isLogin);
+  const userId = useSelector((state) => state.user.user.isLogin);
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userNameRef = useRef();
   const userPhoneNumberRef = useRef();
