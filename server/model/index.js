@@ -21,7 +21,6 @@ db.like = require('./like')(sequelize, Sequelize);
 db.room = require('./room')(sequelize, Sequelize);
 db.chat = require('./chat')(sequelize, Sequelize);
 
-
 // user 삭제 => pet 삭제
 db.user.hasMany(db.pet, {
   foreignKey: 'userId',
@@ -160,7 +159,6 @@ db.chat.belongsTo(db.room, {
   targetKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade',
-
 });
 
 module.exports = db;

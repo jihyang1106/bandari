@@ -1,5 +1,4 @@
-import styles from './css/SalesFost.module.css';
-
+import styles from './css/SalesDetail.module.css';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import Nav from '../components/Nav';
@@ -9,21 +8,20 @@ import Category from '../components/Category';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
 import axios from 'axios';
 import $ from 'jquery';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-const SalesFost = () => {
+const SalesDetail = () => {
   const navigate = useNavigate();
   // state 취득
   const location = useLocation();
   const datas = location.state;
+  const [pet, setPet] = useState([]);
 
-  function onChattingBtn() {
-    console.log('채팅하기 버튼 눌림');
-    navigate('/chatPage');
-  }
-
+  const userId = useSelector((state) => state.user.user.isLogin);
+  console.log(userId);
   const { id } = useParams();
 
   // slick-carousel settings
@@ -41,6 +39,42 @@ const SalesFost = () => {
  const imgs = [datas.imgs[0].img1,datas.imgs[0].img2, datas.imgs[0].img3]
   newImgs = imgs.filter((el)=>el != null);
   }
+
+  // 상세페이지 렌더 시 글에 맞는 펫 정보 가져오기
+  useEffect(() => {
+    axios
+      .get('pet/getData', {
+        params: { id: datas.petId },
+      })
+      .then((res) => {
+        // console.log('res.data', res.data);
+        setPet(res.data);
+      });
+  }, []);
+
+  // 프론트로 보내는 데이터
+  const result = { pet: pet, supplies: datas };
+  console.log(result);
+
+  // 서버로 보내는 데이터
+  const backData = {
+    suppliesId: datas.id, // 글 id
+    userId: userId, // 로그인한 유저 id
+    otherId: datas.userId, // 글 작성 id
+  };
+
+  // 채팅하기 버튼
+  const onChattingBtn = () => {
+    if (userId === false) {
+      alert('로그인 후 연락해주세요');
+      navigate('/');
+    } else {
+      axios.post('room/insert', backData).then((res) => {
+        console.log('생성 판별 여부', res.data);
+      });
+      navigate('/chatPage', { state: result });
+    }
+  };
 
   return (
     <>
@@ -114,25 +148,30 @@ const SalesFost = () => {
             <p className={styles.petLabel}>사용한 반려동물</p>
             <div className={styles.sellectedPet}>
               <div className={styles.petImg}>
-                <img src="" alt="" />
+                {/* <img src={`/petImg/${pet.petImg}`} alt="" /> */}
               </div>
               <div className={styles.petInfo}>
-                <p>보리</p>
-                <p>10세(2018년12개월) / 남아 / 푸들 / 5~10kg</p>
-                <p>보리 입니다~</p>
+                <p>{pet.name}</p>
+                <p>
+                  {pet.age} / {pet.gender} / {pet.petSpeices} / {pet.weight}
+                </p>
+                <p>{pet.info}</p>
               </div>
             </div>
 
             {/* 채팅방 버튼 */}
             <div className={styles.submitButton}>
-              <button
-                type="button"
-                onClick={() => {
-                  onChattingBtn();
-                }}
-              >
-                연락하기
-              </button>
+              {userId != datas.userId ? (
+                <button type="button" onClick={onChattingBtn}>
+                  연락하기
+                </button>
+              ) : (
+                <>
+                  {' '}
+                  <button type="button">수정</button>&nbsp;
+                  <button type="button">삭제</button>
+                </>
+              )}
             </div>
           </form>
         </section>
@@ -141,4 +180,4 @@ const SalesFost = () => {
   );
 };
 
-export default SalesFost;
+export default SalesDetail;

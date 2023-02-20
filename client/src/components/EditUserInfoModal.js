@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './css/EditUserInfoModal.module.css';

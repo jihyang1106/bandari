@@ -7,7 +7,7 @@ import noneLike from '../assets/NoneClikeLikeButton.png';
 import clickedLike from '../assets/ClikedLikeButton.png';
 
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Card = (list) => {
   // likeState 눌렸는지 여부 > likeStateImg 이미지 변경
@@ -59,7 +59,7 @@ const Card = (list) => {
   };
   // 카드 컴포넌트 클릭 함수
   const goToDetail = () => {
-    navigate('/salesFost', { state: { ...list.list } });
+    navigate('/salesDetail', { state: { ...list.list } });
     console.log('카드 클릭 해당 글 상세페이지 이동 정보:', { ...list.list });
   };
   // console.log('판매 글 list', list);
