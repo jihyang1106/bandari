@@ -7,7 +7,7 @@ import noneLike from '../assets/NoneClikeLikeButton.png';
 import clickedLike from '../assets/ClikedLikeButton.png';
 
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Card = (list) => {
   // likeState 눌렸는지 여부 > likeStateImg 이미지 변경
