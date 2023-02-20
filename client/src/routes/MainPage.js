@@ -60,7 +60,7 @@ let datas = [
 ];
 
 const MainPage = () => {
-  const isLoggedIn = useSelector((state) => state.user.user.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
   console.log(isLoggedIn);

@@ -25,7 +25,8 @@ function user(state = initialState, action) {
       return {
         ...state,
         user: {
-          data: action.payload,
+          isLogin: action.isLogin,
+          userName: action.userName
         },
       };
     // case 'LOGOUT':
