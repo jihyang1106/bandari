@@ -1,5 +1,5 @@
 const initialState = {
-  pets: null,
+  pets: [],
 };
 
 function setPets(pet) {
@@ -13,7 +13,14 @@ function setPets(pet) {
 function pets(state = initialState, action) {
   switch (('pet 액션 타입 :', action.type)) {
     case 'SETPETS':
-      return {};
+      const indexpets = state.pets.push(action.pet);
+      return { ...state, pets: indexpets };
+    // return {
+    //   ...state,
+    //   pets: {
+    //     data: action.pet,
+    //   },
+    // };
     default:
       return state;
   }

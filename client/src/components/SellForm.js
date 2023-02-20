@@ -18,6 +18,7 @@ export default function SellForm() {
 
   const navigate = useNavigate();
   const userLocation = useSelector((state) => state.location.userLocation);
+
   const petSelectRef = useRef();
   const categorySelectRef = useRef();
   const formInfoRef = useRef();
@@ -47,6 +48,9 @@ export default function SellForm() {
     }
   };
 
+  const userId = sessionStorage.getItem('userData');
+  const petId = sessionStorage.getItem('petData');
+
   /**판매 글쓰기 완료 함수 */
   const onCompleteBtn = async () => {
     console.log('판매 글쓰기 완료 버튼 눌림');
@@ -69,8 +73,8 @@ export default function SellForm() {
       category: categorySelectRef.current.value,
       deal: true,
       // petId: petSelectRef.current.value,
-      petId: 126,
-      userId: 'test@naver.com',
+      petId: petId,
+      userId: userId,
     };
     formData.append('datas', JSON.stringify(datas));
 
@@ -87,7 +91,8 @@ export default function SellForm() {
       })
       .then((res) => {
         console.log('res.data', res.data);
-      });
+      })
+      .then(navigate('/SellPage'));
   };
 
   // 반려동물 번호 로 정보 요청 > name 값 가져오기

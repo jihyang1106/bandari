@@ -1,11 +1,11 @@
 const { supplies } = require('../model');
+const { img } = require('../model');
 
 // 용품 판매글 조회
 exports.getData = async (req, res) => {
-  supplies.findAll({}).then((result) => {
-    console.log('디비 받아지나?', result);
-    res.send(result);
-  });
+  const result = await supplies.findAll();
+  const resultImg = await img.findAll();
+  res.send(result);
 };
 
 // 판매글 좋아요 카운트, 상태

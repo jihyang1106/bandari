@@ -27,9 +27,7 @@ const SellPage = () => {
 
   useEffect(() => {
     getData();
-    if (btnState === 'basic') {
-      setSell(sell);
-    } else if (btnState === 'peed') {
+    if (btnState === 'peed') {
       sell.filter((data) => data.category === 'peed');
       setSell(sell);
     } else if (btnState === 'snack') {
@@ -47,12 +45,16 @@ const SellPage = () => {
 
   /*판매글 가져오는 함수* */
   const getData = () => {
-    console.log('판매글가져오는함수');
     axios.get('supplies/getData').then((res) => {
       // console.log('판매글 아이디 : ', res.data[0].id);
+      console.log('res.data', res.data);
       setSell(res.data);
     });
   };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>

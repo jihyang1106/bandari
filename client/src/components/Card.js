@@ -74,7 +74,7 @@ const Card = (list) => {
         }}
       >
         <img
-          src={`/images/${listData.cover}`}
+          src={`/uploadImg/${listData.cover}`}
           aria-label="cardImg"
           loading="lazy"
           alt="카드 이미지"
