@@ -55,10 +55,12 @@ ConnectDB();
 const router = require('./routes/user/kakao');
 const suppliesRouter = require('./routes/supplies');
 const petRouter = require('./routes/pet');
+const mypageRouter = require('./routes/mypage')
 
 app.use('/kakao', router);
 app.use('/supplies', suppliesRouter);
 app.use('/pet', petRouter);
+app.use('/mypage', mypageRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`server port ${process.env.PORT} open`);

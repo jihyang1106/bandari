@@ -13,9 +13,14 @@ const NavCategoryHamburger = ({ categoryType }) => {
   };
 
   /**로그인 클릭시 실행되는 함수 */
-  const onClickLogin = () => {
-    console.log('로그인클릭시');
-  };
+  const CLIENT_ID = process.env.REACT_APP_KAKAO_CLIENTID;
+  const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECTURI;
+  const LOGOUT_REDIRECT_URI = process.env.REACT_APP_KAKAO_LOGOUT_REDIRECTURI;
+      const onClickLogin = async () => {
+      const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=http://localhost:5000/kakao/code`;
+      await (window.location.href = kakaoAuthUrl);
+    };
+  
 
   return (
     <div className={styles.categoryHamburger}>
