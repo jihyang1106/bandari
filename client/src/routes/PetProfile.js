@@ -6,13 +6,16 @@ import Category from '../components/Category';
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 import $ from 'jquery';
+import { setPets } from '../store/module/pets';
 
 const PetProfile = () => {
   const [imgState, setImgState] = useState();
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const imgRef = useRef();
   const formInfoRef = useRef();
   const genderRef = useRef();
@@ -22,6 +25,7 @@ const PetProfile = () => {
   const typeRef = useRef();
   const kindRef = useRef();
   const weightRef = useRef();
+  const userId = sessionStorage.getItem('userData');
 
   // 이미지 미리보기 함수
   const saveImgFile = () => {
@@ -46,7 +50,7 @@ const PetProfile = () => {
       petType: form.type.value,
       petSpeices: form.kind.value,
       info: form.content.value,
-      userId: 'test@naver.com',
+      userId: userId,
     };
     console.log('datas : ', datas);
     if (
@@ -55,11 +59,10 @@ const PetProfile = () => {
       datas.info === '' ||
       imgRef.current.files[0] === undefined
     ) {
-      alert('정보를 입력하시고, 이미지 등록해주세요~');
-
+      alert('정보를 입력하시고, 이미지 등록해주세요!');
       return;
     }
-    // console.log('ddddddddddddddd', form.data.value);
+
     formData.append('datas', JSON.stringify(datas));
     // 이미지
     formData.append('petImg', imgRef.current.files[0]);
@@ -75,13 +78,11 @@ const PetProfile = () => {
         },
       })
       .then((res) => {
-        console.log('res.data', res.data);
-
-        alert(
-          `수고하셨습니다. ${form.name.value}(이)의 소중한 정보가 등록되었습니다.`
-        );
+        alert(` ${form.name.value}(이)의 소중한 정보가 등록되었습니다.`);
+        dispatch(setPets(res.data));
+        sessionStorage.setItem('petData', res.data.id);
       })
-      .then(navigate('/'));
+      .then(navigate('/myPage'));
   }
 
   /** 업로드 버튼 클릭 시 이전 값 초기화  */

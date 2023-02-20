@@ -60,9 +60,9 @@ router.post('/insert', upload.array('img'), async (req, res) => {
   const result = await supplies.create(datas);
 
   // 이미지가 두 개 있을 때 부터
-  if (imgData && result) {
+  if (imgData.img1 && result) {
     imgData.suppliesId = result.dataValues.id;
-    await img.create(imgData);
+    img.create(imgData);
   }
 
   res.send(true);
