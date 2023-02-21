@@ -72,7 +72,7 @@ const SalesDetail = () => {
       axios.post('room/insert', backData).then((res) => {
         console.log('생성 판별 여부', res.data);
       });
-      navigate('/chatPage', { state: result });
+      navigate('/chatPage');
     }
   };
 
