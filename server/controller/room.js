@@ -2,6 +2,7 @@ const { room } = require('../model');
 const { supplies } = require('../model');
 const { user } = require('../model');
 
+const { Op } = require('sequelize');
 exports.postInsert = async (req, res) => {
   // 똑같은 값이 없을 때 room 테이블에 create 있을 때 findOne
   const [result, created] = await room.findOrCreate({
@@ -19,8 +20,7 @@ exports.postInsert = async (req, res) => {
 exports.getData = async (req, res) => {
   // console.log('room의 데이터', req.query);
 
-  // 내가 만든 채팅방
-  const totalResult = {};
+  // 다른 사람이 쓴 글에 내가 연락해서 만든 채팅방
   const userId = await room.findAll({
     where: {
       userId: req.query.id,
@@ -29,13 +29,21 @@ exports.getData = async (req, res) => {
       {
         model: supplies,
         attributes: ['title', 'price', 'content', 'deal', 'cover', 'userId'],
+        include: [
+          {
+            model: user,
+            attributes: ['nickname'],
+          },
+        ],
       },
     ],
     raw: true,
     order: [['id', 'desc']],
   });
 
-  // 다른 유저가 만든 채팅방
+  console.log('내가 만든 채팅방', userId);
+
+  // 내가 쓴 글에 다른 유저가 연락해서 만든 채팅방
   const otherId = await room.findAll({
     where: {
       otherId: req.query.id,
@@ -45,10 +53,21 @@ exports.getData = async (req, res) => {
         model: supplies,
         attributes: ['title', 'price', 'content', 'deal', 'cover', 'userId'],
       },
+      {
+        model: user,
+        attributes: ['nickname'],
+      },
     ],
     raw: true,
     order: [['id', 'desc']],
   });
+
+  console.log('다른 유저가 만든 채팅방', otherId);
+  // const userName = await user.findAll({
+  //   where: { id: otherId[userId] },
+  // });
+
+  // console.log('userName', userName);
 
   // 내림차순 정렬
   let result = [];
@@ -75,6 +94,6 @@ exports.getData = async (req, res) => {
     });
   }
 
-  console.log(result);
+  // console.log(result);
   res.send(result);
 };
