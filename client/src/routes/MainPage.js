@@ -75,6 +75,14 @@ const MainPage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // 메인페이지에서 로그인한 상태에서 펫 조회? 마이페이지에서 조회?
+  // useEffect(() => {
+  //   if(isLoggedIn){
+  //     if( 펫 마리수가 0 일때..){
+  //       navigate('/petProfile')
+  //     }
+  //   }
+  // })
   return (
     <>
       <Nav />

@@ -10,10 +10,13 @@ import $ from 'jquery';
 
 const EditPetInfo = () => {
   const [imgState, setImgState] = useState();
+
   const location = useLocation();
-  const petInfo = location.state.pet;
+  const petInfo = location.state.pet.pet;
 
   console.log(petInfo);
+
+  // console.log(state.pet);
 
   const navigate = useNavigate();
   const imgRef = useRef();

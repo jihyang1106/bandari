@@ -22,6 +22,7 @@
   overflow: hidden;
   margin: 0 0 20px 2%;
   box-shadow: 7px 7px 4px -3px rgb(205, 205, 205);
+  
 }
 
 
@@ -74,7 +75,7 @@
 .cardStateContainer span {
   margin-left: 6px;
   font-weight: 600;
-  color: white;
+  color: #c8c8c8f2;
 }
 /* 이미지 thumbnail */
 .card img {
@@ -90,6 +91,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: left;
+  background-color: white;
 }
 
 .cardFooter span {

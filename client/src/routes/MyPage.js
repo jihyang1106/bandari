@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import styles from './css/MyPage.module.css';
@@ -11,6 +11,7 @@ import CustomPetSlider from '../components/CustomPetSlider';
 
 import TestImg from '../assets/TestImg1.jpg';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 let data = [
   {
@@ -99,8 +100,30 @@ let pets = [
 const MyPage = (props) => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const pets = useSelector((state) => state.pets.pets);
+  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
+
   const [displayModal, setDisplayModal] = useState(false);
+  const [petDatas, setPetDatas] = useState([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // 로그인 값이 있으면, 펫 데이터 체크
+    if (!isLoggedIn) {
+      alert('로그인 해주세요');
+      navigate('/');
+      return;
+    } else {
+      axios
+        .post('pet/checkPet', {
+          userID: isLoggedIn,
+        })
+        .then((res) => {
+          console.log('유저의 펫 db 조회:', res.data);
+          setPetDatas(res.data);
+        });
+    }
+  }, []);
 
   function onUserDelete() {
     console.log('회원 탈퇴 버튼 눌림');
@@ -127,7 +150,7 @@ const MyPage = (props) => {
             {/* 제목, 가격 데이터 */}
             <div>
               <h1>마이 페이지</h1>
-              <h2>{data[0].userID}님 안녕하세요</h2>
+              <h2>{isLoggedIn}님 안녕하세요</h2>
               <p onClick={onClickEditUserInfo}>회원 정보 수정</p>
             </div>
 
@@ -140,7 +163,6 @@ const MyPage = (props) => {
                 ) : (
                   '등록된 펫이 없습니다.'
                 )}
-
                 <button
                   onClick={petAddUpload}
                   className={`${styles[`${btnState}`]}`}

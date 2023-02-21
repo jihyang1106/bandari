@@ -12,10 +12,10 @@ const ChatList = ({ chatData, onClickChatData }) => {
       className={styles.chatList}
     >
       <div>
-        <h1>{chatData.userId}</h1>
-        <span>{chatData.content}</span>
+        <h1>{chatData['supply.title']}</h1>
+        <span></span>
       </div>
-      <img src={TestImg} alt="" />
+      <img src={`/uploadImg/${chatData['supply.cover']}`} alt="" />
     </div>
   );
 };

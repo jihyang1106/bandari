@@ -47,47 +47,39 @@ export const StyledSlider = styled(Slider)`
     right: -35px;
   }
 
-  @media screen and (max-width:1500px) {
-    .slick-list{
-        width: 700px;
-        }
-
-        .slick-slide {
-            //각 슬라이드
-            width: 330px !important;
-          }
+  @media screen and (max-width: 1500px) {
+    .slick-list {
+      width: 700px;
     }
 
-    @media screen and (max-width:1200px) {
-        .slick-list{
-            width: 625px;
-            }
-        }
-    
+    .slick-slide {
+      //각 슬라이드
+      width: 330px !important;
+    }
+  }
 
-    
-  @media screen and (max-width:1000px) {
-    .slick-list{
-        width: 50vw;
-        }
+  @media screen and (max-width: 1200px) {
+    .slick-list {
+      width: 625px;
+    }
+  }
 
-        .slick-slide {
-            //각 슬라이드
-            width: 330px !important;
-          }
+  @media screen and (max-width: 1000px) {
+    .slick-list {
+      width: 50vw;
     }
 
-    @media screen and (max-width: 750px) {    
-            .slick-slide {
-                //각 슬라이드
-                width: 250px !important;
-              }
-      
-      }
+    .slick-slide {
+      //각 슬라이드
+      width: 330px !important;
+    }
+  }
 
-
-
-
+  @media screen and (max-width: 750px) {
+    .slick-slide {
+      //각 슬라이드
+      width: 250px !important;
+    }
   }
 `;
 

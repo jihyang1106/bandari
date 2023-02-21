@@ -3,7 +3,7 @@
 
 .sellPage section:first-child {
   display: flex;
-  align-items: center;
+  align-items: baseline;
 }
 
 .AvailSaleContainer {
@@ -23,6 +23,8 @@ input {
   flex-wrap: wrap;
   align-content: center;
   margin-top: 20px;
+  
+  
 }
 
 .unstyledButton {

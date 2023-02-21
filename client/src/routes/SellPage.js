@@ -70,12 +70,11 @@ const SellPage = () => {
           <div className={styles.AvailSaleContainer}>
             <SellCategory setSer={setSer} />
             {/* SellCategory 검색 값*/}
-            <input value={ser} />
+            <input value={ser} type="hidden" />
             <div className={styles.cardContainer}>
               {sell.map((list, index) => {
                 return <Card key={index} list={list} />;
               })}
-              {/* {ser.length === '' && } */}
             </div>
           </div>
         </section>

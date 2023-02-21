@@ -41,6 +41,7 @@ const supplies = (Sequelize, DataTypes) => {
       likeCount: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        defaultValue: 0,
       },
       deal: {
         type: DataTypes.BOOLEAN,
