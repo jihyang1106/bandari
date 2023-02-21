@@ -87,7 +87,7 @@ const ChatPage = () => {
             >
               <h1>채팅목록</h1>
               <div>
-                {chatDatas.map((chatData, index) => {
+                {/* {chatDatas.map((chatData, index) => {
                   return (
                     <ChatList
                       key={index}
@@ -95,7 +95,7 @@ const ChatPage = () => {
                       onClickChatData={onClickChatData}
                     />
                   );
-                })}
+                })} */}
                 {chatRoom.map((chatData, idx) => {
                   return (
                     <ChatList

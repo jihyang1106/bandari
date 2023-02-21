@@ -51,18 +51,19 @@ const ConnectDB = async () => {
 };
 // DB와 연결 및 동기화
 ConnectDB();
-
 const router = require('./routes/user/kakao');
 const suppliesRouter = require('./routes/supplies');
 const petRouter = require('./routes/pet');
 const mypageRouter = require('./routes/mypage');
 const roomRouter = require('./routes/room');
+const pickRouter = require('./routes/pick');
 
 app.use('/kakao', router);
 app.use('/supplies', suppliesRouter);
 app.use('/pet', petRouter);
 app.use('/mypage', mypageRouter);
 app.use('/room', roomRouter);
+app.use('/pick', pickRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`server port ${process.env.PORT} open`);
