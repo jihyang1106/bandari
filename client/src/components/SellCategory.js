@@ -60,21 +60,25 @@ export default function SellCategory(props) {
   const clickedBtn = (e) => {
     const target = e.target;
     if (target.value === 'basic') {
+      dispatch(setStateBasic());
       basicBtnRef.current.classList.add('clicked');
       peedBtnRef.current.classList.remove('clicked');
       snackBtnRef.current.classList.remove('clicked');
       productBtnRef.current.classList.remove('clicked');
     } else if (target.value === 'peed') {
+      dispatch(setSatatePeed());
       peedBtnRef.current.classList.add('clicked');
       basicBtnRef.current.classList.remove('clicked');
       snackBtnRef.current.classList.remove('clicked');
       productBtnRef.current.classList.remove('clicked');
     } else if (target.value === 'snack') {
+      dispatch(setStateSnack());
       snackBtnRef.current.classList.add('clicked');
       basicBtnRef.current.classList.remove('clicked');
       peedBtnRef.current.classList.remove('clicked');
       productBtnRef.current.classList.remove('clicked');
     } else if (target.value === 'product') {
+      dispatch(setStateProduct());
       productBtnRef.current.classList.add('clicked');
       basicBtnRef.current.classList.remove('clicked');
       peedBtnRef.current.classList.remove('clicked');
@@ -86,6 +90,12 @@ export default function SellCategory(props) {
   const onChangeSearch = (e) => {
     e.preventDefault();
     setSearch(e.target.value);
+  };
+  // 앤터 버튼
+  const onSubmitSearch = (e) => {
+    if (e.key === 'Enter') {
+      onSearch();
+    }
   };
 
   // db에 검색 값 조회
@@ -99,6 +109,7 @@ export default function SellCategory(props) {
         console.log('판매 카테고리 검색 결과 값 :', res.data);
         setSearchData(res.data);
         props.setSell([searchData]);
+        console.log('ㅇㅇㄴㅇㄴㅁㅇㄴㅁㅇㅁ', [searchData]);
       });
   };
   return (
@@ -160,6 +171,7 @@ export default function SellCategory(props) {
             className="searchInput"
             value={search}
             onChange={onChangeSearch}
+            onKeyPress={onSubmitSearch}
           />
           {/* 서치값 sellpage 컴포넌트로 값을 보내는 중 */}
           <button

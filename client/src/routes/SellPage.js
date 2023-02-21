@@ -24,6 +24,7 @@ const SellPage = () => {
   const [sell, setSell] = useState([]); // 화면에 보여지는 state ( 전체, 사료 이런 거상관없이 클라이언트가 보고 있는 화면의 목록)
   // 검색창 값
   const [ser, setSer] = useState('');
+
   const state = {
     peed: '사료',
     snack: '간식',
@@ -48,6 +49,8 @@ const SellPage = () => {
     }
   }, [btnState]);
 
+  console.log('dddddd', btnState);
+
   /*판매글 가져오는 함수* */
   const getData = () => {
     axios.get('supplies/getData').then((res) => {
@@ -61,7 +64,7 @@ const SellPage = () => {
   useEffect(() => {
     getData();
   }, []);
-
+  console.log('sellll', sell);
   return (
     <>
       <Nav />
