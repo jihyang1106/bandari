@@ -1,32 +1,24 @@
-/* padding: 36px;
-    display: flex;
-    justify-content: space-between;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: calc(100vw - 70px);
-    height: 7vh; */
+.sellCategory{
+  display: flex;
+}
 
 .changeBtn {
-  background-color: transparent;
-  border: none;
   cursor: pointer;
   font-weight: 500;
+  width: 400px;
+  display: inline-block;
 }
 
 .categoryButtonContainer {
   margin: auto;
   display: inline-block;
+  display: flex;
 }
 
 .categoryButtonContainer button {
   margin-left: 10px;
 }
 
-.categoryButtonContainer button:active {
-  background-color: #f5a280;
-  color: white;
-}
 
 /* 검색  */
 .searchInput {
@@ -41,25 +33,32 @@
 }
 
 .searchNav {
-  margin-left: 5%;
+  margin-left: 35px;
+  width: 100%;
+  display: flex;
 }
 
 /* 검색 버튼 */
 .searchBtn {
-  width: 70px;
-  height: 38px;
-  background: #f5a280;
   border-radius: 30px;
   border: none;
   color: white;
   font-size: 15px;
   font-weight: 600;
-}
-.serchBtn:hover {
-  background-color: transparent;
-  color: black;
+  cursor: pointer;
+  width: 100px;
 }
 
+.searchBtn.basic {
+  background-color: #9e9e9e;
+}
+
+.searchBtn.puppy {
+  background-color: #f5a280;
+}
+.searchBtn.cat {
+  background-color: #78AAC3;
+}
 /* 판매 버튼 */
 .saleButton {
   background-color: rgba(0, 0, 0, 0);
@@ -68,54 +67,76 @@
   font-size: 16px;
   font-weight: 700;
   line-height: 22px;
-  color: #f5a280;
   cursor: pointer;
+  width: 100px;
 }
+
+.saleButton.basic{
+  color: #1a1a1a;
+}
+
+.saleButton.puppy{
+  color: #894d36;
+}
+.saleButton.cat{
+  color: #557483;
+}
+
 
 .saleButton:hover {
   transform: scale(1.1);
 }
 
+
+
+
 /* 카테고리 버튼  */
-.categoryButton {
+.changeBtn > .categoryButton{
   width: 70px;
   height: 38px;
-  background: rgba(255, 255, 255, 0);
   border-radius: 30px;
-  border: 1px solid #f5a280;
+  background-color: transparent;
   font-size: 15px;
   font-weight: 600;
+  cursor: pointer;
 }
+
+.changeBtn.basic > .categoryButton{
+  border: 1px solid #9e9e9e;
+
+}
+
+.changeBtn.puppy > .categoryButton{
+  border: 1px solid #f5a280;
+}
+
+.changeBtn.cat > .categoryButton{
+  border: 1px solid #78AAC3;
+}
+
 
 /* active 버튼 */
-.changeBtn > .basicBtn.clicked {
-  background-color: #f5a280;
+.changeBtn > .categoryButton.clicked{
   color: white;
   font-weight: 600;
 }
 
-.changeBtn > .peedBtn.clicked {
-  background-color: #f5a280;
-  color: white;
-  font-weight: 600;
-}
+.changeBtn.basic > .categoryButton.clicked{
+  background-color: #9e9e9e;
+} 
 
-.changeBtn > .snackBtn.clicked {
+.changeBtn.puppy > .categoryButton.clicked{
   background-color: #f5a280;
-  color: white;
-  font-weight: 600;
-}
+} 
 
-.changeBtn > .productBtn.clicked {
-  background-color: #f5a280;
-  color: white;
-  font-weight: 600;
-}
+.changeBtn.cat > .categoryButton.clicked{
+  background-color: #78AAC3;
+} 
+
 
 /* 주소 버튼 */
 .adressPickButton {
   display: inline;
-  background: #ffece1;
   border: none;
   border-radius: 30px;
   color: #464646;
@@ -126,15 +147,22 @@
   padding: 7px 20px;
 }
 
+.adressPickButton.basic {
+  background-color: #eeeeee;
+
+}
+.adressPickButton.puppy {
+  background-color: #ffece1;
+}
+
+.adressPickButton.cat {
+  background-color: #e0eaee;
+}
+
 /* 주소 아이콘 */
 .adressPickButton img {
   height: 15px;
   margin-right: 5px;
-}
-
-.adressPickButton:hover {
-  background: #f5a280;
-  color: white;
 }
 
 /*1500px이하*/

@@ -85,7 +85,7 @@ const ChatPage = () => {
 
   console.log(chatRoom);
   const onClickChatData = (chatData) => {
-    console.log('채팅클릭');
+    console.log('채팅클릭', { chatData });
     if (chatRoomRef.current) {
       chatRoomRef.current.classList.remove(`${styles.transparent}`);
     }
@@ -123,7 +123,7 @@ const ChatPage = () => {
             >
               <h1>채팅목록</h1>
               <div>
-                {/* {chatDatas.map((chatData, index) => {
+                {chatDatas.map((chatData, index) => {
                   return (
                     <ChatList
                       key={index}
@@ -131,7 +131,7 @@ const ChatPage = () => {
                       onClickChatData={onClickChatData}
                     />
                   );
-                })} */}
+                })}
                 {chatRoom.map((chatData, idx) => {
                   return (
                     <ChatList
