@@ -52,7 +52,6 @@ exports.postLikeminus = async (req, res) => {
 exports.postSearch = async (req, res) => {
   console.log('검색 값 오나유? :', req.body);
   let searchWord = req.body.searchData;
-  console.log(searchWord);
   supplies
     .findAll({
       where: {

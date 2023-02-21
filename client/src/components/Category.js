@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
@@ -10,6 +10,8 @@ import CategoryHamburger from './CategoryHamburger';
 const Category = () => {
   const isLoggedIn = useSelector((state) => state.user.user.isLogin);
   const swtichType = useSelector((state) => state.typeSwitch.switchState);
+
+  const navigate = useNavigate();
   const [categoryType, setCategoryType] = useState('');
 
   useEffect(() => {
@@ -22,6 +24,14 @@ const Category = () => {
     }
   }, [swtichType]);
 
+  // 로그인 체크 함수 ( 채팅 / 마이페이지 )
+  // const loginCheck = () => {
+  //   if (!isLoggedIn) {
+  //     alert('기능을 사용하시려면, 로그인 부탁드립니다');
+  //     navigate('/');
+  //     return;
+  //   }
+  // };
   return (
     <div className={styles.category}>
       <CategoryHamburger categoryType={categoryType} />
@@ -67,7 +77,13 @@ const Category = () => {
               isActive ? `${styles.active} ${styles[`${categoryType}`]}` : ''
             }
           >
-            <span>채팅</span>
+            <span
+              onClick={() => {
+                // loginCheck();
+              }}
+            >
+              채팅
+            </span>
           </NavLink>
         </div>
         <div className={styles.link}>
@@ -87,7 +103,13 @@ const Category = () => {
               isActive ? `${styles.active} ${styles[`${categoryType}`]}` : ''
             }
           >
-            <span>마이페이지</span>
+            <span
+              onClick={() => {
+                // loginCheck();
+              }}
+            >
+              마이페이지
+            </span>
           </NavLink>
         </div>
       </div>
