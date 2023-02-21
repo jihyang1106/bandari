@@ -11,12 +11,11 @@ function setUserInfo(data) {
   };
 }
 
-// function logout() {
-//   sessionStorage.clear();
-//   return {
-//     type: 'LOGOUT',
-//   };
-// }
+function logout() {
+  return {
+    type: 'LOGOUT',
+  };
+}
 console.log('res.data.isLogin', user.isLogin);
 function user(state = initialState, action) {
   switch (action.type) {
@@ -27,18 +26,17 @@ function user(state = initialState, action) {
           isLogin: action.isLogin,
         },
       };
-    // case 'LOGOUT':
-    //   return {
-    //     ...state,
-    //     user: {
-    //       isLoggedIn: false,
-    //       data: null,
-    //     },
-    //   };
+    case 'LOGOUT':
+      return {
+        ...state,
+        user: {
+          isLogin: false,
+        },
+      };
     default:
       return state;
   }
 }
 
 export default user;
-export { setUserInfo };
+export { setUserInfo, logout };

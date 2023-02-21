@@ -43,7 +43,9 @@ const NavCategoryHamburger = ({ categoryType }) => {
             Login
           </button>
         ) : (
-          <button onClick={onClickLogout}>Logout</button>
+          <button onClick={onClickLogout} id={styles.logoutBtn}>
+            Logout
+          </button>
         )}
         <div className={styles.link}>
           <NavLink
