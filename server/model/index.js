@@ -62,16 +62,15 @@ db.like.belongsTo(db.user, {
   onDelete: 'cascade',
   onUpdate: 'cascade',
 });
-
 // user 삭제 => room 삭제
 db.user.hasMany(db.room, {
-  foreignKey: 'userId',
+  foreignKey: 'otherId',
   sourceKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade',
 });
 db.room.belongsTo(db.user, {
-  foreignKey: 'userId',
+  foreignKey: 'otherId',
   targetKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade',
@@ -79,13 +78,13 @@ db.room.belongsTo(db.user, {
 
 // user 삭제 => room 삭제
 db.user.hasMany(db.room, {
-  foreignKey: 'otherId',
+  foreignKey: 'userId',
   sourceKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade',
 });
 db.room.belongsTo(db.user, {
-  foreignKey: 'otherId',
+  foreignKey: 'userId',
   targetKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade',

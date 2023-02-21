@@ -4,33 +4,33 @@ const initialState = {
 
 function setStatePuppy() {
   return {
-    type: 'SETSTATEPUPPY',
+    type: 'switch/SETSTATEPUPPY',
   };
 }
 
 function setStateCat() {
   return {
-    type: 'SETSTATECAT',
+    type: 'switch/SETSTATECAT',
   };
 }
 
 function setStateBasic() {
   return {
-    type: 'SETSTATEBASIC',
+    type: 'switch/SETSTATEBASIC',
   };
 }
 
 function typeSwitch(state = initialState, action) {
   switch (action.type) {
-    case 'SETSTATEBASIC':
+    case 'switch/SETSTATEBASIC':
       return {
         switchState: 'basic',
       };
-    case 'SETSTATEPUPPY':
+    case 'switch/SETSTATEPUPPY':
       return {
         switchState: 'puppy',
       };
-    case 'SETSTATECAT':
+    case 'switch/SETSTATECAT':
       return {
         switchState: 'cat',
       };

@@ -4,46 +4,46 @@ const initialState = {
 
 function setSatatePeed() {
   return {
-    type: 'SETSTATEPEED',
+    type: 'sell/SETSTATEPEED',
   };
 }
 
 function setStateSnack() {
   return {
-    type: 'SETSTATESNACK',
+    type: 'sell/SETSTATESNACK',
   };
 }
 
 function setStateProduct() {
   return {
-    type: 'SETSATEPRODUCT',
+    type: 'sell/SETSATEPRODUCT',
   };
 }
 
 function setStateBasic() {
   return {
-    type: 'SETSTATEBASIC',
+    type: 'sell/SETSTATEBASIC',
   };
 }
 
 function sellCategorySwitch(state = initialState, action) {
   switch (action.type) {
-    case 'SETSTATEBASIC':
+    case 'sell/SETSTATEBASIC':
       return {
         ...state,
         switchState: 'basic',
       };
-    case 'SETSTATEPEED':
+    case 'sell/SETSTATEPEED':
       return {
         ...state,
         switchState: 'peed',
       };
-    case 'SETSTATESNACK':
+    case 'sell/SETSTATESNACK':
       return {
         ...state,
         switchState: 'snack',
       };
-    case 'SETSATEPRODUCT':
+    case 'sell/SETSATEPRODUCT':
       return {
         ...state,
         switchState: 'product',

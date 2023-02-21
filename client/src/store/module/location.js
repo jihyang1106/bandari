@@ -5,7 +5,7 @@ const initialState = {
 
 function setUserLocation(userLocation, haveLocation) {
   return {
-    type: 'SETUSERLOCATION',
+    type: 'location/SETUSERLOCATION',
     userLocation,
     haveLocation,
   };
@@ -13,7 +13,7 @@ function setUserLocation(userLocation, haveLocation) {
 
 function location(state = initialState, action) {
   switch (action.type) {
-    case 'SETUSERLOCATION':
+    case 'location/SETUSERLOCATION':
       return {
         ...state,
         haveLocation: action.haveLocation,
