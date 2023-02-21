@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './css/SellForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 // slick-carousel css
@@ -12,18 +12,29 @@ import Slider from 'react-slick';
 export default function SellForm() {
   const [imgState, setImgState] = useState([]);
 
-  const location = useLocation();
-  // sellpage location.state 에서 파라미터 취득
-  // const id = location.state.id;
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const userLocation = useSelector((state) => state.location.userLocation);
   const userId = useSelector((state) => state.user.user.isLogin);
+  const [pets, setPets] = useState([]);
 
   const petSelectRef = useRef();
   const categorySelectRef = useRef();
   const formInfoRef = useRef();
   const imgRef = useRef();
+
+  //처음에 불러와야할 pet정보
+  useEffect(() => {
+    axios
+      .post('pet/checkPet', {
+        userID: userId,
+      })
+      .then((res) => {
+        console.log('유저의 펫 db 조회:', res.data);
+        setPets(res.data);
+      });
+  }, []);
 
   // slick-carousel settings
   const settings = {
@@ -49,9 +60,6 @@ export default function SellForm() {
       alert('이미지는 최대 4개 까지 등록 가능');
     }
   };
-
-  // const userId = sessionStorage.getItem('userData');
-  const petId = sessionStorage.getItem('petData');
 
   /**판매 글쓰기 완료 함수 */
   const onCompleteBtn = async () => {
@@ -204,7 +212,7 @@ export default function SellForm() {
           ref={petSelectRef}
           className={`${styles.selcet} ${styles.marginBottom}`}
         >
-          {petData.map((pet, index) => {
+          {pets.map((pet, index) => {
             return (
               <option key={index} value={pet.name}>
                 {pet.name}
@@ -239,20 +247,3 @@ export default function SellForm() {
     </>
   );
 }
-
-// {/* {imgState && (
-//   <img
-//     src={imgState}
-//     alt="미리보기 이미지"
-//     className={`${styles.sellImges} ${styles.marginBottom}`}
-//   />
-// )} */}
-// {/* <label
-//   className={styles.imgLabel}
-//   onClick={() => {
-//     onImgUpload();
-//   }}
-//   htmlFor="inputFile"
-// >
-//   +
-// </label> */}
