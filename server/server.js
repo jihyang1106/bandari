@@ -65,6 +65,30 @@ app.use('/mypage', mypageRouter);
 app.use('/room', roomRouter);
 app.use('/pick', pickRouter);
 
-app.listen(process.env.PORT, () => {
-  console.log(`server port ${process.env.PORT} open`);
+// 소켓을 위한 서버 설정
+const http = require('http').createServer(app);
+const io = require('socket.io')(http, {
+  cors: {
+    orgin: ['http://13.124.185.47:3000', 'http://localhost:3000'],
+    method: ['GET', 'POST'],
+  },
+});
+const moment = require('moment');
+
+io.on('connection', (socket) => {
+  //채팅방 입장
+  console.log('server socket connected');
+
+  // console.log(`소켓 id${socket.id}`);
+  socket.on('new_msg', (data) => {
+    console.log('client says ', data);
+    socket.emit('new_msg', data);
+  });
+});
+
+// app.listen(process.env.PORT, () => {
+//   console.log(`server port ${process.env.PORT} open`);
+// });
+http.listen(process.env.PORT, () => {
+  console.log(`${process.env.PORT} server running`);
 });

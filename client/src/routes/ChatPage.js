@@ -11,6 +11,27 @@ import { useLocation } from 'react-router-dom';
 
 import axios from 'axios';
 
+const chatDatas = [
+  {
+    room: 1,
+    suppliesId: 1,
+    userId: 'a',
+    content: '내용입니다1',
+  },
+  {
+    room: 2,
+    suppliesId: 2,
+    userId: 'b',
+    content: '내용입니다2',
+  },
+  {
+    room: 3,
+    suppliesId: 3,
+    userId: 'c',
+    content: '내용입니다3',
+  },
+];
+
 const ChatPage = () => {
   const [selectChat, setSelectChat] = useState(false);
   const [selectedChat, setSelectedChat] = useState({});
@@ -22,8 +43,8 @@ const ChatPage = () => {
   const [chatRoom, setChatRoom] = useState([]);
 
   // 현재 로그인 한 유저
-  const userId = useSelector((state) => state.user.user.isLogin);
-  console.log('userId', userId);
+  // const userId = useSelector((state) => state.user.user.isLogin);
+  const user = sessionStorage.getItem('userData');
 
   const chatRoomRef = useRef();
   const closeBtnRef = useRef();
@@ -40,16 +61,18 @@ const ChatPage = () => {
 
   // 채팅 페이지 렌더 시 현재 로그인한 유저의 room에 있는 데이터 가져오기
   useEffect(() => {
-    axios.get('/room/getData', { params: { id: userId } }).then((res) => {
+    axios.get('/room/getData', { params: { id: user } }).then((res) => {
       setChatRoom(res.data);
-      // if 내가 만든 채팅방만 있을 때
-      // if 상대방이 만든 채팅방만 있을 떄
-      // if 모든 채팅방이 다 있을 때
     });
   }, []);
 
   const onClickChatData = (chatData) => {
     console.log('채팅클릭', { chatData });
+
+    /**상대방 확인 하는 로직 chatData.other가 상대방 */
+    if (chatData.otherId !== user) chatData.other = chatData.otherId;
+    else chatData.other = chatData.userId;
+
     if (chatRoomRef.current) {
       chatRoomRef.current.classList.remove(`${styles.transparent}`);
     }
@@ -96,7 +119,6 @@ const ChatPage = () => {
                     />
                   );
                 })} */}
-
                 {chatRoom.length > 0 ? (
                   chatRoom.map((chatData, idx) => {
                     return (
@@ -110,7 +132,6 @@ const ChatPage = () => {
                 ) : (
                   <div>chating이 없습니다.</div>
                 )}
-
               </div>
             </div>
             {selectChat ? (

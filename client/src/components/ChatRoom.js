@@ -1,16 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { createElement, useEffect, useRef, useState } from 'react';
 import styles from './css/ChatRoom.module.css';
 import axios from 'axios';
+import { io } from 'socket.io-client';
 
 const ChatRoom = ({ chatData, categoryType, chatRef }) => {
-  const inputRef = useRef();
+  let socket = io.connect('http://localhost:5000');
+
+  // console.log('room으로 넘어온 chatData', chatData);
+  // console.log('상대방', chatData.other);
+
+  const user = sessionStorage.getItem('userData');
 
   /*전송이벤트 */
+  const inputRef = useRef();
   const btnSend = () => {
     const inputText = inputRef.current.value;
     console.log('채팅입력후 전송하는 이벤트');
     console.log(inputText);
+    socket.emit('new_msg', inputText);
   };
+
+  socket.on('new_msg', (data) => {
+    console.log('server says', data);
+  });
 
   /*엔터 이벤트 */
   const enter = (e) => {
@@ -19,8 +31,8 @@ const ChatRoom = ({ chatData, categoryType, chatRef }) => {
     }
   };
 
+  /**판매 완료 버튼 이벤트 */
   const onClickCheckSoldOut = () => {
-    console.log('판매완료버튼누름');
     axios
       .patch('/supplies/updateDeal', {
         id: chatData.suppliesId,
@@ -31,11 +43,10 @@ const ChatRoom = ({ chatData, categoryType, chatRef }) => {
       });
   };
 
+  /** 채팅 종료 버튼 이벤트 : 채팅 삭제 */
   const onClickExit = () => {
     console.log('채팅종료버튼누름');
   };
-
-  console.log('room으로 넘어온 chatData', chatData);
 
   return (
     <div
