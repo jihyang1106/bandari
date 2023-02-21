@@ -21,7 +21,7 @@ const SalesDetail = () => {
   const [pet, setPet] = useState([]);
 
   const userId = useSelector((state) => state.user.user.isLogin);
-  console.log(userId);
+  console.log(datas);
   const { id } = useParams();
 
   // slick-carousel settings
@@ -34,10 +34,10 @@ const SalesDetail = () => {
     slidesToScroll: 1,
   };
   /* img값이 2개 이상일 때 null 값을 제외한 이미지 배열  */
-  let newImgs
-  if(datas.imgs.length > 0 ){
- const imgs = [datas.imgs[0].img1,datas.imgs[0].img2, datas.imgs[0].img3]
-  newImgs = imgs.filter((el)=>el != null);
+  let newImgs;
+  if (datas.imgs.length > 0) {
+    const imgs = [datas.imgs[0].img1, datas.imgs[0].img2, datas.imgs[0].img3];
+    newImgs = imgs.filter((el) => el != null);
   }
 
   // 상세페이지 렌더 시 글에 맞는 펫 정보 가져오기
@@ -92,32 +92,27 @@ const SalesDetail = () => {
                     alt="대표 사진"
                     className={styles.sellImges}
                   />
-            {/* 이미지 2개 이상일 때 이미지 보여주기 */}
-                  {datas.imgs.length > 0 ?
-                  newImgs.map((el)=>(
-                    <img src={`/uploadImg/${el}`} alt="대표 사진" className={styles.sellImges}/>
-                  ))
-                  : null}
+                  {/* 이미지 2개 이상일 때 이미지 보여주기 */}
+                  {datas.imgs.length > 0
+                    ? newImgs.map((el) => (
+                        <img
+                          src={`/uploadImg/${el}`}
+                          alt="대표 사진"
+                          className={styles.sellImges}
+                        />
+                      ))
+                    : null}
                 </Slider>
               </div>
-              <div>
-                {/* <Slider {...settings}>
-                  {imgData.map((images, index) => {
-                    return (
-                      <img
-                        key={index}
-                        src={images}
-                        alt={`${images}-${index}`}
-                        className={`${styles.sellImges}`}
-                      ></img>
-                    );
-                  })}
-                </Slider> */}
-              </div>
+              <div></div>
             </div>
 
             {/* 작성자 / 제목 / 가격 데이터 */}
-            <p className={`${styles.formUserInfo} ${styles.formUserInfo_1}`}>
+            <p
+              className={`${styles.formUserInfo} ${styles.formUserInfo_1} ${
+                styles[`num${datas.imgs.length}`]
+              }`}
+            >
               {datas.userId}
             </p>
             {/* 유저 아이디 대신 닉네임으로 대체 예정 */}

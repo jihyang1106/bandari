@@ -48,7 +48,7 @@ exports.kakaoCode = async (req, res) => {
         }
       });
     });
-    ///req.session.user = userData
+  ///req.session.user = userData
   res.redirect('http://localhost:3000');
 };
 //토큰으로 사용자 정보를 받아오는 함수
@@ -86,9 +86,9 @@ exports.isLogin = (req, res) => {
   }
 };
 
-exports.cleanUp = (req,res) =>{
+exports.cleanUp = (req, res) => {
   userData = {
-    id:false, 
-    nickname:false
-  }
-}
+    id: false,
+    nickname: false,
+  };
+};

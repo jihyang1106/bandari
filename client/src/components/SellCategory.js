@@ -30,11 +30,15 @@ export default function SellCategory(props) {
   const navigate = useNavigate();
   const btnState = useSelector((state) => state.sellCategorySwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
+  const isLogin = useSelector((state) => state.user.user.isLogin);
 
   const sellButton = () => {
     console.log('sellButton 판매 버튼 눌림');
-    navigate('/sellForm', { replace: false });
-    // setIsSale(true);
+    if (isLogin) {
+      navigate('/sellForm', { replace: false });
+    } else {
+      alert('로그인 하셔야 이용이 가능합니다.');
+    }
   };
 
   useEffect(() => {
@@ -56,22 +60,22 @@ export default function SellCategory(props) {
   const clickedBtn = (e) => {
     const target = e.target;
     if (target.value === 'basic') {
-      dispatch(setStateBasic());
+      basicBtnRef.current.classList.add('clicked');
       peedBtnRef.current.classList.remove('clicked');
       snackBtnRef.current.classList.remove('clicked');
       productBtnRef.current.classList.remove('clicked');
     } else if (target.value === 'peed') {
-      dispatch(setSatatePeed());
+      peedBtnRef.current.classList.add('clicked');
       basicBtnRef.current.classList.remove('clicked');
       snackBtnRef.current.classList.remove('clicked');
       productBtnRef.current.classList.remove('clicked');
     } else if (target.value === 'snack') {
-      dispatch(setStateSnack());
+      snackBtnRef.current.classList.add('clicked');
       basicBtnRef.current.classList.remove('clicked');
       peedBtnRef.current.classList.remove('clicked');
       productBtnRef.current.classList.remove('clicked');
     } else if (target.value === 'product') {
-      dispatch(setStateProduct());
+      productBtnRef.current.classList.add('clicked');
       basicBtnRef.current.classList.remove('clicked');
       peedBtnRef.current.classList.remove('clicked');
       snackBtnRef.current.classList.remove('clicked');
@@ -85,7 +89,7 @@ export default function SellCategory(props) {
   };
 
   // db에 검색 값 조회
-  const onSerch = () => {
+  const onSearch = () => {
     console.log('검색값 :', search);
     axios
       .post('supplies/postSearch', {
@@ -161,7 +165,7 @@ export default function SellCategory(props) {
           <button
             className="searchBtn"
             onClick={() => {
-              onSerch();
+              onSearch();
             }}
           >
             검색
