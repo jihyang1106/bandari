@@ -1,7 +1,7 @@
 //글 좋아요 테이블
-const like = (Sequelize, DataTypes) => {
+const pick = (Sequelize, DataTypes) => {
   return Sequelize.define(
-    'like',
+    'pick',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -19,11 +19,11 @@ const like = (Sequelize, DataTypes) => {
       },
     },
     {
-      tablename: 'like',
+      tablename: 'pick',
       freezeTableName: true,
       timestamps: false,
     }
   );
 };
 
-module.exports = like;
+module.exports = pick;

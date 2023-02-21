@@ -127,11 +127,11 @@ export default function SellCategory(props) {
       .then((res) => {
         console.log('판매 카테고리 검색 결과 값 :', res.data);
         setSearchData(res.data);
-        props.setSell([searchData]);
-        console.log('ㅇㅇㄴㅇㄴㅁㅇㄴㅁㅇㅁ', [searchData]);
+        props.setSell(res.data);
+        console.log('판매 카테고리의 값 :', [searchData]);
       });
   };
-  
+
   return (
     <div className="sellCategory">
       {/* 상단 카테고리, 검색 & 판매 버튼 누르면, 판매 글 폼 열림 */}
@@ -151,7 +151,6 @@ export default function SellCategory(props) {
           )}
         </div>
         <div className={`changeBtn ${btnState}`}>
-
           <button
             ref={basicBtnRef}
             className="categoryButton basicBtn"
@@ -192,6 +191,7 @@ export default function SellCategory(props) {
           className="searchInput"
           value={search}
           onChange={onChangeSearch}
+          onKeyPress={onSubmitSearch}
         />
         {/* 서치값 sellpage 컴포넌트로 값을 보내는 중 */}
         <button

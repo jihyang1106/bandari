@@ -25,7 +25,6 @@ exports.postLikePlus = async (req, res) => {
     .update(
       {
         likeCount: req.body.likeCount,
-        deal: true,
       },
       {
         where: { id: req.body.id },
@@ -39,7 +38,6 @@ exports.postLikeminus = async (req, res) => {
     .update(
       {
         likeCount: req.body.likeCount,
-        deal: false,
       },
       {
         where: { id: req.body.id },

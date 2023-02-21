@@ -17,7 +17,7 @@ db.user = require('./user')(sequelize, Sequelize);
 db.pet = require('./pet')(sequelize, Sequelize);
 db.supplies = require('./supplies')(sequelize, Sequelize);
 db.img = require('./img')(sequelize, Sequelize);
-db.like = require('./like')(sequelize, Sequelize);
+db.pick = require('./pick')(sequelize, Sequelize);
 db.room = require('./room')(sequelize, Sequelize);
 db.chat = require('./chat')(sequelize, Sequelize);
 
@@ -49,14 +49,14 @@ db.supplies.belongsTo(db.user, {
   onUpdate: 'cascade',
 });
 
-// user 삭제 => like 삭제
-db.user.hasMany(db.like, {
+// user 삭제 => pick 삭제
+db.user.hasMany(db.pick, {
   foreignKey: 'userId',
   sourceKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade',
 });
-db.like.belongsTo(db.user, {
+db.pick.belongsTo(db.user, {
   foreignKey: 'userId',
   targetKey: 'id',
   onDelete: 'cascade',
@@ -118,14 +118,14 @@ db.img.belongsTo(db.supplies, {
   onUpdate: 'cascade',
 });
 
-// supplies 삭제 => like 삭제
-db.supplies.hasMany(db.like, {
+// supplies 삭제 => pick 삭제
+db.supplies.hasMany(db.pick, {
   foreignKey: 'suppliesId',
   sourceKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade',
 });
-db.like.belongsTo(db.supplies, {
+db.pick.belongsTo(db.supplies, {
   foreignKey: 'suppliesId',
   targetKey: 'id',
   onDelete: 'cascade',

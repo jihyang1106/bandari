@@ -45,33 +45,11 @@
   justify-content: center;
 }
 
-.cardStateContainer {
-  position: absolute;
-  top: 157px;
-  left: 140px;
-  /* background-color: rgba(85, 85, 85, 0.5); */
-  padding: 0 0px;
-}
-
-.cardState {
-  width: 14px;
-  height: 14px;
-  border-radius: 7px;
-  background-color: rgb(255, 0, 93);
-  filter: blur(1.3px);
-  display: inline-block;
-}
-
-.cardStateContainer span {
-  margin-left: 6px;
-  font-weight: 600;
-  color: #c8c8c8f2;
-}
 /* 이미지 thumbnail */
 .card img {
-  width: 100%;
-  height: 65%;
-  object-fit: cover;
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
 }
 
 .cardFooter {
@@ -133,6 +111,7 @@
   position: absolute;
   top: 240px;
   left: 200px;
+  z-index: 101;
 }
 
 .likeButton img{

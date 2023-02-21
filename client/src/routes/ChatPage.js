@@ -96,6 +96,7 @@ const ChatPage = () => {
                     />
                   );
                 })} */}
+
                 {chatRoom.length > 0 ? (
                   chatRoom.map((chatData, idx) => {
                     return (
@@ -109,6 +110,7 @@ const ChatPage = () => {
                 ) : (
                   <div>chating이 없습니다.</div>
                 )}
+
               </div>
             </div>
             {selectChat ? (

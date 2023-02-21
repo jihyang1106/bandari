@@ -9,16 +9,28 @@ import clickedLike from '../assets/ClikedLikeButton.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Card = (list) => {
-  // likeState 눌렸는지 여부 > likeStateImg 이미지 변경
-  const [likeState, setLikeState] = useState(list.list.deal);
+const Card = (list, pickList) => {
+  // 1. likeState => userId가 좋아요 누르면 > { pick }에 넣고 빼도록 한다.
+
+  // {supplies의 pk}와 {user의 pk}가 일치하는 {pick}이 있으면,
+  // 2. likeState 눌렸는지 여부 => pick데이터 조회값에 따라 => likeStateImg 이미지 변경
+  // 3. likeStateImg => pick에 값이 있으면, 찜 상태 / 없으면 noneLike 이미지
+
+  // 4. likeCount => 총 카운트는 pick 데이터 갯수
+  const [likeState, setLikeState] = useState();
   const [deal, setDeal] = useState('');
+
   const [likeStateImg, setLikeStateImg] = useState(noneLike);
   const [likeCount, setLikeCount] = useState(list.list.likeCount);
-  const isLogin = useSelector((state) => state.user.user.isLogin);
 
+  const [pick, setPick] = useState([]);
+  const isLogin = useSelector((state) => state.user.user.isLogin);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setPick(pickList);
+    // console.log(pickList);
+  }, [pickList]);
   useEffect(() => {
     //거래중
     if (list.list.deal) {
@@ -32,46 +44,48 @@ const Card = (list) => {
   //  const userLocation = useSelector((state) => state.location.userLocation);
   // const location =
   //   userLocation.region_2depth_name + ' ' + userLocation.region_3depth_name;
+  // console.log(list.list);
+  // 판매페이지 좋아요 버튼 상태값
 
   const onLikeButton = (e) => {
-    if (isLogin) {
-      if (list.list.deal === false) {
-        //찜 안된 상태
-        alert('찜을 하시겠습니까?');
-        setLikeStateImg(clickedLike);
-        setLikeCount(list.list.likeCount + 1);
-        list.list.deal = true;
+    // if (isLogin) {
+    if (list.list.likeCount === 0) {
+      //찜 안된 상태
+      alert('찜을 하시겠습니까?');
+      setLikeStateImg(clickedLike);
+      setLikeCount(list.list.likeCount + 1);
 
-        axios
-          .post('supplies/postLikePlus', {
-            id: list.list.id,
-            likeCount: likeCount + 1,
-            deal: list.list.deal,
-          })
-          .then((res) => {
-            console.log(res);
-          });
-        return;
-      } else {
+      axios
+        .post('supplies/postLikePlus', {
+          id: list.list.id,
+          likeCount: 1,
+        })
+        .then((res) => {
+          console.log(res);
+        });
+      return;
+    } else {
+      if (list.list.likeCount === 1) {
         // 찜한 상태
         alert('찜을 해제 하시겠습니까?');
         setLikeStateImg(noneLike);
         setLikeCount(list.list.likeCount);
-        list.list.deal = false;
+
         axios
           .post('supplies/postLikeminus', {
             id: list.list.id,
-            likeCount: likeCount - 1,
-            deal: list.list.deal,
+            likeCount: 0,
           })
           .then((res) => {
             console.log(res);
           });
-        return;
       }
-    } else {
-      alert('로그인 하셔야 이용이 가능합니다.');
+
+      return;
     }
+    // } else {
+    //   alert('로그인 하셔야 이용이 가능합니다.');
+    // }
   };
   // 카드 컴포넌트 클릭 함수
   const goToDetail = () => {
@@ -98,10 +112,7 @@ const Card = (list) => {
           loading="lazy"
           alt="카드 이미지"
         />
-        <div className={styles.cardStateContainer}>
-          <div className={styles.cardState}></div>
-          <span>판매 완료</span>
-        </div>
+
         <div className={styles.cardFooter}>
           <h3>{listData.title}</h3>
           <p>{listData.price} 원</p>
