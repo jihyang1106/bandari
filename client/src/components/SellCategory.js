@@ -98,7 +98,7 @@ export default function SellCategory(props) {
       .then((res) => {
         console.log('판매 카테고리 검색 결과 값 :', res.data);
         setSearchData(res.data);
-        props.setSer(searchData);
+        props.setSell([searchData]);
       });
   };
   return (
