@@ -19,6 +19,8 @@ export default function SellForm() {
   const userId = useSelector((state) => state.user.user.isLogin);
   const petsidx = useSelector((state) => state.pets.pets);
   console.log(petsidx);
+  const petData = useSelector((state) => state.pets.pets);
+  console.log(petData);
   const [pets, setPets] = useState([]);
 
   const petSelectRef = useRef();
@@ -84,8 +86,7 @@ export default function SellForm() {
       location: `${userLocation.region_2depth_name} ${userLocation.region_3depth_name}`,
       category: categorySelectRef.current.value,
       deal: true,
-      // petId: petSelectRef.current.value,
-      petId: 153,
+      petId: petSelectRef.current.value,
       userId: userId,
     };
     formData.append('datas', JSON.stringify(datas));
@@ -108,7 +109,7 @@ export default function SellForm() {
   };
 
   // 반려동물 번호 로 정보 요청 > name 값 가져오기
-  let petData = [{ name: '보리' }, { name: '수남' }, { name: '밤이' }];
+  //petData = [{ name: '보리' }, { name: '수남' }, { name: '밤이' }];
 
   /**업로드 버튼 클릭 시 이전 값 초기화  */
   function onImgUpload() {
@@ -214,9 +215,9 @@ export default function SellForm() {
           ref={petSelectRef}
           className={`${styles.selcet} ${styles.marginBottom}`}
         >
-          {pets.map((pet, index) => {
+          {petData.map((pet, index) => {
             return (
-              <option key={index} value={pet.name}>
+              <option key={index} value={pet.id}>
                 {pet.name}
               </option>
             );

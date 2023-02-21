@@ -110,6 +110,12 @@ export default function SellCategory(props) {
     e.preventDefault();
     setSearch(e.target.value);
   };
+  // 앤터 버튼
+  const onSubmitSearch = (e) => {
+    if (e.key === 'Enter') {
+      onSearch();
+    }
+  };
 
   // db에 검색 값 조회
   const onSearch = () => {
@@ -122,11 +128,14 @@ export default function SellCategory(props) {
         console.log('판매 카테고리 검색 결과 값 :', res.data);
         setSearchData(res.data);
         props.setSell([searchData]);
+        console.log('ㅇㅇㄴㅇㄴㅁㅇㄴㅁㅇㅁ', [searchData]);
       });
   };
+  
   return (
     <div className="sellCategory">
       {/* 상단 카테고리, 검색 & 판매 버튼 누르면, 판매 글 폼 열림 */}
+
       <div className="categoryButtonContainer">
         <div className={`adressPickButton ${btnState}`}>
           <img src={locationIcon} alt="주소지 버튼 아이콘" />
@@ -142,6 +151,7 @@ export default function SellCategory(props) {
           )}
         </div>
         <div className={`changeBtn ${btnState}`}>
+
           <button
             ref={basicBtnRef}
             className="categoryButton basicBtn"
