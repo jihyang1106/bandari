@@ -17,6 +17,8 @@ export default function SellForm() {
 
   const userLocation = useSelector((state) => state.location.userLocation);
   const userId = useSelector((state) => state.user.user.isLogin);
+  const petsidx = useSelector((state) => state.pets.pets);
+  console.log(petsidx);
   const [pets, setPets] = useState([]);
 
   const petSelectRef = useRef();
@@ -227,7 +229,7 @@ export default function SellForm() {
           required
         ></textarea>
         {/* 취소 완료 버튼 */}
-        <div className={`${styles.submitButton} ${styles.marginBottom}`}>
+        <div className={`${styles.submitButton}`}>
           <button
             onClick={() => {
               onResetPage();
