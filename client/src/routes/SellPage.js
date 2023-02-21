@@ -55,7 +55,9 @@ const SellPage = () => {
     }
   }, [sellState]);
 
+
   // console.log('판매페이지 sell 값', sell);
+
 
   /*판매글 가져오는 함수* */
   const getData = async () => {

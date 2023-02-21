@@ -96,15 +96,21 @@ const ChatPage = () => {
                     />
                   );
                 })} */}
-                {chatRoom.map((chatData, idx) => {
-                  return (
-                    <ChatList
-                      key={idx}
-                      chatData={chatData}
-                      onClickChatData={onClickChatData}
-                    />
-                  );
-                })}
+
+                {chatRoom.length > 0 ? (
+                  chatRoom.map((chatData, idx) => {
+                    return (
+                      <ChatList
+                        key={idx}
+                        chatData={chatData}
+                        onClickChatData={onClickChatData}
+                      />
+                    );
+                  })
+                ) : (
+                  <div>chating이 없습니다.</div>
+                )}
+
               </div>
             </div>
             {selectChat ? (

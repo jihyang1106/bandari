@@ -30,6 +30,7 @@
     height: 140px;
     background-color: #ffe7c7;
     border-radius: 10px;
+    object-fit: cover;
   }
   
   .petInfo {
