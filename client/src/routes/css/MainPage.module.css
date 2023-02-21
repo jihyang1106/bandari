@@ -41,7 +41,7 @@
 }
 
 .mainPage section:first-child .mainImg img {
-  height: calc(75vh + 120px);
+  width: 1300px;
 }
 
 /*두번째 메인페이지*/
@@ -120,6 +120,11 @@
 
 /*1800px이하*/
 @media screen and (max-width: 1800px) {
+  /*첫번째 메인페이지*/
+  .mainPage section:first-child .mainImg img {
+    width: 1000px;
+  }
+  
   /*두번째 메인페이지*/
   .mainPage section:nth-child(2) .sellImg {
     width: 45vw;
@@ -136,7 +141,6 @@
 @media screen and (max-width: 1500px) {
   /*첫 메인페이지*/
   .mainPage section:first-child .mainImg img {
-    height: calc(50vh + 120px);
     z-index: -1;
   }
 }
@@ -165,5 +169,5 @@
 }
 
 /*900px이하*/
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 500px) {
 }

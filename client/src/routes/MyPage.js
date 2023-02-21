@@ -55,6 +55,7 @@ let data = [
   },
 ];
 
+/*
 let pets = [
   {
     name: '보리',
@@ -93,10 +94,11 @@ let pets = [
     info: '보리입니다~',
   },
 ];
+*/
 
 const MyPage = (props) => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
-
+  const pets = useSelector((state) => state.pets.pets);
   const [displayModal, setDisplayModal] = useState(false);
   const navigate = useNavigate();
 
@@ -133,7 +135,12 @@ const MyPage = (props) => {
             <div className={`${styles.myPetsInfo} ${styles[`${btnState}`]}`}>
               <p className={styles.titleIndex}>내 새꾸 ♥</p>
               <div>
-                <CustomPetSlider petdatas={pets} />
+                {pets.length > 0 ? (
+                  <CustomPetSlider petdatas={pets} />
+                ) : (
+                  '등록된 펫이 없습니다.'
+                )}
+
                 <button
                   onClick={petAddUpload}
                   className={`${styles[`${btnState}`]}`}

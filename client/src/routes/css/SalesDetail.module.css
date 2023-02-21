@@ -12,7 +12,7 @@
 
 .sellFormContent {
     margin: 0 auto;
-    margin-top: 10%;
+    margin-top: calc(7vh + 72px + 36px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,11 +47,18 @@
     margin-bottom: 20px;
 }
 
-.formUserInfo_1 {
+.formUserInfo_1 .num0{
     font-weight: 800;
     margin-right: 10px;
     display: inline;
+}
+
+.formUserInfo_1.num1{
     margin-top: 70px;
+}
+
+.formUserInfo_1.num0{
+    margin-top: 10px;
 }
 
 .formSubTitle {
@@ -74,6 +81,7 @@
     font-size: 14px;
     width: 100px;
     height: 40px;
+    margin-bottom: 100px;
 }
 .submitButton button:hover {
     transform: scale(1.2);

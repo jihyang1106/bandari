@@ -37,21 +37,7 @@ const Category = () => {
           </NavLink>
         </div>
         <div className={styles.link}>
-          {/* {!isLoggedIn ? (
-            <>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive
-                    ? `${styles.active} ${styles[`${categoryType}`]}`
-                    : ''
-                }
-              >
-                <span>채팅</span>
-                {alert('로그인 하셔야 이용이 가능합니다.')}
-              </NavLink>
-            </>
-          ) : (
+          {isLoggedIn ? (
             <NavLink
               to="/chatPage"
               className={({ isActive }) =>
@@ -60,15 +46,16 @@ const Category = () => {
             >
               <span>채팅</span>
             </NavLink>
-          )} */}
-          <NavLink
-            to="/chatPage"
-            className={({ isActive }) =>
-              isActive ? `${styles.active} ${styles[`${categoryType}`]}` : ''
-            }
-          >
-            <span>채팅</span>
-          </NavLink>
+          ) : (
+            <NavLink
+              to="/"
+              onClick={() => {
+                alert('로그인 하셔야 이용이 가능합니다.');
+              }}
+            >
+              <span>채팅</span>
+            </NavLink>
+          )}
         </div>
         <div className={styles.link}>
           <NavLink
@@ -81,14 +68,25 @@ const Category = () => {
           </NavLink>
         </div>
         <div className={styles.link}>
-          <NavLink
-            to="/myPage"
-            className={({ isActive }) =>
-              isActive ? `${styles.active} ${styles[`${categoryType}`]}` : ''
-            }
-          >
-            <span>마이페이지</span>
-          </NavLink>
+          {isLoggedIn ? (
+            <NavLink
+              to="/myPage"
+              className={({ isActive }) =>
+                isActive ? `${styles.active} ${styles[`${categoryType}`]}` : ''
+              }
+            >
+              <span>마이페이지</span>
+            </NavLink>
+          ) : (
+            <NavLink
+              to="/"
+              onClick={() => {
+                alert('로그인 하셔야 이용이 가능합니다.');
+              }}
+            >
+              <span>마이페이지</span>
+            </NavLink>
+          )}
         </div>
       </div>
     </div>
