@@ -2,11 +2,11 @@ const initialState = {
   pets: [],
 };
 
-function setPets(petId) {
-  console.log('pet', petId);
+function setPets(pets) {
+  console.log(pets);
   return {
     type: 'pets/SETPETS',
-    petId,
+    pets,
   };
 }
 
@@ -15,20 +15,8 @@ function pets(state = initialState, action) {
     case 'pets/SETPETS':
       return {
         ...state,
-        pets: state.pets.concat(action.petId),
+        pets: action.pets,
       };
-    // return {
-    //   ...state,
-    //   pets : state.pets.concat({
-    //   action.data
-    //   })
-    //   }
-    // return {
-    //   ...state,
-    //   pets: {
-    //     data: action.pet,
-    //   },
-    // };
     default:
       return state;
   }

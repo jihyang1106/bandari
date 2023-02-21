@@ -33,13 +33,18 @@ export default function SellCategory(props) {
   const sellState = useSelector(
     (state) => state.sellCategorySwitch.switchState
   );
+  const pets = useSelector((state) => state.pets.pets);
+  console.log(pets);
   const userLocation = useSelector((state) => state.location.userLocation);
   const isLogin = useSelector((state) => state.user.user.isLogin);
 
   const sellButton = () => {
-    console.log('sellButton 판매 버튼 눌림');
     if (isLogin) {
-      navigate('/sellForm', { replace: false });
+      if (pets.length > 0) {
+        navigate('/sellForm', { replace: false });
+      } else {
+        alert('펫을 등록하셔야 판매할 수 있습니다');
+      }
     } else {
       alert('로그인 하셔야 이용이 가능합니다.');
     }
