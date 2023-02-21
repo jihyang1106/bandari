@@ -1,7 +1,6 @@
 const initialState = {
   user: {
     isLogin: false,
-    userName: false,
   },
 };
 
@@ -26,7 +25,6 @@ function user(state = initialState, action) {
         ...state,
         user: {
           isLogin: action.isLogin,
-          userName: action.userName
         },
       };
     // case 'LOGOUT':

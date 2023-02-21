@@ -1,5 +1,6 @@
 const { user } = require('../model');
 const axios = require('axios');
+const { pet } = require('../model');
 require('dotenv').config();
 
 const CLIENT_ID = process.env.KAKAO_CLIENTID;
@@ -79,10 +80,10 @@ exports.kakaoLogout = (req, res) => {
 exports.isLogin = (req, res) => {
   if (userData !== false) {
     console.log('로그인 유저데이터', userData);
-    res.send({ isLogin: userData.id, userName: userData.nickname });
+    res.send({ isLogin: userData.id });
   } else {
     console.log('로그아웃 유저데이터', userData);
-    res.send({ isLogin: false, userName: false });
+    res.send({ isLogin: false });
   }
 };
 
@@ -92,3 +93,19 @@ exports.cleanUp = (req, res) => {
     nickname: false,
   };
 };
+
+exports.getPetId = async (req, res) => {
+  console.log('쿼리', req.query);
+  if (userData.id == false) {
+    res.send(false);
+  } else {
+    const result = await pet.findAll({
+      where: { userId: userData.id },
+      attributes: ['id'],
+      raw: true,
+    });
+    console.log('결과', result);
+    res.send(result);
+  }
+};
+
