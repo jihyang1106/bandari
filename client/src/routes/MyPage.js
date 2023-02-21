@@ -23,6 +23,7 @@ let data = [
     saleStatus: false,
     likeStatus: false,
     cardImg: '/Test.png',
+    deal: true,
   },
   {
     id: 2,
@@ -33,6 +34,7 @@ let data = [
     saleStatus: false,
     likeStatus: false,
     cardImg: '/Test.png',
+    deal: false,
   },
   {
     id: 3,
@@ -43,6 +45,7 @@ let data = [
     saleStatus: true,
     likeStatus: true,
     cardImg: '/Test.png',
+    deal: false,
   },
   {
     id: 4,
@@ -53,6 +56,7 @@ let data = [
     saleStatus: true,
     likeStatus: true,
     cardImg: '/Test.png',
+    deal: true,
   },
 ];
 
@@ -147,22 +151,23 @@ const MyPage = (props) => {
         <section>
           <Category />
           <div className={styles.MyPageContainer}>
-            {/* 제목, 가격 데이터 */}
+            {/* 유저, 펫 정보들 */}
             <section>
+              {/* 유저정보 */}
               <div>
                 <h1>마이 페이지</h1>
                 <h2>{isLoggedIn}님 안녕하세요</h2>
                 <p onClick={onClickEditUserInfo}>회원 정보 수정</p>
               </div>
 
-              {/* 등록된 반려동물 정보*/}
+              {/* 펫정보*/}
               <div className={`${styles.myPetsInfo} ${styles[`${btnState}`]}`}>
                 <p className={styles.titleIndex}>내 새꾸 ♥</p>
                 <div>
                   {pets.length > 0 ? (
-                    <CustomPetSlider petdatas={pets} />
+                    <CustomPetSlider petdatas={petDatas} />
                   ) : (
-                    '등록된 펫이 없습니다.'
+                    <p>등록된 펫이 없습니다</p>
                   )}
                   <button
                     onClick={petAddUpload}

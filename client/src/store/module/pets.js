@@ -2,19 +2,21 @@ const initialState = {
   pets: [],
 };
 
-function setPets(pet) {
-  console.log('pet', pet);
+function setPets(petId) {
+  console.log('pet', petId);
   return {
     type: 'pets/SETPETS',
-    pet,
+    petId,
   };
 }
 
 function pets(state = initialState, action) {
   switch (('pet 액션 타입 :', action.type)) {
     case 'pets/SETPETS':
-    // const indexpets = state.pets.push(action.pet);
-    // return { ...state, pets: indexpets };
+      return {
+        ...state,
+        pets: state.pets.concat(action.petId),
+      };
     // return {
     //   ...state,
     //   pets : state.pets.concat({

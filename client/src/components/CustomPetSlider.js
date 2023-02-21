@@ -114,9 +114,11 @@ const CustomSlider = ({ petdatas }) => {
   console.log(petdatas);
   return (
     <StyledSlider {...settings} className={styles.slider}>
-      {petdatas.map((data) => (
-        <PetCard key={data.id} pet={data} />
-      ))}
+      {petdatas !== undefined ? (
+        petdatas.map((data) => <PetCard pet={data} />)
+      ) : (
+        <div>...</div>
+      )}
     </StyledSlider>
   );
 };

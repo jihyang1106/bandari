@@ -43,6 +43,7 @@ function App() {
             const newPetId = petId[i].id;
             /*펫 데아터 리덕스 저장을 위한 처리*/
             console.log(newPetId);
+            dispatch(setPets(newPetId));
             /*newPetID로 데이터가 여러개여도 redux에 들어가게 for문안에 처리하시면 될 것같습니다. */
           }
         });
