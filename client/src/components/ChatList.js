@@ -1,6 +1,5 @@
 import React from 'react';
 
-import TestImg from '../assets/TestImg1.jpg';
 import styles from './css/ChatList.module.css';
 
 const ChatList = ({ chatData, onClickChatData }) => {
@@ -12,8 +11,9 @@ const ChatList = ({ chatData, onClickChatData }) => {
       className={styles.chatList}
     >
       <div>
-        <h1>{chatData['supply.title']}</h1>
-        <span></span>
+        <h1>{chatData['supply.user.nickname']}</h1>
+        <h1>{chatData['user.nickname']}</h1>
+        <span>{chatData['supply.title']}</span>
       </div>
       <img src={`/uploadImg/${chatData['supply.cover']}`} alt="" />
     </div>

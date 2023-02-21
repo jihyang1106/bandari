@@ -11,27 +11,6 @@ import { useLocation } from 'react-router-dom';
 
 import axios from 'axios';
 
-const chatDatas = [
-  {
-    room: 1,
-    suppliesId: 1,
-    userId: 'a',
-    content: '내용입니다1',
-  },
-  {
-    room: 2,
-    suppliesId: 2,
-    userId: 'b',
-    content: '내용입니다2',
-  },
-  {
-    room: 3,
-    suppliesId: 3,
-    userId: 'c',
-    content: '내용입니다3',
-  },
-];
-
 const ChatPage = () => {
   const [selectChat, setSelectChat] = useState(false);
   const [selectedChat, setSelectedChat] = useState({});
@@ -49,15 +28,6 @@ const ChatPage = () => {
   const chatRoomRef = useRef();
   const closeBtnRef = useRef();
 
-  // useEffect(() => {
-  //   getChats();
-  // }, []);
-
-  /** SalesDetail에서 넘어온 데이터 값 */
-  const location = useLocation();
-  const result = location.state;
-  console.log('salesDatail에서 넘어온 데이터', result);
-
   useEffect(() => {
     if (swtichType === 'basic') {
       setCategoryType('basic');
@@ -67,11 +37,6 @@ const ChatPage = () => {
       setCategoryType('cat');
     }
   }, [swtichType]);
-
-  /**채팅정보가져오기 */
-  // const getChats = () => {
-  //   console.log(`채팅정보가져오기, user : ${userId}`);
-  // };
 
   // 채팅 페이지 렌더 시 현재 로그인한 유저의 room에 있는 데이터 가져오기
   useEffect(() => {
@@ -83,7 +48,6 @@ const ChatPage = () => {
     });
   }, []);
 
-  console.log(chatRoom);
   const onClickChatData = (chatData) => {
     console.log('채팅클릭');
     if (chatRoomRef.current) {
@@ -96,7 +60,7 @@ const ChatPage = () => {
   };
 
   const onClickClose = () => {
-    console.log('눌림');
+    console.log('채팅방 close');
     chatRoomRef.current.classList.add(`${styles.transparent}`);
     closeBtnRef.current.classList.add(`${styles.transparent}`);
     setSelected(false);

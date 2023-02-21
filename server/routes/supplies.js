@@ -77,4 +77,7 @@ router.post('/postLikeminus', supplilesController.postLikeminus);
 // 검색 값
 router.post('/postSearch', supplilesController.postSearch);
 
+// 판매완료 수정(품절)
+router.patch('/updateDeal', supplilesController.patchUpdateDeal);
+
 module.exports = router;
