@@ -51,7 +51,7 @@ const SellPage = () => {
     }
   }, [sellState]);
 
-  console.log('dddddd', btnState);
+  //console.log('dddddd', btnState);
 
   /*판매글 가져오는 함수* */
   const getData = () => {

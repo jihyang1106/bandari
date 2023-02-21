@@ -101,11 +101,10 @@ exports.getPetId = async (req, res) => {
   } else {
     const result = await pet.findAll({
       where: { userId: userData.id },
-      attributes: ['id'],
+      attributes: ['id', 'name'],
       raw: true,
     });
     console.log('결과', result);
     res.send(result);
   }
 };
-
