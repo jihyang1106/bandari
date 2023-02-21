@@ -34,7 +34,7 @@ export default function SellCategory(props) {
     (state) => state.sellCategorySwitch.switchState
   );
   const pets = useSelector((state) => state.pets.pets);
-  console.log(pets);
+  // console.log(pets);
   const userLocation = useSelector((state) => state.location.userLocation);
   const isLogin = useSelector((state) => state.user.user.isLogin);
 
