@@ -87,7 +87,7 @@ const ChatPage = () => {
             >
               <h1>채팅목록</h1>
               <div>
-                {chatDatas.map((chatData, index) => {
+                {/* {chatDatas.map((chatData, index) => {
                   return (
                     <ChatList
                       key={index}
@@ -95,16 +95,20 @@ const ChatPage = () => {
                       onClickChatData={onClickChatData}
                     />
                   );
-                })}
-                {chatRoom.map((chatData, idx) => {
-                  return (
-                    <ChatList
-                      key={idx}
-                      chatData={chatData}
-                      onClickChatData={onClickChatData}
-                    />
-                  );
-                })}
+                })} */}
+                {chatRoom.length > 0 ? (
+                  chatRoom.map((chatData, idx) => {
+                    return (
+                      <ChatList
+                        key={idx}
+                        chatData={chatData}
+                        onClickChatData={onClickChatData}
+                      />
+                    );
+                  })
+                ) : (
+                  <div>chating이 없습니다.</div>
+                )}
               </div>
             </div>
             {selectChat ? (

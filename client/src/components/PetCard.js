@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import styles from './css/PetCard.module.css';
 
 const PetCard = (pet) => {
+  console.log(pet);
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ const PetCard = (pet) => {
         styles[`${btnState}`]
       }`}
     >
-      <img src={pet.pet.petImg} className={styles.petImg} alt="" />
+      <img src={`/petImg/${pet.pet.petImg}`} className={styles.petImg} alt="" />
       <div className={styles.petInfo}>
         <p>{pet.pet.name}</p>
         <p>
