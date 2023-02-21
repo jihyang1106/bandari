@@ -28,50 +28,72 @@ export default function SellCategory(props) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const btnState = useSelector((state) => state.sellCategorySwitch.switchState);
+  const [btnState, setBtnState] = useState('');
+  const idxBtnState = useSelector((state) => state.typeSwitch.switchState);
+  const sellState = useSelector(
+    (state) => state.sellCategorySwitch.switchState
+  );
   const userLocation = useSelector((state) => state.location.userLocation);
+  const isLogin = useSelector((state) => state.user.user.isLogin);
 
   const sellButton = () => {
     console.log('sellButton 판매 버튼 눌림');
-    navigate('/sellForm', { replace: false });
-    // setIsSale(true);
+    if (isLogin) {
+      navigate('/sellForm', { replace: false });
+    } else {
+      alert('로그인 하셔야 이용이 가능합니다.');
+    }
   };
 
   useEffect(() => {
-    if (btnState === 'basic') {
+    if (idxBtnState === 'basic') {
+      setBtnState('basic');
+    } else if (idxBtnState === 'puppy') {
+      setBtnState('puppy');
+    } else {
+      setBtnState('cat');
+    }
+  }, [idxBtnState]);
+
+  useEffect(() => {
+    if (sellState === 'basic') {
       setSwitchType('전체');
       basicBtnRef.current.classList.add('clicked');
-    } else if (btnState === 'peed') {
+    } else if (sellState === 'peed') {
       setSwitchType('사료');
       peedBtnRef.current.classList.add('clicked');
-    } else if (btnState === 'snack') {
+    } else if (sellState === 'snack') {
       setSwitchType('간식');
       snackBtnRef.current.classList.add('clicked');
     } else {
       setSwitchType('용품');
       productBtnRef.current.classList.add('clicked');
     }
-  }, [btnState]);
+  }, [sellState]);
 
   const clickedBtn = (e) => {
     const target = e.target;
     if (target.value === 'basic') {
       dispatch(setStateBasic());
+      basicBtnRef.current.classList.add('clicked');
       peedBtnRef.current.classList.remove('clicked');
       snackBtnRef.current.classList.remove('clicked');
       productBtnRef.current.classList.remove('clicked');
     } else if (target.value === 'peed') {
       dispatch(setSatatePeed());
+      peedBtnRef.current.classList.add('clicked');
       basicBtnRef.current.classList.remove('clicked');
       snackBtnRef.current.classList.remove('clicked');
       productBtnRef.current.classList.remove('clicked');
     } else if (target.value === 'snack') {
       dispatch(setStateSnack());
+      snackBtnRef.current.classList.add('clicked');
       basicBtnRef.current.classList.remove('clicked');
       peedBtnRef.current.classList.remove('clicked');
       productBtnRef.current.classList.remove('clicked');
     } else if (target.value === 'product') {
       dispatch(setStateProduct());
+      productBtnRef.current.classList.add('clicked');
       basicBtnRef.current.classList.remove('clicked');
       peedBtnRef.current.classList.remove('clicked');
       snackBtnRef.current.classList.remove('clicked');
@@ -85,7 +107,7 @@ export default function SellCategory(props) {
   };
 
   // db에 검색 값 조회
-  const onSerch = () => {
+  const onSearch = () => {
     console.log('검색값 :', search);
     axios
       .post('supplies/postSearch', {
@@ -94,89 +116,87 @@ export default function SellCategory(props) {
       .then((res) => {
         console.log('판매 카테고리 검색 결과 값 :', res.data);
         setSearchData(res.data);
-        props.setSer(searchData);
+        props.setSell([searchData]);
       });
   };
   return (
-    <>
+    <div className="sellCategory">
       {/* 상단 카테고리, 검색 & 판매 버튼 누르면, 판매 글 폼 열림 */}
-      <div>
-        <span className="categoryButtonContainer">
-          <div className="adressPickButton">
-            <img src={locationIcon} alt="주소지 버튼 아이콘" />
-            {userLocation ? (
-              <>
-                {' '}
-                {userLocation.region_2depth_name +
-                  ' ' +
-                  userLocation.region_3depth_name}
-              </>
-            ) : (
-              <>전체</>
-            )}
-          </div>
-          <span className="changeBtn">
-            <button
-              ref={basicBtnRef}
-              className="categoryButton basicBtn"
-              value="basic"
-              onClick={clickedBtn}
-            >
-              전체
-            </button>
-            <button
-              ref={peedBtnRef}
-              className="categoryButton peedBtn"
-              value="peed"
-              onClick={clickedBtn}
-            >
-              사료
-            </button>
-            <button
-              ref={snackBtnRef}
-              className="categoryButton snackBtn"
-              value="snack"
-              onClick={clickedBtn}
-            >
-              간식
-            </button>
-            <button
-              ref={productBtnRef}
-              className="categoryButton productBtn"
-              value="product"
-              onClick={clickedBtn}
-            >
-              용품
-            </button>
-          </span>
-        </span>
-        <span className="searchNav">
-          <input
-            type="text"
-            className="searchInput"
-            value={search}
-            onChange={onChangeSearch}
-          />
-          {/* 서치값 sellpage 컴포넌트로 값을 보내는 중 */}
+      <div className="categoryButtonContainer">
+        <div className={`adressPickButton ${btnState}`}>
+          <img src={locationIcon} alt="주소지 버튼 아이콘" />
+          {userLocation ? (
+            <>
+              {' '}
+              {userLocation.region_2depth_name +
+                ' ' +
+                userLocation.region_3depth_name}
+            </>
+          ) : (
+            <>전체</>
+          )}
+        </div>
+        <div className={`changeBtn ${btnState}`}>
           <button
-            className="searchBtn"
-            onClick={() => {
-              onSerch();
-            }}
+            ref={basicBtnRef}
+            className="categoryButton basicBtn"
+            value="basic"
+            onClick={clickedBtn}
           >
-            검색
+            전체
           </button>
-
           <button
-            className="saleButton"
-            onClick={() => {
-              sellButton();
-            }}
+            ref={peedBtnRef}
+            className="categoryButton peedBtn"
+            value="peed"
+            onClick={clickedBtn}
           >
-            판매하기
+            사료
           </button>
-        </span>
+          <button
+            ref={snackBtnRef}
+            className="categoryButton snackBtn"
+            value="snack"
+            onClick={clickedBtn}
+          >
+            간식
+          </button>
+          <button
+            ref={productBtnRef}
+            className="categoryButton productBtn"
+            value="product"
+            onClick={clickedBtn}
+          >
+            용품
+          </button>
+        </div>
       </div>
-    </>
+      <div className="searchNav">
+        <input
+          type="text"
+          className="searchInput"
+          value={search}
+          onChange={onChangeSearch}
+        />
+        {/* 서치값 sellpage 컴포넌트로 값을 보내는 중 */}
+        <button
+          className={`searchBtn ${btnState}`}
+          onClick={() => {
+            onSearch();
+          }}
+        >
+          검색
+        </button>
+
+        <button
+          className={`saleButton ${btnState}`}
+          onClick={() => {
+            sellButton();
+          }}
+        >
+          판매하기
+        </button>
+      </div>
+    </div>
   );
 }

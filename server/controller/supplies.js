@@ -6,16 +6,16 @@ const { Op } = require('sequelize');
 exports.getData = async (req, res) => {
   const result = await supplies.findAll({
     include: [
-       {
-         model: img,
-         required:false
-       }
-    ]
+      {
+        model: img,
+        required: false,
+      },
+    ],
     //  where: {'$img.img1$': { [Op.ne]: null }},
-});
+  });
   // const result = await supplies.findAll();
   // const resultImg = await img.findAll();
-  console.log(result)
+  console.log(result);
   res.send(result);
 };
 
@@ -73,4 +73,15 @@ exports.postSearch = async (req, res) => {
       console.log('디비 조회', result);
       res.json(result);
     });
+};
+
+// 판매 완료 확인
+exports.patchUpdateDeal = async (req, res) => {
+  console.log(req.body.id);
+  const result = await supplies.update(
+    { deal: false },
+    { where: { id: req.body.id } }
+  );
+  console.log('result', result);
+  res.send(result);
 };

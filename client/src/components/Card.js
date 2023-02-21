@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import styles from './css/Card.module.css';
@@ -12,49 +12,65 @@ import { useNavigate } from 'react-router-dom';
 const Card = (list) => {
   // likeState 눌렸는지 여부 > likeStateImg 이미지 변경
   const [likeState, setLikeState] = useState(list.list.deal);
+  const [deal, setDeal] = useState('');
   const [likeStateImg, setLikeStateImg] = useState(noneLike);
   const [likeCount, setLikeCount] = useState(list.list.likeCount);
+  const isLogin = useSelector((state) => state.user.user.isLogin);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    //거래중
+    if (list.list.deal) {
+      setDeal('selling');
+    } else {
+      //거래완료
+      setDeal('soldout');
+    }
+  }, [list.list.deal]);
 
   //  const userLocation = useSelector((state) => state.location.userLocation);
   // const location =
   //   userLocation.region_2depth_name + ' ' + userLocation.region_3depth_name;
 
-  const onLikeButton = () => {
-    if (list.list.deal === false) {
-      //찜 안된 상태
-      alert('찜을 하시겠습니까?');
-      setLikeStateImg(clickedLike);
-      setLikeCount(list.list.likeCount + 1);
-      list.list.deal = true;
+  const onLikeButton = (e) => {
+    if (isLogin) {
+      if (list.list.deal === false) {
+        //찜 안된 상태
+        alert('찜을 하시겠습니까?');
+        setLikeStateImg(clickedLike);
+        setLikeCount(list.list.likeCount + 1);
+        list.list.deal = true;
 
-      axios
-        .post('supplies/postLikePlus', {
-          id: list.list.id,
-          likeCount: likeCount + 1,
-          deal: list.list.deal,
-        })
-        .then((res) => {
-          console.log(res);
-        });
-      return;
+        axios
+          .post('supplies/postLikePlus', {
+            id: list.list.id,
+            likeCount: likeCount + 1,
+            deal: list.list.deal,
+          })
+          .then((res) => {
+            console.log(res);
+          });
+        return;
+      } else {
+        // 찜한 상태
+        alert('찜을 해제 하시겠습니까?');
+        setLikeStateImg(noneLike);
+        setLikeCount(list.list.likeCount);
+        list.list.deal = false;
+        axios
+          .post('supplies/postLikeminus', {
+            id: list.list.id,
+            likeCount: likeCount - 1,
+            deal: list.list.deal,
+          })
+          .then((res) => {
+            console.log(res);
+          });
+        return;
+      }
     } else {
-      // 찜한 상태
-      alert('찜을 해제 하시겠습니까?');
-      setLikeStateImg(noneLike);
-      setLikeCount(list.list.likeCount);
-      list.list.deal = false;
-      axios
-        .post('supplies/postLikeminus', {
-          id: list.list.id,
-          likeCount: likeCount - 1,
-          deal: list.list.deal,
-        })
-        .then((res) => {
-          console.log(res);
-        });
-      return;
+      alert('로그인 하셔야 이용이 가능합니다.');
     }
   };
   // 카드 컴포넌트 클릭 함수
@@ -70,9 +86,12 @@ const Card = (list) => {
       <div
         className={styles.card}
         onClick={() => {
-          goToDetail(this);
+          goToDetail();
         }}
       >
+        <div className={`${styles[`${deal}`]}`}>
+          {list.list.deal ? '' : 'Soldout'}
+        </div>
         <img
           src={`/uploadImg/${listData.cover}`}
           aria-label="cardImg"
@@ -102,11 +121,12 @@ const Card = (list) => {
           </p>
         </div>
         <div className={styles.likeButton}>
-          <div className={styles.likeCount}>{likeCount}</div>
+          <span className={styles.likeCount}>{likeCount}</span>
           <img
             src={likeStateImg}
             alt="찜"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               onLikeButton(setLikeState(!likeState));
             }}
           />

@@ -7,8 +7,11 @@
 }
 
 .AvailSaleContainer {
-  width: 100%;
+  width:70vw;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .AvailSaleContainer button,
@@ -18,13 +21,8 @@ input {
 
 .cardContainer {
   display: flex;
-  flex-direction: row;
-  align-items: center;
   flex-wrap: wrap;
-  align-content: center;
   margin-top: 20px;
-  
-  
 }
 
 .unstyledButton {

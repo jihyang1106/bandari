@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './css/ChatRoom.module.css';
-
-import TestImg from '../assets/TestImg1.jpg';
+import axios from 'axios';
 
 const ChatRoom = ({ chatData, categoryType, chatRef }) => {
   const inputRef = useRef();
@@ -22,11 +21,21 @@ const ChatRoom = ({ chatData, categoryType, chatRef }) => {
 
   const onClickCheckSoldOut = () => {
     console.log('판매완료버튼누름');
+    axios
+      .patch('/supplies/updateDeal', {
+        id: chatData.suppliesId,
+      })
+      .then((res) => {
+        if (res.data[0] === 1) alert('판매완료 되었습니다!');
+        else alert('이미 판매완료된 상품입니다.');
+      });
   };
 
   const onClickExit = () => {
     console.log('채팅종료버튼누름');
   };
+
+  console.log('room으로 넘어온 chatData', chatData);
 
   return (
     <div
@@ -36,9 +45,9 @@ const ChatRoom = ({ chatData, categoryType, chatRef }) => {
       {/**상품정보창 */}
       <div className={styles.item}>
         <div>
-          <img src={TestImg} alt="" />
+          <img src={`/uploadImg/${chatData['supply.cover']}`} alt="" />
           <div>
-            <h1>상품제목</h1>
+            <h1>{chatData['supply.title']}</h1>
             <span>{chatData.content}</span>
           </div>
         </div>

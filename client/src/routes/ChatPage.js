@@ -11,27 +11,6 @@ import { useLocation } from 'react-router-dom';
 
 import axios from 'axios';
 
-const chatDatas = [
-  {
-    room: 1,
-    suppliesId: 1,
-    userId: 'a',
-    content: '내용입니다1',
-  },
-  {
-    room: 2,
-    suppliesId: 2,
-    userId: 'b',
-    content: '내용입니다2',
-  },
-  {
-    room: 3,
-    suppliesId: 3,
-    userId: 'c',
-    content: '내용입니다3',
-  },
-];
-
 const ChatPage = () => {
   const [selectChat, setSelectChat] = useState(false);
   const [selectedChat, setSelectedChat] = useState({});
@@ -39,11 +18,8 @@ const ChatPage = () => {
   const [categoryType, setCategoryType] = useState('');
   const swtichType = useSelector((state) => state.typeSwitch.switchState);
 
-  // 내가 만든 채팅방, 상대방이 만든 채팅방 구분
-  const [iCreate, setICreate] = useState([]);
-  const [otherCreate, setOtherCreate] = useState([]);
-  // 글 용품 id
-  const [suppliesId, setSupliesId] = useState([]);
+  // 채팅방
+  const [chatRoom, setChatRoom] = useState([]);
 
   // 현재 로그인 한 유저
   const userId = useSelector((state) => state.user.user.isLogin);
@@ -51,15 +27,6 @@ const ChatPage = () => {
 
   const chatRoomRef = useRef();
   const closeBtnRef = useRef();
-
-  // useEffect(() => {
-  //   getChats();
-  // }, []);
-
-  /** SalesDetail에서 넘어온 데이터 값 */
-  const location = useLocation();
-  const result = location.state;
-  console.log('salesDatail에서 넘어온 데이터', result);
 
   useEffect(() => {
     if (swtichType === 'basic') {
@@ -71,33 +38,18 @@ const ChatPage = () => {
     }
   }, [swtichType]);
 
-  /**채팅정보가져오기 */
-  // const getChats = () => {
-  //   console.log(`채팅정보가져오기, user : ${userId}`);
-  // };
-
   // 채팅 페이지 렌더 시 현재 로그인한 유저의 room에 있는 데이터 가져오기
-
   useEffect(() => {
     axios.get('/room/getData', { params: { id: userId } }).then((res) => {
-      // if (res.data.userId) {
-      //   setICreate(res.data.userId);
-
-      //   suppliesId = res.data.userId.suppliesId;
-      // } else if (res.data.otherId) {
-      //   setOtherCreate(res.data.otherId);
-      //   suppliesId = res.data.otherId.suppliesId;
-      // }
-      console.log('resdata', res.data);
+      setChatRoom(res.data);
+      // if 내가 만든 채팅방만 있을 때
+      // if 상대방이 만든 채팅방만 있을 떄
+      // if 모든 채팅방이 다 있을 때
     });
   }, []);
 
-  console.log('내가 만든 채팅방', iCreate);
-  console.log('상대방이 만든 채팅방', otherCreate);
-  console.log(suppliesId);
-
   const onClickChatData = (chatData) => {
-    console.log('채팅클릭');
+    console.log('채팅클릭', { chatData });
     if (chatRoomRef.current) {
       chatRoomRef.current.classList.remove(`${styles.transparent}`);
     }
@@ -108,7 +60,7 @@ const ChatPage = () => {
   };
 
   const onClickClose = () => {
-    console.log('눌림');
+    console.log('채팅방 close');
     chatRoomRef.current.classList.add(`${styles.transparent}`);
     closeBtnRef.current.classList.add(`${styles.transparent}`);
     setSelected(false);
@@ -139,6 +91,15 @@ const ChatPage = () => {
                   return (
                     <ChatList
                       key={index}
+                      chatData={chatData}
+                      onClickChatData={onClickChatData}
+                    />
+                  );
+                })}
+                {chatRoom.map((chatData, idx) => {
+                  return (
+                    <ChatList
+                      key={idx}
                       chatData={chatData}
                       onClickChatData={onClickChatData}
                     />

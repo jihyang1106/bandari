@@ -56,6 +56,7 @@ let data = [
   },
 ];
 
+/*
 let pets = [
   {
     name: '보리',
@@ -94,9 +95,11 @@ let pets = [
     info: '보리입니다~',
   },
 ];
+*/
 
 const MyPage = (props) => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
+  const pets = useSelector((state) => state.pets.pets);
   const isLoggedIn = useSelector((state) => state.user.user.isLogin);
 
   const [displayModal, setDisplayModal] = useState(false);
@@ -145,25 +148,31 @@ const MyPage = (props) => {
           <Category />
           <div className={styles.MyPageContainer}>
             {/* 제목, 가격 데이터 */}
-            <div>
-              <h1>마이 페이지</h1>
-              <h2>{isLoggedIn}님 안녕하세요</h2>
-              <p onClick={onClickEditUserInfo}>회원 정보 수정</p>
-            </div>
-
-            {/* 등록된 반려동물 정보*/}
-            <div className={`${styles.myPetsInfo} ${styles[`${btnState}`]}`}>
-              <p className={styles.titleIndex}>내 새꾸 ♥</p>
+            <section>
               <div>
-                <CustomPetSlider petdatas={petDatas} />
-                <button
-                  onClick={petAddUpload}
-                  className={`${styles[`${btnState}`]}`}
-                >
-                  +
-                </button>
+                <h1>마이 페이지</h1>
+                <h2>{isLoggedIn}님 안녕하세요</h2>
+                <p onClick={onClickEditUserInfo}>회원 정보 수정</p>
               </div>
-            </div>
+
+              {/* 등록된 반려동물 정보*/}
+              <div className={`${styles.myPetsInfo} ${styles[`${btnState}`]}`}>
+                <p className={styles.titleIndex}>내 새꾸 ♥</p>
+                <div>
+                  {pets.length > 0 ? (
+                    <CustomPetSlider petdatas={pets} />
+                  ) : (
+                    '등록된 펫이 없습니다.'
+                  )}
+                  <button
+                    onClick={petAddUpload}
+                    className={`${styles[`${btnState}`]}`}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </section>
 
             <section>
               <h2 className={styles.titleIndex}>찜</h2>
