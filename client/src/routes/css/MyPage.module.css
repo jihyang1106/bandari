@@ -49,24 +49,29 @@
 }
 
 
+.MyPageContainer > section:first-child{
+  display: flex;
+flex-direction: column;
+}
+
 .MyPageContainer h2{
   font-size: 20px;
   margin-bottom: 10px;
   font-weight: 600;
 }
 
-.MyPageContainer > div > h1{
+.MyPageContainer > section:first-child h1{
   font-size: 30px;
   font-weight: 600;
   margin-bottom: 30px;
 }
 
-.MyPageContainer > div > h2{
+.MyPageContainer > section:first-child  h2{
   font-size: 17px;
   margin-bottom: 10px;
 }
 
-.MyPageContainer > div > p{
+.MyPageContainer > section:first-child > p{
   font-size: 12px;
   margin-bottom: 10px;
 }
@@ -76,7 +81,7 @@
   font-weight: 900;
 }
 
-.MyPageContainer > div:first-child > p{
+.MyPageContainer > section:first-child > div:first-child > p{
   cursor: pointer;
 }
 
@@ -91,7 +96,15 @@
 .myPetsInfo > div{
   display: flex;
   margin-top: 10px;
+  align-items: center;
+
 }
+
+.myPetsInfo > div > p{
+  text-align: center;
+  width: 300px;
+}
+
 
   
 .myPetsInfo> div > button{

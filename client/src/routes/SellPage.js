@@ -26,6 +26,11 @@ const SellPage = () => {
   const [sell, setSell] = useState([]); // 화면에 보여지는 state ( 전체, 사료 이런 거상관없이 클라이언트가 보고 있는 화면의 목록)
   // 검색창 값
   const [ser, setSer] = useState('');
+
+  // pick 조회 값
+  const [pick, setPick] = useState([]);
+
+  // sellState 카테고리 변경 json
   const state = {
     peed: '사료',
     snack: '간식',
@@ -50,19 +55,32 @@ const SellPage = () => {
     }
   }, [sellState]);
 
+
+  // console.log('판매페이지 sell 값', sell);
+
+
   /*판매글 가져오는 함수* */
-  const getData = () => {
+  const getData = async () => {
     axios.get('supplies/getData').then((res) => {
-      // console.log('판매글 아이디 : ', res.data[0].id);
-      console.log('res.data', res.data);
+      // console.log('res.data', res.data);
       setSell(res.data);
       setAll(res.data);
+    });
+    //pick 좋아요 테이블 조회 (userId가 찜한 글 조회)
+    axios.get('pick/getLike').then((result) => {
+      setPick(result.data);
+      console.log('setPick res1123:', result.data);
+      console.log('setPick res-----:', pick);
     });
   };
 
   useEffect(() => {
     getData();
   }, []);
+
+  useEffect(() => {
+    console.log(pick);
+  }, [pick]);
 
   return (
     <>
@@ -76,7 +94,7 @@ const SellPage = () => {
             <input value={ser} type="hidden" />
             <div className={styles.cardContainer}>
               {sell.map((list, index) => {
-                return <Card key={index} list={list} />;
+                return <Card key={index} list={list} pick={pick} />;
               })}
             </div>
           </div>

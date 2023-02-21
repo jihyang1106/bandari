@@ -1,17 +1,7 @@
 .card {
-  width: 100%;
-  background-color: #525252;
-  z-index: 1;
-  cursor: pointer;
-}
-
-/* body {
-  width: 100%;
-} */
-.card {
   display: inline-block;
   position: relative;
-  width: 240px;
+  width: 18%;
   height: 280px;
   padding: 1em 0;
   padding-top: 0;
@@ -35,7 +25,7 @@
   top: 0;
   left: 0;
   z-index: 100;
-  width: 240px;
+  width: 100%;
   height: 280px;
 }
 
@@ -48,40 +38,18 @@
   font-size: 30px;
   font-weight: 600;
   z-index: 100;
-  width: 240px;
+  width: 100%;
   height: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.cardStateContainer {
-  position: absolute;
-  top: 157px;
-  left: 140px;
-  /* background-color: rgba(85, 85, 85, 0.5); */
-  padding: 0 0px;
-}
-
-.cardState {
-  width: 14px;
-  height: 14px;
-  border-radius: 7px;
-  background-color: rgb(255, 0, 93);
-  filter: blur(1.3px);
-  display: inline-block;
-}
-
-.cardStateContainer span {
-  margin-left: 6px;
-  font-weight: 600;
-  color: #c8c8c8f2;
-}
 /* 이미지 thumbnail */
 .card img {
-  width: 100%;
-  height: 65%;
-  object-fit: cover;
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
 }
 
 .cardFooter {
@@ -116,9 +84,12 @@
   margin-bottom: 13px;
 }
 
-/*1000px이하*/
-@media screen and (max-width: 1000px) {
-  .sellPage {
+/*1500px이하*/
+@media screen and (max-width: 1500px) {
+
+  .card {
+    width: 30%;
+    
   }
 
   .sellPage > section > .AvailSaleContainer {
@@ -140,6 +111,7 @@
   position: absolute;
   top: 240px;
   left: 200px;
+  z-index: 101;
 }
 
 .likeButton img{
@@ -157,4 +129,20 @@
     font-size: 13px;
     font-weight: 600;
     color: #525252;
+}
+
+@media screen and (max-width: 1000px) {
+
+  .card {
+    width: 45%;
+    
+  }
+}
+
+@media screen and (max-width: 700px) {
+
+  .card {
+    width: 70%;
+    
+  }
 }

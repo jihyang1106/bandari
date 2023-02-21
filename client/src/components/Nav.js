@@ -16,6 +16,7 @@ import BasicIcon from '../assets/BasicIcon.png';
 import HamburgerIcon from '../assets/HamburgerIcon.png';
 
 import GetLocation from './js/GetLocation';
+import { logout } from '../store/module/user';
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -44,10 +45,12 @@ const Nav = () => {
   const onClickLogin = async () => {
     const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=http://localhost:5000/kakao/code`;
     await (window.location.href = kakaoAuthUrl);
+    console.log('로그인됨');
   };
   /**로그아웃 클릭시 실행되는 함수*/
   const onClickLogout = async () => {
-    sessionStorage.removeItem('userData');
+    dispatch(logout());
+    sessionStorage.clear();
     const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=http://localhost:5000/kakao/logout`;
     await (window.location.href = kakaoLogoutUrl);
   };

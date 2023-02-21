@@ -10,7 +10,6 @@ exports.getData = async (req, res) => {
 
 // 마이페이지 펫 체크
 exports.checkPet = async (req, res) => {
-  console.log('마이페이지 펫 체크 :', req.body.userID);
   const result = await pet
     .findAll({
       where: { userId: req.body.userID },

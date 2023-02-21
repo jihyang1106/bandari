@@ -33,13 +33,18 @@ export default function SellCategory(props) {
   const sellState = useSelector(
     (state) => state.sellCategorySwitch.switchState
   );
+  const pets = useSelector((state) => state.pets.pets);
+  console.log(pets);
   const userLocation = useSelector((state) => state.location.userLocation);
   const isLogin = useSelector((state) => state.user.user.isLogin);
 
   const sellButton = () => {
-    console.log('sellButton 판매 버튼 눌림');
     if (isLogin) {
-      navigate('/sellForm', { replace: false });
+      if (pets.length > 0) {
+        navigate('/sellForm', { replace: false });
+      } else {
+        alert('펫을 등록하셔야 판매할 수 있습니다');
+      }
     } else {
       alert('로그인 하셔야 이용이 가능합니다.');
     }
@@ -105,6 +110,12 @@ export default function SellCategory(props) {
     e.preventDefault();
     setSearch(e.target.value);
   };
+  // 앤터 버튼
+  const onSubmitSearch = (e) => {
+    if (e.key === 'Enter') {
+      onSearch();
+    }
+  };
 
   // db에 검색 값 조회
   const onSearch = () => {
@@ -116,12 +127,15 @@ export default function SellCategory(props) {
       .then((res) => {
         console.log('판매 카테고리 검색 결과 값 :', res.data);
         setSearchData(res.data);
-        props.setSell([searchData]);
+        props.setSell(res.data);
+        console.log('판매 카테고리의 값 :', [searchData]);
       });
   };
+
   return (
     <div className="sellCategory">
       {/* 상단 카테고리, 검색 & 판매 버튼 누르면, 판매 글 폼 열림 */}
+
       <div className="categoryButtonContainer">
         <div className={`adressPickButton ${btnState}`}>
           <img src={locationIcon} alt="주소지 버튼 아이콘" />
@@ -177,6 +191,7 @@ export default function SellCategory(props) {
           className="searchInput"
           value={search}
           onChange={onChangeSearch}
+          onKeyPress={onSubmitSearch}
         />
         {/* 서치값 sellpage 컴포넌트로 값을 보내는 중 */}
         <button

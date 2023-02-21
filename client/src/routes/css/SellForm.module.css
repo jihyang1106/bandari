@@ -2,12 +2,7 @@
 }
 .sellForm section:first-child {
   display: flex;
+  align-items: baseline;
 }
 .sellForm {
-  /* margin: auto; */
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin-top: 10%;
 }

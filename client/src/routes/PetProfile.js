@@ -79,10 +79,9 @@ const PetProfile = () => {
       })
       .then((res) => {
         alert(` ${form.name.value}(이)의 소중한 정보가 등록되었습니다.`);
-        dispatch(setPets(res.data));
-        sessionStorage.setItem('petData', res.data.id);
-      })
-      .then(navigate('/myPage'));
+        dispatch(setPets(res.data.id));
+        navigate('/myPage');
+      });
   }
 
   /** 업로드 버튼 클릭 시 이전 값 초기화  */

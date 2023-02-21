@@ -11,6 +11,17 @@
   margin-bottom: 10px;
 }
 
+ .categoryHamburger > .HamburgerDiv.open #loginBtn,
+ .categoryHamburger > .HamburgerDiv.open > #logoutBtn
+{
+  border: none;
+  background-color: transparent;
+  font-weight: 600;
+  margin-bottom: 15px;
+
+
+}
+
 .categoryHamburger > .HamburgerDiv > .link > a.active.basic > span {
   font-weight: 600;
   color: black;
