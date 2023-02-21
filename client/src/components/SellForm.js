@@ -91,7 +91,7 @@ export default function SellForm() {
         },
       })
       .then((res) => {
-        console.log('res.data', res.data);
+        alert('글 등록에 성공하셨습니다!');
       })
       .then(navigate('/SellPage'));
   };
