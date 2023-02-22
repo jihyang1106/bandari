@@ -98,9 +98,6 @@
 }
 
 .sellImges {
-  width: 120px;
-  height: 48px;
-  background-color: #e8e8e8;
   margin: 0 auto;
   position: relative;
   border-radius: 10px;
@@ -109,10 +106,6 @@
   object-fit: cover;
   display: block;
   margin-bottom: 20px;
-}
-
-.sellImges div {
-  line-height: 210px;
 }
 
 .sellFormContent.basic > .sellectedPet {
@@ -135,24 +128,30 @@
   top: 766px;
   border-radius: 20px;
   padding: 3% 3%;
+  display: flex;
+  align-items: center;
 }
 
 .petImg {
   width: 150px;
   height: 140px;
   background-color: #ffe7c7;
-  position: absolute;
   border-radius: 10px;
 }
 
 .petInfo {
-  margin-left: 32%;
+  margin-left: 20px;
+}
+
+.petInfo h1 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .petInfo p {
-  margin-top: 15px;
+  margin-bottom: 10px;
 }
-
 .petInfo p:nth-child(1) {
   font-size: 20px;
   font-weight: 600;
@@ -170,4 +169,21 @@
 
 .content {
   margin: 0 15px 165px 0;
+}
+
+/*700px이하*/
+@media screen and (max-width: 700px) {
+  .sellectedPet {
+    box-sizing: border-box;
+    width: 400px;
+    height: 175px;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .petInfo {
+    width: 250px;
+  }
 }
