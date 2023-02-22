@@ -17,27 +17,20 @@ function App() {
   /*로그인 여부 확인 함수*/
   const isLogin = () => {
     //세션스토리지에 유저데이터 남아있으면 자동로그인됩니다
-    if (sessionStorage.userData) {
-      dispatch({
-        type: 'SETUSERINFO',
-        isLogin: sessionStorage.getItem('userData'),
-      });
-      getPetInfo();
-    } else {
-      axios({
-        method: 'get',
-        url: '/kakao/isLogin',
+
+    axios({
+      method: 'get',
+      url: '/kakao/isLogin',
+    })
+      .then((res) => {
+        //로그인 여부 세션스토리지 저장
+        sessionStorage.setItem('userData', res.data.isLogin);
+        //로그인 여부 리덕스 저장 로그인 했을때isLogin:id, userName:이름 로그아웃 했을때 false
+        dispatch({ type: 'SETUSERINFO', isLogin: res.data.isLogin });
       })
-        .then((res) => {
-          //로그인 여부 세션스토리지 저장
-          sessionStorage.setItem('userData', res.data.isLogin);
-          //로그인 여부 리덕스 저장 로그인 했을때isLogin:id, userName:이름 로그아웃 했을때 false
-          dispatch({ type: 'SETUSERINFO', isLogin: res.data.isLogin });
-        })
-        .then(() => {
-          getPetInfo();
-        });
-    }
+      .then(() => {
+        getPetInfo();
+      });
   };
 
   const getPetInfo = () => {
@@ -58,9 +51,9 @@ function App() {
     // sessionStorage.setItem('userData', false);
     // dispatch({type:'SETUSERINFO',payload:{isLogin:false, userName:false}})
   };
-  window.addEventListener('beforeunload', () => {
-    cleanUp();
-  });
+  // window.addEventListener('load', () => {
+  //   cleanUp();
+  // });
 
   /* 펫 정보 */
   const pets = {
