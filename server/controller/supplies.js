@@ -1,4 +1,5 @@
 const { supplies } = require('../model');
+const { pick } = require('../model');
 const { img } = require('../model');
 const { Op } = require('sequelize');
 
@@ -10,40 +11,17 @@ exports.getData = async (req, res) => {
         model: img,
         required: false,
       },
+      {
+        model: pick,
+        required: false,
+      },
     ],
     //  where: {'$img.img1$': { [Op.ne]: null }},
   });
   // const result = await supplies.findAll();
   // const resultImg = await img.findAll();
-  console.log(result);
+  // console.log('여기는 서버, 용품 판매글 조회 값 :', result);
   res.send(result);
-};
-
-// 판매글 좋아요 카운트, 상태
-exports.postLikePlus = async (req, res) => {
-  supplies
-    .update(
-      {
-        likeCount: req.body.likeCount,
-      },
-      {
-        where: { id: req.body.id },
-      }
-    )
-    .then(console.log('좋아요 상태 업데이트 되었습니다.'));
-};
-
-exports.postLikeminus = async (req, res) => {
-  supplies
-    .update(
-      {
-        likeCount: req.body.likeCount,
-      },
-      {
-        where: { id: req.body.id },
-      }
-    )
-    .then(console.log('좋아요 상태 업데이트 되었습니다.'));
 };
 
 // 판매 페이지 검색

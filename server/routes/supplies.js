@@ -70,10 +70,6 @@ router.post('/insert', upload.array('img'), async (req, res) => {
 
 router.get('/getData', supplilesController.getData);
 
-// 좋아요 버튼 +, -
-// router.post('/postLikePlus', supplilesController.postLikePlus);
-// router.post('/postLikeminus', supplilesController.postLikeminus);
-
 // 검색 값
 router.post('/postSearch', supplilesController.postSearch);
 

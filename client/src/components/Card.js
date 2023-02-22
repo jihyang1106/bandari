@@ -9,7 +9,7 @@ import clickedLike from '../assets/ClikedLikeButton.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Card = (list, pickList) => {
+const Card = (list) => {
   // 1. likeState => userId가 좋아요 누르면 > { pick }에 넣고 빼도록 한다.
 
   // {supplies의 pk}와 {user의 pk}가 일치하는 {pick}이 있으면,
@@ -17,20 +17,18 @@ const Card = (list, pickList) => {
   // 3. likeStateImg => pick에 값이 있으면, 찜 상태 / 없으면 noneLike 이미지
 
   // 4. likeCount => 총 카운트는 pick 데이터 갯수
-  const [likeState, setLikeState] = useState();
+  const [likeState, setLikeState] = useState('0');
   const [deal, setDeal] = useState('');
+
+  const [pick, setPick] = useState([]);
+  const [state, setState] = useState([]);
 
   const [likeStateImg, setLikeStateImg] = useState(noneLike);
   const [likeCount, setLikeCount] = useState(list.list.likeCount);
 
-  const [pick, setPick] = useState([]);
-  const isLogin = useSelector((state) => state.user.user.isLogin);
+  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setPick(pickList);
-    // console.log(pickList);
-  }, [pickList]);
   useEffect(() => {
     //거래중
     if (list.list.deal) {
@@ -41,58 +39,85 @@ const Card = (list, pickList) => {
     }
   }, [list.list.deal]);
 
-  //  const userLocation = useSelector((state) => state.location.userLocation);
-  // const location =
-  //   userLocation.region_2depth_name + ' ' + userLocation.region_3depth_name;
-  // console.log(list.list);
-  // 판매페이지 좋아요 버튼 상태값
+  // console.log('이거 왜없냐:', isLoggedIn);
 
-  const onLikeButton = (e) => {
-    // if (isLogin) {
-    if (list.list.likeCount === 0) {
-      //찜 안된 상태
-      alert('찜을 하시겠습니까?');
-      setLikeStateImg(clickedLike);
-      setLikeCount(list.list.likeCount + 1);
-
-      axios
-        .post('supplies/postLikePlus', {
-          id: list.list.id,
-          likeCount: 1,
-        })
-        .then((res) => {
-          console.log(res);
+  useEffect(() => {
+    if (isLoggedIn)
+      // 조회 아이디 값으로 pick데이터 긁어옴
+      axios.post('pick/getPick', { userId: 'ehs_11@naver.com' }).then((res) => {
+        // console.log('해당 아이디 좋아요 데이터', res.data);
+        setPick(res.data);
+        res.data.map((el) => {
+          setPick(el.suppliesId);
         });
-      return;
-    } else {
-      if (list.list.likeCount === 1) {
-        // 찜한 상태
-        alert('찜을 해제 하시겠습니까?');
-        setLikeStateImg(noneLike);
-        setLikeCount(list.list.likeCount);
+        // const findIndex = res.data.findIndex((element) => element.suppliesId);
+        console.log('setPickㅇㅇㅇㅇㅇ', pick);
+      });
+  }, []);
 
+  // const set = new set(pick);
+  // setState([...pick]);
+  // const newArray = pick.filter((data) => data.userId && data.suppliesId )
+
+  // 찜 버튼
+  const onLikeButton = (e) => {
+    if (isLoggedIn) {
+      // !pick 수정해야====
+      if (likeState) {
+        //찜 안된 상태
+
+        alert('찜을 하시겠습니까?');
+        setLikeStateImg(clickedLike);
+        setLikeCount(1);
         axios
-          .post('supplies/postLikeminus', {
+          .post('pick/postLikePlus', {
             id: list.list.id,
-            likeCount: 0,
+            userId: 'ehs_11@naver.com',
           })
           .then((res) => {
-            console.log(res);
+            if (res.data === true) console.log('좋아요 성공');
           });
+        return;
+      } else {
+        if (likeState !== 0) {
+          // 찜한 상태
+          alert('찜을 해제 하시겠습니까?');
+          setLikeStateImg(noneLike);
+          setLikeCount(0);
+          axios
+            .post('pick/postLikeminus', {
+              id: list.list.id,
+              userId: 'ehs_11@naver.com',
+            })
+            .then((res) => {
+              if (res.data === true) console.log('좋아요 해제 성공');
+            });
+        }
+        return;
       }
-
-      return;
+    } else {
+      alert('로그인 하셔야 이용이 가능합니다.');
     }
-    // } else {
-    //   alert('로그인 하셔야 이용이 가능합니다.');
-    // }
+    console.log('현재 선택된 카드', list.list);
   };
+
+  // console.log('1번 list.list.id  상품 pk :', list.list.id);
+  // console.log('2번 list.list.picks 찜 갯수:', list.list.picks);
+  // useEffect(() => {
+  //   var newArrPick = [list.list.picks];
+  //   console.log('+++++++++++++++++찜 갯수:', list.list.picks);
+  //   setPick([newArrPick]);
+  //   console.log('픽값..', pick);
+  // }, []);
+
+  // const pickDatas = list.list.picks;
+  // console.log('3번 pickDatas 찜 갯수:', pickDatas);
+
   // 카드 컴포넌트 클릭 함수
   const goToDetail = () => {
     navigate('/salesDetail', { state: { ...list.list } });
     console.log('카드 클릭 해당 글 상세페이지 이동 정보:', { ...list.list });
   };
-  // console.log('판매 글 list', list);
 
   const listData = list.list;
   return (
