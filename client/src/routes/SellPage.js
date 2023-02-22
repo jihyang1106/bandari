@@ -56,12 +56,16 @@ const SellPage = () => {
   /*판매글 가져오는 함수* */
   const getData = async () => {
     axios.get('supplies/getData').then((res) => {
+      for (let i = 0; i < res.data.length; i++) {
+        console.log('포문 시험', res.data[i].picks.length);
+        setSell({
+          ...state,
+          likeCount: res.data[i].picks.length,
+        });
+      }
+      console.log('판매글 getData  :', res.data);
       setSell(res.data);
       setAll(res.data);
-      console.log('판매글 getData  :', res.data);
-      // for (let i = 0; i < res.data.length; i++) {
-      //   console.log('포문 시험', res.data[i].picks);
-      // }
     });
   };
 
@@ -107,6 +111,12 @@ const SellPage = () => {
     getData();
   }, []);
 
+  const test = () => {
+    console.log('all', all);
+    console.log('all[0].picks.length', all[0].picks.length);
+    console.log('sell', sell);
+  };
+
   return (
     <>
       <Nav />
@@ -119,6 +129,14 @@ const SellPage = () => {
               {sell.map((list, index) => {
                 return <Card key={index} list={list} />;
               })}
+              <br />
+              <button
+                onClick={() => {
+                  test();
+                }}
+              >
+                테스트
+              </button>
             </div>
           </div>
         </section>

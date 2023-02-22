@@ -39,7 +39,7 @@ const Card = (list) => {
     }
   }, [list.list.deal]);
 
-  // console.log('이거 왜없냐:', isLoggedIn);
+  console.log('이거 왜없냐:', isLoggedIn);
 
   useEffect(() => {
     if (isLoggedIn)
@@ -120,6 +120,7 @@ const Card = (list) => {
   };
 
   const listData = list.list;
+  // console.log('list', list.list.picks);
   return (
     <>
       <div
