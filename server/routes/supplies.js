@@ -68,6 +68,7 @@ router.post('/insert', upload.array('img'), async (req, res) => {
   res.send(true);
 });
 
+// 판매페이지 값 조회 & 메인페이지 인기글 조회
 router.get('/getData', supplilesController.getData);
 
 // 검색 값
@@ -75,5 +76,8 @@ router.post('/postSearch', supplilesController.postSearch);
 
 // 판매완료 수정(품절)
 router.patch('/updateDeal', supplilesController.patchUpdateDeal);
+
+// 메인페이지 인기글 조회
+// router.get('/getHotPost', supplilesController.getHotPost);
 
 module.exports = router;

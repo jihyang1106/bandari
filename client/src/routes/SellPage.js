@@ -1,12 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate, withRouter } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import styles from './css/SellPage.module.css';
-
-import Nav from '../components/Nav';
-import Category from '../components/Category';
-import Card from '../components/Card';
-import SellCategory from '../components/SellCategory';
 
 import {
   setStateBasic,
@@ -14,7 +10,11 @@ import {
   setStateSnack,
   setStateProduct,
 } from '../store/module/sellCategorySwitch';
-import { useDispatch, useSelector } from 'react-redux';
+
+import Nav from '../components/Nav';
+import Category from '../components/Category';
+import Card from '../components/Card';
+import SellCategory from '../components/SellCategory';
 
 import axios from 'axios';
 
@@ -26,7 +26,6 @@ const SellPage = () => {
   const [all, setAll] = useState([]); // 전체 목록을 항상 가지고 있는 state -> 처음에 세팅되면 바뀔 일이 없어요
   const [sell, setSell] = useState([]); // 화면에 보여지는 state ( 전체, 사료 이런 거상관없이 클라이언트가 보고 있는 화면의 목록)
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   // sellState 카테고리 변경 json
   const state = {
