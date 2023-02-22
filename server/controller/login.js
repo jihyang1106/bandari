@@ -96,7 +96,7 @@ exports.cleanUp = (req, res) => {
 
 exports.getPetId = async (req, res) => {
   console.log('쿼리', req.query);
-  if (userData.id == false) {
+  if (userData.id == undefined) {
     res.send(false);
   } else {
     const result = await pet.findAll({
