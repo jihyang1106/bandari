@@ -5,11 +5,13 @@
 .slider {
   margin-bottom: 100px;
   width: 50vw;
+  text-align: center;
 }
 
 @media screen and (max-width: 2200px) {
   .slider {
     width: 70vw;
+    text-align: center;
   }
 }
 

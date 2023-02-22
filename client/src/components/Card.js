@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 
 import styles from './css/Card.module.css';
 
-import noneLike from '../assets/NoneClikeLikeButton.png';
-import clickedLike from '../assets/ClikedLikeButton.png';
+import noneLike from '../assets/NoneClickLikeButton.png';
+import clickedLike from '../assets/ClickedLikeButton.png';
 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -27,6 +27,7 @@ const Card = ({ list }) => {
       setDeal('selling');
     } else {
       //거래완료
+      setDeal('soldout');
     }
   }, [list.deal]);
 

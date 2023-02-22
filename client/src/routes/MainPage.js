@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Card from '../components/Card';
 
+
 let datas = [
   {
     id: 1,
@@ -65,6 +66,7 @@ let datas = [
   },
 ];
 
+
 const MainPage = () => {
   const [Hot, setHot] = useState([]);
   const isLoggedIn = useSelector((state) => state.user.user.isLogin);
@@ -73,6 +75,14 @@ const MainPage = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    getPopularPost();
+  }, []);
+
+  /**인기글 가져오는 함수 */
+  const getPopularPost = () => {
+    console.log('인기글을 가져옵니다');
+  };
   const moveSellPage = () => {
     navigate('/sellPage');
   };
@@ -80,15 +90,6 @@ const MainPage = () => {
   const onClickGoUp = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  // 메인페이지에서 로그인한 상태에서 펫 조회? 마이페이지에서 조회?
-  // useEffect(() => {
-  //   if(isLoggedIn){
-  //     if( 펫 마리수가 0 일때..){
-  //       navigate('/petProfile')
-  //     }
-  //   }
-  // })
 
   // 인기글 조회
   useEffect(() => {
@@ -173,12 +174,15 @@ const MainPage = () => {
         <section>
           <h1>인기글</h1>
           <div className={styles.cards}>
+
             {/* <CustomCardSlider datas={datas} /> */}
             <div>
               {Hot.map((hot, index) => {
                 return <Card key={index} list={hot} />;
               })}
             </div>
+
+
           </div>
 
           <span onClick={moveSellPage}>더보기</span>

@@ -1,7 +1,8 @@
 .card {
   display: inline-block;
   position: relative;
-  width: 18%;
+  cursor: pointer;
+  width: 14vw;
   height: 280px;
   padding: 1em 0;
   padding-top: 0;
@@ -12,15 +13,13 @@
   overflow: hidden;
   margin: 0 0 20px 2%;
   box-shadow: 7px 7px 4px -3px rgb(205, 205, 205);
-  
 }
-
 
 .card:hover {
   transform: scale(1.1);
 }
 
-.card > .selling{
+.card > .selling {
   position: absolute;
   top: 0;
   left: 0;
@@ -29,7 +28,7 @@
   height: 280px;
 }
 
-.card > .soldout{
+.card > .soldout {
   position: absolute;
   top: 0;
   left: 0;
@@ -47,9 +46,9 @@
 
 /* 이미지 thumbnail */
 .card img {
-    width: 100%;
-    height: 70%;
-    object-fit: cover;
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
 }
 
 .cardFooter {
@@ -84,12 +83,17 @@
   margin-bottom: 13px;
 }
 
+.likeButton {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 101;
+}
+
 /*1500px이하*/
 @media screen and (max-width: 1500px) {
-
   .card {
-    width: 30%;
-    
+    width: 20vw;
   }
 
   .sellPage > section > .AvailSaleContainer {
@@ -107,17 +111,10 @@
   }
 }
 
-.likeButton{
-  position: absolute;
-  top: 240px;
-  left: 200px;
-  z-index: 101;
-}
-
-.likeButton img{
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
+.likeButton img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
 }
 
 .likeButton:hover img {
@@ -125,24 +122,21 @@
 }
 
 .likeCount {
-    text-align: right;
-    font-size: 13px;
-    font-weight: 600;
-    color: #525252;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 600;
+  color: #525252;
 }
 
+/*1000px이하*/
 @media screen and (max-width: 1000px) {
-
   .card {
-    width: 45%;
-    
+    width: 25vw;
   }
 }
 
 @media screen and (max-width: 700px) {
-
   .card {
     width: 70%;
-    
   }
 }

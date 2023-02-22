@@ -93,7 +93,7 @@
 }
 
 /*마지막 메인페이지*/
-.mainPage>section:nth-child(5) {
+.mainPage > section:nth-child(5) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,7 +108,7 @@
   flex-wrap: wrap;
 }
 
-.mainPage section:nth-child(5) .cards >div{
+.mainPage section:nth-child(5) .cards > div {
   width: 70vw;
   display: flex;
   justify-content: center;
@@ -124,7 +124,7 @@
   .mainPage section:first-child .mainImg img {
     width: 950px;
   }
-  
+
   /*두번째 메인페이지*/
   .mainPage section:nth-child(2) .sellImg {
     width: 45vw;
@@ -156,6 +156,26 @@
     width: 80vw;
     height: auto;
     z-index: -1;
+  }
+
+  /*두번째 메인페이지*/
+  .mainPage section:nth-child(2) {
+    flex-direction: column;
+  }
+
+  .mainPage section:nth-child(2) > .sellImg {
+    margin: 0;
+    width: 60vw;
+    margin-bottom: 20px;
+  }
+
+  .mainPage section:nth-child(2) > div h1 {
+    text-align: center;
+    line-height: 50px;
+  }
+
+  .mainPage section:nth-child(2) > div h3 {
+    text-align: center;
   }
 
   /*마지막 메인페이지*/
