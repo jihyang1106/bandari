@@ -30,6 +30,16 @@ exports.postSearch = async (req, res) => {
   let searchWord = req.body.searchData;
   supplies
     .findAll({
+      include: [
+        {
+          model: img,
+          required: false,
+        },
+        {
+          model: pick,
+          required: false,
+        },
+      ],
       where: {
         [Op.or]: [
           {

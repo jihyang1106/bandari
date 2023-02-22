@@ -48,6 +48,5 @@ exports.getPick = async (req, res) => {
     },
     raw: true,
   });
-  // console.log('re', result);
   res.send(result);
 };
