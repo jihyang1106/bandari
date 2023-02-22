@@ -19,6 +19,7 @@ const SalesDetail = () => {
   const location = useLocation();
   const datas = location.state;
   const [pet, setPet] = useState([]);
+  const btnState = useSelector((state) => state.typeSwitch.switchState);
 
   const userId = useSelector((state) => state.user.user.isLogin);
   console.log(datas);
@@ -47,14 +48,12 @@ const SalesDetail = () => {
         params: { id: datas.petId },
       })
       .then((res) => {
-        // console.log('res.data', res.data);
         setPet(res.data);
       });
   }, []);
 
   // 프론트로 보내는 데이터
   const result = { pet: pet, supplies: datas };
-  console.log(result);
 
   // 서버로 보내는 데이터
   const backData = {
@@ -65,14 +64,19 @@ const SalesDetail = () => {
 
   // 채팅하기 버튼
   const onChattingBtn = () => {
-    if (userId === false) {
-      alert('로그인 후 연락해주세요');
-      navigate('/');
+    // 판매완료시
+    if (!datas.deal) {
+      alert('판매완료된 상품입니다');
     } else {
-      axios.post('room/insert', backData).then((res) => {
-        console.log('생성 판별 여부', res.data);
-      });
-      navigate('/chatPage');
+      if (userId === false) {
+        alert('로그인 후 연락해주세요');
+        navigate('/');
+      } else {
+        axios.post('room/insert', backData).then((res) => {
+          console.log('생성 판별 여부', res.data);
+        });
+        navigate('/chatPage');
+      }
     }
   };
 
@@ -82,7 +86,10 @@ const SalesDetail = () => {
       <div className={styles.sellForm}>
         <section>
           <Category />
-          <form className={styles.sellFormContent}>
+          <form
+            className={`${styles.sellFormContent} ${styles[`${btnState}`]} 
+              }`}
+          >
             {/* 업로드 된 이미지 미리보기 슬라이드 */}
             <div className={styles.sliderDiv}>
               <div className={`${styles.sellImges}`}>

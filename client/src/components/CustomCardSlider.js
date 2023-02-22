@@ -8,7 +8,7 @@ import styles from './css/CustomCardSlider.module.css';
 import Card from './Card';
 
 export const StyledSlider = styled(Slider)`
-  height: 300px; //슬라이드 컨테이너 영역
+  height: 350px; //슬라이드 컨테이너 영역
   .slick-list {
     //슬라이드 스크린
     width: 50vw;
@@ -74,6 +74,7 @@ export const StyledSlider = styled(Slider)`
 `;
 
 const CustomSlider = ({ datas }) => {
+  console.log({ datas });
   const settings = {
     dots: true,
     infinite: false,

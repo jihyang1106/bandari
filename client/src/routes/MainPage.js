@@ -15,51 +15,10 @@ import LocationMainImg from '../assets/LocationMainImg.png';
 import UpIcon from '../assets/UpIcon.png';
 
 import { useNavigate } from 'react-router-dom';
-
-let datas = [
-  {
-    id: 1,
-    userID: '누구 님',
-    title: '고양이 이동장 팝니다.',
-    price: '25000',
-    location: '용산 어디어디 오디',
-    saleStatus: false,
-    likeStatus: false,
-    cardImg: '/Test.png',
-  },
-  {
-    id: 2,
-    userID: '누구 님',
-    title: '강아지 배변 패드 팝니다.',
-    price: '25000',
-    location: '용산 어디어디 오디',
-    saleStatus: false,
-    likeStatus: false,
-    cardImg: '/Test.png',
-  },
-  {
-    id: 3,
-    userID: '누구 님',
-    title: '사료 기호성 테스트 키트.',
-    price: '10000',
-    location: '어디어디 오디',
-    saleStatus: true,
-    likeStatus: true,
-    cardImg: '/Test.png',
-  },
-  {
-    id: 4,
-    userID: '누구 님',
-    title: '사료 기호성 테스트 키트.',
-    price: '10000',
-    location: '어디어디 오디',
-    saleStatus: true,
-    likeStatus: true,
-    cardImg: '/Test.png',
-  },
-];
+import axios from 'axios';
 
 const MainPage = () => {
+  const [Hot, setHot] = useState([]);
   const isLoggedIn = useSelector((state) => state.user.user.isLogin);
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
@@ -81,6 +40,14 @@ const MainPage = () => {
   const onClickGoUp = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // 인기글 조회
+  useEffect(() => {
+    axios.get('supplies/getData').then((res) => {
+      console.log('재활용.. 라우터 가능?', res.data);
+      setHot(res.data);
+    });
+  }, []);
 
   return (
     <>
@@ -147,7 +114,7 @@ const MainPage = () => {
         <section>
           <h1>인기글</h1>
           <div className={styles.cards}>
-            <CustomCardSlider datas={datas} />
+            <CustomCardSlider datas={Hot} />
           </div>
           <span onClick={moveSellPage}>더보기</span>
         </section>
