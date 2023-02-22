@@ -9,9 +9,57 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
+import styled, { keyframes, css } from 'styled-components';
 import $ from 'jquery';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+
+export const StyledSlider = styled(Slider)`
+  .slick-list {
+    //슬라이드 스크린
+    width: 300px;
+    height: 300px;
+    margin: 0;
+    overflow-x: hidden;
+    margin-top: 30px;
+  }
+  .slick-dots {
+    //슬라이드의 위치
+    margin-top: 70px;
+  }
+  .slick-track {
+    //이건 잘 모르겠음
+    width: 100%;
+    height: 100%;
+  }
+  .slick-prev:before,
+  .slick-next:before {
+    color: black;
+    left: -45px;
+  }
+
+  .slick-next:before {
+    color: black;
+    right: -45px;
+  }
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 25px;
+  }
+
+  .slick-next {
+    right: -45px;
+  }
+
+  @media screen and (max-width: 2200px) {
+  }
+
+  @media screen and (max-width: 1500px) {
+  }
+
+  @media screen and (max-width: 1200px) {
+  }
+`;
 
 const SalesDetail = () => {
   const navigate = useNavigate();
@@ -25,14 +73,13 @@ const SalesDetail = () => {
   console.log(datas);
   const { id } = useParams();
 
-  // slick-carousel settings
   const settings = {
     dots: true,
-    autoplay: true,
-    infinite: true,
-    speed: 1000,
+    infinite: false,
+    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    initialSlide: 0,
   };
   /* img값이 2개 이상일 때 null 값을 제외한 이미지 배열  */
   let newImgs;
@@ -91,26 +138,24 @@ const SalesDetail = () => {
               }`}
           >
             {/* 업로드 된 이미지 미리보기 슬라이드 */}
-            <div className={styles.sliderDiv}>
-              <div className={`${styles.sellImges}`}>
-                <Slider {...settings}>
-                  <img
-                    src={`/uploadImg/${datas.cover}`}
-                    alt="대표 사진"
-                    className={styles.sellImges}
-                  />
-                  {/* 이미지 2개 이상일 때 이미지 보여주기 */}
-                  {datas.imgs.length > 0
-                    ? newImgs.map((el) => (
-                        <img
-                          src={`/uploadImg/${el}`}
-                          alt="대표 사진"
-                          className={styles.sellImges}
-                        />
-                      ))
-                    : null}
-                </Slider>
-              </div>
+            <div className={`${styles.sellImges}`}>
+              <StyledSlider {...settings}>
+                <img
+                  src={`/uploadImg/${datas.cover}`}
+                  alt="대표 사진"
+                  className={styles.sellImges}
+                />
+                {/* 이미지 2개 이상일 때 이미지 보여주기 */}
+                {datas.imgs.length > 0
+                  ? newImgs.map((el) => (
+                      <img
+                        src={`/uploadImg/${el}`}
+                        alt="대표 사진"
+                        className={styles.sellImges}
+                      />
+                    ))
+                  : null}
+              </StyledSlider>
               <div></div>
             </div>
 
@@ -153,7 +198,7 @@ const SalesDetail = () => {
                 {/* <img src={`/petImg/${pet.petImg}`} alt="" /> */}
               </div>
               <div className={styles.petInfo}>
-                <p>{pet.name}</p>
+                <h1>{pet.name}</h1>
                 <p>
                   {pet.age} / {pet.gender} / {pet.petSpeices} / {pet.weight}
                 </p>

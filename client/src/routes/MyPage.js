@@ -10,7 +10,7 @@ import CustomCardSlider from '../components/CustomCardSlider';
 import CustomPetSlider from '../components/CustomPetSlider';
 
 import TestImg from '../assets/TestImg1.jpg';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 let data = [
@@ -105,7 +105,9 @@ const MyPage = (props) => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const pets = useSelector((state) => state.pets.pets);
   const isLoggedIn = useSelector((state) => state.user.user.isLogin);
-
+  const [all, setAll] = useState([]); //전체목록
+  const [sell, setSell] = useState([]); // 현재유저가 올린 판매글
+  const [like, setLike] = useState([]);
   const [displayModal, setDisplayModal] = useState(false);
   const [petDatas, setPetDatas] = useState([]);
 
@@ -118,6 +120,9 @@ const MyPage = (props) => {
       navigate('/');
       return;
     } else {
+      getData();
+      getLikeData();
+
       axios
         .post('pet/checkPet', {
           userID: isLoggedIn,
@@ -132,6 +137,21 @@ const MyPage = (props) => {
   function onUserDelete() {
     console.log('회원 탈퇴 버튼 눌림');
   }
+  /*로그인한 유저가올린 판매글 가져오는 함수* */
+  const getData = async () => {
+    axios.get('supplies/getData').then((res) => {
+      console.log('판매글 getData  :', res.data);
+      res.data.map((data) => {
+        if (data.userId === isLoggedIn) {
+          setSell([...sell, data]);
+        }
+      });
+      setAll(res.data);
+    });
+  };
+
+  /**로그인한 유저가 찜한 판매글 가져오는 함수*/
+  const getLikeData = () => {};
 
   /**펫 추가 이벤트 */
   function petAddUpload() {
@@ -182,18 +202,16 @@ const MyPage = (props) => {
             <section>
               <h2 className={styles.titleIndex}>찜</h2>
               <div className={styles.cards}>
-                <CustomCardSlider datas={data} />
+                <CustomCardSlider datas={like} />
               </div>
 
               <h2 className={styles.titleIndex}>판매</h2>
               <div className={styles.cards}>
-                <CustomCardSlider datas={data} />
+                <CustomCardSlider datas={sell} />
               </div>
 
               <h2 className={styles.titleIndex}>구매</h2>
-              <div className={styles.cards}>
-                <CustomCardSlider datas={data} />
-              </div>
+              <div className={styles.cards}></div>
             </section>
           </div>
         </section>
