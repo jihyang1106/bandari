@@ -28,9 +28,6 @@ const SellPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // pick 조회 값
-  const [pick, setPick] = useState([]);
-
   // sellState 카테고리 변경 json
   const state = {
     peed: '사료',
@@ -56,66 +53,16 @@ const SellPage = () => {
   /*판매글 가져오는 함수* */
   const getData = async () => {
     axios.get('supplies/getData').then((res) => {
-      for (let i = 0; i < res.data.length; i++) {
-        console.log('포문 시험', res.data[i].picks.length);
-        setSell({
-          ...state,
-          likeCount: res.data[i].picks.length,
-        });
-      }
+      console.log('res.data', res.data);
       console.log('판매글 getData  :', res.data);
       setSell(res.data);
       setAll(res.data);
     });
   };
 
-  // pick db에서 ( 유저아이디 && 글번호 )
-  // const pickSt = {
-
-  // }
-  // useEffect(() => {
-  //픽 데이터
-  // const newPickArr = all.filter((data) => data[i].picks);
-  // console.log('allll', all[3].picks);
-  // const newPickArr = all.map((el, index) => {
-  //   setPick(el.picks);
-  //   console.log('2133sadddddddddd3333', el.picks);
-  // });
-  // setPick([...newPickArr]);
-  // console.log('setPick', pick);
-  // const pickDatas = all[i].picks;
-  // console.log('pickDatas+++', pickDatas);
-  // console.log('=========', pickDatas.length);
-  // setPick(pickDatas.length);
-
-  // if (pickDatas !== null) {
-  //   // pick 값이 값이 있으면?
-  //   // if (pickDatas.suppliesId && pickDatas.suppliesId) {
-  //   //   //유저아이디와 용품pk 값이 있다면? => 나든 누구든 찜을 했다.
-  //   if (pickDatas.userId == isLoggedIn && pickDatas.suppliesId) {
-  //     // 값이 있으면 => 찜 버튼 활성화
-  //     console.log('내가 찜한 글 !!!');
-  //   } else {
-  //     // 버튼 활성 x /
-  //     console.log('누군가 찜하긴 함..');
-  //   }
-  // } else {
-  //   // 아얘 찜이 없는 글
-  //   console.log('찜 값이 없는 글!!');
-  // }
-  // // }
-  //   return;
-  // }, []);
-
   useEffect(() => {
     getData();
   }, []);
-
-  const test = () => {
-    console.log('all', all);
-    console.log('all[0].picks.length', all[0].picks.length);
-    console.log('sell', sell);
-  };
 
   return (
     <>
@@ -129,14 +76,6 @@ const SellPage = () => {
               {sell.map((list, index) => {
                 return <Card key={index} list={list} />;
               })}
-              <br />
-              <button
-                onClick={() => {
-                  test();
-                }}
-              >
-                테스트
-              </button>
             </div>
           </div>
         </section>

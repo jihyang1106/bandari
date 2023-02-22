@@ -73,7 +73,8 @@ export const StyledSlider = styled(Slider)`
   }
 `;
 
-const CustomSlider = ({ datas }) => {
+const CustomSlider = ({ Hot }) => {
+  console.log({ Hot });
   const settings = {
     dots: true,
     infinite: false,
@@ -113,7 +114,7 @@ const CustomSlider = ({ datas }) => {
   return (
     <div>
       <StyledSlider {...settings} className={styles.slider}>
-        {datas.map((data) => (
+        {Hot.map((data) => (
           <Card key={data.id} list={data} />
         ))}
       </StyledSlider>
