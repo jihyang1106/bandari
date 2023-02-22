@@ -3,7 +3,7 @@ const { pick } = require('../model');
 const { img } = require('../model');
 const { Op } = require('sequelize');
 
-// 용품 판매글 조회
+// 용품 판매글 조회 & 메인페이지 인기글 조회
 exports.getData = async (req, res) => {
   const result = await supplies.findAll({
     include: [
@@ -71,3 +71,20 @@ exports.patchUpdateDeal = async (req, res) => {
   console.log('result', result);
   res.send(result);
 };
+
+// // 메인페이지 인기글 조회
+// exports.getHotPost = async (req, res) => {
+//    supplies
+//     .findAll({
+//       include: [
+//         {
+//           model: img,
+//           required: false,
+//         },
+//         {
+//           model: pick,
+//           required: false,
+//         },
+//       ],})
+
+// }
