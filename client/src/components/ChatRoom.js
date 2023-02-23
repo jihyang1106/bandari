@@ -36,6 +36,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     // axios.post('chat/insert', datas).then((res) => {
     //   console.log('res.data', res.data);
     // });
+    inputRef.current.value = '';
   };
 
   socket.on('newMsg', (data) => {
@@ -62,7 +63,6 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
       );
     }
   });
-
 
   const onClickClose = () => {
     console.log('채팅방 close');
