@@ -35,6 +35,7 @@ const EditPetInfo = () => {
     nameRef.current.value = petInfo.name;
     kindRef.current.value = petInfo.petType;
     explanationRef.current.value = petInfo.info;
+    weightRef.current.value = petInfo.weight;
   });
   // 이미지 미리보기 함수
   const saveImgFile = () => {
@@ -124,7 +125,7 @@ const EditPetInfo = () => {
             <div className={`${styles.petImg}`}>
               {petInfo.petImg && (
                 <img
-                  src={petInfo.petImg}
+                  src={`/petImg/${petInfo.petImg}`}
                   alt=""
                   className={`${styles.petImg}`}
                 />

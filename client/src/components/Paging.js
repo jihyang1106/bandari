@@ -1,6 +1,6 @@
 import React from 'react';
 import Pagination from 'react-js-pagination';
-import './Paging.css';
+
 import './css/Paging.css';
 
 const Paging = ({ page, count, setPage }) => {
