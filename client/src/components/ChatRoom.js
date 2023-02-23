@@ -1,21 +1,14 @@
 import React, { createElement, useEffect, useRef, useState } from 'react';
- import styles from './css/ChatRoom.module.css';
- import axios from 'axios';
- import { io } from 'socket.io-client';
+import styles from './css/ChatRoom.module.css';
+import axios from 'axios';
+import { io } from 'socket.io-client';
 
 const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
   let socket = io.connect('http://localhost:5000');
   const closeBtnRef = useRef();
   // console.log('room으로 넘어온 chatData', chatData);
   //   console.log('상대방', chatData.other);
-
-
-   console.log('room으로 넘어온 chatData', chatData);
-   console.log('상대방', chatData.other);
-
-
-   const user = sessionStorage.getItem('userData');
-
+  const user = sessionStorage.getItem('userData');
 
   console.log('room id', chatData.id); // chatDB의 roomId
   console.log('userId', user); // chatDB의 userId
@@ -40,26 +33,20 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
       roomId: chatData.id,
     };
     socket.emit('sendMsg', datas);
-    axios.post('chat/insert', datas).then((res) => {
-       console.log('res.data', res.data);
-    });
-  };
-
-  const onClickClose = () => {
-    console.log('채팅방 close');
-    chatRef.current.classList.add(`${styles.transparent}`);
-    setSelectChat(false);
+    // axios.post('chat/insert', datas).then((res) => {
+    //   console.log('res.data', res.data);
+    // });
   };
 
   socket.on('newMsg', (data) => {
-    console.log(`server에서 받아온 data : ${data}`);
+    console.log('server에서 넘어온 값', data);
     if (user === data.userId) {
       chat.current.insertAdjacentHTML(
         'beforeend',
         `<div class='${styles.myChat} ${styles[categoryType]}'>` +
           `<span>${data.time}</span>` +
           `<div>` +
-          +`${data.msg}` +
+          `${data.msg}` +
           '</div>' +
           '</div>'
       );
@@ -76,19 +63,24 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     }
   });
 
+  const onClickClose = () => {
+    console.log('채팅방 close');
+    chatRef.current.classList.add(`${styles.transparent}`);
+    socket.disconnect();
+    setSelectChat(false);
+  };
 
-   /**판매 완료 버튼 이벤트 */
-   const onClickCheckSoldOut = () => {
-   axios
-     .patch('/supplies/updateDeal', {
+  /**판매 완료 버튼 이벤트 */
+  const onClickCheckSoldOut = () => {
+    axios
+      .patch('/supplies/updateDeal', {
         id: chatData.suppliesId,
-       })
+      })
       .then((res) => {
         if (res.data[0] === 1) alert('판매완료 되었습니다!');
-         else alert('이미 판매완료된 상품입니다.');
-       });
-   };
-
+        else alert('이미 판매완료된 상품입니다.');
+      });
+  };
 
   /** 채팅 종료 버튼 이벤트 : 채팅 삭제 */
   const onClickExit = () => {
@@ -161,6 +153,5 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     </div>
   );
 };
-
 
 export default ChatRoom;
