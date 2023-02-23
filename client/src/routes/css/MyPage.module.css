@@ -96,7 +96,7 @@ flex-direction: column;
 .myPetsInfo > div{
   display: flex;
   margin-top: 10px;
-  align-items: center;
+      align-items: stretch;
 
 }
 

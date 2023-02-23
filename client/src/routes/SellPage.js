@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import styles from './css/SellPage.module.css';
 // 페이지네이션
-// import Pagination from 'react-js-pagination';
+import Paging from '../components/Paging';
 
 import Nav from '../components/Nav';
 import Category from '../components/Category';
@@ -19,7 +19,16 @@ const SellPage = () => {
   );
   const isLoggedIn = useSelector((state) => state.user.user.isLogin);
   const [all, setAll] = useState([]); // 전체 목록을 항상 가지고 있는 state -> 처음에 세팅되면 바뀔 일이 없어요
+
+  //페이지네이션
+  const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
+  const [count, setCount] = useState(0); // 아이템 총 개수
   const [sell, setSell] = useState([]); // 화면에 보여지는 state ( 전체, 사료 이런 거상관없이 클라이언트가 보고 있는 화면의 목록)
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지. default 값으로 1
+  const [postPerPage] = useState(8); // 한 페이지에 보여질 아이템 수
+  const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
+  const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
+  const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
   const navigate = useNavigate();
 
@@ -52,25 +61,73 @@ const SellPage = () => {
       console.log('판매글 getData  :', res.data);
       setSell(res.data);
       setAll(res.data);
+
+      const indexLast = currentPage * postPerPage;
+      setProducts(res.data);
+      setCount(res.data.length);
+      setIndexOfLastPost(indexLast);
+      setIndexOfFirstPost(indexLast - postPerPage);
+      setCurrentPosts(res.data.slice(indexLast - postPerPage, indexLast));
     });
   };
-
   useEffect(() => {
     getData();
   }, []);
 
+  const setPage = (pageNum) => {
+    console.log('eeeeeeeeeeeeeeeeeeeeeeee : ', pageNum);
+    setCurrentPage(pageNum);
+    const indexLast = pageNum * postPerPage;
+    setIndexOfLastPost(indexLast);
+    setIndexOfFirstPost(indexLast - postPerPage);
+    setCurrentPosts(products.slice(indexLast - postPerPage, indexLast));
+  };
+
+  const setPagination = (postNum) => {
+    setCurrentPage(1);
+    setCount(postNum);
+  };
+
   return (
     <>
-      <Nav />
+      {/* <Nav />
       <div className={styles.sellPage}>
         <section>
           <Category />
           <div className={styles.AvailSaleContainer}>
             <SellCategory setSell={setSell} />
+
             <div className={styles.cardContainer}>
               {sell.map((list, index) => {
                 return <Card key={index} list={list} />;
               })}
+            </div>
+
+          </div>
+        </section> */}
+
+      <Nav />
+      <div className={styles.sellPage}>
+        <section>
+          <Category />
+          <div className={styles.AvailSaleContainer}>
+            <SellCategory
+              setCurrentPosts={setCurrentPosts}
+              setPagination={setPagination}
+            />
+            <div className={styles.cardContainer}>
+              {currentPosts && products.length > 0 ? (
+                <>
+                  {currentPosts.map((list, index) => {
+                    return <Card key={index} list={list} />;
+                  })}
+                </>
+              ) : (
+                <div> No posts.</div>
+              )}
+            </div>
+            <div className={styles.pagings}>
+              <Paging page={currentPage} count={count} setPage={setPage} />
             </div>
           </div>
         </section>

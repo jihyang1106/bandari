@@ -13,52 +13,6 @@ import TestImg from '../assets/TestImg1.jpg';
 import { redirect, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-let data = [
-  {
-    id: 1,
-    userID: '보리 언니',
-    title: '고양이 이동장 팝니다.',
-    price: '25000',
-    location: '용산 어디어디 오디',
-    saleStatus: false,
-    likeStatus: false,
-    cardImg: '/Test.png',
-    deal: true,
-  },
-  {
-    id: 2,
-    userID: '누구 님',
-    title: '강아지 배변 패드 팝니다.',
-    price: '25000',
-    location: '용산 어디어디 오디',
-    saleStatus: false,
-    likeStatus: false,
-    cardImg: '/Test.png',
-    deal: false,
-  },
-  {
-    id: 3,
-    userID: '누구 님',
-    title: '사료 기호성 테스트 키트.',
-    price: '10000',
-    location: '어디어디 오디',
-    saleStatus: true,
-    likeStatus: true,
-    cardImg: '/Test.png',
-    deal: false,
-  },
-  {
-    id: 4,
-    userID: '누구 님',
-    title: '사료 기호성 테스트 키트.',
-    price: '10000',
-    location: '어디어디 오디',
-    saleStatus: true,
-    likeStatus: true,
-    cardImg: '/Test.png',
-    deal: true,
-  },
-];
 
 const MyPage = (props) => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
