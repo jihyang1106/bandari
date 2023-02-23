@@ -93,3 +93,16 @@ exports.getPopularPost = async (req, res) => {
       res.send(result);
     });
 };
+
+exports.getLikeCount = async (req, res) => {
+  supplies
+    .findOne({
+      where: {
+        id: req.query.id,
+      },
+      attributes: ['likeCount'],
+    })
+    .then((result) => {
+      res.send(result);
+    });
+};

@@ -16,9 +16,7 @@ import LocationMainImg from '../assets/LocationMainImg.png';
 import UpIcon from '../assets/UpIcon.png';
 import Card from '../components/Card';
 
-
 import axios from 'axios';
-
 
 const MainPage = () => {
   const [Hot, setHot] = useState([]);
@@ -35,25 +33,19 @@ const MainPage = () => {
   /**인기글 가져오는 함수 */
   const getPopularPost = () => {
     console.log('인기글을 가져옵니다');
-    axios.get('supplies/getPopularPost').then((res) => {
-      console.log(res.data);
+    axios.get('supplies/getData').then((res) => {
       let temp = [];
-      let conutTemp = [];
-      for (let i = 0; i < 4; i++) {
 
-      let idxData = res.data.sort((a, b) => {
+      res.data.sort((a, b) => {
         if (a.likeCount > b.likeCount) return -1;
         if (a.likeCount < b.likeCount) return 1;
         return 0;
       });
 
-      console.log(idxData);
-
       for (let i = 0; i < 4; i++) {
         temp.push(res.data[i]);
       }
-      console.log('temp', temp);
-
+      console.log(res.data);
       setHot(temp);
       console.log('Hot', Hot);
     });
