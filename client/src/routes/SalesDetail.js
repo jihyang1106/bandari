@@ -123,6 +123,7 @@ const SalesDetail = () => {
           console.log('생성 판별 여부', res.data);
         });
         navigate('/chatPage');
+        window.location.reload();
       }
     }
   };

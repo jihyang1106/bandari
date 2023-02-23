@@ -63,11 +63,6 @@ exports.getData = async (req, res) => {
   });
 
   console.log('다른 유저가 만든 채팅방', otherId);
-  // const userName = await user.findAll({
-  //   where: { id: otherId[userId] },
-  // });
-
-  // console.log('userName', userName);
 
   // 내림차순 정렬
   let result = [];
@@ -96,4 +91,11 @@ exports.getData = async (req, res) => {
 
   // console.log(result);
   res.send(result);
+};
+
+exports.delete = async (req, res) => {
+  console.log('삭제할 room ', req.body);
+  const result = await room.destroy({ where: { id: req.body.id } });
+  console.log('delete result', result);
+  res.send({ result: result });
 };
