@@ -77,22 +77,39 @@ const io = require('socket.io')(http, {
 });
 
 const moment = require('moment');
+// 접속한 유저, 방 번호, 방
 let loginUser = '';
+let roomId = '';
+let rooms = [];
 
 io.on('connection', (socket) => {
   //채팅방 입장
   console.log('server socket connected');
 
-  // 로그인 한 유저
-  socket.on('loginUser', (user) => {
-    loginUser = user;
-    console.log(`로그인한 유저 ${loginUser}`);
+  // 방 입장 시 로그인 한 유저와 방이름
+  socket.on('loginUser', (data) => {
+    loginUser = data.user;
+    roomId = data.roomId;
+    console.log(`로그인한 유저 ${loginUser}와 방 번호 ${roomId}`);
+
+    // rooms에 있으면 roomId 추가 xx
+    if (!rooms.includes(roomId)) {
+      rooms.push(roomId);
+    }
+    socket.join(roomId);
   });
 
+  console.log('rooms', rooms);
   // 메시지 데이터
-  socket.on('send', (data) => {
+  socket.on('sendMsg', (data) => {
     console.log('메시지 데이터', data);
-    socket.emit('newMsg', data);
+    io.to(roomId).emit('newMsg', data);
+  });
+
+  // x버튼으로 채팅방 나가기
+  socket.on('leave', () => {});
+  socket.on('disconnect', () => {
+    console.log(`${loginUser}가 ${roomId}방을 나갔습니다.}`);
   });
 });
 
