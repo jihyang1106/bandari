@@ -152,18 +152,23 @@ const MyPage = (props) => {
 
   /**로그인한 유저가 찜한 판매글 가져오는 함수*/
   const getLikeData = () => {
-    axios.get('pick/userPick',{
-      params: {
-      userId:isLoggedIn
-      }
-    }).then((res)=>{
-      // console.log("찜",res.data)
-      const userPick= [];
-      for(let i = 0; i<res.data.length; i++)
-      {userPick.push(res.data[i].supply)}
-      console.log("어레이",userPick)
-      // setLike(userPick)
-    })
+    axios
+      .get('pick/userPick', {
+        params: {
+          userId: isLoggedIn,
+        },
+      })
+      .then((res) => {
+        // console.log("찜",res.data)
+        const userPick = [];
+        for (let i = 0; i < res.data.length; i++) {
+          userPick.push(res.data[i].supply);
+        }
+        console.log('어레이', userPick);
+        // setLike((prev) => {
+        //   return [...prev, userPick];
+        // });
+      });
   };
 
   /**펫 추가 이벤트 */
@@ -226,6 +231,14 @@ const MyPage = (props) => {
               <h2 className={styles.titleIndex}>구매</h2>
               <div className={styles.cards}></div>
             </section>
+            <button
+              className={styles.deleteButton}
+              onClick={() => {
+                onUserDelete();
+              }}
+            >
+              회원 탈퇴
+            </button>
           </div>
         </section>
         <div>
@@ -234,14 +247,6 @@ const MyPage = (props) => {
             setDisplay={setDisplayModal}
           />
         </div>
-        <button
-          className={styles.deleteButton}
-          onClick={() => {
-            onUserDelete();
-          }}
-        >
-          회원 탈퇴
-        </button>
       </div>
     </>
   );

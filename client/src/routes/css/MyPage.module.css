@@ -2,11 +2,11 @@
   cursor: pointer;
 }
 
-.myPage{
+.myPage .cards{
 }
 
 /*탈퇴버튼*/
-.myPage >button{
+.MyPageContainer > button{
   border: none;
   background-color: transparent;
   margin: 70px 0;

@@ -18,7 +18,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Card from '../components/Card';
 
-
 let datas = [
   {
     id: 1,
@@ -66,7 +65,6 @@ let datas = [
   },
 ];
 
-
 const MainPage = () => {
   const [Hot, setHot] = useState([]);
   const isLoggedIn = useSelector((state) => state.user.user.isLogin);
@@ -96,10 +94,15 @@ const MainPage = () => {
     axios.get('supplies/getData').then((res) => {
       console.log('재활용.. 라우터 가능?', res.data);
       let temp = [];
+      let idxData = res.data.sort((a, b) => {
+        if (a.likeCount > b.likeCount) return -1;
+        if (a.likeCount < b.likeCount) return 1;
+        return 0;
+      });
+
+      console.log(idxData);
+
       for (let i = 0; i < 4; i++) {
-        //setHot(res.data[i]);
-        const data = res.data[i];
-        console.log('222', data);
         temp.push(res.data[i]);
       }
       console.log('temp', temp);
@@ -174,15 +177,12 @@ const MainPage = () => {
         <section>
           <h1>인기글</h1>
           <div className={styles.cards}>
-
-            {/* <CustomCardSlider datas={datas} /> */}
             <div>
               {Hot.map((hot, index) => {
                 return <Card key={index} list={hot} />;
               })}
             </div>
-
-
+            {/* <CustomCardSlider datas={datas} /> */}
           </div>
 
           <span onClick={moveSellPage}>더보기</span>
