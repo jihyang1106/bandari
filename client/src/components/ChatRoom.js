@@ -1,17 +1,21 @@
-import React, { createElement, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './css/ChatRoom.module.css';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 
 const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
+  // 채팅 보일때마다 가져오기
+  useEffect(() => {
+    axios.get('chat/getData', { params: { id: chatData.id } }).then((res) => {
+      console.log('res.data', res.data);
+    });
+  });
+
   let socket = io.connect('http://localhost:5000');
   const closeBtnRef = useRef();
   // console.log('room으로 넘어온 chatData', chatData);
   //   console.log('상대방', chatData.other);
   const user = sessionStorage.getItem('userData');
-
-  console.log('room id', chatData.id); // chatDB의 roomId
-  console.log('userId', user); // chatDB의 userId
 
   // 현재 채팅에 들어온 유저와 방 번호
   socket.emit('loginUser', { user: user, roomId: chatData.id });
@@ -33,9 +37,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
       roomId: chatData.id,
     };
     socket.emit('sendMsg', datas);
-    // axios.post('chat/insert', datas).then((res) => {
-    //   console.log('res.data', res.data);
-    // });
+    axios.post('chat/insert', datas);
     inputRef.current.value = '';
   };
 
@@ -64,6 +66,8 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     }
   });
 
+
+  /**채팅 방 나가기 */
   const onClickClose = () => {
     console.log('채팅방 close');
     chatRef.current.classList.add(`${styles.transparent}`);
@@ -85,9 +89,14 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
 
   /** 채팅 종료 버튼 이벤트 : 채팅 삭제 */
   const onClickExit = () => {
-    console.log('채팅종료버튼누름');
-    io.emit('leave', chatData.id);
-    io.close();
+    alert('채팅을 종료하시겠습니까? 채팅방의 모든 내용이 삭제됩니다.');
+    axios.delete('room/delete', { data: { id: chatData.id } }).then((res) => {
+      if (res.data.result === 1) alert('성공적으로 채팅방에서 나가졌습니다!');
+      else alert('이미 채팅방에서 나가졌습니다.');
+      socket.disconnect();
+      onClickClose();
+      window.location.reload();
+    });
   };
 
   /*엔터 이벤트 */
@@ -96,6 +105,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
       btnSend();
     }
   };
+
   return (
     <div
       className={`${styles.chatRoom} ${styles[`${categoryType}`]}`}

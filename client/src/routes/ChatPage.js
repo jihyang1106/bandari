@@ -60,24 +60,22 @@ const ChatPage = () => {
 
   // 채팅 페이지 렌더 시 현재 로그인한 유저의 room에 있는 데이터 가져오기
   useEffect(() => {
-    axios.get('/room/getData', { params: { id: user } }).then((res) => {
+    axios.get('room/getData', { params: { id: user } }).then((res) => {
       setChatRoom(res.data);
     });
   }, []);
 
-  const onClickChatData = (chatData) => {
+  const onClickChatData = async (chatData) => {
     console.log('채팅클릭', { chatData });
-
     /**상대방 확인 하는 로직 chatData.other가 상대방 */
     if (chatData.otherId !== user) chatData.other = chatData.otherId;
     else chatData.other = chatData.userId;
-
     if (chatRoomRef.current) {
       chatRoomRef.current.classList.remove(`${styles.transparent}`);
     }
-    setSelectChat(true);
     setSelectedChat(chatData);
     setSelected(true);
+    setSelectChat(true);
   };
 
   return (
