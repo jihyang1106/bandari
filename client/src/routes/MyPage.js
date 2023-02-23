@@ -23,7 +23,7 @@ const MyPage = (props) => {
   const [like, setLike] = useState([]);
   const [displayModal, setDisplayModal] = useState(false);
   const [petDatas, setPetDatas] = useState([]);
-
+  let cardData;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,6 +54,7 @@ const MyPage = (props) => {
   const getData = async () => {
     axios.get('supplies/getData').then((res) => {
       console.log('판매글 getData  :', res.data);
+      cardData = res.data;
       res.data.map((data) => {
         if (data.userId === isLoggedIn) {
           setSell([...sell, data]);
@@ -72,15 +73,22 @@ const MyPage = (props) => {
         },
       })
       .then((res) => {
-        // console.log("찜",res.data)
-        const userPick = [];
+        console.log('찜', res.data);
+        let userPick = [];
+
         for (let i = 0; i < res.data.length; i++) {
-          userPick.push(res.data[i].supply);
+          const supply = res.data[i].supply;
+          supply['picks'] = [
+            {
+              id: res.data[i].id,
+              suppliesId: res.data[i].suppliesId,
+              userId: res.data[i].userId,
+            },
+          ];
+          userPick.push(supply);
         }
         console.log('어레이', userPick);
-        // setLike((prev) => {
-        //   return [...prev, userPick];
-        // });
+        setLike(userPick);
       });
   };
 

@@ -106,3 +106,15 @@ exports.getLikeCount = async (req, res) => {
       res.send(result);
     });
 };
+
+exports.getImgs = async (req, res) => {
+  console.log(req.query);
+  img
+    .findAll({
+      where: { suppliesId: req.query.suppliesId },
+    })
+    .then((result) => {
+      console.log('리절', result);
+      res.send(result);
+    });
+};

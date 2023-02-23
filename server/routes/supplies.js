@@ -82,4 +82,6 @@ router.get('/getPopularPost', supplilesController.getPopularPost);
 
 router.get('/getLikecount', supplilesController.getLikeCount);
 
+router.get('/getImgs', supplilesController.getImgs);
+
 module.exports = router;
