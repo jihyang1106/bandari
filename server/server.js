@@ -57,6 +57,7 @@ const petRouter = require('./routes/pet');
 const mypageRouter = require('./routes/mypage');
 const roomRouter = require('./routes/room');
 const pickRouter = require('./routes/pick');
+const chatRouter = require('./routes/chat');
 
 app.use('/kakao', router);
 app.use('/supplies', suppliesRouter);
@@ -64,6 +65,7 @@ app.use('/pet', petRouter);
 app.use('/mypage', mypageRouter);
 app.use('/room', roomRouter);
 app.use('/pick', pickRouter);
+app.use('/chat', chatRouter);
 
 // 소켓을 위한 서버 설정
 const http = require('http').createServer(app);
@@ -73,16 +75,24 @@ const io = require('socket.io')(http, {
     method: ['GET', 'POST'],
   },
 });
+
 const moment = require('moment');
+let loginUser = '';
 
 io.on('connection', (socket) => {
   //채팅방 입장
   console.log('server socket connected');
 
-  // console.log(`소켓 id${socket.id}`);
-  socket.on('new_msg', (data) => {
-    console.log('client says ', data);
-    socket.emit('new_msg', data);
+  // 로그인 한 유저
+  socket.on('loginUser', (user) => {
+    loginUser = user;
+    console.log(`로그인한 유저 ${loginUser}`);
+  });
+
+  // 메시지 데이터
+  socket.on('send', (data) => {
+    console.log('메시지 데이터', data);
+    socket.emit('newMsg', data);
   });
 });
 
