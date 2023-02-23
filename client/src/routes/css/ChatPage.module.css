@@ -22,22 +22,6 @@
   position: relative;
 }
 
-.chatPage >section>.chats > .closeBtn{
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  color: white;
-  font-weight: 600;
-  background-color: rgb(255, 96, 96);
-  position: absolute;
-  top: 15px;
-  right: 45px;
-  z-index: 100;
-}
-
 .chatPage >section>.chats .chatList.basic{
   background-color: rgb(230, 230, 230);
 }

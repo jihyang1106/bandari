@@ -13,6 +13,7 @@ import TestImg from '../assets/TestImg1.jpg';
 import { redirect, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+
 const MyPage = (props) => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const pets = useSelector((state) => state.pets.pets);

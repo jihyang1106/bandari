@@ -94,22 +94,6 @@ const MainPage = () => {
         </section>
         {/*세번째 메인페이지*/}
         <section>
-          <div>
-            <h1>
-              유기견들에게
-              <br />
-              사랑과 관심을 전달하는 곳
-            </h1>
-            <h3>
-              반려동물 물품을
-              <br />
-              필요한 아이들에게 기부해보세요
-            </h3>
-          </div>
-          <div className={styles.donateImg}>기부캡쳐이미지들</div>
-        </section>
-        {/*네번째 메인페이지*/}
-        <section>
           <img src={LocationMainImg} className={styles.locationImg} alt="" />
           <div>
             <h1>

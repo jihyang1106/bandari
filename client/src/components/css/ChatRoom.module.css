@@ -7,6 +7,26 @@
   position: relative;
 }
 
+.chatRoom .closeBtn{
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: white;
+  font-weight: 600;
+  background-color: rgb(255, 96, 96);
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  z-index: 100;
+}
+
+.transparent{
+  display: none;
+}
+
 .chatRoom.basic {
   background-color: #efefef;
 }
@@ -22,7 +42,8 @@
 /*채팅 상품부분*/
 .chatRoom > .item {
   background-color: white;
-  width: 90%;
+  padding: 20px 30px;
+  width: 80%;
   height: 140px;
   margin-top: 20px;
   border-radius: 10px;
@@ -32,19 +53,21 @@
 }
 
 .chatRoom > .item > div:first-child {
+  margin-bottom: 10px;
   display: flex;
-  align-items: center;
 }
 
 .chatRoom > .item > div:first-child img {
   width: 80px;
   height: 80px;
+  margin-right: 20px;
 }
 
 .chatRoom > .item > div:first-child h1 {
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .chatRoom > .item > div:first-child div span {
@@ -53,7 +76,7 @@
 
 .chatRoom > .item > div:last-child {
   display: flex;
-  justify-content: center;
+justify-content: space-around;
   margin-top: 5px;
 }
 

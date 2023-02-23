@@ -10,7 +10,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Card = ({ list }) => {
+
   // console.log(list);
+
   // 개인 좋아요
   const [likeState, setLikeState] = useState(false);
   // 총 좋아요

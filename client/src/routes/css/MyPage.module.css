@@ -3,6 +3,7 @@
 }
 
 .myPage .cards{
+  height: 400px;
 }
 
 /*탈퇴버튼*/
@@ -45,7 +46,6 @@
   width: 70vw;
   display: flex;
   flex-direction: column;
-  height: 75vh;
 }
 
 

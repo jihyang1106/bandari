@@ -2,11 +2,12 @@ import React from 'react';
 
 import styles from './css/ChatList.module.css';
 
-const ChatList = ({ chatData, onClickChatData }) => {
+const ChatList = ({ chatData, onClickChatData, setSelectChat }) => {
   return (
     <div
       onClick={() => {
         onClickChatData(chatData);
+        setSelectChat(true);
       }}
       className={styles.chatList}
     >
