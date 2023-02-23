@@ -78,6 +78,6 @@ router.post('/postSearch', supplilesController.postSearch);
 router.patch('/updateDeal', supplilesController.patchUpdateDeal);
 
 // 메인페이지 인기글 조회
-// router.get('/getHotPost', supplilesController.getHotPost);
+router.get('/getPopularPost', supplilesController.getPopularPost);
 
 module.exports = router;
