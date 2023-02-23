@@ -1,5 +1,6 @@
 const { pick } = require('../model');
 const { supplies } = require('../model');
+const { img } = require('../model');
 const { Op } = require('sequelize');
 
 // 판매페이지에서 pick 데이터 조회
@@ -78,7 +79,16 @@ exports.userPick = async (req, res) => {
       },
     ],
   });
-  console.log(result);
+  await console.log(result);
+  // result
+  //   .map((el) => {
+  //     img.findAll({
+  //       where: { suppliesId: el.suppliesId },
+  //     });
+  //   })
+  //   .then((respones) => {
+  //     console.log('리스', response);
+  //   });
 
   res.send(result);
 };
