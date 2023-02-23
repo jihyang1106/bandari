@@ -16,7 +16,9 @@ import LocationMainImg from '../assets/LocationMainImg.png';
 import UpIcon from '../assets/UpIcon.png';
 import Card from '../components/Card';
 
+
 import axios from 'axios';
+
 
 const MainPage = () => {
   const [Hot, setHot] = useState([]);
@@ -38,9 +40,17 @@ const MainPage = () => {
       let temp = [];
       let conutTemp = [];
       for (let i = 0; i < 4; i++) {
-        // console.log(`판매글 ${res.data[i].id}의 좋아요 개수 : ${data}`);
+
+      let idxData = res.data.sort((a, b) => {
+        if (a.likeCount > b.likeCount) return -1;
+        if (a.likeCount < b.likeCount) return 1;
+        return 0;
+      });
+
+      console.log(idxData);
+
+      for (let i = 0; i < 4; i++) {
         temp.push(res.data[i]);
-        // temp.filter((like) => like.likeCount);
       }
       console.log('temp', temp);
 
@@ -126,12 +136,11 @@ const MainPage = () => {
         <section>
           <h1>인기글</h1>
           <div className={styles.cards}>
-            {/* <CustomCardSlider datas={datas} /> */}
-            {/* <div>
-              {Hot.map((list, index) => {
-                return <Card key={index} list={list} />;
+            <div>
+              {Hot.map((hot, index) => {
+                return <Card key={index} list={hot} />;
               })}
-            </div> */}
+            </div>
           </div>
 
           <span onClick={moveSellPage}>더보기</span>

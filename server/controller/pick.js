@@ -72,3 +72,19 @@ exports.getPick = async (req, res) => {
   });
   res.send(result);
 };
+
+exports.userPick = async (req,res) =>{
+  console.log("쿼리",req.query.userId)
+  const result = await pick.findAll({
+    where:{
+      userId: req.query.userId
+    },
+        include: [{
+      model: supplies,
+    }],
+  })
+  console.log(result)
+
+
+  res.send(result)
+}
