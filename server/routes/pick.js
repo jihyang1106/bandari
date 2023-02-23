@@ -4,6 +4,7 @@ const router = express.Router();
 
 // 판매페이지에서 pick 조회
 router.get('/getLike', pickController.getLike);
+router.get('/userPick',pickController.userPick);
 
 // 좋아요 버튼 +, -
 router.post('/postLikePlus', pickController.postLikePlus);

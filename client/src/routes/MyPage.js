@@ -151,7 +151,20 @@ const MyPage = (props) => {
   };
 
   /**로그인한 유저가 찜한 판매글 가져오는 함수*/
-  const getLikeData = () => {};
+  const getLikeData = () => {
+    axios.get('pick/userPick',{
+      params: {
+      userId:isLoggedIn
+      }
+    }).then((res)=>{
+      // console.log("찜",res.data)
+      const userPick= [];
+      for(let i = 0; i<res.data.length; i++)
+      {userPick.push(res.data[i].supply)}
+      console.log("어레이",userPick)
+      // setLike(userPick)
+    })
+  };
 
   /**펫 추가 이벤트 */
   function petAddUpload() {
