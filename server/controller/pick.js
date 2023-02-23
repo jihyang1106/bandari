@@ -25,6 +25,17 @@ exports.postLikePlus = async (req, res) => {
       // console.log('좋아요 추가')
       res.send(true)
     );
+  await supplies
+    .update(
+      { likeCount: req.body.likeCount + 1 },
+      {
+        where: {
+          id: req.body.id,
+        },
+        raw: true,
+      }
+    )
+    .then((data) => console.log(data));
 };
 
 exports.postLikeminus = async (req, res) => {
@@ -37,6 +48,17 @@ exports.postLikeminus = async (req, res) => {
       res.send(true)
       // console.log('좋아요 해제'));
     );
+  await supplies
+    .update(
+      { likeCount: req.body.likeCount - 1 },
+      {
+        where: {
+          id: req.body.id,
+        },
+        raw: true,
+      }
+    )
+    .then((data) => res.send(data));
 };
 
 // 카드에서 아이디값 좋아요 정보 조회

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './css/MainPage.module.css';
 
@@ -13,57 +14,11 @@ import BasicMainImg from '../assets/BasicMainImg.png';
 import SellMainImg from '../assets/SellMainImg.png';
 import LocationMainImg from '../assets/LocationMainImg.png';
 import UpIcon from '../assets/UpIcon.png';
-
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Card from '../components/Card';
 
-let datas = [
-  {
-    id: 1,
-    userID: '누구 님',
-    title: '고양이 이동장 팝니다.',
-    price: '25000',
-    location: '용산 어디어디 오디',
-    saleStatus: false,
-    likeStatus: false,
-    cardImg: '/Test.png',
-    picks: 1,
-  },
-  {
-    id: 2,
-    userID: '누구 님',
-    title: '강아지 배변 패드 팝니다.',
-    price: '25000',
-    location: '용산 어디어디 오디',
-    saleStatus: false,
-    likeStatus: false,
-    cardImg: '/Test.png',
-    picks: 1,
-  },
-  {
-    id: 3,
-    userID: '누구 님',
-    title: '사료 기호성 테스트 키트.',
-    price: '10000',
-    location: '어디어디 오디',
-    saleStatus: true,
-    likeStatus: true,
-    cardImg: '/Test.png',
-    picks: 1,
-  },
-  {
-    id: 4,
-    userID: '누구 님',
-    title: '사료 기호성 테스트 키트.',
-    price: '10000',
-    location: '어디어디 오디',
-    saleStatus: true,
-    likeStatus: true,
-    cardImg: '/Test.png',
-    picks: 1,
-  },
-];
+
+import axios from 'axios';
+
 
 const MainPage = () => {
   const [Hot, setHot] = useState([]);
@@ -80,20 +35,12 @@ const MainPage = () => {
   /**인기글 가져오는 함수 */
   const getPopularPost = () => {
     console.log('인기글을 가져옵니다');
-  };
-  const moveSellPage = () => {
-    navigate('/sellPage');
-  };
-
-  const onClickGoUp = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  // 인기글 조회
-  useEffect(() => {
-    axios.get('supplies/getData').then((res) => {
-      console.log('재활용.. 라우터 가능?', res.data);
+    axios.get('supplies/getPopularPost').then((res) => {
+      console.log(res.data);
       let temp = [];
+      let conutTemp = [];
+      for (let i = 0; i < 4; i++) {
+
       let idxData = res.data.sort((a, b) => {
         if (a.likeCount > b.likeCount) return -1;
         if (a.likeCount < b.likeCount) return 1;
@@ -106,11 +53,23 @@ const MainPage = () => {
         temp.push(res.data[i]);
       }
       console.log('temp', temp);
+
       setHot(temp);
+      console.log('Hot', Hot);
     });
-    // console.log('재활용.. 라우터 가능?', Hot);
-    console.log('222132132', Hot);
+  };
+  // 인기글 조회
+  useEffect(() => {
+    getPopularPost();
   }, []);
+
+  const moveSellPage = () => {
+    navigate('/sellPage');
+  };
+
+  const onClickGoUp = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <>
@@ -182,7 +141,6 @@ const MainPage = () => {
                 return <Card key={index} list={hot} />;
               })}
             </div>
-            {/* <CustomCardSlider datas={datas} /> */}
           </div>
 
           <span onClick={moveSellPage}>더보기</span>

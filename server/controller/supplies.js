@@ -1,7 +1,5 @@
-const { supplies } = require('../model');
-const { pick } = require('../model');
-const { img } = require('../model');
-const { Op } = require('sequelize');
+const { supplies, pick, img, Sequelize } = require('../model');
+const Op = Sequelize.Op;
 
 // 용품 판매글 조회 & 메인페이지 인기글 조회
 exports.getData = async (req, res) => {
@@ -20,7 +18,7 @@ exports.getData = async (req, res) => {
   });
   // const result = await supplies.findAll();
   // const resultImg = await img.findAll();
-  // console.log('여기는 서버, 용품 판매글 조회 값 :', result);
+
   res.send(result);
 };
 
@@ -53,10 +51,11 @@ exports.postSearch = async (req, res) => {
             },
           },
         ],
+        raw: true,
       },
     })
     .then((result) => {
-      console.log('디비 조회', result);
+      // console.log('디비 조회', result);
       res.json(result);
     });
 };
@@ -72,19 +71,25 @@ exports.patchUpdateDeal = async (req, res) => {
   res.send(result);
 };
 
-// // 메인페이지 인기글 조회
-// exports.getHotPost = async (req, res) => {
-//    supplies
-//     .findAll({
-//       include: [
-//         {
-//           model: img,
-//           required: false,
-//         },
-//         {
-//           model: pick,
-//           required: false,
-//         },
-//       ],})
-
-// }
+// 메인페이지 인기글 조회
+exports.getPopularPost = async (req, res) => {
+  pick
+    .findAll({
+      attributes: [
+        [Sequelize.fn('COUNT', Sequelize.col('pick.id')), 'count'],
+        'suppliesId',
+      ],
+      include: [
+        {
+          model: supplies,
+          required: true,
+        },
+      ],
+      group: 'suppliesId',
+      raw: true,
+    })
+    .then((result) => {
+      console.log('메인페이지 인기글 조회', result);
+      res.send(result);
+    });
+};

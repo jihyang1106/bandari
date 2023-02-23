@@ -13,14 +13,15 @@ const Card = ({ list }) => {
   // 개인 좋아요
   const [likeState, setLikeState] = useState(false);
   // 총 좋아요
-  const [likeCount, setLikeCount] = useState(list.picks.length);
+  const [likeCount, setLikeCount] = useState(list.likeCount);
   // sold out 여부
   const [deal, setDeal] = useState('');
 
   const isLoggedIn = useSelector((state) => state.user.user.isLogin);
-  const userId = useSelector((state) => state.user.user.userId);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  // console.log('11', list.picks.length);
+  // console.log('22', list.likeCount);
   useEffect(() => {
     //거래중
     if (list.deal) {
@@ -53,6 +54,7 @@ const Card = ({ list }) => {
           .post('pick/postLikePlus', {
             id: list.id,
             userId: isLoggedIn,
+            likeCount: list.likeCount,
           })
           .then((res) => {
             setLikeCount(likeCount + 1);
@@ -67,6 +69,7 @@ const Card = ({ list }) => {
           .post('pick/postLikeminus', {
             id: list.id,
             userId: isLoggedIn,
+            likeCount: list.likeCount,
           })
           .then((res) => {
             setLikeCount(likeCount - 1);
