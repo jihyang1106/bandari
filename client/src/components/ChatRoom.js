@@ -1,7 +1,7 @@
 import React, { createElement, useEffect, useRef, useState } from 'react';
- import styles from './css/ChatRoom.module.css';
- import axios from 'axios';
- import { io } from 'socket.io-client';
+import styles from './css/ChatRoom.module.css';
+import axios from 'axios';
+import { io } from 'socket.io-client';
 
 const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
   let socket = io.connect('http://localhost:5000');
@@ -9,13 +9,10 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
   // console.log('room으로 넘어온 chatData', chatData);
   //   console.log('상대방', chatData.other);
 
+  console.log('room으로 넘어온 chatData', chatData);
+  console.log('상대방', chatData.other);
 
-   console.log('room으로 넘어온 chatData', chatData);
-   console.log('상대방', chatData.other);
-
-
-   const user = sessionStorage.getItem('userData');
-
+  const user = sessionStorage.getItem('userData');
 
   console.log('room id', chatData.id); // chatDB의 roomId
   console.log('userId', user); // chatDB의 userId
@@ -41,7 +38,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     };
     socket.emit('sendMsg', datas);
     axios.post('chat/insert', datas).then((res) => {
-       console.log('res.data', res.data);
+      console.log('res.data', res.data);
     });
   };
 
@@ -76,19 +73,17 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     }
   });
 
-
-   /**판매 완료 버튼 이벤트 */
-   const onClickCheckSoldOut = () => {
-   axios
-     .patch('/supplies/updateDeal', {
+  /**판매 완료 버튼 이벤트 */
+  const onClickCheckSoldOut = () => {
+    axios
+      .patch('/supplies/updateDeal', {
         id: chatData.suppliesId,
-       })
+      })
       .then((res) => {
         if (res.data[0] === 1) alert('판매완료 되었습니다!');
-         else alert('이미 판매완료된 상품입니다.');
-       });
-   };
-
+        else alert('이미 판매완료된 상품입니다.');
+      });
+  };
 
   /** 채팅 종료 버튼 이벤트 : 채팅 삭제 */
   const onClickExit = () => {
@@ -123,7 +118,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
           <img src={`/uploadImg/${chatData['supply.cover']}`} alt="" />
           <div>
             <h1>{chatData['supply.title']}</h1>
-            <span>{chatData.content}</span>
+            <span>{chatData['supply.content']}</span>
           </div>
         </div>
         {/**상품정보 */}
@@ -161,6 +156,5 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     </div>
   );
 };
-
 
 export default ChatRoom;

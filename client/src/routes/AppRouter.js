@@ -5,7 +5,6 @@ import MainPage from './MainPage';
 import SellPage from './SellPage';
 import MyPage from './MyPage';
 import ChatPage from './ChatPage';
-import DonatePage from './DonatePage';
 import ErrorPage from './ErrorPage';
 import SellForm from './SellForm';
 import PetProfile from './PetProfile';
@@ -23,7 +22,6 @@ const AppRouter = () => {
         <Route path="/petProfile" element={<PetProfile />} />
         <Route path="/myPage" element={<MyPage />} />
         <Route path="/chatPage" element={<ChatPage />} />
-        <Route path="/donatePage" element={<DonatePage />} />
         <Route path="/editPetInfoPage" element={<EditPetInfo />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>

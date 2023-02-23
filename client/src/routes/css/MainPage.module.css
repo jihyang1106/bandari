@@ -68,39 +68,20 @@
   justify-content: center;
 }
 
-.mainPage section:nth-child(3) div:first-child {
-  margin-right: 70px;
-  display: flex;
-  flex-direction: column;
-}
-
-.mainPage section:nth-child(3) .donateImg {
-  width: 600px;
-  height: 300px;
-  background-color: #f5a280;
-}
-
-/*세번째 메인페이지*/
-.mainPage section:nth-child(4) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mainPage section:nth-child(4) .locationImg {
+.mainPage section:nth-child(3) .locationImg {
   width: 800px;
   margin-right: 70px;
 }
 
 /*마지막 메인페이지*/
-.mainPage > section:nth-child(5) {
+.mainPage > section:nth-child(4) {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.mainPage section:nth-child(5) .cards {
+.mainPage section:nth-child(4) .cards {
   display: flex;
   width: 70vw;
   justify-content: space-around;
@@ -108,13 +89,13 @@
   flex-wrap: wrap;
 }
 
-.mainPage section:nth-child(5) .cards > div {
+.mainPage section:nth-child(4) .cards > div {
   width: 70vw;
   display: flex;
   justify-content: center;
 }
 
-.mainPage section:nth-child(5) > span {
+.mainPage section:nth-child(4) > span {
   cursor: pointer;
 }
 
@@ -131,7 +112,7 @@
     margin-right: 70px;
   }
 
-  .mainPage section:nth-child(4) .locationImg {
+  .mainPage section:nth-child(3) .locationImg {
     width: 45vw;
     margin-right: 70px;
   }
@@ -158,23 +139,28 @@
     z-index: -1;
   }
 
-  /*두번째 메인페이지*/
-  .mainPage section:nth-child(2) {
+  /*두번째,세번째 메인페이지*/
+  .mainPage section:nth-child(2),
+  .mainPage section:nth-child(3)  {
     flex-direction: column;
   }
 
-  .mainPage section:nth-child(2) > .sellImg {
+  .mainPage section:nth-child(2) > .sellImg,
+  .mainPage section:nth-child(2) > .locationImg {
     margin: 0;
     width: 60vw;
     margin-bottom: 20px;
   }
 
-  .mainPage section:nth-child(2) > div h1 {
+  .mainPage section:nth-child(2) > div h1,
+  .mainPage section:nth-child(3) > div h1
+   {
     text-align: center;
     line-height: 50px;
   }
 
-  .mainPage section:nth-child(2) > div h3 {
+  .mainPage section:nth-child(2) > div h3,
+  .mainPage section:nth-child(3) > div h3 {
     text-align: center;
   }
 
@@ -186,6 +172,12 @@
     margin-bottom: 50px;
     flex-wrap: wrap;
   }
+
+  .mainPage section:nth-child(4) .cards > div {
+    width: 60vw;
+    flex-wrap: wrap;
+  }
+  
 }
 
 /*900px이하*/

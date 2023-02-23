@@ -19,6 +19,8 @@ export const StyledSlider = styled(Slider)`
   }
   .slick-slide {
     width: calc(70vw / 3);
+    display: flex;
+    align-items: center;
   }
   .slick-dots {
     //슬라이드의 위치

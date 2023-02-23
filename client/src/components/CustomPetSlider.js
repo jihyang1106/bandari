@@ -3,8 +3,6 @@ import styled, { keyframes, css } from 'styled-components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import styles from './css/CustomPetSlider.module.css';
-
 import PetCard from './PetCard';
 
 export const StyledSlider = styled(Slider)`
@@ -19,6 +17,8 @@ export const StyledSlider = styled(Slider)`
   .slick-slide {
     //각 슬라이드
     width: 470px !important;
+    display: flex;
+    align-items: center;
   }
   .slick-dots {
     //슬라이드의 점 위치
@@ -113,7 +113,7 @@ const CustomSlider = ({ petdatas }) => {
 
   console.log(petdatas);
   return (
-    <StyledSlider {...settings} className={styles.slider}>
+    <StyledSlider {...settings}>
       {petdatas !== undefined ? (
         petdatas.map((data) => <PetCard pet={data} />)
       ) : (
