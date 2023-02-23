@@ -125,7 +125,8 @@ export default function SellCategory(props) {
       })
       .then((res) => {
         console.log('판매 카테고리 검색 결과 값 :', res.data);
-        props.setSell(res.data);
+        props.setCurrentPosts(res.data);
+        props.setPagination(res.data.length);
       });
   };
 
