@@ -94,10 +94,15 @@ const MainPage = () => {
     axios.get('supplies/getData').then((res) => {
       console.log('재활용.. 라우터 가능?', res.data);
       let temp = [];
+      let idxData = res.data.sort((a, b) => {
+        if (a.likeCount > b.likeCount) return -1;
+        if (a.likeCount < b.likeCount) return 1;
+        return 0;
+      });
+
+      console.log(idxData);
+
       for (let i = 0; i < 4; i++) {
-        //setHot(res.data[i]);
-        const data = res.data[i];
-        console.log('222', data);
         temp.push(res.data[i]);
       }
       console.log('temp', temp);
@@ -172,10 +177,12 @@ const MainPage = () => {
         <section>
           <h1>인기글</h1>
           <div className={styles.cards}>
+            <div>
+              {Hot.map((hot, index) => {
+                return <Card key={index} list={hot} />;
+              })}
+            </div>
             {/* <CustomCardSlider datas={datas} /> */}
-            {Hot.map((hot, index) => {
-              return <Card key={index} list={hot} />;
-            })}
           </div>
 
           <span onClick={moveSellPage}>더보기</span>
