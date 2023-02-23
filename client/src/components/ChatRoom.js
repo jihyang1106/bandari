@@ -6,46 +6,62 @@ import { io } from 'socket.io-client';
 const ChatRoom = ({ chatData, categoryType, chatRef }) => {
   let socket = io.connect('http://localhost:5000');
 
-  console.log('room으로 넘어온 chatData', chatData);
+  // console.log('room으로 넘어온 chatData', chatData);
   //   console.log('상대방', chatData.other);
 
   const user = sessionStorage.getItem('userData');
 
   console.log('room id', chatData.id); // chatDB의 roomId
   console.log('userId', user); // chatDB의 userId
-  // 현재 채팅에 들어온 유저
-  socket.emit('loginUser', user);
+
+  // 현재 채팅에 들어온 유저와 방 번호
+  socket.emit('loginUser', { user: user, roomId: chatData.id });
 
   /*전송이벤트 */
   const inputRef = useRef();
+  const chat = useRef();
 
   const btnSend = () => {
-    // const inputText = inputRef.current.value;
+    const inputText = inputRef.current.value;
     console.log('채팅입력후 전송하는 이벤트');
+    // 시간
     let hourMin = new Date().toTimeString().split(' ')[0];
+    hourMin = hourMin.substring(0, hourMin.lastIndexOf(':'));
     const datas = {
-      msg: inputRef.current.value,
-      time: hourMin.substring(0, hourMin.lastIndexOf(':')),
+      msg: inputText,
+      time: hourMin,
       userId: user,
       roomId: chatData.id,
     };
-    console.log('datas', datas);
-    // socket.emit('send', { msg: inputText, user });
-    axios.post('chat/insert', datas).then((res) => {
-      console.log('res.data', res.data);
-    });
+    socket.emit('sendMsg', datas);
+    // axios.post('chat/insert', datas).then((res) => {
+    //   console.log('res.data', res.data);
+    // });
   };
 
   socket.on('newMsg', (data) => {
-    console.log('서버에서 받아온 data', data);
-  });
-
-  /*엔터 이벤트 */
-  const enter = (e) => {
-    if (e.keyCode == 13) {
-      btnSend();
+    console.log(`server에서 받아온 data : ${data}`);
+    if (user === data.userId) {
+      chat.current.insertAdjacentHTML(
+        'beforeend',
+        `${data.time}` +
+          `<div className=` +
+          `${styles.myChat}` +
+          `${styles[`${categoryType}`]}>` +
+          `${data.msg}` +
+          '</div>'
+      );
+    } else {
+      chat.current.insertAdjacentHTML(
+        'beforeend',
+        `${data.time}` +
+          `<div className=` +
+          `${styles.otherChat} >` +
+          `${data.msg}` +
+          '</div>'
+      );
     }
-  };
+  });
 
   /**판매 완료 버튼 이벤트 */
   const onClickCheckSoldOut = () => {
@@ -62,8 +78,16 @@ const ChatRoom = ({ chatData, categoryType, chatRef }) => {
   /** 채팅 종료 버튼 이벤트 : 채팅 삭제 */
   const onClickExit = () => {
     console.log('채팅종료버튼누름');
+    io.emit('leave', chatData.id);
+    io.close();
   };
 
+  /*엔터 이벤트 */
+  const enter = (e) => {
+    if (e.keyCode == 13) {
+      btnSend();
+    }
+  };
   return (
     <div
       className={`${styles.chatRoom} ${styles[`${categoryType}`]}`}
@@ -97,13 +121,11 @@ const ChatRoom = ({ chatData, categoryType, chatRef }) => {
       </div>
       {/**카톡내용창 */}
       <div className={styles.chatpage}>
-        <div className={styles.container}>
-          <div className={`${styles.myChat} ${styles[`${categoryType}`]}`}>
-            <div>나의 메세지</div>
-          </div>
-          <div className={styles.otherChat}>
-            <div>상대 메세지</div>
-          </div>
+        <div ref={chat} className={styles.container}>
+          {/* <div
+            className={`${styles.myChat} ${styles[`${categoryType}`]}`}
+          ></div>
+          <div className={styles.otherChat}></div> */}
         </div>
       </div>
       <div className={styles.inputSection}>
