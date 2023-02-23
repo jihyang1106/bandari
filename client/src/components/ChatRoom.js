@@ -3,8 +3,11 @@ import React, { createElement, useEffect, useRef, useState } from 'react';
  import axios from 'axios';
  import { io } from 'socket.io-client';
 
- const ChatRoom = ({ chatData, categoryType, chatRef }) => {
-   let socket = io.connect('http://localhost:5000');
+const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
+  let socket = io.connect('http://localhost:5000');
+  const closeBtnRef = useRef();
+  // console.log('room으로 넘어온 chatData', chatData);
+  //   console.log('상대방', chatData.other);
 
 
    console.log('room으로 넘어온 chatData', chatData);
@@ -42,24 +45,31 @@ import React, { createElement, useEffect, useRef, useState } from 'react';
     });
   };
 
+  const onClickClose = () => {
+    console.log('채팅방 close');
+    chatRef.current.classList.add(`${styles.transparent}`);
+    setSelectChat(false);
+  };
+
   socket.on('newMsg', (data) => {
     console.log(`server에서 받아온 data : ${data}`);
     if (user === data.userId) {
       chat.current.insertAdjacentHTML(
         'beforeend',
-        `${data.time}` +
-          `<div className=` +
-          `${styles.myChat}` +
-          `${styles[`${categoryType}`]}>` +
-          `${data.msg}` +
+        `<div class='${styles.myChat} ${styles[categoryType]}'>` +
+          `<span>${data.time}</span>` +
+          `<div>` +
+          +`${data.msg}` +
+          '</div>' +
           '</div>'
       );
     } else {
       chat.current.insertAdjacentHTML(
         'beforeend',
-        `${data.time}` +
-          `<div className=` +
-          `${styles.otherChat} >` +
+        `<div class=` +
+          `${styles.otherChat}>` +
+          `${data.time}` +
+          `<div>` +
           `${data.msg}` +
           '</div>'
       );
@@ -98,6 +108,15 @@ import React, { createElement, useEffect, useRef, useState } from 'react';
       className={`${styles.chatRoom} ${styles[`${categoryType}`]}`}
       ref={chatRef}
     >
+      <button
+        className={`${styles.closeBtn}`}
+        onClick={() => {
+          onClickClose();
+        }}
+        ref={closeBtnRef}
+      >
+        X
+      </button>
       {/**상품정보창 */}
       <div className={styles.item}>
         <div>

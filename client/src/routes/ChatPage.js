@@ -33,7 +33,7 @@ const chatDatas = [
 ];
 
 const ChatPage = () => {
-  const [selectChat, setSelectChat] = useState(false);
+  const [selectChat, setSelectChat] = useState(false); //채팅방 선택 유무
   const [selectedChat, setSelectedChat] = useState({});
   const [selected, setSelected] = useState(false);
   const [categoryType, setCategoryType] = useState('');
@@ -47,7 +47,6 @@ const ChatPage = () => {
   const user = sessionStorage.getItem('userData');
 
   const chatRoomRef = useRef();
-  const closeBtnRef = useRef();
 
   useEffect(() => {
     if (swtichType === 'basic') {
@@ -76,17 +75,9 @@ const ChatPage = () => {
     if (chatRoomRef.current) {
       chatRoomRef.current.classList.remove(`${styles.transparent}`);
     }
-    closeBtnRef.current.classList.remove(`${styles.transparent}`);
     setSelectChat(true);
     setSelectedChat(chatData);
     setSelected(true);
-  };
-
-  const onClickClose = () => {
-    console.log('채팅방 close');
-    chatRoomRef.current.classList.add(`${styles.transparent}`);
-    closeBtnRef.current.classList.add(`${styles.transparent}`);
-    setSelected(false);
   };
 
   return (
@@ -96,13 +87,6 @@ const ChatPage = () => {
         <section>
           <Category />
           <div className={styles.chats}>
-            <button
-              className={`${styles.closeBtn} ${styles.transparent}`}
-              onClick={onClickClose}
-              ref={closeBtnRef}
-            >
-              X
-            </button>
             <div
               className={`${styles.chatList} ${styles[`${categoryType}`]} ${
                 styles[`${selected}`]
@@ -126,6 +110,7 @@ const ChatPage = () => {
                         key={idx}
                         chatData={chatData}
                         onClickChatData={onClickChatData}
+                        setSelectChat={setSelectChat}
                       />
                     );
                   })
@@ -136,9 +121,11 @@ const ChatPage = () => {
             </div>
             {selectChat ? (
               <ChatRoom
+                ref={chatRoomRef}
                 chatData={selectedChat}
                 categoryType={categoryType}
                 chatRef={chatRoomRef}
+                setSelectChat={setSelectChat}
               />
             ) : (
               <div className={styles.chatEmptyDiv}>채팅을 선택하세요</div>

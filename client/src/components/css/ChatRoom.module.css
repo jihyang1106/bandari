@@ -7,6 +7,26 @@
   position: relative;
 }
 
+.chatRoom .closeBtn{
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: white;
+  font-weight: 600;
+  background-color: rgb(255, 96, 96);
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  z-index: 100;
+}
+
+.transparent{
+  display: none;
+}
+
 .chatRoom.basic {
   background-color: #efefef;
 }
