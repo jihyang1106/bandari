@@ -20,7 +20,7 @@ const Card = ({ list }) => {
   // sold out 여부
   const [deal, setDeal] = useState('');
 
-  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
+  const isLoggedIn = localStorage.getItem('userId')
 
   const navigate = useNavigate();
 
