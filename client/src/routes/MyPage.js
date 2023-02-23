@@ -60,47 +60,6 @@ let data = [
   },
 ];
 
-/*
-let pets = [
-  {
-    name: '보리',
-    age: '2018년 12개월',
-    gender: '남아',
-    petType: '푸들',
-    weight: '10~15kg',
-    petImg: TestImg,
-    info: '보리입니다~',
-  },
-  {
-    name: '보리',
-    age: '2018년 12개월',
-    gender: '남아',
-    petType: '푸들',
-    weight: '10~15kg',
-    petImg: TestImg,
-    info: '보리입니다~',
-  },
-  {
-    name: '보리',
-    age: '2018년 12개월',
-    gender: '남아',
-    petType: '푸들',
-    weight: '10~15kg',
-    petImg: TestImg,
-    info: '보리입니다~',
-  },
-  {
-    name: '보리',
-    age: '2018년 12개월',
-    gender: '남아',
-    petType: '푸들',
-    weight: '10~15kg',
-    petImg: TestImg,
-    info: '보리입니다~',
-  },
-];
-*/
-
 const MyPage = (props) => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const pets = useSelector((state) => state.pets.pets);

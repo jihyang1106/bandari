@@ -42,16 +42,6 @@ const NavCategoryHamburger = ({ categoryType }) => {
         </div>
         <div className={styles.link}>
           <NavLink
-            to="/donatePage"
-            className={({ isActive }) =>
-              isActive ? `${styles.active} ${styles[`${categoryType}`]}` : ''
-            }
-          >
-            <span>기부관련페이지</span>
-          </NavLink>
-        </div>
-        <div className={styles.link}>
-          <NavLink
             to="/myPage"
             className={({ isActive }) =>
               isActive ? `${styles.active} ${styles[`${categoryType}`]}` : ''

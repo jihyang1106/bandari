@@ -63,6 +63,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     }
   });
 
+
   const onClickClose = () => {
     console.log('채팅방 close');
     chatRef.current.classList.add(`${styles.transparent}`);
@@ -115,7 +116,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
           <img src={`/uploadImg/${chatData['supply.cover']}`} alt="" />
           <div>
             <h1>{chatData['supply.title']}</h1>
-            <span>{chatData.content}</span>
+            <span>{chatData['supply.content']}</span>
           </div>
         </div>
         {/**상품정보 */}
