@@ -7,7 +7,7 @@
   position: relative;
 }
 
-.chatRoom .closeBtn{
+.chatRoom .closeBtn {
   border: none;
   cursor: pointer;
   padding: 10px;
@@ -23,7 +23,7 @@
   z-index: 100;
 }
 
-.transparent{
+.transparent {
   display: none;
 }
 
@@ -76,7 +76,7 @@
 
 .chatRoom > .item > div:last-child {
   display: flex;
-justify-content: space-around;
+  justify-content: space-around;
   margin-top: 5px;
 }
 
@@ -123,8 +123,9 @@ justify-content: space-around;
 }
 
 .chatRoom .chatpage > .container {
-  height: 50vh;
+  height: 40vh;
   padding: 35px 23px;
+  overflow: auto;
 }
 
 .myChat {

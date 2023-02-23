@@ -11,6 +11,9 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     });
   });
 
+  useEffect(() => {
+    chat.current.scrollTop = chat.current.scrollHeight;
+  }, []);
   let socket = io.connect('http://localhost:5000');
   const closeBtnRef = useRef();
   // console.log('room으로 넘어온 chatData', chatData);
@@ -65,7 +68,6 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
       );
     }
   });
-
 
   /**채팅 방 나가기 */
   const onClickClose = () => {
