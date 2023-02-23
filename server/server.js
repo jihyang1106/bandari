@@ -49,6 +49,7 @@ const ConnectDB = async () => {
     console.error('DB 연결 및 동기화 실패', error);
   }
 };
+
 // DB와 연결 및 동기화
 ConnectDB();
 const router = require('./routes/user/kakao');
@@ -107,9 +108,10 @@ io.on('connection', (socket) => {
   });
 
   // x버튼으로 채팅방 나가기
-  socket.on('leave', () => {});
   socket.on('disconnect', () => {
-    console.log(`${loginUser}가 ${roomId}방을 나갔습니다.}`);
+    delete rooms[roomId];
+    console.log(`${loginUser}가 ${roomId}방을 나갔습니다.`);
+    console.log('delete 후의 rooms', rooms);
   });
 });
 
