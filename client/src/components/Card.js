@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Card = ({ list }) => {
+  console.log(list);
   // 개인 좋아요
   const [likeState, setLikeState] = useState(false);
   // 총 좋아요
@@ -21,6 +22,16 @@ const Card = ({ list }) => {
 
   const navigate = useNavigate();
 
+  /**좋아요 초기화 부분 */
+  useEffect(() => {
+    checkLogin();
+  }, []);
+
+  const checkLogin = () => {
+    if (!isLoggedIn) return false;
+    const datas = list.picks.filter((data) => data.userId === isLoggedIn);
+    if (datas.length > 0) setLikeState(true);
+  };
   useEffect(() => {
     //거래중
     if (list.deal) {
@@ -31,14 +42,6 @@ const Card = ({ list }) => {
     }
   }, [list.deal]);
 
-  /**좋아요 초기화 부분 */
-  useEffect(() => {
-    if (!isLoggedIn) return false;
-    const datas = list.picks.filter((data) => data.userId === isLoggedIn);
-    console.log('datas : ', datas);
-    if (datas.length > 0) setLikeState(true);
-  }, []);
-
   /**좋아요 개수 초기화 부분 */
   useEffect(() => {
     axios
@@ -48,7 +51,6 @@ const Card = ({ list }) => {
         },
       })
       .then((res) => {
-        console.log(res.data.likeCount);
         setLikeCount(res.data.likeCount);
       });
   }, [likeState]);
