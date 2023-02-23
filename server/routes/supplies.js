@@ -80,4 +80,6 @@ router.patch('/updateDeal', supplilesController.patchUpdateDeal);
 // 메인페이지 인기글 조회
 router.get('/getPopularPost', supplilesController.getPopularPost);
 
+router.get('/getLikecount', supplilesController.getLikeCount);
+
 module.exports = router;

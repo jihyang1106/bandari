@@ -13,15 +13,14 @@ const Card = ({ list }) => {
   // 개인 좋아요
   const [likeState, setLikeState] = useState(false);
   // 총 좋아요
-  const [likeCount, setLikeCount] = useState(list.likeCount);
+  const [likeCount, setLikeCount] = useState();
   // sold out 여부
   const [deal, setDeal] = useState('');
 
   const isLoggedIn = useSelector((state) => state.user.user.isLogin);
 
   const navigate = useNavigate();
-  // console.log('11', list.picks.length);
-  // console.log('22', list.likeCount);
+
   useEffect(() => {
     //거래중
     if (list.deal) {
@@ -32,13 +31,27 @@ const Card = ({ list }) => {
     }
   }, [list.deal]);
 
+  /**좋아요 초기화 부분 */
   useEffect(() => {
     if (!isLoggedIn) return false;
     const datas = list.picks.filter((data) => data.userId === isLoggedIn);
     console.log('datas : ', datas);
     if (datas.length > 0) setLikeState(true);
   }, []);
-  // console.log('용품글 아이디: ', list.id);
+
+  /**좋아요 개수 초기화 부분 */
+  useEffect(() => {
+    axios
+      .get('supplies/getLikeCount', {
+        params: {
+          id: list.id,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.likeCount);
+        setLikeCount(res.data.likeCount);
+      });
+  }, [likeState]);
 
   // 찜 버튼
   const onLikeButton = (e) => {
@@ -47,17 +60,15 @@ const Card = ({ list }) => {
       return;
     }
     if (!likeState) {
-      //찜 안된 상태
-
       if (window.confirm('찜을 하시겠습니까?')) {
         axios
           .post('pick/postLikePlus', {
             id: list.id,
             userId: isLoggedIn,
-            likeCount: list.likeCount,
+            likeCount,
           })
           .then((res) => {
-            setLikeCount(likeCount + 1);
+            setLikeCount((prev) => prev + 1);
             setLikeState(true);
             if (res.data === true) console.log('좋아요 성공');
           });
@@ -69,11 +80,12 @@ const Card = ({ list }) => {
           .post('pick/postLikeminus', {
             id: list.id,
             userId: isLoggedIn,
-            likeCount: list.likeCount,
+            likeCount,
           })
           .then((res) => {
-            setLikeCount(likeCount - 1);
+            setLikeCount((prev) => prev - 1);
             setLikeState(false);
+            console.log(res.data);
             if (res.data === true) console.log('좋아요 해제 성공');
           });
       }
@@ -130,7 +142,7 @@ const Card = ({ list }) => {
             alt="찜"
             onClick={(e) => {
               e.stopPropagation();
-              onLikeButton(setLikeState(!likeState));
+              onLikeButton();
             }}
           />
         </div>
