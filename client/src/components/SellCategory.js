@@ -24,7 +24,6 @@ export default function SellCategory(props) {
   // 클라이언트의 서치 상태 값
   const [search, setSearch] = useState('');
   // db에서 가져온 서치 값
-  const [searchData, setSearchData] = useState([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -126,9 +125,7 @@ export default function SellCategory(props) {
       })
       .then((res) => {
         console.log('판매 카테고리 검색 결과 값 :', res.data);
-        setSearchData(res.data);
         props.setSell(res.data);
-        console.log('판매 카테고리의 값 :', [searchData]);
       });
   };
 

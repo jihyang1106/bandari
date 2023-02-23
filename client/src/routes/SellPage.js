@@ -3,13 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import styles from './css/SellPage.module.css';
-
-import {
-  setStateBasic,
-  setSatatePeed,
-  setStateSnack,
-  setStateProduct,
-} from '../store/module/sellCategorySwitch';
+// 페이지네이션
+// import Pagination from 'react-js-pagination';
 
 import Nav from '../components/Nav';
 import Category from '../components/Category';
@@ -25,6 +20,7 @@ const SellPage = () => {
   const isLoggedIn = useSelector((state) => state.user.user.isLogin);
   const [all, setAll] = useState([]); // 전체 목록을 항상 가지고 있는 state -> 처음에 세팅되면 바뀔 일이 없어요
   const [sell, setSell] = useState([]); // 화면에 보여지는 state ( 전체, 사료 이런 거상관없이 클라이언트가 보고 있는 화면의 목록)
+
   const navigate = useNavigate();
 
   // sellState 카테고리 변경 json
