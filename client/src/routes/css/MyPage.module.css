@@ -2,6 +2,9 @@
   cursor: pointer;
 }
 
+.myPage .cards{
+}
+
 /*탈퇴버튼*/
 .myPage >button{
   border: none;
