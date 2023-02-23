@@ -213,6 +213,14 @@ const MyPage = (props) => {
               <h2 className={styles.titleIndex}>구매</h2>
               <div className={styles.cards}></div>
             </section>
+            <button
+              className={styles.deleteButton}
+              onClick={() => {
+                onUserDelete();
+              }}
+            >
+              회원 탈퇴
+            </button>
           </div>
         </section>
         <div>
@@ -221,14 +229,6 @@ const MyPage = (props) => {
             setDisplay={setDisplayModal}
           />
         </div>
-        <button
-          className={styles.deleteButton}
-          onClick={() => {
-            onUserDelete();
-          }}
-        >
-          회원 탈퇴
-        </button>
       </div>
     </>
   );

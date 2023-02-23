@@ -18,7 +18,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Card from '../components/Card';
 
-
 let datas = [
   {
     id: 1,
@@ -65,7 +64,6 @@ let datas = [
     picks: 1,
   },
 ];
-
 
 const MainPage = () => {
   const [Hot, setHot] = useState([]);
@@ -174,15 +172,10 @@ const MainPage = () => {
         <section>
           <h1>인기글</h1>
           <div className={styles.cards}>
-
             {/* <CustomCardSlider datas={datas} /> */}
-            <div>
-              {Hot.map((hot, index) => {
-                return <Card key={index} list={hot} />;
-              })}
-            </div>
-
-
+            {Hot.map((hot, index) => {
+              return <Card key={index} list={hot} />;
+            })}
           </div>
 
           <span onClick={moveSellPage}>더보기</span>
