@@ -93,3 +93,18 @@ exports.getPetId = async (req, res) => {
   console.log('결과', result);
   res.send(result);
 };
+
+exports.userDelete = async (req, res) => {
+  console.log(req.body.access_token);
+  console.log(req.body.userId);
+  const ACCESS_TOKEN = req.body.access_token;
+  const userId = req.body.userId;
+  axios({
+    method: 'POST',
+    url: 'https://kapi.kakao.com/v1/user/unlink',
+    headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
+  }).then(() => {
+    user.destroy({ where: { id: userId } });
+  });
+  res.send(true);
+};

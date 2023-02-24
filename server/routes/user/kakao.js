@@ -8,4 +8,5 @@ router.get('/logout', controller.kakaoLogout);
 // router.get('/isLogin', controller.isLogin);
 // router.get('/cleanUp', controller.cleanUp);
 router.get('/getPetId', controller.getPetId);
+router.delete('/userDelete', controller.userDelete);
 module.exports = router;
