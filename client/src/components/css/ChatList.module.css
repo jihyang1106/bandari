@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   padding: 25px;
-  width: 24vw;
+  width: 35vw;
   margin: 5px 0;
   background-color: white;
   cursor: pointer;
@@ -34,7 +34,7 @@
 /*1000px이하*/
 @media screen and (max-width: 1000px) {
   .chatList {
-    width: 60vw;
+    width: 75vw;
   }
 }
 
