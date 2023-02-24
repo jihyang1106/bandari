@@ -4,10 +4,39 @@ import axios from 'axios';
 import { io } from 'socket.io-client';
 
 const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
-  // 채팅 보일때마다 가져오기
+  const user = sessionStorage.getItem('userId'); // 로그인한 유저
+
+  const inputRef = useRef();
+  const chat = useRef();
+
+  // 채팅 목록에서 채팅방 클릭 시 DB에서 chat 가져오기
   useEffect(() => {
     axios.get('chat/getData', { params: { id: chatData.id } }).then((res) => {
-      console.log('res.data', res.data);
+      // /console.log('res.data', res.data);
+      res.data.forEach((el, idx) => {
+        console.log(el);
+        if (el.userId === user) {
+          chat.current.insertAdjacentHTML(
+            'beforeend',
+            `<div class='${styles.myChat} ${styles[categoryType]}'>` +
+              `<span>${el.time}</span>` +
+              `<div>` +
+              `${el.msg}` +
+              '</div>' +
+              '</div>'
+          );
+        } else {
+          chat.current.insertAdjacentHTML(
+            'beforeend',
+            `<div class=` +
+              `${styles.otherChat}>` +
+              `${el.time}` +
+              `<div>` +
+              `${el.msg}` +
+              '</div>'
+          );
+        }
+      });
     });
   });
 
@@ -18,15 +47,11 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
   const closeBtnRef = useRef();
   // console.log('room으로 넘어온 chatData', chatData);
   //   console.log('상대방', chatData.other);
-  const user = sessionStorage.getItem('userId');
 
   // 현재 채팅에 들어온 유저와 방 번호
   socket.emit('loginUser', { user: user, roomId: chatData.id });
 
   /*전송이벤트 */
-  const inputRef = useRef();
-  const chat = useRef();
-
   const btnSend = () => {
     const inputText = inputRef.current.value;
     console.log('채팅입력후 전송하는 이벤트');
