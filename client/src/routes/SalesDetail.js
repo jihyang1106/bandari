@@ -11,7 +11,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import styled, { keyframes, css } from 'styled-components';
 import $ from 'jquery';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export const StyledSlider = styled(Slider)`
@@ -72,6 +72,9 @@ const SalesDetail = () => {
   const userId = sessionStorage.getItem('userId');
   console.log(datas);
   const { id } = useParams();
+  const titleRef = useRef();
+  const priceRef = useRef();
+  const contentRef = useRef();
 
   const settings = {
     dots: true,
@@ -145,7 +148,35 @@ const SalesDetail = () => {
 
   /**수정하기1!!!!!!!!!!!!! */
   const onClickEdit = () => {
-    console.log('수정하기 버튼누름');
+    console.log(Number(priceRef.current.value));
+    if (Number(priceRef.current.value) == 0)
+      alert('가격에 숫자를 입력해주세요');
+    else {
+      axios
+        .patch('/supplies/patchSupplies', {
+          data: {
+            suppliesId: datas.id,
+            title: titleRef.current.value,
+            price: priceRef.current.value,
+            content: contentRef.current.value,
+          },
+        })
+        .then((res) => {
+          alert(` ${titleRef.current.value}상품의 정보가 수정되었습니다.`);
+          navigate('/sellPage');
+        });
+    }
+  };
+  const onClickDel = () => {
+    console.log(datas.id);
+    axios
+      .delete('/supplies/deleteSupplies', {
+        data: { suppliesId: datas.id },
+      })
+      .then(() => {
+        alert('상품 글이 삭제되었습니다.');
+        navigate('/sellPage');
+      });
   };
 
   return (
@@ -188,20 +219,24 @@ const SalesDetail = () => {
             <p className={styles.formUserInfo}>{datas.location}</p>
             <div className={styles.petPrifDisplay}>
               <p className={styles.formSubTitle}>제목</p>
+              {userId != datas.userId ? true : false}
               <input
                 readOnly={userId != datas.userId ? true : false}
                 type="text"
-                defaultValue={datas.title}
+                defaultValue={`${datas.title}`}
                 className={styles.inputWidth}
+                ref={titleRef}
               />
             </div>
             <div className={styles.petPrifDisplay}>
               <p className={styles.formSubTitle}>가격</p>
               <input
                 readOnly={userId != datas.userId ? true : false}
-                type="text"
+                type="number"
+                step="1000"
                 defaultValue={`${datas.price} 원`}
                 className={styles.inputWidth}
+                ref={priceRef}
               />
             </div>
 
@@ -210,6 +245,7 @@ const SalesDetail = () => {
               <textarea
                 readOnly={userId != datas.userId ? true : false}
                 defaultValue={`${datas.content}`}
+                ref={contentRef}
               ></textarea>
             </div>
 
@@ -241,7 +277,9 @@ const SalesDetail = () => {
                     수정
                   </button>
                   &nbsp;
-                  <button type="button">삭제</button>
+                  <button type="button" onClick={onClickDel}>
+                    삭제
+                  </button>
                 </>
               )}
             </div>

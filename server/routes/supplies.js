@@ -84,4 +84,8 @@ router.get('/getLikecount', supplilesController.getLikeCount);
 
 router.get('/getImgs', supplilesController.getImgs);
 
+router.patch('/patchSupplies', supplilesController.patchSupplies);
+
+router.delete('/deleteSupplies', supplilesController.deleteSupplies);
+
 module.exports = router;
