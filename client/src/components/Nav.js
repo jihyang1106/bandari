@@ -15,7 +15,6 @@ import BasicIcon from '../assets/BasicIcon.png';
 
 import HamburgerIcon from '../assets/HamburgerIcon.png';
 
-import GetLocation from './js/GetLocation';
 import { logout } from '../store/module/user';
 
 const Nav = () => {
@@ -56,7 +55,7 @@ const Nav = () => {
     const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=http://localhost:3000/kakao/logout`;
     await (window.location.href = kakaoLogoutUrl);
   };
-  console.log(isLoggedIn);
+
   /**클릭시 위치얻기 실행되는 함수 */
 
   /*카테고리 열기 함수*/
