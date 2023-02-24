@@ -80,7 +80,7 @@ const PetProfile = () => {
       .then((res) => {
         alert(` ${form.name.value}(이)의 소중한 정보가 등록되었습니다.`);
         dispatch(setPets(res.data.id));
-        navigate('/');
+        navigate('/myPage');
       });
   }
 
