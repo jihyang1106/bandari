@@ -16,6 +16,7 @@ import axios from 'axios';
 const MyPage = (props) => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const pets = useSelector((state) => state.pets.pets);
+  const pet = localStorage.getItem('pet');
   const isLoggedIn = sessionStorage.getItem('userId');
   const [all, setAll] = useState([]); //전체목록
   const [sell, setSell] = useState([]); // 현재유저가 올린 판매글
