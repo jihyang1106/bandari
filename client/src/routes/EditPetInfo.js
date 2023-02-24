@@ -53,8 +53,9 @@ const EditPetInfo = () => {
     const formData = new FormData();
     // 파일
     const img = imgRef.current.files[0];
-    formData.append('img', img[0]);
     console.log(img);
+    formData.append('img', img);
+
     //데이터
     const datas = {
       name: form.name.value,
