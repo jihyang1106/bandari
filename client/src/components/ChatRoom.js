@@ -40,9 +40,14 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     });
   });
 
+  //스크롤 위치를 위함
+  const resetScroll = () => {
+    chat.current.scrollTop = chat.current.scrollHeight - 500;
+  };
   useEffect(() => {
-    chat.current.scrollTop = chat.current.scrollHeight;
-  }, []);
+    window.setTimeout(resetScroll, 50);
+  });
+
   let socket = io.connect('http://localhost:5000');
   const closeBtnRef = useRef();
   // console.log('room으로 넘어온 chatData', chatData);
@@ -67,6 +72,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     socket.emit('sendMsg', datas);
     axios.post('chat/insert', datas);
     inputRef.current.value = '';
+    resetScroll();
   };
 
   socket.on('newMsg', (data) => {
@@ -175,12 +181,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
       </div>
       {/**카톡내용창 */}
       <div className={styles.chatpage}>
-        <div ref={chat} className={styles.container}>
-          {/* <div
-            className={`${styles.myChat} ${styles[`${categoryType}`]}`}
-          ></div>
-          <div className={styles.otherChat}></div> */}
-        </div>
+        <div ref={chat} className={styles.container}></div>
       </div>
       <div className={styles.inputSection}>
         <input type="text" id="msg_box" onKeyDown={enter} ref={inputRef} />
