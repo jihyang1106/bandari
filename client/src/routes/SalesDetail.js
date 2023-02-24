@@ -70,7 +70,8 @@ const SalesDetail = () => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const [newImgs, setnewImgs] = useState([]);
   const userId = sessionStorage.getItem('userId');
-  console.log(datas);
+  console.log('datas 판매 상세페이지 : ', datas);
+  console.log('datas 판매 상세페이지 : ', datas.price);
   const { id } = useParams();
   const titleRef = useRef();
   const priceRef = useRef();
@@ -145,7 +146,8 @@ const SalesDetail = () => {
       }
     }
   };
-
+  // console.log('priceRef.current.value', priceRef.current.value);
+  // console.log(Number(priceRef.current.value));
   /**수정하기1!!!!!!!!!!!!! */
   const onClickEdit = () => {
     console.log(Number(priceRef.current.value));
@@ -234,7 +236,7 @@ const SalesDetail = () => {
                 readOnly={userId != datas.userId ? true : false}
                 type="number"
                 step="1000"
-                defaultValue={`${datas.price} 원`}
+                defaultValue={datas.price}
                 className={styles.inputWidth}
                 ref={priceRef}
               />
@@ -280,7 +282,7 @@ const SalesDetail = () => {
                   <button type="button" onClick={onClickEdit}>
                     수정
                   </button>
-                  &nbsp;
+                  {/* &nbsp; */}{' '}
                   <button type="button" onClick={onClickDel}>
                     삭제
                   </button>
