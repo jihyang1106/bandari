@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './css/MyPage.module.css';
 
@@ -8,12 +8,13 @@ import Category from '../components/Category';
 import EditUserInfoModal from '../components/EditUserInfoModal';
 import CustomCardSlider from '../components/CustomCardSlider';
 import CustomPetSlider from '../components/CustomPetSlider';
-
+import { setPets } from '../store/module/pets';
 import TestImg from '../assets/TestImg1.jpg';
 import { redirect, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const MyPage = (props) => {
+  const dispatch = useDispatch()
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const pets = useSelector((state) => state.pets.pets);
   const pet = localStorage.getItem('pet');
@@ -33,9 +34,10 @@ const MyPage = (props) => {
       navigate('/');
       return;
     } else {
+      console.log("펫",pet)
       getData();
       getLikeData();
-
+      getpetIds();
       axios
         .post('pet/checkPet', {
           userID: isLoggedIn,
@@ -46,6 +48,21 @@ const MyPage = (props) => {
         });
     }
   }, []);
+
+  const getpetIds = () => {
+    axios
+      .get('kakao/getPetId', {
+        params: {
+          userId: isLoggedIn,
+        },
+      })
+      .then((res) => {
+        /*백에서 불러온 펫 데이터*/
+        console.log('데이터', res.data);
+        dispatch(setPets(res.data));
+        sessionStorage.setItem('pet', res.data);
+      });
+  };
 
   //회원 탈퇴
   function onUserDelete() {
