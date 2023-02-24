@@ -49,6 +49,10 @@ const ChatPage = () => {
   const chatRoomRef = useRef();
 
   useEffect(() => {
+    console.log('selecttChat', selectChat);
+  }, [selectChat]);
+
+  useEffect(() => {
     if (swtichType === 'basic') {
       setCategoryType('basic');
     } else if (swtichType === 'puppy') {
@@ -73,9 +77,14 @@ const ChatPage = () => {
     if (chatRoomRef.current) {
       chatRoomRef.current.classList.remove(`${styles.transparent}`);
     }
+
     setSelectedChat(chatData);
     setSelected(true);
     setSelectChat(true);
+  };
+
+  const changeChatRoom = (chatData, closeEvent) => {
+    onClickChatData(chatData);
   };
 
   return (
@@ -87,7 +96,7 @@ const ChatPage = () => {
           <div className={styles.chats}>
             <div
               className={`${styles.chatList} ${styles[`${categoryType}`]} ${
-                styles[`${selected}`]
+                styles[`${selectChat}`]
               }`}
             >
               <h1>채팅목록</h1>
@@ -126,7 +135,7 @@ const ChatPage = () => {
                 setSelectChat={setSelectChat}
               />
             ) : (
-              <div className={styles.chatEmptyDiv}>채팅을 선택하세요</div>
+              <></>
             )}
           </div>
         </section>

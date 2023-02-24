@@ -2,6 +2,25 @@
 }
 
 
+  /*채팅이 선택된경우*/
+  .chatPage >section>.chats .chatList.true{
+    display: none;
+  }
+    /*채팅이 선택되지 않은경우*/
+    .chatPage >section>.chats .chatList.false{
+      display: block;
+    }
+
+    .chatPage >section>.chats > .chatEmptyDiv{
+display: none;
+    }
+
+    .chatPage >section>.chats > .closeBtn{
+    
+    
+    }
+
+
 .chatPage .transparent{
   display: none;
 }
@@ -15,11 +34,12 @@
 
 .chatPage >section>.chats{
   display: flex;
-  justify-content: space-between;
   width: 70vw;
   padding: 0 30px;
   height: 75vh;
   position: relative;
+  justify-content: center;
+  align-items: center;
 }
 
 .chatPage >section>.chats .chatList.basic{
@@ -35,7 +55,8 @@
 
 }
 .chatPage >section>.chats .chatList{
-  width: 30vw;
+  width: 40vw;
+  height: 75vh;
 }
 
 
@@ -122,24 +143,6 @@
     
   }
 
-
-  /*채팅이 선택된경우*/
-  .chatPage >section>.chats .chatList.true{
-    display: none;
-  }
-    /*채팅이 선택되지 않은경우*/
-    .chatPage >section>.chats .chatList.false{
-      display: block;
-    }
-
-    .chatPage >section>.chats > .chatEmptyDiv{
-display: none;
-    }
-
-    .chatPage >section>.chats > .closeBtn{
-    
-    
-    }
   
 
 

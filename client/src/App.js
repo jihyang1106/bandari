@@ -8,15 +8,25 @@ import { useDispatch } from 'react-redux';
 import { setUserInfo } from './store/module/user';
 import { setPets } from './store/module/pets';
 import GetLocation from './components/js/GetLocation';
+import useMousePosition from './Mousepostion';
+import usePrefersReducedMotion from './usePrefersReducedMotion';
 
 import CursonIcon from './assets/ClickedLikeButton.png';
+
+import styles from './App.module.css';
 
 function App() {
   const userId = sessionStorage.getItem('userId');
   console.log('oisjdfojfsojfoejsoejseofjse', userId);
   const [init, setInit] = useState(true);
 
-  const cursorRef = useRef();
+  // const mousePosition = useMousePosition();
+  // const prefersReducedMotion = usePrefersReducedMotion();
+
+  // const transform = prefersReducedMotion
+  //   ? null
+  //   : `translate(${mousePosition.x}px, ${mousePosition.y}px)`;
+  // const cursorRef = useRef();
 
   const dispatch = useDispatch();
 
@@ -34,21 +44,23 @@ function App() {
 
   useEffect(() => {
     GetLocation(dispatch);
-  }, []);
 
-  const onCursorEvent = (e) => {};
+    // return () => {
+    //   window.removeEventListener('mousemove', handleMouseMove);
+    // };
+  }, []);
 
   return (
     <>
       {init ? (
         <>
-          <div
-            className="dogCursor"
+          {/* <img
             ref={cursorRef}
-            onMouseMove={onCursorEvent}
-          >
-            <img src={CursonIcon} alt="" />
-          </div>
+            style={{ transform }}
+            src={CursonIcon}
+            alt=""
+            className={styles.dogCursor}
+          /> */}
           <AppRouter />
         </>
       ) : (
