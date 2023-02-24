@@ -44,7 +44,7 @@ const ChatPage = () => {
 
   // 현재 로그인 한 유저
   // const userId = localStorage.getItem('userId')
-  const user = localStorage.getItem('userId')
+  const user = sessionStorage.getItem('userId');
 
   const chatRoomRef = useRef();
 

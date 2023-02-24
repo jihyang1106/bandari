@@ -69,7 +69,7 @@ const SalesDetail = () => {
   const [pet, setPet] = useState([]);
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const [newImgs, setnewImgs] = useState([]);
-  const userId = localStorage.getItem('userId');
+  const userId = sessionStorage.getItem('userId');
   console.log(datas);
   const { id } = useParams();
 

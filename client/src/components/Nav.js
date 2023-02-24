@@ -21,9 +21,10 @@ import { logout } from '../store/module/user';
 const Nav = () => {
   const dispatch = useDispatch();
   const HamburgerDivRef = useRef();
-
   const [swtichType, setSwitchType] = useState('');
-  const isLoggedIn = localStorage.getItem('userId')
+  const [isLoggedIn, setisLoggedIn] = useState(
+    sessionStorage.getItem('userId')
+  );
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
   const haveLocation = useSelector((state) => state.location.haveLocation);
@@ -54,7 +55,7 @@ const Nav = () => {
     const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=http://localhost:3000/kakao/logout`;
     await (window.location.href = kakaoLogoutUrl);
   };
-
+  console.log(isLoggedIn);
   /**클릭시 위치얻기 실행되는 함수 */
 
   /*카테고리 열기 함수*/

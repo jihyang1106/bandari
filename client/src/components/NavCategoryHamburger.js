@@ -7,7 +7,7 @@ import HamburgerIcon from '../assets/HamburgerIcon.png';
 
 const NavCategoryHamburger = ({ categoryType }) => {
   const HamburgerDivRef = useRef();
-  const isLoggedIn = localStorage.getItem('userId')
+  const isLoggedIn = sessionStorage.getItem('userId');
 
   const onClickOpenCategory = () => {
     // console.log(HamburgerDivRef.current.classList);

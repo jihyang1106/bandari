@@ -10,26 +10,29 @@ import { setPets } from './store/module/pets';
 import GetLocation from './components/js/GetLocation';
 
 function App() {
-  const userId = localStorage.getItem('userId');
+  const userId = sessionStorage.getItem('userId');
+
   const [init, setInit] = useState(true);
 
   const dispatch = useDispatch();
-  
-  axios.get('kakao/getPetId',{params:{
-    userId:userId
-}}).then((res) => {
-  /*백에서 불러온 펫 데이터*/
-  console.log('데이터', res.data);
-  dispatch(setPets(res.data));
-  localStorage.setItem('pet', res.data)
-});
-;
+
+  axios
+    .get('kakao/getPetId', {
+      params: {
+        userId: userId,
+      },
+    })
+    .then((res) => {
+      /*백에서 불러온 펫 데이터*/
+      console.log('데이터', res.data);
+      dispatch(setPets(res.data));
+      sessionStorage.setItem('pet', res.data);
+    });
   /* 펫 정보 */
   const pets = {
     pets: sessionStorage.getItem('pets'),
   };
 
- 
   /*펫 정보*/
   if (pets) {
     console.log('pets', pets);

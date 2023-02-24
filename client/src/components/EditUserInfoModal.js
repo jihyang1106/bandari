@@ -5,7 +5,7 @@ import axios from 'axios';
 import styles from './css/EditUserInfoModal.module.css';
 
 const EditUserInfoModal = ({ display, setDisplay }) => {
-  const userId = localStorage.getItem('userId')
+  const userId = sessionStorage.getItem('userId');
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userNameRef = useRef();
   const userPhoneNumberRef = useRef();

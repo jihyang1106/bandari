@@ -20,7 +20,7 @@ import axios from 'axios';
 
 const MainPage = () => {
   const [Hot, setHot] = useState([]);
-  const isLoggedIn = localStorage.getItem('userId')
+  const isLoggedIn = sessionStorage.getItem('userId');
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
 
