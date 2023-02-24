@@ -207,7 +207,7 @@ const SalesDetail = () => {
             <p className={styles.petLabel}>사용한 반려동물</p>
             <div className={styles.sellectedPet}>
               <div className={styles.petImg}>
-                {/* <img src={`/petImg/${pet.petImg}`} alt="" /> */}
+                <img src={`/petImg/${pet.petImg}`} alt="" />
               </div>
               <div className={styles.petInfo}>
                 <h1>{pet.name}</h1>

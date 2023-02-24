@@ -23,6 +23,7 @@ import axios from 'axios';
 const MainPage = () => {
   const [Hot, setHot] = useState([]);
   const isLoggedIn = sessionStorage.getItem('userId');
+
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
 
@@ -42,31 +43,34 @@ const MainPage = () => {
   useEffect(() => {
     getPopularPost();
     openModal();
+    getPopularPost();
   }, []);
 
   /**인기글 가져오는 함수 */
   const getPopularPost = () => {
-    axios.get('supplies/getData').then((res) => {
-      let temp = [];
+    axios
+      .get('supplies/getData', {
+        params: {
+          type: 'basic',
+          location: 'location',
+        },
+      })
+      .then((res) => {
+        let temp = [];
 
-      res.data.sort((a, b) => {
-        if (a.likeCount > b.likeCount) return -1;
-        if (a.likeCount < b.likeCount) return 1;
-        return 0;
+        res.data.sort((a, b) => {
+          if (a.likeCount > b.likeCount) return -1;
+          if (a.likeCount < b.likeCount) return 1;
+          return 0;
+        });
+
+        for (let i = 0; i < 4; i++) {
+          temp.push(res.data[i]);
+        }
+        console.log(res.data);
+        setHot(temp);
       });
-
-      for (let i = 0; i < 4; i++) {
-        temp.push(res.data[i]);
-      }
-      console.log(res.data);
-      setHot(temp);
-      console.log('Hot', Hot);
-    });
   };
-  // 인기글 조회
-  useEffect(() => {
-    getPopularPost();
-  }, []);
 
   /**펫정보가져오기*/
   const getpetIds = () => {

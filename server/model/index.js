@@ -104,6 +104,20 @@ db.chat.belongsTo(db.user, {
   onUpdate: 'cascade',
 });
 
+// pet 삭제 => supplies 삭제
+db.pet.hasMany(db.supplies, {
+  foreignKey: 'petId',
+  sourceKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
+db.supplies.belongsTo(db.pet, {
+  foreignKey: 'petId',
+  targetKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade',
+});
+
 // supplies 삭제 => img 삭제
 db.supplies.hasMany(db.img, {
   foreignKey: 'suppliesId',
