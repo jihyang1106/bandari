@@ -27,6 +27,7 @@ export default function SellForm() {
   const categorySelectRef = useRef();
   const formInfoRef = useRef();
   const imgRef = useRef();
+  const priceRef = useRef();
 
   //처음에 불러와야할 pet정보
   useEffect(() => {
@@ -81,7 +82,7 @@ export default function SellForm() {
     //데이터
     const datas = {
       title: form.title.value,
-      price: form.price.value,
+      price: priceRef.current.value,
       content: form.content.value,
       location: `${userLocation.region_2depth_name} ${userLocation.region_3depth_name}`,
       category: categorySelectRef.current.value,
@@ -185,6 +186,7 @@ export default function SellForm() {
             step="1000"
             min="1000"
             // pattern="/[0-9]/"
+            ref={priceRef}
             required
           />
         </div>

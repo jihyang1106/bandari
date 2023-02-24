@@ -30,10 +30,16 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'SeoulHangangM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulHangangM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 
 *, body, section {
-    font-family:'KyoboHand';
+    font-family:'SeoulHangangM';
 
 }
 
