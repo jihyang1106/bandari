@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './css/MainPage.module.css';
 
 import Nav from '../components/Nav';
 import Category from '../components/Category';
+import { setPets } from '../store/module/pets';
 
 import PuppyMainImg from '../assets/PuppyMainImg.png';
 import CatMainImg from '../assets/CatMainImg.png';
@@ -26,6 +27,7 @@ const MainPage = () => {
   const userLocation = useSelector((state) => state.location.userLocation);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // useState를 사용하여 open상태를 변경한다. (open일때 true로 만들어 열리는 방식)
   const [modalOpen, setModalOpen] = useState(false);
@@ -65,6 +67,28 @@ const MainPage = () => {
   // 인기글 조회
   useEffect(() => {
     getPopularPost();
+  }, []);
+
+  /**펫정보가져오기*/
+  const getpetIds = () => {
+    axios
+      .get('kakao/getPetId', {
+        params: {
+          userId: isLoggedIn,
+        },
+      })
+      .then((res) => {
+        /*백에서 불러온 펫 데이터*/
+        console.log('데이터', res.data);
+        dispatch(setPets(res.data));
+        sessionStorage.setItem('pet', res.data);
+      });
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      getpetIds();
+    }
   }, []);
 
   const moveSellPage = () => {

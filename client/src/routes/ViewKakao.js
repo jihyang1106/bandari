@@ -46,7 +46,6 @@ const ViewKakao = () => {
 
   return (
     <>
-      <Nav />
       <div className={styles.sellForm}>
         <div> 카카오 로그인중</div>
       </div>
