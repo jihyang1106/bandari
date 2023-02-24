@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,7 +6,6 @@ import styles from './css/MainPage.module.css';
 
 import Nav from '../components/Nav';
 import Category from '../components/Category';
-import CustomCardSlider from '../components/CustomCardSlider';
 
 import PuppyMainImg from '../assets/PuppyMainImg.png';
 import CatMainImg from '../assets/CatMainImg.png';
@@ -15,6 +14,8 @@ import SellMainImg from '../assets/SellMainImg.png';
 import LocationMainImg from '../assets/LocationMainImg.png';
 import UpIcon from '../assets/UpIcon.png';
 import Card from '../components/Card';
+import MainModal from '../components/MainModal';
+import MainModalImg from '../assets/MainModal.jpg';
 
 import axios from 'axios';
 
@@ -26,8 +27,19 @@ const MainPage = () => {
 
   const navigate = useNavigate();
 
+  // useState를 사용하여 open상태를 변경한다. (open일때 true로 만들어 열리는 방식)
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   useEffect(() => {
     getPopularPost();
+    openModal();
   }, []);
 
   /**인기글 가져오는 함수 */
@@ -123,6 +135,14 @@ const MainPage = () => {
         </section>
         <img src={UpIcon} alt="" onClick={onClickGoUp} id={styles.goUpIcon} />
       </div>
+
+      <MainModal
+        open={modalOpen}
+        close={closeModal}
+        header="bandari에 어서오세요 집사님!"
+      >
+        <img src={MainModalImg} alt="" className={styles.modalImg} />
+      </MainModal>
     </>
   );
 };

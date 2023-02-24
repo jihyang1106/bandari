@@ -16,7 +16,14 @@ exports.checkPet = async (req, res) => {
       raw: true,
     })
     .then((result) => {
-      console.log('값 오나융?ㅠㅠㅠ:', result);
       res.send(result);
     });
+};
+
+// 판매페이지 펫 타입 가져오기
+exports.getPetType = async (req, res) => {
+  const result = await pet.findAll({}).then((result) => {
+    res.send(result);
+    // console.log('펫 타입', result);
+  });
 };

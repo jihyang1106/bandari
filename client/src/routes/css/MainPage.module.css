@@ -99,6 +99,10 @@
   cursor: pointer;
 }
 
+.modalImg {
+  width: 490px;
+  height: 490px;
+}
 /*1800px이하*/
 @media screen and (max-width: 1800px) {
   /*첫번째 메인페이지*/
