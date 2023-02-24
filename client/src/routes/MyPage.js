@@ -47,8 +47,23 @@ const MyPage = (props) => {
     }
   }, []);
 
+  //회원 탈퇴
   function onUserDelete() {
-    console.log('회원 탈퇴 버튼 눌림');
+    const access_token = localStorage.getItem('access_token');
+    const userId = sessionStorage.getItem('userId');
+    axios
+      .delete('/kakao/userDelete', {
+        data: {
+          access_token,
+          userId,
+        },
+      })
+      .then(() => {
+        sessionStorage.clear();
+        localStorage.clear();
+        alert('회원 탈퇴가 완료 되었습니다.');
+        navigate('/');
+      });
   }
   /*로그인한 유저가올린 판매글 가져오는 함수* */
   const getData = async () => {
