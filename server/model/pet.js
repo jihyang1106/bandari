@@ -34,7 +34,7 @@ const pet = (Sequelize, DataTypes) => {
         allowNull: false,
       },
       petImg: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(500),
         allowNull: false,
       },
       info: {

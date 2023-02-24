@@ -14,6 +14,7 @@ exports.getData = async (req, res) => {
         required: false,
       },
     ],
+    order: [['id', 'DESC']],
     //  where: {'$img.img1$': { [Op.ne]: null }},
   });
   // const result = await supplies.findAll();

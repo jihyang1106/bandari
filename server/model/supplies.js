@@ -35,7 +35,7 @@ const supplies = (Sequelize, DataTypes) => {
         defaultValue: Sequelize.fn('current_date'),
       },
       cover: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(500),
         allowNull: false,
       },
       likeCount: {
