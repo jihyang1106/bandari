@@ -40,15 +40,18 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
         }
       });
     });
-  });
+  }, []);
 
   //스크롤 위치를 위함
   const resetScroll = () => {
-    chat.current.scrollTop = chat.current.scrollHeight - 100;
+    window.setTimeout(() => {
+      chat.current.scrollTop = chat.current.scrollHeight - 100;
+    }, 50);
   };
   useEffect(() => {
-    window.setTimeout(resetScroll, 50);
-  }, [send]);
+    console.log('변함');
+    resetScroll();
+  }, []);
 
   let socket = io.connect('http://localhost:5000');
   const closeBtnRef = useRef();
@@ -74,7 +77,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     socket.emit('sendMsg', datas);
     axios.post('chat/insert', datas);
     inputRef.current.value = '';
-    setSend((prev) => !prev);
+    resetScroll();
   };
 
   socket.on('newMsg', (data) => {
