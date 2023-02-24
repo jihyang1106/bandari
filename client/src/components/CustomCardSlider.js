@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styles from './css/CustomCardSlider.module.css';
+import NoContentNotice from '../assets/NoContentNotice.jpg';
 
 import Card from './Card';
 
@@ -115,11 +116,15 @@ const CustomSlider = ({ datas }) => {
 
   return (
     <div>
-      <StyledSlider {...settings} className={styles.slider}>
-        {datas.map((data) => (
-          <Card key={data.id} list={data} />
-        ))}
-      </StyledSlider>
+      {datas.length == '' ? (
+        <img className={styles.NoContentNotice} src={NoContentNotice} alt="" />
+      ) : (
+        <StyledSlider {...settings} className={styles.slider}>
+          {datas.map((data) => (
+            <Card key={data.id} list={data} />
+          ))}
+        </StyledSlider>
+      )}
     </div>
   );
 };

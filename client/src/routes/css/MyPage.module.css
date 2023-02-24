@@ -96,13 +96,17 @@ flex-direction: column;
 .myPetsInfo > div{
   display: flex;
   margin-top: 10px;
-      align-items: stretch;
+      align-items: center;
+      
 
 }
 
 .myPetsInfo > div > p{
   text-align: center;
   width: 300px;
+  margin: auto 0;
+  color: gray;
+  font-weight: 500;
 }
 
 
