@@ -3,23 +3,73 @@ const Op = Sequelize.Op;
 
 // 용품 판매글 조회 & 메인페이지 인기글 조회
 exports.getData = async (req, res) => {
-  const result = await supplies.findAll({
-    include: [
-      {
-        model: img,
-        required: false,
-      },
-      {
-        model: pick,
-        required: false,
-      },
-    ],
-    //  where: {'$img.img1$': { [Op.ne]: null }},
-  });
-  // const result = await supplies.findAll();
-  // const resultImg = await img.findAll();
+  let petType = req.query.type;
+  console.log('petType', petType);
+  console.log('req.query', req.query.location);
 
-  res.send(result);
+  // 메인 페이지 에서 렌더 시 및 판매페이지에서 위치 기준으로 렌더시
+  if (petType === 'basic') {
+    // 메인페이지에서 렌더 시
+    if (req.query.location === 'location') {
+      const mypage = await supplies.findAll({
+        include: [
+          {
+            model: img,
+            required: false,
+          },
+          {
+            model: pick,
+            required: false,
+          },
+        ],
+      });
+      res.send(mypage);
+    } else {
+      // 판매 페이지에서 위치 기준으로 렌더시
+      const basic = await supplies.findAll({
+        include: [
+          {
+            model: img,
+            required: false,
+          },
+          {
+            model: pick,
+            required: false,
+          },
+        ],
+        where: {
+          location: { [Op.startsWith]: req.query.location.region_2depth_name },
+        },
+      });
+      res.send(basic);
+    }
+  } else if (petType === 'puppy') {
+    const puppy = await supplies.findAll({
+      include: [
+        {
+          model: img,
+          required: false,
+        },
+        {
+          model: pick,
+          required: false,
+        },
+        {
+          model: pet,
+          required: false,
+          attributes: ['id'],
+          where: {
+            petType: '강아지',
+          },
+        },
+      ],
+      where: {
+        location: { [Op.startsWith]: req.query.location.region_2depth_name },
+      },
+    });
+    res.send(puppy);
+  } else if (petType === 'cat') {
+  }
 };
 
 // 판매 페이지 검색

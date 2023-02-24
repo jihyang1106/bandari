@@ -25,6 +25,7 @@ const SellPage = () => {
   );
 
   const idxBtnState = useSelector((state) => state.typeSwitch.switchState);
+  const userLocation = useSelector((state) => state.location.userLocation);
 
   const isLoggedIn = sessionStorage.getItem('userId');
 
@@ -104,23 +105,29 @@ const SellPage = () => {
 
   /*판매글 가져오는 함수* */
   const getData = async () => {
-    axios.get('supplies/getData').then((res) => {
-      console.log('res.data', res.data);
-      console.log('판매글 getData  :', res.data);
-      setSell(res.data);
-      setAll(res.data);
+    axios
+      .get('supplies/getData', {
+        params: {
+          type: idxBtnState,
+          location: userLocation,
+        },
+      })
+      .then((res) => {
+        console.log('판매글 getData  :', res.data);
+        setSell(res.data);
+        setAll(res.data);
 
-      const indexLast = currentPage * postPerPage;
-      setProducts(res.data);
-      setCount(res.data.length);
-      setIndexOfLastPost(indexLast);
-      setIndexOfFirstPost(indexLast - postPerPage);
-      setCurrentPosts(res.data.slice(indexLast - postPerPage, indexLast));
-    });
+        const indexLast = currentPage * postPerPage;
+        setProducts(res.data);
+        setCount(res.data.length);
+        setIndexOfLastPost(indexLast);
+        setIndexOfFirstPost(indexLast - postPerPage);
+        setCurrentPosts(res.data.slice(indexLast - postPerPage, indexLast));
+      });
   };
   useEffect(() => {
     getData();
-  }, []);
+  }, [idxBtnState]);
 
   // 페이지네이션 페이지 조정
   const setPage = (pageNum) => {

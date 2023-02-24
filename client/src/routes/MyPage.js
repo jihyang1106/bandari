@@ -65,18 +65,26 @@ const MyPage = (props) => {
         navigate('/');
       });
   }
+
   /*로그인한 유저가올린 판매글 가져오는 함수* */
   const getData = async () => {
-    axios.get('supplies/getData').then((res) => {
-      console.log('판매글 getData  :', res.data);
-      cardData = res.data;
-      res.data.map((data) => {
-        if (data.userId === isLoggedIn) {
-          setSell([...sell, data]);
-        }
+    axios
+      .get('supplies/getData', {
+        params: {
+          type: 'basic',
+          location: 'location',
+        },
+      })
+      .then((res) => {
+        console.log('판매글 getData  :', res.data);
+        cardData = res.data;
+        res.data.map((data) => {
+          if (data.userId === isLoggedIn) {
+            setSell([...sell, data]);
+          }
+        });
+        setAll(res.data);
       });
-      setAll(res.data);
-    });
   };
 
   /**로그인한 유저가 찜한 판매글 가져오는 함수*/
