@@ -120,13 +120,20 @@
 .chatRoom .chatpage {
   height: 55vh;
   width: 90%;
+  box-sizing: content-box;
 }
 
 .chatRoom .chatpage > .container {
-  height: 40vh;
+  height: 50vh;
   padding: 35px 23px;
   overflow: auto;
 }
+
+/* .chatRoom .chatpage > .container::-webkit-scrollbar {
+  display: none;
+} */
+
+
 
 .myChat {
   display: flex;
