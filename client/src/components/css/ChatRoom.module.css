@@ -125,15 +125,14 @@
 
 .chatRoom .chatpage > .container {
   height: 50vh;
-  padding: 35px 23px;
+  padding: 0px 23px;
   overflow: auto;
+  margin-top: 20px;
 }
 
 /* .chatRoom .chatpage > .container::-webkit-scrollbar {
   display: none;
 } */
-
-
 
 .myChat {
   display: flex;
