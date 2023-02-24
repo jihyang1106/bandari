@@ -117,3 +117,24 @@ exports.getImgs = async (req, res) => {
       res.send(result);
     });
 };
+
+exports.patchSupplies = async (req, res) => {
+  let data;
+  data = {
+    title: req.body.data.title,
+    price: req.body.data.price,
+    content: req.body.data.content,
+  };
+  await supplies.update(data, {
+    where: { id: req.body.data.suppliesId },
+  });
+  res.send(true);
+};
+
+exports.deleteSupplies = async (req, res) => {
+  console.log(req.body.suppliesId);
+  await supplies.destroy({
+    where: { id: req.body.suppliesId },
+  });
+  res.send(true);
+};
