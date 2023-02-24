@@ -17,7 +17,6 @@ import styles from './App.module.css';
 
 function App() {
   const userId = sessionStorage.getItem('userId');
-  console.log('oisjdfojfsojfoejsoejseofjse', userId);
   const [init, setInit] = useState(true);
 
   // const mousePosition = useMousePosition();
@@ -29,14 +28,6 @@ function App() {
   // const cursorRef = useRef();
 
   const dispatch = useDispatch();
-
-  /* Api 요청 실행 예제 */
-  // const callApi = async () => {
-  //   axios.get('/api').then((res) => console.log(res.data.test));
-  // };
-  // useEffect(() => {
-  //   callApi();
-  // }, []);
 
   /* axios 요청 */
   axios.defaults.baseURL = 'http://localhost:5000';

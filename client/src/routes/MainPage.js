@@ -46,7 +46,6 @@ const MainPage = () => {
 
   /**인기글 가져오는 함수 */
   const getPopularPost = () => {
-    console.log('인기글을 가져옵니다');
     axios.get('supplies/getData').then((res) => {
       let temp = [];
 
