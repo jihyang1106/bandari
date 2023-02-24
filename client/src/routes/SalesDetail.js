@@ -252,8 +252,12 @@ const SalesDetail = () => {
             {/* 선택된 반려동물 정보 /사진 / 정보 & 소개글 */}
             <p className={styles.petLabel}>사용한 반려동물</p>
             <div className={styles.sellectedPet}>
-              <div className={styles.petImg}>
-                <img src={`/petImg/${pet.petImg}`} alt="" />
+              <div>
+                <img
+                  className={styles.petImg}
+                  src={`/petImg/${pet.petImg}`}
+                  alt=""
+                />
               </div>
               <div className={styles.petInfo}>
                 <h1>{pet.name}</h1>

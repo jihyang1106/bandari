@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import GetLocation from '../components/js/GetLocation';
 
 import styles from './css/SellPage.module.css';
 // 페이지네이션
@@ -42,6 +43,7 @@ const SellPage = () => {
   const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // slick-carousel settings
   const settings = {
@@ -125,8 +127,17 @@ const SellPage = () => {
         setCurrentPosts(res.data.slice(indexLast - postPerPage, indexLast));
       });
   };
+
   useEffect(() => {
-    getData();
+    async function fetchData() {
+      if (userLocation) {
+        getData();
+      } else {
+        console.log(userLocation, '여기2');
+        setTimeout(getData, 500);
+      }
+    }
+    fetchData();
   }, [idxBtnState]);
 
   // 페이지네이션 페이지 조정
