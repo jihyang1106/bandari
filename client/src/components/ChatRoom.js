@@ -42,7 +42,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
 
   //스크롤 위치를 위함
   const resetScroll = () => {
-    chat.current.scrollTop = chat.current.scrollHeight - 500;
+    chat.current.scrollTop = chat.current.scrollHeight - 100;
   };
   useEffect(() => {
     window.setTimeout(resetScroll, 50);
