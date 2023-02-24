@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+
 import { setUserLocation } from '../../store/module/location';
 
 const GetLocation = async (dispatch) => {
