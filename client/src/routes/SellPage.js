@@ -23,8 +23,10 @@ const SellPage = () => {
   const sellState = useSelector(
     (state) => state.sellCategorySwitch.switchState
   );
+
   const idxBtnState = useSelector((state) => state.typeSwitch.switchState);
-  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
+
+  const isLoggedIn = sessionStorage.getItem('userId');
 
   const [all, setAll] = useState([]); // 전체 목록을 항상 가지고 있는 state -> 처음에 세팅되면 바뀔 일이 없어요
   const [sell, setSell] = useState([]); // 화면에 보여지는 state ( 전체, 사료 이런 거상관없이 클라이언트가 보고 있는 화면의 목록)

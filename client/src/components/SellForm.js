@@ -16,7 +16,7 @@ export default function SellForm() {
   const dispatch = useDispatch();
 
   const userLocation = useSelector((state) => state.location.userLocation);
-  const userId = useSelector((state) => state.user.user.isLogin);
+  const userId = sessionStorage.getItem('userId');
   const petsidx = useSelector((state) => state.pets.pets);
   console.log(petsidx);
   const petData = useSelector((state) => state.pets.pets);

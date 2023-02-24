@@ -11,11 +11,14 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     });
   });
 
+  useEffect(() => {
+    chat.current.scrollTop = chat.current.scrollHeight;
+  }, []);
   let socket = io.connect('http://localhost:5000');
   const closeBtnRef = useRef();
   // console.log('room으로 넘어온 chatData', chatData);
   //   console.log('상대방', chatData.other);
-  const user = sessionStorage.getItem('userData');
+  const user = sessionStorage.getItem('userId');
 
   // 현재 채팅에 들어온 유저와 방 번호
   socket.emit('loginUser', { user: user, roomId: chatData.id });
@@ -65,7 +68,6 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
       );
     }
   });
-
 
   /**채팅 방 나가기 */
   const onClickClose = () => {

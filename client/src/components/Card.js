@@ -10,7 +10,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Card = ({ list }) => {
-
   // console.log(list);
 
   // 개인 좋아요
@@ -20,7 +19,7 @@ const Card = ({ list }) => {
   // sold out 여부
   const [deal, setDeal] = useState('');
 
-  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
+  const isLoggedIn = sessionStorage.getItem('userId');
 
   const navigate = useNavigate();
 

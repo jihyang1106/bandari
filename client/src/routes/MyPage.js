@@ -13,11 +13,10 @@ import TestImg from '../assets/TestImg1.jpg';
 import { redirect, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-
 const MyPage = (props) => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const pets = useSelector((state) => state.pets.pets);
-  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
+  const isLoggedIn = sessionStorage.getItem('userId');
   const [all, setAll] = useState([]); //전체목록
   const [sell, setSell] = useState([]); // 현재유저가 올린 판매글
   const [like, setLike] = useState([]);

@@ -21,7 +21,7 @@ import axios from 'axios';
 
 const MainPage = () => {
   const [Hot, setHot] = useState([]);
-  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
+  const isLoggedIn = sessionStorage.getItem('userId');
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
 

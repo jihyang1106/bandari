@@ -10,6 +10,8 @@ import SellForm from './SellForm';
 import PetProfile from './PetProfile';
 import EditPetInfo from './EditPetInfo';
 import SalesDetail from './SalesDetail';
+import ViewKakao from './ViewKakao';
+import ViewKakaoLogout from './ViewKakaoLogout';
 
 const AppRouter = () => {
   return (
@@ -24,6 +26,8 @@ const AppRouter = () => {
         <Route path="/chatPage" element={<ChatPage />} />
         <Route path="/editPetInfoPage" element={<EditPetInfo />} />
         <Route path="/*" element={<ErrorPage />} />
+        <Route path="/kakao/login" element={<ViewKakao />} />
+        <Route path="/kakao/logout" element={<ViewKakaoLogout/>} />
       </Routes>
     </BrowserRouter>
   );

@@ -21,9 +21,10 @@ import { logout } from '../store/module/user';
 const Nav = () => {
   const dispatch = useDispatch();
   const HamburgerDivRef = useRef();
-
   const [swtichType, setSwitchType] = useState('');
-  const isLoggedIn = useSelector((state) => state.user.user.isLogin);
+  const [isLoggedIn, setisLoggedIn] = useState(
+    sessionStorage.getItem('userId')
+  );
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
   const haveLocation = useSelector((state) => state.location.haveLocation);
@@ -43,7 +44,7 @@ const Nav = () => {
   const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECTURI;
   const LOGOUT_REDIRECT_URI = process.env.REACT_APP_KAKAO_LOGOUT_REDIRECTURI;
   const onClickLogin = async () => {
-    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=http://localhost:5000/kakao/code`;
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=http://localhost:3000/kakao/login`;
     await (window.location.href = kakaoAuthUrl);
     console.log('로그인됨');
   };
@@ -51,10 +52,10 @@ const Nav = () => {
   const onClickLogout = async () => {
     dispatch(logout());
     sessionStorage.clear();
-    const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=http://localhost:5000/kakao/logout`;
+    const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=http://localhost:3000/kakao/logout`;
     await (window.location.href = kakaoLogoutUrl);
   };
-
+  console.log(isLoggedIn);
   /**클릭시 위치얻기 실행되는 함수 */
 
   /*카테고리 열기 함수*/

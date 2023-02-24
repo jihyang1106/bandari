@@ -43,8 +43,8 @@ const ChatPage = () => {
   const [chatRoom, setChatRoom] = useState([]);
 
   // 현재 로그인 한 유저
-  // const userId = useSelector((state) => state.user.user.isLogin);
-  const user = sessionStorage.getItem('userData');
+  // const userId = localStorage.getItem('userId')
+  const user = sessionStorage.getItem('userId');
 
   const chatRoomRef = useRef();
 
