@@ -9,40 +9,17 @@ import { setUserInfo } from './store/module/user';
 import { setPets } from './store/module/pets';
 import GetLocation from './components/js/GetLocation';
 
+import CursonIcon from './assets/ClickedLikeButton.png';
+
 function App() {
   const userId = sessionStorage.getItem('userId');
   console.log('oisjdfojfsojfoejsoejseofjse', userId);
   const [init, setInit] = useState(true);
 
+  const cursorRef = useRef();
+
   const dispatch = useDispatch();
 
-  const getpetIds = () => {
-    axios
-      .get('kakao/getPetId', {
-        params: {
-          userId: userId,
-        },
-      })
-      .then((res) => {
-        /*백에서 불러온 펫 데이터*/
-        console.log('데이터', res.data);
-        dispatch(setPets(res.data));
-        sessionStorage.setItem('pet', res.data);
-      });
-  };
-
-  /* 펫 정보 */
-  const pets = {
-    pets: sessionStorage.getItem('pets'),
-  };
-
-  /*펫 정보*/
-  if (pets) {
-    console.log('pets', pets);
-    for (let i = 0; i < pets.length; i++) {
-      setPets(pets[i]);
-    }
-  }
   /* Api 요청 실행 예제 */
   // const callApi = async () => {
   //   axios.get('/api').then((res) => console.log(res.data.test));
@@ -57,14 +34,21 @@ function App() {
 
   useEffect(() => {
     GetLocation(dispatch);
-    if (userId) {
-      getpetIds();
-    }
-  }, [userId]);
+  }, []);
+
+  const onCursorEvent = (e) => {};
+
   return (
     <>
       {init ? (
         <>
+          <div
+            className="dogCursor"
+            ref={cursorRef}
+            onMouseMove={onCursorEvent}
+          >
+            <img src={CursonIcon} alt="" />
+          </div>
           <AppRouter />
         </>
       ) : (

@@ -25,6 +25,7 @@ const Nav = () => {
   const [isLoggedIn, setisLoggedIn] = useState(
     sessionStorage.getItem('userId')
   );
+
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
   const haveLocation = useSelector((state) => state.location.haveLocation);
