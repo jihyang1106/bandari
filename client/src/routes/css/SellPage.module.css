@@ -33,6 +33,21 @@ input {
   margin-top: 50PX;
 }
 
+.BannerImg {
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.slick-list {
+  height: 100%;
+}
+
+.slider {
+  margin-bottom: 100px;
+  width: 50vw;
+  text-align: center;
+}
+
 
 /*1200px이하*/
 @media screen and (max-width: 1200px) {

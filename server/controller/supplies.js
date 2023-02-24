@@ -1,4 +1,4 @@
-const { supplies, pick, img, Sequelize } = require('../model');
+const { supplies, pick, img, pet, Sequelize } = require('../model');
 const Op = Sequelize.Op;
 
 // 용품 판매글 조회 & 메인페이지 인기글 조회
@@ -24,7 +24,6 @@ exports.getData = async (req, res) => {
 
 // 판매 페이지 검색
 exports.postSearch = async (req, res) => {
-  console.log('검색 값 오나유? :', req.body);
   let searchWord = req.body.searchData;
 
   supplies
