@@ -1,6 +1,7 @@
 /*메인페이지 공통사항들*/
 .mainPage {
-}
+  font-family: 'GangwonEdu_OTFBoldA';
+} 
 
 .mainPage h1 {
   font-weight: 600;

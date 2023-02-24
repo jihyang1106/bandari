@@ -27,7 +27,7 @@ const AppRouter = () => {
         <Route path="/editPetInfoPage" element={<EditPetInfo />} />
         <Route path="/*" element={<ErrorPage />} />
         <Route path="/kakao/login" element={<ViewKakao />} />
-        <Route path="/kakao/logout" element={<ViewKakaoLogout/>} />
+        <Route path="/kakao/logout" element={<ViewKakaoLogout />} />
       </Routes>
     </BrowserRouter>
   );

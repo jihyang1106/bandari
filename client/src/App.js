@@ -14,6 +14,7 @@ import usePrefersReducedMotion from './usePrefersReducedMotion';
 import CursonIcon from './assets/ClickedLikeButton.png';
 
 import styles from './App.module.css';
+import GlobalStyle from './components/GlobalStyle';
 
 function App() {
   const userId = sessionStorage.getItem('userId');
@@ -52,6 +53,7 @@ function App() {
             alt=""
             className={styles.dogCursor}
           /> */}
+          <GlobalStyle />
           <AppRouter />
         </>
       ) : (
