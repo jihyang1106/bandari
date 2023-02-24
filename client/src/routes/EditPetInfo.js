@@ -5,15 +5,18 @@ import Category from '../components/Category';
 
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 import $ from 'jquery';
+import { setPets } from '../store/module/pets';
+import { useDispatch } from 'react-redux';
 
 const EditPetInfo = () => {
+  const dispatch = useDispatch();
   const [imgState, setImgState] = useState();
 
   const location = useLocation();
   const petInfo = location.state.pet.pet;
-
+  const userId = sessionStorage.getItem('userId');
   console.log(petInfo);
 
   // console.log(state.pet);
@@ -37,47 +40,61 @@ const EditPetInfo = () => {
     explanationRef.current.value = petInfo.info;
     weightRef.current.value = petInfo.weight;
   });
-  // 이미지 미리보기 함수
-  const saveImgFile = () => {
-    const file = imgRef.current.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImgState(reader.result);
-    };
-  };
 
-  function onCompleteBtn() {
+  const onCompleteBtn = async () => {
     console.log('펫 프로필 등록 버튼');
     const form = formInfoRef.current;
     const formData = new FormData();
     // 파일
-    const img = imgRef.current.files[0];
-    console.log(img);
-    formData.append('img', img);
 
     //데이터
     const datas = {
       name: form.name.value,
-      gender: genderRef.current.value,
-      age: `${yyRef.current.value} ${mmRef.current.value} ${ddRef.current.value}`,
-      petType: typeRef.current.value,
-      petSpecies: kindRef.current.value,
-      weight: weightRef.current.value,
+      gender: form.gender.value,
+      age: `${form.yy.value}년${form.mm.value}월${form.dd.value}일생`,
+      weight: form.weight.value,
+      petType: form.type.value,
+      petSpeices: form.kind.value,
       info: form.content.value,
+      userId: userId,
     };
-    formData.append('data', JSON.stringify(datas));
+
+    formData.append('datas', JSON.stringify(datas));
 
     // formData의 value 확인
     for (var value of formData.values()) {
       console.log(' formData의 value 확인', value);
     }
-  }
+    const age = `${form.yy.value}년${form.mm.value}월${form.dd.value}일생`;
+
+    // data: {
+    //   userName: name,
+    //   userPhoneNumber: phoneNum,
+    //   userId: userId,
+    // },
+    await axios
+      .patch('mypage/patchPet', {
+        data: {
+          petId: petInfo.id,
+          name: form.name.value,
+          gender: form.gender.value,
+          age: age,
+          weight: form.weight.value,
+          petType: form.type.value,
+          petSpeices: form.kind.value,
+          info: form.content.value,
+          userId: userId,
+        },
+      })
+      .then((res) => {
+        alert(` ${form.name.value}(이)의 소중한 정보가 수정되었습니다.`);
+        navigate('/myPage');
+      });
+  };
 
   /** 업로드 버튼 클릭 시 이전 값 초기화  */
   function onImgUpload() {
-    // 업로드 버튼 다시 눌렀을때 미리보기 날림
-    setImgState([]);
+    alert('이미지는 수정이 불가합니다.');
   }
 
   // 취소 버튼
@@ -142,15 +159,6 @@ const EditPetInfo = () => {
               >
                 +
               </label>
-
-              <input
-                type="file"
-                id="inputFile"
-                accept="image/*"
-                style={{ display: 'none' }}
-                onChange={saveImgFile}
-                ref={imgRef}
-              />
             </div>
 
             <div className={styles.petPrifDisplay}>
@@ -173,8 +181,8 @@ const EditPetInfo = () => {
                 ref={genderRef}
                 name="gender"
               >
-                <option value="man">남아</option>
-                <option value="femail">여아</option>
+                <option value="남아">남아</option>
+                <option value="여아">여아</option>
               </select>
             </div>
 
@@ -209,8 +217,8 @@ const EditPetInfo = () => {
             <div className={styles.petPrifDisplay}>
               <p className={styles.formSubTitle}>분류</p>
               <select name="type" ref={typeRef} className={styles.selcet}>
-                <option value="dog">강아지</option>
-                <option value="cat">고양이</option>
+                <option value="강아지">강아지</option>
+                <option value="고양이">고양이</option>
               </select>
             </div>
 

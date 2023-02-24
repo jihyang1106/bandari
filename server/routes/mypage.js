@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.patch('/patchUser', mypagecontroller.patchUser);
 
-
+router.patch('/patchPet', mypagecontroller.patchPet);
 
 module.exports = router;
