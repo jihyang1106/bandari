@@ -143,6 +143,11 @@ const SalesDetail = () => {
     }
   };
 
+  /**수정하기1!!!!!!!!!!!!! */
+  const onClickEdit = () => {
+    console.log('수정하기 버튼누름');
+  };
+
   return (
     <>
       <Nav />
@@ -184,6 +189,7 @@ const SalesDetail = () => {
             <div className={styles.petPrifDisplay}>
               <p className={styles.formSubTitle}>제목</p>
               <input
+                readOnly={userId != datas.userId ? true : false}
                 type="text"
                 defaultValue={datas.title}
                 className={styles.inputWidth}
@@ -192,6 +198,7 @@ const SalesDetail = () => {
             <div className={styles.petPrifDisplay}>
               <p className={styles.formSubTitle}>가격</p>
               <input
+                readOnly={userId != datas.userId ? true : false}
                 type="text"
                 defaultValue={`${datas.price} 원`}
                 className={styles.inputWidth}
@@ -200,7 +207,10 @@ const SalesDetail = () => {
 
             <div className={styles.petPrifDisplay}>
               <p className={`${styles.formSubTitle} ${styles.content}`}>설명</p>
-              <textarea defaultValue={`${datas.content}`}></textarea>
+              <textarea
+                readOnly={userId != datas.userId ? true : false}
+                defaultValue={`${datas.content}`}
+              ></textarea>
             </div>
 
             {/* 선택된 반려동물 정보 /사진 / 정보 & 소개글 */}
@@ -227,7 +237,10 @@ const SalesDetail = () => {
               ) : (
                 <>
                   {' '}
-                  <button type="button">수정</button>&nbsp;
+                  <button type="button" onClick={onClickEdit}>
+                    수정
+                  </button>
+                  &nbsp;
                   <button type="button">삭제</button>
                 </>
               )}
