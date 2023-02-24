@@ -9,6 +9,8 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
   const inputRef = useRef();
   const chat = useRef();
 
+  const [send, setSend] = useState(false); //채팅전송시바뀜
+
   // 채팅 목록에서 채팅방 클릭 시 DB에서 chat 가져오기
   useEffect(() => {
     axios.get('chat/getData', { params: { id: chatData.id } }).then((res) => {
@@ -46,7 +48,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
   };
   useEffect(() => {
     window.setTimeout(resetScroll, 50);
-  });
+  }, [send]);
 
   let socket = io.connect('http://localhost:5000');
   const closeBtnRef = useRef();
@@ -72,7 +74,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     socket.emit('sendMsg', datas);
     axios.post('chat/insert', datas);
     inputRef.current.value = '';
-    resetScroll();
+    setSend((prev) => !prev);
   };
 
   socket.on('newMsg', (data) => {
