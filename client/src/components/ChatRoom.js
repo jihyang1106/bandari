@@ -18,7 +18,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
   const closeBtnRef = useRef();
   // console.log('room으로 넘어온 chatData', chatData);
   //   console.log('상대방', chatData.other);
-  const user = localStorage.getItem('userId')
+  const user = sessionStorage.getItem('userId');
 
   // 현재 채팅에 들어온 유저와 방 번호
   socket.emit('loginUser', { user: user, roomId: chatData.id });

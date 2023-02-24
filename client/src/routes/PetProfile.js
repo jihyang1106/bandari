@@ -25,7 +25,7 @@ const PetProfile = () => {
   const typeRef = useRef();
   const kindRef = useRef();
   const weightRef = useRef();
-  const userId = localStorage.getItem('userId')
+  const userId = sessionStorage.getItem('userId');
 
   // 이미지 미리보기 함수
   const saveImgFile = () => {

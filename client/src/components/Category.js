@@ -8,7 +8,7 @@ import styles from './css/Category.module.css';
 import CategoryHamburger from './CategoryHamburger';
 
 const Category = () => {
-  const isLoggedIn = localStorage.getItem('userId')
+  const isLoggedIn = sessionStorage.getItem('userId');
   const swtichType = useSelector((state) => state.typeSwitch.switchState);
 
   const navigate = useNavigate();

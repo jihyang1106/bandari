@@ -17,7 +17,7 @@ const SellPage = () => {
   const sellState = useSelector(
     (state) => state.sellCategorySwitch.switchState
   );
-  const isLoggedIn = localStorage.getItem('userId')
+  const isLoggedIn = sessionStorage.getItem('userId');
   const [all, setAll] = useState([]); // 전체 목록을 항상 가지고 있는 state -> 처음에 세팅되면 바뀔 일이 없어요
 
   //페이지네이션
