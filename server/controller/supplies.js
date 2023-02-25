@@ -40,6 +40,7 @@ exports.getData = async (req, res) => {
         where: {
           location: { [Op.startsWith]: req.query.location.region_2depth_name },
         },
+        order: [['id', 'DESC']],
       });
       res.send(basic);
     }
@@ -60,6 +61,7 @@ exports.getData = async (req, res) => {
         location: { [Op.startsWith]: req.query.location.region_2depth_name },
         petType: petType,
       },
+      order: [['id', 'DESC']],
     });
     res.send(puppy);
   } else if (petType === 'cat') {
@@ -79,6 +81,7 @@ exports.getData = async (req, res) => {
         location: { [Op.startsWith]: req.query.location.region_2depth_name },
         petType: petType,
       },
+      order: [['id', 'DESC']],
     });
     res.send(cat);
   }
@@ -114,6 +117,7 @@ exports.postSearch = async (req, res) => {
           },
         ],
       },
+      order: [['id', 'DESC']],
     })
     .then((result) => {
       // console.log('디비 조회', result);
