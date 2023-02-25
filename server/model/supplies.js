@@ -56,6 +56,10 @@ const supplies = (Sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      petType: {
+        type: DataTypes.STRING(5),
+        allowNull: false,
+      },
     },
     {
       tablename: 'supplies',

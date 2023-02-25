@@ -44,6 +44,7 @@ exports.getData = async (req, res) => {
       res.send(basic);
     }
   } else if (petType === 'puppy') {
+    petType = '강아지';
     const puppy = await supplies.findAll({
       include: [
         {
@@ -54,21 +55,32 @@ exports.getData = async (req, res) => {
           model: pick,
           required: false,
         },
-        {
-          model: pet,
-          required: false,
-          attributes: ['id'],
-          where: {
-            petType: '강아지',
-          },
-        },
       ],
       where: {
         location: { [Op.startsWith]: req.query.location.region_2depth_name },
+        petType: petType,
       },
     });
     res.send(puppy);
   } else if (petType === 'cat') {
+    petType = '고양이';
+    const cat = await supplies.findAll({
+      include: [
+        {
+          model: img,
+          required: false,
+        },
+        {
+          model: pick,
+          required: false,
+        },
+      ],
+      where: {
+        location: { [Op.startsWith]: req.query.location.region_2depth_name },
+        petType: petType,
+      },
+    });
+    res.send(cat);
   }
 };
 
