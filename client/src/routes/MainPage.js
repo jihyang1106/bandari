@@ -24,6 +24,7 @@ const MainPage = () => {
   const [Hot, setHot] = useState([]);
   const isLoggedIn = sessionStorage.getItem('userId');
 
+  const [havePop, setHavePop] = useState(false);
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
 
@@ -56,6 +57,8 @@ const MainPage = () => {
         },
       })
       .then((res) => {
+        if (res.length === 0) {
+        }
         let temp = [];
 
         res.data.sort((a, b) => {
@@ -152,9 +155,15 @@ const MainPage = () => {
           <h1>인기글</h1>
           <div className={styles.cards}>
             <div>
-              {Hot.map((hot, index) => {
-                return <Card key={index} list={hot} />;
-              })}
+              {havePop ? (
+                <>
+                  {Hot.map((hot, index) => {
+                    return <Card key={index} list={hot} />;
+                  })}
+                </>
+              ) : (
+                <>인기글이 없습니다</>
+              )}
             </div>
           </div>
 
