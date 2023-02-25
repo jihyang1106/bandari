@@ -131,7 +131,7 @@ const SellPage = () => {
   useEffect(() => {
     async function fetchData() {
       if (userLocation) {
-        getData();
+        setTimeout(getData, 500);
       } else {
         console.log(userLocation, '여기2');
         setTimeout(getData, 500);
@@ -196,7 +196,7 @@ const SellPage = () => {
                   })}
                 </>
               ) : (
-                <div> No posts.</div>
+                <div>로딩중...</div>
               )}
             </div>
             <div className={styles.pagings}>
