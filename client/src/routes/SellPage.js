@@ -185,8 +185,8 @@ const SellPage = () => {
             <div className={styles.cardContainer}>
               <div className={styles.BannerImg}>
                 <Slider {...settings}>
-                  <img src={Dogbanner} alt="배너" />
-                  <img src={Catbanner} alt="배너" />
+                  <img src={Dogbanner} alt="배너" width="500px" />
+                  <img src={Catbanner} alt="배너" width="500px" />
                 </Slider>
               </div>
               {currentPosts && products.length > 0 ? (
