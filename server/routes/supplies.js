@@ -11,10 +11,10 @@ const path = require('path');
 
 // upload 할 img 폴더 없을 시 생성
 try {
-  fs.readdirSync('../client/public/uploadImg');
+  fs.readdirSync('../client/build/uploadImg');
 } catch (err) {
   console.error('upload할 upload 폴더가 없습니다. 폴더를 생성합니다.');
-  fs.mkdirSync('../client/public/uploadImg');
+  fs.mkdirSync('../client/build/uploadImg');
 }
 
 // multer
@@ -22,7 +22,7 @@ const upload = multer({
   storage: multer.diskStorage({
     destination(req, file, done) {
       // 저장되는 path
-      done(null, '../client/public/uploadImg');
+      done(null, '../client/build/uploadImg');
     },
     filename(req, file, done) {
       const ext = path.extname(file.originalname);

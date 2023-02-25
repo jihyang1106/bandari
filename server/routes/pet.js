@@ -11,7 +11,7 @@ const path = require('path');
 
 // upload 할 petImg 폴더 없을 시 생성
 try {
-  fs.readdirSync('../client/public/petImg');
+  fs.readdirSync('../client/build/petImg');
 } catch (err) {
   console.error('upload할 petImg 폴더가 없습니다. 폴더를 생성합니다.');
   fs.mkdirSync('../client/public/petImg');

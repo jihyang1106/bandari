@@ -53,7 +53,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     resetScroll();
   }, []);
 
-  let socket = io.connect('http://localhost:5000');
+  let socket = io.connect('http://13.124.185.47:5000');
   const closeBtnRef = useRef();
   // console.log('room으로 넘어온 chatData', chatData);
   //   console.log('상대방', chatData.other);

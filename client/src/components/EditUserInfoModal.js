@@ -32,7 +32,7 @@ const EditUserInfoModal = ({ display, setDisplay }) => {
       },
     }).then((res) => {
       alert('사용자 변경 완료');
-      window.location.href = 'http://localhost:3000/myPage';
+      window.location.href = 'http://13.124.185.47:3000/myPage';
     });
   };
   return (
