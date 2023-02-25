@@ -77,7 +77,6 @@ export const StyledSlider = styled(Slider)`
 `;
 
 const CustomSlider = ({ datas }) => {
-  console.log({ datas });
   const settings = {
     dots: true,
     infinite: false,

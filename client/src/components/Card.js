@@ -10,8 +10,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Card = ({ list }) => {
-  // console.log(list);
-
   // 개인 좋아요
   const [likeState, setLikeState] = useState(false);
   // 총 좋아요
@@ -73,7 +71,6 @@ const Card = ({ list }) => {
           .then((res) => {
             setLikeCount((prev) => prev + 1);
             setLikeState(true);
-            if (res.data === true) console.log('좋아요 성공');
           });
       }
     } else {
@@ -88,8 +85,6 @@ const Card = ({ list }) => {
           .then((res) => {
             setLikeCount((prev) => prev - 1);
             setLikeState(false);
-            console.log(res.data);
-            if (res.data === true) console.log('좋아요 해제 성공');
           });
       }
     }
@@ -98,7 +93,6 @@ const Card = ({ list }) => {
   // 카드 컴포넌트 클릭 함수
   const goToDetail = () => {
     navigate('/salesDetail', { state: { ...list } });
-    console.log('카드 클릭 해당 글 상세페이지 이동 정보:', { ...list });
   };
 
   const listData = list;

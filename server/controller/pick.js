@@ -79,16 +79,6 @@ exports.userPick = async (req, res) => {
       },
     ],
   });
-  await console.log(result);
-  // result
-  //   .map((el) => {
-  //     img.findAll({
-  //       where: { suppliesId: el.suppliesId },
-  //     });
-  //   })
-  //   .then((respones) => {
-  //     console.log('리스', response);
-  //   });
 
   res.send(result);
 };

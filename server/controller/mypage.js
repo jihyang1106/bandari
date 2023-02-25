@@ -29,6 +29,4 @@ exports.patchPet = async (req, res) => {
     },
   });
   res.send(true);
-  // const datas = JSON.parse(req.body.datas);
-  // console.log(datas);
 };

@@ -19,8 +19,6 @@ const EditPetInfo = () => {
   const userId = sessionStorage.getItem('userId');
   console.log(petInfo);
 
-  // console.log(state.pet);
-
   const navigate = useNavigate();
   const imgRef = useRef();
   const formInfoRef = useRef();
@@ -42,7 +40,6 @@ const EditPetInfo = () => {
   });
 
   const onCompleteBtn = async () => {
-    console.log('펫 프로필 등록 버튼');
     const form = formInfoRef.current;
     const formData = new FormData();
     // 파일
@@ -67,11 +64,6 @@ const EditPetInfo = () => {
     }
     const age = `${form.yy.value}년${form.mm.value}월${form.dd.value}일생`;
 
-    // data: {
-    //   userName: name,
-    //   userPhoneNumber: phoneNum,
-    //   userId: userId,
-    // },
     await axios
       .patch('mypage/patchPet', {
         data: {

@@ -34,7 +34,6 @@ const MyPage = (props) => {
       navigate('/');
       return;
     } else {
-      console.log('펫', pet);
       getData();
       getLikeData();
       getpetIds();
@@ -43,7 +42,6 @@ const MyPage = (props) => {
           userID: isLoggedIn,
         })
         .then((res) => {
-          console.log('유저의 펫 db 조회:', res.data);
           setPetDatas(res.data);
         });
     }
@@ -58,7 +56,7 @@ const MyPage = (props) => {
       })
       .then((res) => {
         /*백에서 불러온 펫 데이터*/
-        console.log('데이터', res.data);
+
         dispatch(setPets(res.data));
         sessionStorage.setItem('pet', res.data);
       });
@@ -93,8 +91,6 @@ const MyPage = (props) => {
         },
       })
       .then((res) => {
-        console.log('판매글 getData  :', res.data);
-
         cardData = res.data;
         let myData = [];
         res.data.map((el) => {
@@ -114,7 +110,6 @@ const MyPage = (props) => {
         },
       })
       .then((res) => {
-        console.log('찜', res.data);
         let userPick = [];
 
         for (let i = 0; i < res.data.length; i++) {
@@ -128,20 +123,8 @@ const MyPage = (props) => {
           ];
           userPick.push(supply);
         }
-        console.log('어레이', userPick);
         setLike(userPick);
       });
-  };
-
-  /**펫 추가 이벤트 */
-  function petAddUpload() {
-    console.log('마이페이지 내 새꾸 프로필 추가)');
-    navigate('/petProfile');
-  }
-
-  /**회원정보수정모달 */
-  const onClickEditUserInfo = () => {
-    setDisplayModal(true);
   };
 
   return (
@@ -157,7 +140,13 @@ const MyPage = (props) => {
               <div>
                 <h1>마이 페이지</h1>
                 <h2>{isLoggedIn}님 안녕하세요</h2>
-                <p onClick={onClickEditUserInfo}>회원 정보 수정</p>
+                <p
+                  onClick={() => {
+                    setDisplayModal(true);
+                  }}
+                >
+                  회원 정보 수정
+                </p>
               </div>
 
               {/* 펫정보*/}
@@ -170,7 +159,9 @@ const MyPage = (props) => {
                     <p>등록된 펫이 없습니다</p>
                   )}
                   <button
-                    onClick={petAddUpload}
+                    onClick={() => {
+                      navigate('/petProfile');
+                    }}
                     className={`${styles[`${btnState}`]}`}
                   >
                     +

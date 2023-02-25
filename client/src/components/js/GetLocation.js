@@ -29,8 +29,6 @@ const GetLocation = async (dispatch) => {
       }
     )
     .then((res) => {
-      // console.log(res.data.documents[0].address.address_name);
-      // console.log(res.data.documents[0].address);
       dispatch(setUserLocation(res.data.documents[0].address, true));
     })
     .catch((e) => {

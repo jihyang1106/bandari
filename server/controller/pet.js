@@ -24,6 +24,5 @@ exports.checkPet = async (req, res) => {
 exports.getPetType = async (req, res) => {
   const result = await pet.findAll({}).then((result) => {
     res.send(result);
-    // console.log('펫 타입', result);
   });
 };

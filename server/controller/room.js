@@ -18,8 +18,6 @@ exports.postInsert = async (req, res) => {
 };
 
 exports.getData = async (req, res) => {
-  // console.log('room의 데이터', req.query);
-
   // 다른 사람이 쓴 글에 내가 연락해서 만든 채팅방
   const userId = await room.findAll({
     where: {
@@ -41,8 +39,6 @@ exports.getData = async (req, res) => {
     order: [['id', 'desc']],
   });
 
-  console.log('내가 만든 채팅방', userId);
-
   // 내가 쓴 글에 다른 유저가 연락해서 만든 채팅방
   const otherId = await room.findAll({
     where: {
@@ -61,8 +57,6 @@ exports.getData = async (req, res) => {
     raw: true,
     order: [['id', 'desc']],
   });
-
-  console.log('다른 유저가 만든 채팅방', otherId);
 
   // 내림차순 정렬
   let result = [];
@@ -89,13 +83,10 @@ exports.getData = async (req, res) => {
     });
   }
 
-  // console.log(result);
   res.send(result);
 };
 
 exports.delete = async (req, res) => {
-  console.log('삭제할 room ', req.body);
   const result = await room.destroy({ where: { id: req.body.id } });
-  console.log('delete result', result);
   res.send({ result: result });
 };

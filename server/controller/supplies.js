@@ -4,8 +4,6 @@ const Op = Sequelize.Op;
 // 용품 판매글 조회 & 메인페이지 인기글 조회
 exports.getData = async (req, res) => {
   let petType = req.query.type;
-  console.log('petType', petType);
-  console.log('req.query', req.query.location);
 
   // 메인 페이지 에서 렌더 시 및 판매페이지에서 위치 기준으로 렌더시
   if (petType === 'basic') {
@@ -120,19 +118,16 @@ exports.postSearch = async (req, res) => {
       order: [['id', 'DESC']],
     })
     .then((result) => {
-      // console.log('디비 조회', result);
       res.json(result);
     });
 };
 
 // 판매 완료 확인
 exports.patchUpdateDeal = async (req, res) => {
-  console.log(req.body.id);
   const result = await supplies.update(
     { deal: false },
     { where: { id: req.body.id } }
   );
-  console.log('result', result);
   res.send(result);
 };
 
@@ -179,7 +174,6 @@ exports.getImgs = async (req, res) => {
       where: { suppliesId: req.query.suppliesId },
     })
     .then((result) => {
-      console.log('리절', result);
       res.send(result);
     });
 };
@@ -198,7 +192,6 @@ exports.patchSupplies = async (req, res) => {
 };
 
 exports.deleteSupplies = async (req, res) => {
-  console.log(req.body.suppliesId);
   await supplies.destroy({
     where: { id: req.body.suppliesId },
   });
