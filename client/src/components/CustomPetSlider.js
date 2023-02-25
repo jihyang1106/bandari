@@ -110,8 +110,6 @@ const CustomSlider = ({ petdatas }) => {
       },
     ],
   };
-
-  console.log(petdatas);
   return (
     <StyledSlider {...settings}>
       {petdatas !== undefined ? (

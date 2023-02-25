@@ -14,9 +14,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
   // 채팅 목록에서 채팅방 클릭 시 DB에서 chat 가져오기
   useEffect(() => {
     axios.get('chat/getData', { params: { id: chatData.id } }).then((res) => {
-      // /console.log('res.data', res.data);
       res.data.forEach((el, idx) => {
-        console.log(el);
         if (el.userId === user) {
           chat.current.insertAdjacentHTML(
             'beforeend',
@@ -49,14 +47,11 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     }, 50);
   };
   useEffect(() => {
-    console.log('변함');
     resetScroll();
   }, []);
 
   let socket = io.connect('http://localhost:5000');
   const closeBtnRef = useRef();
-  // console.log('room으로 넘어온 chatData', chatData);
-  //   console.log('상대방', chatData.other);
 
   // 현재 채팅에 들어온 유저와 방 번호
   socket.emit('loginUser', { user: user, roomId: chatData.id });
@@ -64,7 +59,6 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
   /*전송이벤트 */
   const btnSend = () => {
     const inputText = inputRef.current.value;
-    console.log('채팅입력후 전송하는 이벤트');
     // 시간
     let hourMin = new Date().toTimeString().split(' ')[0];
     hourMin = hourMin.substring(0, hourMin.lastIndexOf(':'));

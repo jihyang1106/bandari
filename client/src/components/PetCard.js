@@ -5,11 +5,8 @@ import { useSelector } from 'react-redux';
 import styles from './css/PetCard.module.css';
 
 const PetCard = (pet) => {
-  console.log(pet);
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const navigate = useNavigate();
-
-  // console.log(pet);
 
   /**펫정보수정이동*/
   const onClickEditPetInfo = () => {
@@ -17,7 +14,7 @@ const PetCard = (pet) => {
       state: { pet },
     });
   };
-  console.log('펫 데이터 카드:', { ...pet.pet });
+
   return (
     <div
       className={`${styles.myPetInfo} ${styles.marginBottom} ${

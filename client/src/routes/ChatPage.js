@@ -70,7 +70,6 @@ const ChatPage = () => {
   }, []);
 
   const onClickChatData = async (chatData) => {
-    console.log('채팅클릭', { chatData });
     /**상대방 확인 하는 로직 chatData.other가 상대방 */
     if (chatData.otherId !== user) chatData.other = chatData.otherId;
     else chatData.other = chatData.userId;

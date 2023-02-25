@@ -72,7 +72,6 @@ const MainPage = () => {
         for (let i = 0; i < 4; i++) {
           temp.push(res.data[i]);
         }
-        console.log(res.data);
         setHot(temp);
       });
   };

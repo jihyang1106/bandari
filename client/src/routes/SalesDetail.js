@@ -70,8 +70,7 @@ const SalesDetail = () => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const [newImgs, setnewImgs] = useState([]);
   const userId = sessionStorage.getItem('userId');
-  console.log('datas 판매 상세페이지 : ', datas);
-  console.log('datas 판매 상세페이지 : ', datas.price);
+
   const { id } = useParams();
   const titleRef = useRef();
   const priceRef = useRef();
@@ -96,7 +95,6 @@ const SalesDetail = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         if (res.data.length > 0) {
           const imgs = [res.data[0].img1, res.data[0].img2, res.data[0].img3];
           newImgs.push(imgs.filter((el) => el != null));
@@ -106,7 +104,7 @@ const SalesDetail = () => {
     const imgs = [datas.imgs[0].img1, datas.imgs[0].img2, datas.imgs[0].img3];
     newImgs.push(imgs.filter((el) => el != null));
   }
-  console.log(newImgs);
+
   // 상세페이지 렌더 시 글에 맞는 펫 정보 가져오기
   useEffect(() => {
     axios
@@ -138,17 +136,15 @@ const SalesDetail = () => {
         alert('로그인 후 연락해주세요');
         navigate('/');
       } else {
-        axios.post('room/insert', backData).then((res) => {
-          console.log('생성 판별 여부', res.data);
+        axios.post('room/insert', backData).then(() => {
+          navigate('/chatPage');
+          window.location.reload();
         });
-        navigate('/chatPage');
-        window.location.reload();
       }
     }
   };
-  // console.log('priceRef.current.value', priceRef.current.value);
-  // console.log(Number(priceRef.current.value));
-  /**수정하기1!!!!!!!!!!!!! */
+
+  /**수정하기 */
   const onClickEdit = () => {
     console.log(Number(priceRef.current.value));
     if (Number(priceRef.current.value) == 0)
@@ -169,6 +165,8 @@ const SalesDetail = () => {
         });
     }
   };
+
+  /**상품 글 삭제하기 */
   const onClickDel = () => {
     console.log(datas.id);
     axios
