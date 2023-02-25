@@ -1,0 +1,190 @@
+/*메인페이지 공통사항들*/
+.mainPage {
+  font-family: 'GangwonEdu_OTFBoldA';
+} 
+
+.mainPage h1 {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 45px;
+  margin-bottom: 30px;
+}
+
+.mainPage h3 {
+  font-size: 17px;
+  line-height: 23px;
+}
+
+.mainPage section {
+  height: 100vh;
+}
+
+.mainPage #goUpIcon {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  bottom: 30px;
+  right: 30px;
+  cursor: pointer;
+}
+
+/*첫 메인페이지*/
+.mainPage section:first-child {
+  display: flex;
+}
+
+.mainPage section:first-child .mainImg {
+  width: 83vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.mainPage section:first-child .mainImg img {
+  width: 1300px;
+}
+
+/*두번째 메인페이지*/
+.mainPage section:nth-child(2) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainPage section:nth-child(2) .sellImg {
+  width: 800px;
+  margin-right: 70px;
+}
+
+.mainPage section:nth-child(2) div:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+/*세번째 메인페이지*/
+.mainPage section:nth-child(3) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainPage section:nth-child(3) .locationImg {
+  width: 800px;
+  margin-right: 70px;
+}
+
+/*마지막 메인페이지*/
+.mainPage > section:nth-child(4) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainPage section:nth-child(4) .cards {
+  display: flex;
+  width: 70vw;
+  justify-content: space-around;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.mainPage section:nth-child(4) .cards > div {
+  width: 70vw;
+  display: flex;
+  justify-content: center;
+}
+
+.mainPage section:nth-child(4) > span {
+  cursor: pointer;
+}
+
+.modalImg {
+  width: 490px;
+  height: 490px;
+}
+/*1800px이하*/
+@media screen and (max-width: 1800px) {
+  /*첫번째 메인페이지*/
+  .mainPage section:first-child .mainImg img {
+    width: 950px;
+  }
+
+  /*두번째 메인페이지*/
+  .mainPage section:nth-child(2) .sellImg {
+    width: 45vw;
+    margin-right: 70px;
+  }
+
+  .mainPage section:nth-child(3) .locationImg {
+    width: 45vw;
+    margin-right: 70px;
+  }
+}
+
+/*1500px이하*/
+@media screen and (max-width: 1500px) {
+  /*첫 메인페이지*/
+  .mainPage section:first-child .mainImg img {
+    z-index: -1;
+  }
+}
+
+/*1200px이하*/
+@media screen and (max-width: 1200px) {
+  /*첫 메인페이지*/
+  .mainPage section:first-child .mainImg {
+    width: 100vw;
+  }
+
+  .mainPage section:first-child .mainImg img {
+    width: 80vw;
+    height: auto;
+    z-index: -1;
+  }
+
+  /*두번째,세번째 메인페이지*/
+  .mainPage section:nth-child(2),
+  .mainPage section:nth-child(3)  {
+    flex-direction: column;
+  }
+
+  .mainPage section:nth-child(2) > .sellImg,
+  .mainPage section:nth-child(2) > .locationImg {
+    margin: 0;
+    width: 60vw;
+    margin-bottom: 20px;
+  }
+
+  .mainPage section:nth-child(2) > div h1,
+  .mainPage section:nth-child(3) > div h1
+   {
+    text-align: center;
+    line-height: 50px;
+  }
+
+  .mainPage section:nth-child(2) > div h3,
+  .mainPage section:nth-child(3) > div h3 {
+    text-align: center;
+  }
+
+  /*마지막 메인페이지*/
+  .mainPage section:last-child .cards {
+    display: flex;
+    width: 600px;
+    justify-content: space-around;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+  }
+
+  .mainPage section:nth-child(4) .cards > div {
+    width: 60vw;
+    flex-wrap: wrap;
+  }
+  
+}
+
+/*900px이하*/
+@media screen and (max-width: 500px) {
+}

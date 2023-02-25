@@ -1,0 +1,143 @@
+.card {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  width: 10vw;
+  height: 280px;
+  padding: 1em 0;
+  padding-top: 0;
+  box-sizing: border-box;
+  border: 1px solid #525252;
+  border-radius: 14px;
+  background-color: white;
+  overflow: hidden;
+  margin: 0 0 20px 2%;
+  box-shadow: 7px 7px 4px -3px rgb(205, 205, 205);
+}
+
+.card:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+.card > .selling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 280px;
+}
+
+.card > .soldout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(20, 20, 20, 0.783);
+  color: white;
+  font-size: 30px;
+  font-weight: 600;
+  z-index: 100;
+  width: 100%;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 이미지 thumbnail */
+.card img {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+}
+
+.cardFooter {
+  position: absolute;
+  top: 200px;
+  left: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  background-color: white;
+}
+
+.cardFooter span {
+  margin-left: 5px;
+  font-size: 13px;
+  font-weight: 550;
+  color: white;
+  vertical-align: top;
+}
+
+.cardFooter h3 {
+  font-size: 15px;
+  font-weight: 1000;
+  margin: 0;
+  margin-bottom: 7px;
+}
+
+.cardFooter p {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 13px;
+}
+
+.likeButton {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 101;
+}
+
+/*1500px이하*/
+@media screen and (max-width: 1500px) {
+  .card {
+    width: 20vw;
+  }
+
+  .sellPage > section > .AvailSaleContainer {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .sellPage > section > .AvailSaleContainer > .cardContainer {
+    width: 75vw;
+    margin-left: 0px;
+    justify-content: center;
+  }
+}
+
+.likeButton img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.likeButton:hover img {
+  transform: scale(1.4);
+}
+
+.likeCount {
+  text-align: right;
+  font-size: 13px;
+  font-weight: 600;
+  color: #525252;
+}
+
+/*1000px이하*/
+@media screen and (max-width: 1000px) {
+  .card {
+    width: 25vw;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .card {
+    width: 70%;
+  }
+}

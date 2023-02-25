@@ -1,0 +1,52 @@
+.categoryOpened {
+  height: 75vh;
+  width: 17vw;
+  font-size: 20px;
+  padding: 60px 34px;
+  margin-left: 39px;
+  margin-top: calc(7vh + 72px);
+  z-index: 100;
+}
+
+.nav .btns > .categoryHamburger {
+  display: none;
+}
+
+.categoryHamburger {
+  display: none;
+}
+.categoryOpened > .link {
+  margin-bottom: 30px;
+}
+
+.category > .categoryOpened > .link > a.active.basic > span,
+.categoryHamburger > .HamburgerDiv > .link > a.active.basic > span {
+  font-weight: 600;
+  color: black;
+}
+
+.category > .categoryOpened > .link > a.active.puppy > span,
+.categoryHamburger > .HamburgerDiv > .link > a.active.puppy > span {
+  font-weight: 600;
+  color: #f5a280;
+}
+
+.category > .categoryOpened > .link > a.active.cat > span,
+.categoryHamburger > .HamburgerDiv > .link > a.active.cat > span {
+  font-weight: 600;
+  color: #78aac3;
+}
+
+/*1200px이하*/
+@media screen and (max-width: 1200px) {
+  .categoryOpened {
+    display: none;
+  }
+}
+
+/*900px이하*/
+@media screen and (max-width: 900px) {
+  .categoryHamburger {
+    display: none;
+  }
+}

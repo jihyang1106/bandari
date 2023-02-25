@@ -1,0 +1,211 @@
+.myPage button{
+  cursor: pointer;
+}
+
+.myPage .cards{
+  height: 400px;
+}
+
+/*탈퇴버튼*/
+.MyPageContainer > button{
+  border: none;
+  background-color: transparent;
+  margin: 70px 0;
+} 
+
+.myPage.true {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  
+}
+
+
+.myPage.true > section{
+  filter: blur(2.5px) ;
+  backdrop-filter: blur(0.5px) grayscale(30%);
+}
+
+
+.myPage.true >div{
+  position: fixed;
+  margin: 0 auto;
+  left: 50%;
+  top: 50%;
+  transform: translate( -50%, -50% );
+}
+
+
+.myPage section:first-child {
+  display: flex;
+  align-items: baseline;
+}
+
+.MyPageContainer {
+  /* margin: auto; */
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.MyPageContainer > section:first-child{
+  display: flex;
+flex-direction: column;
+}
+
+.MyPageContainer h2{
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.MyPageContainer > section:first-child h1{
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.MyPageContainer > section:first-child  h2{
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.MyPageContainer > section:first-child > p{
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.MyPageContainer > section:first-child > div:first-child > p{
+  cursor: pointer;
+}
+
+
+/*등록된 반려동물 정보*/
+.myPetsInfo{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.myPetsInfo > div{
+  display: flex;
+  margin-top: 10px;
+      align-items: center;
+      
+
+}
+
+.myPetsInfo > div > p{
+  text-align: center;
+  width: 300px;
+  margin: auto 0;
+  color: gray;
+  font-weight: 500;
+}
+
+
+  
+.myPetsInfo> div > button{
+  height: 160px;
+  width: 80px;
+  font-size: 30px;
+  border-radius: 20px;
+  color: white;
+}
+
+
+
+.myPetsInfo.basic > div > button{
+  border: 1px solid rgb(46, 46, 46);
+  background-color: rgb(46, 46, 46);
+}
+
+.myPetsInfo.puppy > div > button{
+  border: 1px solid #F5A280;
+  background-color: #F5A280;
+}
+
+.myPetsInfo.cat > div > button{
+  border: 1px solid #78AAC3;
+  background-color: #78AAC3;
+}
+
+
+
+
+
+.titleIndex {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 25px;
+  /* margin-bottom: 30px; */
+  /* margin-left: 2%; */
+}
+
+.marginBottom,
+.titleIndex {
+  margin-bottom: 40px;
+}
+
+
+
+/*1200px이하*/
+@media screen and (max-width: 1200px) {
+  .myPage{
+    align-items: normal;
+  }
+
+  .myPage section:first-child {
+    display: flex;
+    align-items: normal;
+  }
+
+  .MyPageContainer {
+    align-items: center;
+    margin-top: calc(7vh + 72px + 36px);
+  }
+
+  .MyPageContainer > div,
+  .MyPageContainer > section {
+    width: 70vw;
+    margin-left: 70px;
+  }
+
+  .cards {
+    margin-left: -2%;
+  }
+}
+
+
+/*1000px이하*/
+@media screen and (max-width: 1000px) {
+  .sellectedPet {
+    width: 50vw;
+  }
+  
+}
+
+
+/*500px이하*/
+@media screen and (max-width: 500px) {
+  .MyPageContainer {
+    margin-top: 36px;
+  }
+  
+  .MyPageContainer > div,
+  .MyPageContainer > section {
+    width: 80vw;
+    margin-left: 0px;
+  }
+
+  .MyPageContainer > div > h1{
+    font-size: 15px;
+  }
+  
+}

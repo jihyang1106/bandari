@@ -1,0 +1,41 @@
+.slick-list {
+  height: 100%;
+}
+
+.slider {
+  margin-bottom: 100px;
+  width: 50vw;
+  text-align: center;
+}
+
+
+
+@media screen and (max-width: 2200px) {
+  .slider {
+    width: 70vw;
+    text-align: center;
+  }
+  .NoContentNotice{
+    margin: 80px;
+    width: 750px;
+    height: 170px;
+}
+}
+
+@media screen and (max-width: 1200px) {
+  .slider {
+    margin-bottom: 100px;
+  }
+  .NoContentNotice{
+    margin: 0px;
+    width: 450px;
+    height: 90px;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .slider {
+    width: 65vw;
+  }
+
+}

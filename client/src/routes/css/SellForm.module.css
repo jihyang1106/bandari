@@ -1,0 +1,17 @@
+.sellForm {
+}
+.sellForm section:first-child {
+  display: flex;
+  align-items: baseline;
+}
+.sellForm {
+}
+
+
+@media screen and (max-width : 1500px) {
+  .sellForm section:first-child {
+    display: flex;
+    align-items: normal;
+  }
+}
+

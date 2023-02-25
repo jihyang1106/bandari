@@ -1,0 +1,215 @@
+.sellCategory{
+  display: flex;
+}
+
+.changeBtn {
+  cursor: pointer;
+  font-weight: 500;
+  width: 400px;
+  display: inline-block;
+}
+
+.categoryButtonContainer {
+  margin: auto;
+  display: flex;
+  align-items: baseline;
+}
+
+.categoryButtonContainer button {
+  margin-left: 10px;
+}
+
+
+/* 검색  */
+.searchInput {
+  margin-left: inherit;
+  margin-right: 10px;
+  border: none;
+  border-bottom: 1px solid rgb(39, 39, 39);
+  height: 32px;
+  font-size: 15px;
+    outline: none;
+    margin: auto 0;
+}
+
+.searchNav {
+  margin-left: 35px;
+  width: 100%;
+  display: flex;
+}
+
+/* 검색 버튼 */
+.searchBtn {
+  border-radius: 30px;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100px;
+}
+
+.searchBtn.basic {
+  background-color: #9e9e9e;
+}
+
+.searchBtn.puppy {
+  background-color: #f5a280;
+}
+.searchBtn.cat {
+  background-color: #78AAC3;
+}
+/* 판매 버튼 */
+.saleButton {
+  background-color: rgba(0, 0, 0, 0);
+  margin-left: 1%;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.saleButton.basic{
+  color: #1a1a1a;
+}
+
+.saleButton.puppy{
+  color: #894d36;
+}
+.saleButton.cat{
+  color: #557483;
+}
+
+
+.saleButton:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+/* 카테고리 버튼  */
+.changeBtn > .categoryButton{
+  width: 70px;
+  height: 38px;
+  border-radius: 30px;
+  background-color: transparent;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.changeBtn.basic > .categoryButton{
+  border: 1px solid #9e9e9e;
+
+}
+
+.changeBtn.puppy > .categoryButton{
+  border: 1px solid #f5a280;
+}
+
+.changeBtn.cat > .categoryButton{
+  border: 1px solid #78AAC3;
+}
+
+
+/* active 버튼 */
+.changeBtn > .categoryButton.clicked{
+  color: white;
+  font-weight: 600;
+}
+
+.changeBtn.basic > .categoryButton.clicked{
+  background-color: #9e9e9e;
+} 
+
+.changeBtn.puppy > .categoryButton.clicked{
+  background-color: #f5a280;
+} 
+
+.changeBtn.cat > .categoryButton.clicked{
+  background-color: #78AAC3;
+} 
+
+
+/* 주소 버튼 */
+.adressPickButton {
+  display: inline;
+  border: none;
+  border-radius: 30px;
+  color: #464646;
+  line-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 7px 20px;
+}
+
+.adressPickButton.basic {
+  background-color: #eeeeee;
+
+}
+.adressPickButton.puppy {
+  background-color: #ffece1;
+}
+
+.adressPickButton.cat {
+  background-color: #e0eaee;
+}
+
+/* 주소 아이콘 */
+.adressPickButton img {
+  height: 15px;
+  margin-right: 5px;
+}
+
+/*1500px이하*/
+@media screen and (max-width: 1500px) {
+  .sellCategory{
+    flex-direction: column;
+  }
+  .categoryButtonContainer {
+    margin-top: 30px;
+  }
+
+  .searchNav {
+    margin-left: 0;
+    margin: 15px 0;
+    height: 50px;
+    justify-content: center;
+  }
+}
+
+
+/*700px이하*/
+@media screen and (max-width: 700px) {
+  .categoryButtonContainer {
+    font-size: 15px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .adressPickButton {
+    width: 200px;
+    margin-bottom: 15px;
+  }
+  
+
+  .categoryButton {
+    font-size: 13px;
+    height: 30px;
+  }
+
+  .searchBtn {
+    font-size: 13px;
+    height: 30px;
+  }
+
+  /* 판매 버튼 */
+  .saleButton {
+    font-size: 15px;
+    margin-top: 10px;
+  }
+}

@@ -1,0 +1,100 @@
+
+.sellPage section:first-child {
+  display: flex;
+  align-items: baseline;
+}
+
+.AvailSaleContainer {
+  width:70vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.AvailSaleContainer button,
+input {
+  margin-bottom: 10px;
+}
+
+.cardContainer {
+  width: 70vw;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.unstyledButton {
+  border: none;
+  background-color: transparent;
+}
+
+.pagings {
+  margin-top: 50PX;
+}
+
+.BannerImg{
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.slick-list {
+  height: 100%;
+}
+
+.slider {
+  margin-bottom: 100px;
+  width: 50vw;
+  text-align: center;
+}
+
+
+
+/*1200px이하*/
+@media screen and (max-width: 1200px) {
+  .sellPage section:first-child {
+    display: flex;
+    align-items: normal;
+  }
+
+  .sellPage > section > .AvailSaleContainer {
+    margin-top: calc(7vh + 72px + 36px);
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+}
+
+/*1000px이하*/
+@media screen and (max-width: 1000px) {
+  .sellPage {
+  }
+
+  .sellPage > section > .AvailSaleContainer {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+}
+
+/*700px이하*/
+@media screen and (max-width: 700px) {
+  .sellPage > section > .AvailSaleContainer {
+    margin-top: 20px;
+  }
+
+  .cardContainer {
+    width: 70vw;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+}
+
+

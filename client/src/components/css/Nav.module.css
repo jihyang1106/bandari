@@ -1,0 +1,130 @@
+.nav {
+  padding: 36px;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: calc(100vw - 72px);
+  height: 7vh;
+}
+
+.nav > .transparent {
+  display: none;
+}
+
+.nav > div:first-child {
+  display: flex;
+  align-items: center;
+}
+
+.nav > div > a > .logoIcon {
+  width: 100px;
+  margin-right: 20px;
+}
+
+.nav > div > .typeIcon {
+  width: 45px;
+  height: 45px;
+}
+
+.nav .btns {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav .btns > button {
+  border: none;
+  background-color: transparent;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.nav .btns > span.allowLocationSpan {
+  font-size: 13px;
+  display: inline-block;
+  width: 125px;
+}
+
+.nav .btns > span {
+  font-size: 17px;
+  font-weight: 600;
+  width: 100px;
+}
+
+.nav .btns > span.basic {
+  color: black;
+}
+
+.nav .btns > span.puppy {
+  color: #f5a280;
+}
+
+.nav .btns > span.cat {
+  color: #78aac3;
+}
+
+@media screen and (max-width: 1200px) {
+  .categoryOpened {
+    display: none;
+  }
+}
+
+/*1000px이하*/
+@media screen and (max-width: 1000px) {
+  .nav {
+    position: relative;
+    padding: 0;
+    align-items: flex-start;
+    width: 80vw; /*100vw - hamburger넓이*/
+    margin: 36px 0px 0px 0px;
+  }
+
+  .nav > div > a > .logoIcon {
+    margin-left: 30px;
+  }
+
+  .nav .btns {
+    width: 250px;
+  }
+
+  .nav .btns > button {
+    display: none;
+  }
+}
+/*720px이하*/
+@media screen and (max-width: 720px) {
+  .nav .btns {
+    flex-direction: column-reverse;
+  }
+
+  .nav .btns > span {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+/*600px이하*/
+@media screen and (max-width: 600px) {
+  .nav {
+    position: static;
+    padding: 0;
+    align-items: flex-start;
+    width: 100vw;
+  }
+
+  .nav > div > .typeIcon {
+    display: none;
+  }
+
+  .nav > div > a > .logoIcon {
+    width: 70px;
+  }
+
+  .nav > div > a > .logoIcon {
+    margin-left: 15px;
+  }
+}
