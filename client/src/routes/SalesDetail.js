@@ -201,7 +201,7 @@ const SalesDetail = () => {
                 />
                 {/* 이미지 2개 이상일 때 이미지 보여주기 */}
                 {newImgs.length > 0
-                  ? newImgs.map((el) => (
+                  ? newImgs[0].map((el) => (
                       <img
                         src={`/uploadImg/${el}`}
                         alt="대표 사진"
