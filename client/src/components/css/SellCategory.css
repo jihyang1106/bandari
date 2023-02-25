@@ -11,8 +11,8 @@
 
 .categoryButtonContainer {
   margin: auto;
-  display: inline-block;
   display: flex;
+  align-items: baseline;
 }
 
 .categoryButtonContainer button {
@@ -28,8 +28,8 @@
   border-bottom: 1px solid rgb(39, 39, 39);
   height: 32px;
   font-size: 15px;
-  font-weight: 600;
-  outline: none;
+    outline: none;
+    margin: auto 0;
 }
 
 .searchNav {
@@ -177,6 +177,7 @@
   .searchNav {
     margin-left: 0;
     margin: 15px 0;
+    height: 50px;
     justify-content: center;
   }
 }
