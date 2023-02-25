@@ -14,7 +14,7 @@ import { redirect, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const MyPage = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const pets = useSelector((state) => state.pets.pets);
   const pet = localStorage.getItem('pet');
@@ -34,7 +34,7 @@ const MyPage = (props) => {
       navigate('/');
       return;
     } else {
-      console.log("펫",pet)
+      console.log('펫', pet);
       getData();
       getLikeData();
       getpetIds();
@@ -94,13 +94,14 @@ const MyPage = (props) => {
       })
       .then((res) => {
         console.log('판매글 getData  :', res.data);
+
         cardData = res.data;
-        res.data.map((data) => {
-          if (data.userId === isLoggedIn) {
-            setSell([...sell, data]);
+        let myData = [];
+        res.data.map((el) => {
+          if (el.userId === isLoggedIn) {
+            setSell((prev) => [...prev, el]);
           }
         });
-        setAll(res.data);
       });
   };
 
