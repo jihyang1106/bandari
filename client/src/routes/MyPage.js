@@ -94,13 +94,14 @@ const MyPage = (props) => {
       })
       .then((res) => {
         console.log('판매글 getData  :', res.data);
+
         cardData = res.data;
-        res.data.map((data) => {
-          if (data.userId === isLoggedIn) {
-            setSell([...sell, data]);
+        let myData = [];
+        res.data.map((el) => {
+          if (el.userId === isLoggedIn) {
+            setSell((prev) => [...prev, el]);
           }
         });
-        setAll(res.data);
       });
   };
 
