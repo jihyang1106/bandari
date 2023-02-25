@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import GetLocation from '../components/js/GetLocation';
+import styled from 'styled-components';
 
 import styles from './css/SellPage.module.css';
 // 페이지네이션
@@ -19,6 +20,12 @@ import Dogbanner from '../assets/DogImgBanner.jpg';
 import Catbanner from '../assets/CatImgBanner.jpg';
 
 import axios from 'axios';
+
+export const StyledSlider = styled(Slider)`
+  .slick-slide img {
+    width: 80% !important;
+  }
+`;
 
 const SellPage = () => {
   const sellState = useSelector(
@@ -184,10 +191,10 @@ const SellPage = () => {
             />
             <div className={styles.cardContainer}>
               <div className={styles.BannerImg}>
-                <Slider {...settings}>
+                <StyledSlider {...settings}>
                   <img src={Dogbanner} alt="배너" />
                   <img src={Catbanner} alt="배너" />
-                </Slider>
+                </StyledSlider>
               </div>
               {currentPosts && products.length > 0 ? (
                 <>
