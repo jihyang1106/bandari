@@ -22,6 +22,7 @@ export default function SellForm() {
   const petData = useSelector((state) => state.pets.pets);
   console.log(petData);
   const [pets, setPets] = useState([]);
+  const [petType, setpetType] = useState();
 
   const petSelectRef = useRef();
   const categorySelectRef = useRef();
@@ -38,6 +39,7 @@ export default function SellForm() {
       .then((res) => {
         console.log('유저의 펫 db 조회:', res.data);
         setPets(res.data);
+        setpetType(res.data.petType);
       });
   }, []);
 
@@ -79,6 +81,14 @@ export default function SellForm() {
       formData.append(`img`, img[i]);
     }
 
+    // 펫타입정의
+    let petType = '';
+    pets.forEach((el, idx) => {
+      if (el.id + '' === petSelectRef.current.value) {
+        petType = el.petType;
+      }
+    });
+
     //데이터
     const datas = {
       title: form.title.value,
@@ -89,6 +99,7 @@ export default function SellForm() {
       deal: true,
       petId: petSelectRef.current.value,
       userId: userId,
+      petType: petType,
     };
     formData.append('datas', JSON.stringify(datas));
 
