@@ -58,6 +58,8 @@ const MainPage = () => {
       })
       .then((res) => {
         if (res.length === 0) {
+        } else {
+          setHavePop(true);
         }
         let temp = [];
 
