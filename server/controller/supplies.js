@@ -1,4 +1,4 @@
-const { supplies, pick, img, pet, Sequelize } = require('../model');
+const { supplies, pick, img, pet, Sequelize, user } = require('../model');
 const Op = Sequelize.Op;
 
 // 용품 판매글 조회 & 메인페이지 인기글 조회
@@ -19,6 +19,11 @@ exports.getData = async (req, res) => {
             model: pick,
             required: false,
           },
+          {
+            model: user,
+            required: false,
+            attributes: ['nickname'],
+          },
         ],
       });
       res.send(mypage);
@@ -33,6 +38,11 @@ exports.getData = async (req, res) => {
           {
             model: pick,
             required: false,
+          },
+          {
+            model: user,
+            required: false,
+            attributes: ['nickname'],
           },
         ],
         where: {

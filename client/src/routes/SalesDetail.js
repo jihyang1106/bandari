@@ -62,6 +62,7 @@ export const StyledSlider = styled(Slider)`
 `;
 
 const SalesDetail = () => {
+  const [nickname, setNickname] = useState([]);
   const navigate = useNavigate();
   // state 취득
   const location = useLocation();
@@ -113,6 +114,17 @@ const SalesDetail = () => {
       })
       .then((res) => {
         setPet(res.data);
+      });
+  }, []);
+
+  // 유저 닉네임 가져오기
+  useEffect(() => {
+    axios
+      .get('kakao/getNickName', {
+        params: { id: userId },
+      })
+      .then((res) => {
+        setNickname(res.data.nickname);
       });
   }, []);
 
@@ -213,7 +225,7 @@ const SalesDetail = () => {
 
             {/* 작성자 / 제목 / 가격 데이터 */}
             <p className={`${styles.formUserInfo} ${styles.formUserInfo_1}`}>
-              {datas.userId}
+              {datas.user.nickname}
             </p>
             {/* 유저 아이디 대신 닉네임으로 대체 예정 */}
             <p className={styles.formUserInfo}>{datas.location}</p>
