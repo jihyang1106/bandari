@@ -25,6 +25,7 @@ exports.getData = async (req, res) => {
             attributes: ['nickname'],
           },
         ],
+        order: [['id', 'DESC']],
       });
       res.send(mypage);
     } else {
