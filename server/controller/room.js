@@ -26,7 +26,7 @@ exports.getData = async (req, res) => {
     include: [
       {
         model: supplies,
-        attributes: ['title', 'price', 'content', 'deal', 'cover', 'userId'],
+        attributes: ['title', 'price', 'content', 'deal', 'cover'],
         include: [
           {
             model: user,
@@ -47,7 +47,7 @@ exports.getData = async (req, res) => {
     include: [
       {
         model: supplies,
-        attributes: ['title', 'price', 'content', 'deal', 'cover', 'userId'],
+        attributes: ['title', 'price', 'content', 'deal', 'cover'],
       },
       {
         model: user,
