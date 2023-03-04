@@ -24,6 +24,7 @@ const MyPage = (props) => {
   const [like, setLike] = useState([]);
   const [displayModal, setDisplayModal] = useState(false);
   const [petDatas, setPetDatas] = useState([]);
+  const [nickname, setNickname] = useState([]);
   let cardData;
   const navigate = useNavigate();
 
@@ -47,6 +48,17 @@ const MyPage = (props) => {
         });
     }
   }, []);
+
+  // // 유저 닉네임 가져오기
+  // useEffect(() => {
+  //   axios
+  //     .get('kakao/getNickName', {
+  //       params: { id: isLoggedIn },
+  //     })
+  //     .then((res) => {
+  //       setNickname(res.data.nickname);
+  //     });
+  // }, []);
 
   const getpetIds = () => {
     axios
@@ -116,6 +128,7 @@ const MyPage = (props) => {
         },
       })
       .then((res) => {
+        console.log(res.data);
         let userPick = [];
 
         for (let i = 0; i < res.data.length; i++) {
@@ -127,6 +140,8 @@ const MyPage = (props) => {
               userId: res.data[i].userId,
             },
           ];
+          supply['user'] = { nickname: res.data[i].user.nickname };
+
           userPick.push(supply);
         }
         setLike(userPick);
@@ -149,7 +164,7 @@ const MyPage = (props) => {
               {/* 유저정보 */}
               <div>
                 <h1>마이 페이지</h1>
-                <h2>{isLoggedIn}님 안녕하세요</h2>
+                <h2>{nickname}님 안녕하세요</h2>
                 <p
                   onClick={() => {
                     setDisplayModal(true);

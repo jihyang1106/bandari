@@ -88,3 +88,18 @@ exports.userDelete = async (req, res) => {
   });
   res.send(true);
 };
+
+exports.getNickName = async (req, res) => {
+  try {
+    console.log('아이디', req.query.id);
+    const result = await user.findOne({
+      where: { id: req.query.id },
+      attributes: ['nickname'],
+      raw: true,
+    });
+    console.log(result);
+    res.send(result);
+  } catch {
+    res.send('로그인 정보가 없습니다.');
+  }
+};
