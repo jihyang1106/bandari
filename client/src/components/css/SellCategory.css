@@ -7,7 +7,7 @@
 .changeBtn {
   cursor: pointer;
   font-weight: 500;
-  width: 400px;
+  width:300px;
   display: inline-block;
 }
 
@@ -15,6 +15,7 @@
   margin: auto;
   display: flex;
   align-items: baseline;
+  margin-right: 30px;
 }
 
 
@@ -37,8 +38,9 @@
 
 .searchNav {
   margin-left: 35px;
-  width: 100%;
+
   display: flex;
+  align-items: center;
 }
 
 /* 검색 버튼 */
@@ -50,6 +52,7 @@
   font-weight: 600;
   cursor: pointer;
   width: 100px;
+  height: 40px;
 }
 
 .searchBtn.basic {
@@ -102,6 +105,8 @@
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
+  margin-right: 5px;
+  display: inline-block;
 }
 
 .changeBtn.basic > .categoryButton{
@@ -141,6 +146,7 @@
 .getAllBtn {
   cursor: pointer;
   margin-right: 10px;
+  width: 210px;
 }
 
 
@@ -182,6 +188,13 @@
   }
   .categoryButtonContainer {
     margin-top: 30px;
+    margin-right: 0px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .changeBtn{
+    width: 100%;
   }
 
   .searchNav {

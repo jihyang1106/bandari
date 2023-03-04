@@ -20,6 +20,7 @@ exports.getData = async (req, res) => {
             required: false,
           },
         ],
+        order: [['id', 'DESC']],
       });
       res.send(mypage);
     } else {

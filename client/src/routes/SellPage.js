@@ -47,6 +47,8 @@ const SellPage = () => {
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
   const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
+  const [getAll, setGetAll] = useState(true); //초반에는 전체글, 버튼클릭시 위치로 가져오며 false된다
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -80,8 +82,30 @@ const SellPage = () => {
     }
   }, [sellState]);
 
-  /*판매글 가져오는 함수* */
-  const getData = async () => {
+  /*전체판매글 가져오는 함수* */
+  const getAllData = async () => {
+    axios
+      .get('supplies/getData', {
+        params: {
+          type: 'basic',
+          location: 'location',
+        },
+      })
+      .then((res) => {
+        setSell(res.data);
+        setAll(res.data);
+
+        const indexLast = currentPage * postPerPage;
+        setProducts(res.data);
+        setCount(res.data.length);
+        setIndexOfLastPost(indexLast);
+        setIndexOfFirstPost(indexLast - postPerPage);
+        setCurrentPosts(res.data.slice(indexLast - postPerPage, indexLast));
+      });
+  };
+
+  /**위치값에 따른 글 가져오기 */
+  const getLocationData = async () => {
     axios
       .get('supplies/getData', {
         params: {
@@ -90,7 +114,6 @@ const SellPage = () => {
         },
       })
       .then((res) => {
-        console.log('판매글 getData  :', res.data);
         setSell(res.data);
         setAll(res.data);
 
@@ -104,17 +127,12 @@ const SellPage = () => {
   };
 
   useEffect(() => {
-    async function fetchData() {
-      if (userLocation) {
-        setTimeout(getData, 500);
-      } else {
-        await GetLocation(dispatch);
-        console.log(userLocation, '여기2');
-        setTimeout(getData, 500);
-      }
+    if (getAll) {
+      getAllData();
+    } else {
+      getLocationData();
     }
-    fetchData();
-  }, [idxBtnState]);
+  }, [getAll]);
 
   // 페이지네이션 페이지 조정
   const setPage = (pageNum) => {
@@ -133,28 +151,14 @@ const SellPage = () => {
 
   return (
     <>
-      {/* <Nav />
-      <div className={styles.sellPage}>
-        <section>
-          <Category />
-          <div className={styles.AvailSaleContainer}>
-            <SellCategory setSell={setSell} />
-
-            <div className={styles.cardContainer}>
-              {sell.map((list, index) => {
-                return <Card key={index} list={list} />;
-              })}
-            </div>
-
-          </div>
-        </section> */}
-
       <Nav />
       <div className={styles.sellPage}>
         <section>
           <Category />
           <div className={styles.AvailSaleContainer}>
             <SellCategory
+              getAll={getAll}
+              setGetAll={setGetAll}
               setCurrentPosts={setCurrentPosts}
               setPagination={setPagination}
             />

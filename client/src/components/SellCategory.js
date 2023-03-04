@@ -131,8 +131,8 @@ export default function SellCategory(props) {
       });
   };
 
-  const getAllData = () => {
-    console.log('위치와 상관없는 모든 값을 가져옵니다');
+  const onChangeGetData = () => {
+    props.setGetAll((prev) => !prev);
   };
 
   return (
@@ -140,56 +140,64 @@ export default function SellCategory(props) {
       {/* 상단 카테고리, 검색 & 판매 버튼 누르면, 판매 글 폼 열림 */}
 
       <div className="categoryButtonContainer">
-        <button className="getAllBtn" onClick={getAllData}>
-          모든 위치 글 가져오기
+        {props.getAll ? (
+          <button className="getAllBtn" onClick={onChangeGetData}>
+            주변 글 가져오기
+          </button>
+        ) : (
+          <>
+            <button className="getAllBtn" onClick={onChangeGetData}>
+              모든 위치 글 가져오기
+            </button>
+            <div className={`adressPickButton ${btnState}`}>
+              <img src={locationIcon} alt="주소지 버튼 아이콘" />
+              {userLocation ? (
+                <>
+                  {' '}
+                  {userLocation.region_2depth_name +
+                    ' ' +
+                    userLocation.region_3depth_name}
+                </>
+              ) : (
+                <>전체</>
+              )}
+            </div>
+          </>
+        )}
+      </div>
+      <div className={`changeBtn ${btnState}`}>
+        <button
+          ref={basicBtnRef}
+          className="categoryButton basicBtn"
+          value="basic"
+          onClick={clickedBtn}
+        >
+          전체
         </button>
-        <div className={`adressPickButton ${btnState}`}>
-          <img src={locationIcon} alt="주소지 버튼 아이콘" />
-          {userLocation ? (
-            <>
-              {' '}
-              {userLocation.region_2depth_name +
-                ' ' +
-                userLocation.region_3depth_name}
-            </>
-          ) : (
-            <>전체</>
-          )}
-        </div>
-        <div className={`changeBtn ${btnState}`}>
-          <button
-            ref={basicBtnRef}
-            className="categoryButton basicBtn"
-            value="basic"
-            onClick={clickedBtn}
-          >
-            전체
-          </button>
-          <button
-            ref={peedBtnRef}
-            className="categoryButton peedBtn"
-            value="peed"
-            onClick={clickedBtn}
-          >
-            사료
-          </button>
-          <button
-            ref={snackBtnRef}
-            className="categoryButton snackBtn"
-            value="snack"
-            onClick={clickedBtn}
-          >
-            간식
-          </button>
-          <button
-            ref={productBtnRef}
-            className="categoryButton productBtn"
-            value="product"
-            onClick={clickedBtn}
-          >
-            용품
-          </button>
-        </div>
+        <button
+          ref={peedBtnRef}
+          className="categoryButton peedBtn"
+          value="peed"
+          onClick={clickedBtn}
+        >
+          사료
+        </button>
+        <button
+          ref={snackBtnRef}
+          className="categoryButton snackBtn"
+          value="snack"
+          onClick={clickedBtn}
+        >
+          간식
+        </button>
+        <button
+          ref={productBtnRef}
+          className="categoryButton productBtn"
+          value="product"
+          onClick={clickedBtn}
+        >
+          용품
+        </button>
       </div>
       <div className="searchNav">
         <input
