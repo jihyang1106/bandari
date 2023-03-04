@@ -6,6 +6,7 @@ import { io } from 'socket.io-client';
 const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
   const user = sessionStorage.getItem('userId'); // 로그인한 유저
 
+  console.log('쳇 데이터', chatData);
   const inputRef = useRef();
   const chat = useRef();
 
