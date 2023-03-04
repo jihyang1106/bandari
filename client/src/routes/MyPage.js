@@ -21,6 +21,7 @@ const MyPage = (props) => {
   const isLoggedIn = sessionStorage.getItem('userId');
   const [all, setAll] = useState([]); //전체목록
   const [sell, setSell] = useState([]); // 현재유저가 올린 판매글
+  const [buy, setBuy] = useState([]); // 현재유저가 구매한 글
   const [like, setLike] = useState([]);
   const [displayModal, setDisplayModal] = useState(false);
   const [petDatas, setPetDatas] = useState([]);
@@ -69,7 +70,6 @@ const MyPage = (props) => {
       })
       .then((res) => {
         /*백에서 불러온 펫 데이터*/
-
         dispatch(setPets(res.data));
         sessionStorage.setItem('pet', res.data);
       });
@@ -99,6 +99,34 @@ const MyPage = (props) => {
     }
   }
 
+  /**로그인한 유저가 찜한 판매글 가져오는 함수*/
+  const getLikeData = () => {
+    axios
+      .get('pick/userPick', {
+        params: {
+          userId: isLoggedIn,
+        },
+      })
+      .then((res) => {
+        let userPick = [];
+
+        for (let i = 0; i < res.data.length; i++) {
+          const supply = res.data[i].supply;
+          supply['picks'] = [
+            {
+              id: res.data[i].id,
+              suppliesId: res.data[i].suppliesId,
+              userId: res.data[i].userId,
+            },
+          ];
+          supply['user'] = { nickname: res.data[i].user.nickname };
+
+          userPick.push(supply);
+        }
+        setLike(userPick);
+      });
+  };
+
   /*로그인한 유저가올린 판매글 가져오는 함수* */
   const getSellData = async () => {
     axios
@@ -119,38 +147,19 @@ const MyPage = (props) => {
       });
   };
 
-  /**로그인한 유저가 찜한 판매글 가져오는 함수*/
-  const getLikeData = () => {
+  /**로그인한 유저가 구매한 글 가져오는 함수 */
+  const getBuyData = () => {
     axios
-      .get('pick/userPick', {
+      .get('supplies/getData', {
         params: {
-          userId: isLoggedIn,
+          type: 'basic',
+          location: 'location',
+          buyer: isLoggedIn,
         },
       })
       .then((res) => {
-        console.log(res.data);
-        let userPick = [];
-
-        for (let i = 0; i < res.data.length; i++) {
-          const supply = res.data[i].supply;
-          supply['picks'] = [
-            {
-              id: res.data[i].id,
-              suppliesId: res.data[i].suppliesId,
-              userId: res.data[i].userId,
-            },
-          ];
-          supply['user'] = { nickname: res.data[i].user.nickname };
-
-          userPick.push(supply);
-        }
-        setLike(userPick);
+        setBuy(res.data);
       });
-  };
-
-  /**로그인한 유저가 구매한 글 가져오는 함수 */
-  const getBuyData = () => {
-    console.log('유저가 구매한 글 가져오기');
   };
   return (
     <>
@@ -207,7 +216,9 @@ const MyPage = (props) => {
               </div>
 
               <h2 className={styles.titleIndex}>구매</h2>
-              <div className={styles.cards}></div>
+              <div className={styles.cards}>
+                <CustomCardSlider datas={buy} />
+              </div>
             </section>
             <button
               className={styles.deleteButton}

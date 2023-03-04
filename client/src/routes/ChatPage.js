@@ -27,9 +27,7 @@ const ChatPage = () => {
 
   const chatRoomRef = useRef();
 
-  useEffect(() => {
-    console.log('selecttChat', selectChat);
-  }, [selectChat]);
+  useEffect(() => {}, [selectChat]);
 
   useEffect(() => {
     if (swtichType === 'basic') {
@@ -49,9 +47,6 @@ const ChatPage = () => {
   }, []);
 
   const onClickChatData = async (chatData) => {
-    /**상대방 확인 하는 로직 chatData.other가 상대방 */
-    if (chatData.otherId !== user) chatData.other = chatData.otherId;
-    else chatData.other = chatData.userId;
     if (chatRoomRef.current) {
       chatRoomRef.current.classList.remove(`${styles.transparent}`);
     }

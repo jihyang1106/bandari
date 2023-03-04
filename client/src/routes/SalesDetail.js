@@ -134,8 +134,8 @@ const SalesDetail = () => {
   // 서버로 보내는 데이터
   const backData = {
     suppliesId: datas.id, // 글 id
-    userId: userId, // 로그인한 유저 id
-    otherId: datas.userId, // 글 작성 id
+    buyer: userId, // 로그인한 유저 id
+    seller: datas.userId, // 글 작성 id
   };
 
   // 채팅하기 버튼
