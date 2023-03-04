@@ -109,14 +109,16 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
 
   /**판매 완료 버튼 이벤트 */
   const onClickCheckSoldOut = () => {
-    axios
-      .patch('/supplies/updateDeal', {
-        id: chatData.suppliesId,
-      })
-      .then((res) => {
-        if (res.data[0] === 1) alert('판매완료 되었습니다!');
-        else alert('이미 판매완료된 상품입니다.');
-      });
+    if (window.confirm('정말 판매 완료 하시겠습니까?')) {
+      axios
+        .patch('/supplies/updateDeal', {
+          id: chatData.suppliesId,
+        })
+        .then((res) => {
+          if (res.data[0] === 1) alert('판매완료 되었습니다!');
+          else alert('이미 판매완료된 상품입니다.');
+        });
+    } else return;
   };
 
   /** 채팅 종료 버튼 이벤트 : 채팅 삭제 */
