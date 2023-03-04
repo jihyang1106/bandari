@@ -35,8 +35,6 @@ const SellPage = () => {
   const idxBtnState = useSelector((state) => state.typeSwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
 
-  const isLoggedIn = sessionStorage.getItem('userId');
-
   const [all, setAll] = useState([]); // 전체 목록을 항상 가지고 있는 state -> 처음에 세팅되면 바뀔 일이 없어요
   const [sell, setSell] = useState([]); // 화면에 보여지는 state ( 전체, 사료 이런 거상관없이 클라이언트가 보고 있는 화면의 목록)
 
@@ -62,42 +60,12 @@ const SellPage = () => {
     slidesToScroll: 1,
   };
 
-  // idxBtnState 판패메이지 기본, 강아지, 고양이 값 분류
-  const pageState = {
-    puppy: '강아지',
-    cat: '고양이',
-  };
-
-  // console.log('idxBtnState', idxBtnState);
-
   // sellState 카테고리 변경 json
   const state = {
     peed: '사료',
     snack: '간식',
     product: '용품',
   };
-
-  // let petArr = [];
-  // useEffect(() => {
-  //   if (idxBtnState === 'basic') setCurrentPosts([...all]);
-  //   else {
-  //     axios.get('pet/getPetType').then((res) => {
-  //       // console.log('getPetType', res.data);
-  //       for (let i = 0; i < res.data.length; i++) {
-  //         petArr.push([res.data[i]]);
-  //         const petArray = petArr.filter(
-  //           (data) => data.petType == pageState[idxBtnState]
-  //         );
-  //         setSell([...petArray]);
-  //       }
-  // console.log('petARR', petArr);
-  // console.log('pageState[idxBtnState]', pageState[idxBtnState]);
-  // console.log('setCurrentPosts=========', sell);
-  //     });
-  //   }
-  // }, [idxBtnState]);
-
-  // console.log('ad;;;;;;;;;;', all); //petId 펫아이디를 db로 보내서 pet / petType & id(반려동물 번호)
 
   useEffect(() => {
     // 처음 basic이 들어오면 전체라는 거니까 전체 정보를 갖고 있는 all
@@ -140,6 +108,7 @@ const SellPage = () => {
       if (userLocation) {
         setTimeout(getData, 500);
       } else {
+        await GetLocation(dispatch);
         console.log(userLocation, '여기2');
         setTimeout(getData, 500);
       }
