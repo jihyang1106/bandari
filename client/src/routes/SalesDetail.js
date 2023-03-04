@@ -158,37 +158,41 @@ const SalesDetail = () => {
 
   /**수정하기 */
   const onClickEdit = () => {
-    console.log(Number(priceRef.current.value));
-    if (Number(priceRef.current.value) == 0)
-      alert('가격에 숫자를 입력해주세요');
-    else {
-      axios
-        .patch('/supplies/patchSupplies', {
-          data: {
-            suppliesId: datas.id,
-            title: titleRef.current.value,
-            price: priceRef.current.value,
-            content: contentRef.current.value,
-          },
-        })
-        .then((res) => {
-          alert(` ${titleRef.current.value}상품의 정보가 수정되었습니다.`);
-          navigate('/sellPage');
-        });
-    }
+    if (window.confirm('정말 글을 수정하시겠습니까?')) {
+      console.log(Number(priceRef.current.value));
+      if (Number(priceRef.current.value) == 0)
+        alert('가격에 숫자를 입력해주세요');
+      else {
+        axios
+          .patch('/supplies/patchSupplies', {
+            data: {
+              suppliesId: datas.id,
+              title: titleRef.current.value,
+              price: priceRef.current.value,
+              content: contentRef.current.value,
+            },
+          })
+          .then((res) => {
+            alert(` ${titleRef.current.value}상품의 정보가 수정되었습니다.`);
+            navigate('/sellPage');
+          });
+      }
+    } else return;
   };
 
   /**상품 글 삭제하기 */
   const onClickDel = () => {
-    console.log(datas.id);
-    axios
-      .delete('/supplies/deleteSupplies', {
-        data: { suppliesId: datas.id },
-      })
-      .then(() => {
-        alert('상품 글이 삭제되었습니다.');
-        navigate('/sellPage');
-      });
+    if (window.confirm('정말 글을 삭제하시겠습니까?')) {
+      console.log(datas.id);
+      axios
+        .delete('/supplies/deleteSupplies', {
+          data: { suppliesId: datas.id },
+        })
+        .then(() => {
+          alert('상품 글이 삭제되었습니다.');
+          navigate('/sellPage');
+        });
+    } else return;
   };
 
   return (

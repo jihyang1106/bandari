@@ -48,16 +48,16 @@ const MyPage = (props) => {
     }
   }, []);
 
-  // // 유저 닉네임 가져오기
-  // useEffect(() => {
-  //   axios
-  //     .get('kakao/getNickName', {
-  //       params: { id: isLoggedIn },
-  //     })
-  //     .then((res) => {
-  //       setNickname(res.data.nickname);
-  //     });
-  // }, []);
+  // 유저 닉네임 가져오기
+  useEffect(() => {
+    axios
+      .get('kakao/getNickName', {
+        params: { id: isLoggedIn },
+      })
+      .then((res) => {
+        setNickname(res.data.nickname);
+      });
+  }, []);
 
   const getpetIds = () => {
     axios
@@ -202,7 +202,11 @@ const MyPage = (props) => {
             <button
               className={styles.deleteButton}
               onClick={() => {
-                onUserDelete();
+                if (window.confirm('정말 탈퇴하겠습니까?')) {
+                  onUserDelete();
+                } else {
+                  return;
+                }
               }}
             >
               회원 탈퇴
