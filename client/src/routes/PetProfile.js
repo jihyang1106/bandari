@@ -97,27 +97,27 @@ const PetProfile = () => {
 
   // 연, 월, 일 셀랙트 박스 값
   $(document).ready(function () {
-    var now = new Date();
-    var year = now.getFullYear();
-    var mon =
+    let now = new Date();
+    let year = now.getFullYear();
+    let mon =
       now.getMonth() + 1 > 9
         ? '' + (now.getMonth() + 1)
         : '0' + (now.getMonth() + 1);
-    var day = now.getDate() > 9 ? '' + now.getDate() : '0' + now.getDate();
+    let day = now.getDate() > 9 ? '' + now.getDate() : '0' + now.getDate();
     //년도 selectbox만들기
-    for (var i = 2000; i <= year; i++) {
+    for (let i = year - 20; i <= year + 20; i++) {
       $('#year').append('<option value="' + i + '">' + i + '년</option>');
     }
 
     // 월별 selectbox 만들기
-    for (var i = 1; i <= 12; i++) {
-      var mm = i > 9 ? i : '0' + i;
+    for (let i = 1; i <= 12; i++) {
+      let mm = i > 9 ? i : '0' + i;
       $('#month').append('<option value="' + mm + '">' + mm + '월</option>');
     }
 
     // 일별 selectbox 만들기
-    for (var i = 1; i <= 31; i++) {
-      var dd = i > 9 ? i : '0' + i;
+    for (let i = 1; i <= 31; i++) {
+      let dd = i > 9 ? i : '0' + i;
       $('#day').append('<option value="' + dd + '">' + dd + '일</option>');
     }
     $('#year  > option[value=' + year + ']').attr('selected', 'true');

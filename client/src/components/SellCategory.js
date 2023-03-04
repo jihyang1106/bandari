@@ -131,11 +131,18 @@ export default function SellCategory(props) {
       });
   };
 
+  const getAllData = () => {
+    console.log('위치와 상관없는 모든 값을 가져옵니다');
+  };
+
   return (
     <div className="sellCategory">
       {/* 상단 카테고리, 검색 & 판매 버튼 누르면, 판매 글 폼 열림 */}
 
       <div className="categoryButtonContainer">
+        <button className="getAllBtn" onClick={getAllData}>
+          모든 위치 글 가져오기
+        </button>
         <div className={`adressPickButton ${btnState}`}>
           <img src={locationIcon} alt="주소지 버튼 아이콘" />
           {userLocation ? (

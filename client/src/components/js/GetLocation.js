@@ -30,6 +30,7 @@ const GetLocation = async (dispatch) => {
     )
     .then((res) => {
       dispatch(setUserLocation(res.data.documents[0].address, true));
+      console.log(res.data.documents[0].address);
     })
     .catch((e) => {
       console.warn(`${e.message}, 로그인 버튼 누르기 전에 허용 해주세요`);

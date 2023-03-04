@@ -34,9 +34,10 @@ const MyPage = (props) => {
       navigate('/');
       return;
     } else {
-      getData();
+      getSellData();
       getLikeData();
       getpetIds();
+      getBuyData();
       axios
         .post('pet/checkPet', {
           userID: isLoggedIn,
@@ -66,23 +67,28 @@ const MyPage = (props) => {
   function onUserDelete() {
     const access_token = localStorage.getItem('access_token');
     const userId = sessionStorage.getItem('userId');
-    axios
-      .delete('/kakao/userDelete', {
-        data: {
-          access_token,
-          userId,
-        },
-      })
-      .then(() => {
-        sessionStorage.clear();
-        localStorage.clear();
-        alert('회원 탈퇴가 완료 되었습니다.');
-        navigate('/');
-      });
+
+    let confirm = window.confirm('정말로 탈퇴하시겠습니까?');
+
+    if (confirm) {
+      axios
+        .delete('/kakao/userDelete', {
+          data: {
+            access_token,
+            userId,
+          },
+        })
+        .then(() => {
+          sessionStorage.clear();
+          localStorage.clear();
+          alert('회원 탈퇴가 완료 되었습니다.');
+          navigate('/');
+        });
+    }
   }
 
   /*로그인한 유저가올린 판매글 가져오는 함수* */
-  const getData = async () => {
+  const getSellData = async () => {
     axios
       .get('supplies/getData', {
         params: {
@@ -127,6 +133,10 @@ const MyPage = (props) => {
       });
   };
 
+  /**로그인한 유저가 구매한 글 가져오는 함수 */
+  const getBuyData = () => {
+    console.log('유저가 구매한 글 가져오기');
+  };
   return (
     <>
       <Nav />
