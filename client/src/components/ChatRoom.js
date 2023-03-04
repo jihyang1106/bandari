@@ -158,7 +158,7 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
           <img src={`/uploadImg/${chatData['supply.cover']}`} alt="" />
           <div>
             <h1>{chatData['supply.title']}</h1>
-            <span>{chatData['supply.content']}</span>
+            <p>{chatData['supply.content']}</p>
           </div>
         </div>
         {/**상품정보 */}
