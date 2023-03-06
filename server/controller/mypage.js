@@ -7,13 +7,11 @@ exports.patchUser = async (req, res) => {
     nickname: req.body.userName,
     phone: req.body.userPhoneNumber,
   };
-  const result = await user.update(data, { where: { id: userData.id } });
-  console.log(result);
+  const result = await user.update(data, { where: { id: req.body.userId } });
   res.send(result);
 };
 
 exports.patchPet = async (req, res) => {
-  console.log(req.body.data);
   let data;
   data = {
     name: req.body.data.name,

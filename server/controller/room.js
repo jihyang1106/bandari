@@ -4,7 +4,7 @@ const { user } = require('../model');
 
 const { Op } = require('sequelize');
 exports.postInsert = async (req, res) => {
-  // 똑같은 값이 없을 때 room 테이블에 create 있을 때 findOne
+  // 똑같은 값이 없을 때 room 테이블에 create, 값이 있을 때 findOne
   const [result, created] = await room.findOrCreate({
     where: {
       suppliesId: req.body.suppliesId,
@@ -13,7 +13,6 @@ exports.postInsert = async (req, res) => {
     },
     raw: true,
   });
-
   res.send(created);
 };
 
@@ -88,6 +87,7 @@ exports.getData = async (req, res) => {
   res.send(result);
 };
 
+// 채팅 방 삭제
 exports.delete = async (req, res) => {
   const result = await room.destroy({ where: { id: req.body.id } });
   res.send({ result: result });

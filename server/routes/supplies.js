@@ -55,7 +55,6 @@ router.post('/insert', upload.array('img'), async (req, res) => {
         return;
     }
   });
-  console.log(imgData);
   // 판매용품 글 등록(이미지 한 개만 있을 때)
   const result = await supplies.create(datas);
 
@@ -64,7 +63,6 @@ router.post('/insert', upload.array('img'), async (req, res) => {
     imgData.suppliesId = result.dataValues.id;
     img.create(imgData);
   }
-
   res.send(true);
 });
 

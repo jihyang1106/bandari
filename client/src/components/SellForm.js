@@ -100,11 +100,6 @@ export default function SellForm() {
     };
     formData.append('datas', JSON.stringify(datas));
 
-    // formData의 value 확인
-    for (var value of formData.values()) {
-      console.log(value);
-    }
-
     await axios
       .post('supplies/insert', formData, {
         headers: {
@@ -112,23 +107,20 @@ export default function SellForm() {
         },
       })
       .then((res) => {
-        alert('글 등록에 성공하셨습니다!');
+        if (res.data) {
+          alert('글 등록에 성공하셨습니다!');
+        } else {
+          alert('글 등록에 실패하였습니다!');
+        }
       })
       .then(navigate('/SellPage'));
   };
-
-  // 반려동물 번호 로 정보 요청 > name 값 가져오기
-  //petData = [{ name: '보리' }, { name: '수남' }, { name: '밤이' }];
 
   /**업로드 버튼 클릭 시 이전 값 초기화  */
   function onImgUpload() {
     setImgState([]); //
   }
 
-  // 취소 버튼
-  function onResetPage() {
-    navigate('/sellPage');
-  }
   return (
     <>
       {/* 판매글 폼 */}
@@ -243,7 +235,7 @@ export default function SellForm() {
         <div className={`${styles.submitButton}`}>
           <button
             onClick={() => {
-              onResetPage();
+              navigate('/sellPage');
             }}
           >
             취소

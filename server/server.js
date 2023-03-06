@@ -84,14 +84,10 @@ let roomId = '';
 let rooms = [];
 
 io.on('connection', (socket) => {
-  //채팅방 입장
-  console.log('server socket connected');
-
   // 방 입장 시 로그인 한 유저와 방이름
   socket.on('loginUser', (data) => {
     loginUser = data.user;
     roomId = data.roomId;
-    console.log(`로그인한 유저 ${loginUser}와 방 번호 ${roomId}`);
 
     // rooms에 있으면 roomId 추가 xx
     if (!rooms.includes(roomId)) {
@@ -100,7 +96,6 @@ io.on('connection', (socket) => {
     socket.join(roomId);
   });
 
-  console.log('rooms', rooms);
   // 메시지 데이터
   socket.on('sendMsg', (data) => {
     console.log('메시지 데이터', data);
@@ -109,15 +104,17 @@ io.on('connection', (socket) => {
 
   // x버튼으로 채팅방 나가기
   socket.on('disconnect', () => {
-    delete rooms[roomId];
+    console.log('rooms체크', rooms);
+    rooms.forEach((el, idx) => {
+      if (el == roomId) {
+        rooms.splice(idx, 1);
+      }
+    });
     console.log(`${loginUser}가 ${roomId}방을 나갔습니다.`);
     console.log('delete 후의 rooms', rooms);
   });
 });
 
-// app.listen(process.env.PORT, () => {
-//   console.log(`server port ${process.env.PORT} open`);
-// });
 http.listen(process.env.PORT, () => {
   console.log(`${process.env.PORT} server running`);
 });
