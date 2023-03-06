@@ -113,7 +113,7 @@ const CustomSlider = ({ petdatas }) => {
   return (
     <StyledSlider {...settings}>
       {petdatas !== undefined ? (
-        petdatas.map((data, index) => <PetCard key={index} pet={data} />)
+        petdatas.map((data, index) => <PetCard pet={data} key={index} />)
       ) : (
         <div>...</div>
       )}

@@ -79,6 +79,7 @@ const SellPage = () => {
       // 이걸 하나씩 if문으로 하는 게 아니라 위에 json 형태로 만들어놓고 btnState 즉, 영어로 들어온 값이 맞춰서 검색을 하는 거지
       const newArray = all.filter((data) => data.category == state[sellState]);
       setCurrentPosts([...newArray]);
+      // setPage();
     }
   }, [sellState]);
 
@@ -145,7 +146,7 @@ const SellPage = () => {
   };
 
   const setPagination = (postNum) => {
-    setCurrentPage(1);
+    setCurrentPage(postNum - 1);
     setCount(postNum);
   };
 
