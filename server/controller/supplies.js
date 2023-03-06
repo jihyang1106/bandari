@@ -6,7 +6,7 @@ exports.getData = async (req, res) => {
   let petType = req.query.type;
 
   // 메인 페이지 에서 렌더 시 및 판매페이지에서 위치 기준으로 렌더시
-  if (petType === 'basic') {
+  if (petType === 'basic' && !req.query.buyer) {
     // 메인페이지에서 렌더 시
     if (req.query.location === 'location') {
       const mypage = await supplies.findAll({
@@ -93,6 +93,25 @@ exports.getData = async (req, res) => {
       order: [['id', 'DESC']],
     });
     res.send(cat);
+  } else if (
+    // 로그인 한 유저가 구매한 글 가져오기
+    petType === 'basic' &&
+    req.query.location === 'location' &&
+    req.query.buyer
+  ) {
+    const buyItem = await supplies.findAll({
+      where: {
+        deal: req.query.buyer,
+      },
+      include: [
+        {
+          model: pick,
+          required: false,
+        },
+      ],
+      order: [['id', 'DESC']],
+    });
+    res.send(buyItem);
   }
 };
 
@@ -135,11 +154,22 @@ exports.postSearch = async (req, res) => {
 
 // 판매 완료 확인
 exports.patchUpdateDeal = async (req, res) => {
-  const result = await supplies.update(
-    { deal: false },
-    { where: { id: req.body.id } }
-  );
-  res.send(result);
+  const soldOut = await supplies.findOne({
+    where: { id: req.body.id },
+    attributes: ['deal'],
+    raw: true,
+  });
+
+  // null이 아니면 이미 판매 완료된 상품, null이면 판매 완료 성공!
+  if (soldOut.deal != null) {
+    res.send(soldOut);
+  } else {
+    const result = await supplies.update(
+      { deal: req.body.buyer },
+      { where: { id: req.body.id } }
+    );
+    res.send(result);
+  }
 };
 
 // 메인페이지 인기글 조회

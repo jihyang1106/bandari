@@ -6,11 +6,10 @@ import { io } from 'socket.io-client';
 const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
   const user = sessionStorage.getItem('userId'); // 로그인한 유저
 
-  console.log('쳇 데이터', chatData);
   const inputRef = useRef();
   const chat = useRef();
 
-  const [send, setSend] = useState(false); //채팅전송시바뀜
+  const [send, setSend] = useState(false); //채팅 전송 시 바뀜
 
   // 채팅 목록에서 채팅방 클릭 시 DB에서 chat 가져오기
   useEffect(() => {
@@ -76,7 +75,6 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
   };
 
   socket.on('newMsg', (data) => {
-    console.log('server에서 넘어온 값', data);
     if (user === data.userId) {
       chat.current.insertAdjacentHTML(
         'beforeend',
@@ -100,38 +98,47 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
     }
   });
 
-  /**채팅 방 나가기 */
+  /**채팅 방만 나가기 */
   const onClickClose = () => {
-    console.log('채팅방 close');
     chatRef.current.classList.add(`${styles.transparent}`);
     socket.disconnect();
     setSelectChat(false);
   };
 
   /**판매 완료 버튼 이벤트 */
-  const onClickCheckSoldOut = () => {
-    if (window.confirm('정말 판매 완료 하시겠습니까?')) {
-      axios
-        .patch('/supplies/updateDeal', {
-          id: chatData.suppliesId,
-        })
-        .then((res) => {
-          if (res.data[0] === 1) alert('판매완료 되었습니다!');
-          else alert('이미 판매완료된 상품입니다.');
-        });
-    } else return;
+  const onClickCheckSoldOut = (seller) => {
+    if (seller != user) {
+      alert('용품을 판매하는 사람만 판매 완료를 할 수 있습니다.');
+    } else {
+      if (window.confirm('정말 판매 완료 하시겠습니까?')) {
+        axios
+          .patch('/supplies/updateDeal', {
+            id: chatData.suppliesId,
+            buyer: chatData.buyer,
+          })
+          .then((res) => {
+            if (res.data[0] === 1) alert('판매완료 되었습니다!');
+            else alert('이미 판매완료된 상품입니다.');
+          });
+      } else return;
+    }
   };
 
   /** 채팅 종료 버튼 이벤트 : 채팅 삭제 */
   const onClickExit = () => {
-    alert('채팅을 종료하시겠습니까? 채팅방의 모든 내용이 삭제됩니다.');
-    axios.delete('room/delete', { data: { id: chatData.id } }).then((res) => {
-      if (res.data.result === 1) alert('성공적으로 채팅방에서 나가졌습니다!');
-      else alert('이미 채팅방에서 나가졌습니다.');
-      socket.disconnect();
-      onClickClose();
-      window.location.reload();
-    });
+    if (
+      window.confirm(
+        '채팅을 종료하시겠습니까? 채팅방의 모든 내용이 삭제됩니다.'
+      )
+    ) {
+      axios.delete('room/delete', { data: { id: chatData.id } }).then((res) => {
+        if (res.data.result === 1) alert('성공적으로 채팅방에서 나가졌습니다!');
+        else alert('이미 채팅방에서 나가졌습니다.');
+        socket.disconnect();
+        onClickClose();
+        window.location.reload();
+      });
+    }
   };
 
   /*엔터 이벤트 */
@@ -168,7 +175,9 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
         <div>
           <button
             className={`${styles.checkSoldBtn} ${styles[`${categoryType}`]}`}
-            onClick={onClickCheckSoldOut}
+            onClick={() => {
+              onClickCheckSoldOut(chatData.seller);
+            }}
           >
             판매완료확인
           </button>

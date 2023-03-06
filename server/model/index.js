@@ -62,15 +62,16 @@ db.pick.belongsTo(db.user, {
   onDelete: 'cascade',
   onUpdate: 'cascade',
 });
+
 // user 삭제 => room 삭제
 db.user.hasMany(db.room, {
-  foreignKey: 'otherId',
+  foreignKey: 'seller',
   sourceKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade',
 });
 db.room.belongsTo(db.user, {
-  foreignKey: 'otherId',
+  foreignKey: 'seller',
   targetKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade',
@@ -78,13 +79,13 @@ db.room.belongsTo(db.user, {
 
 // user 삭제 => room 삭제
 db.user.hasMany(db.room, {
-  foreignKey: 'userId',
+  foreignKey: 'buyer',
   sourceKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade',
 });
 db.room.belongsTo(db.user, {
-  foreignKey: 'userId',
+  foreignKey: 'buyer',
   targetKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade',
@@ -98,7 +99,7 @@ db.user.hasMany(db.chat, {
   onUpdate: 'cascade',
 });
 db.chat.belongsTo(db.user, {
-  foreignKey: 'otherId',
+  foreignKey: 'userId',
   targetKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade',

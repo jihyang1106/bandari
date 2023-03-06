@@ -33,7 +33,7 @@ const Card = ({ list }) => {
   };
   useEffect(() => {
     //거래중
-    if (list.deal) {
+    if (list.deal === null) {
       setDeal('selling');
     } else {
       //거래완료
@@ -105,7 +105,7 @@ const Card = ({ list }) => {
         }}
       >
         <div className={`${styles[`${deal}`]}`}>
-          {list.deal ? '' : 'Soldout'}
+          {list.deal === null ? '' : 'Soldout'}
         </div>
         <img
           src={`/uploadImg/${listData.cover}`}

@@ -8,8 +8,8 @@ exports.postInsert = async (req, res) => {
   const [result, created] = await room.findOrCreate({
     where: {
       suppliesId: req.body.suppliesId,
-      userId: req.body.userId,
-      otherId: req.body.otherId,
+      buyer: req.body.userId,
+      seller: req.body.otherId,
     },
     raw: true,
   });
@@ -18,10 +18,11 @@ exports.postInsert = async (req, res) => {
 };
 
 exports.getData = async (req, res) => {
-  // 다른 사람이 쓴 글에 내가 연락해서 만든 채팅방
+  // 다른 사람이 쓴 글에 내가 연락하기
+  // seller는 다른 유저, buyer는 연락한 로그인한 유저
   const userId = await room.findAll({
     where: {
-      userId: req.query.id,
+      buyer: req.query.id,
     },
     include: [
       {
@@ -39,12 +40,14 @@ exports.getData = async (req, res) => {
     order: [['id', 'desc']],
   });
 
-  // 내가 쓴 글에 다른 유저가 연락해서 만든 채팅방
+  // 내가 쓴 글에 다른 유저가 연락해옴
+  // seller는 로그인 한 유저, buyer는 연락받은 유저
   const otherId = await room.findAll({
     where: {
-      otherId: req.query.id,
+      seller: req.query.id,
     },
     include: [
+      { model: user },
       {
         model: supplies,
         attributes: ['title', 'price', 'content', 'deal', 'cover'],
@@ -82,7 +85,6 @@ exports.getData = async (req, res) => {
       result.push(el);
     });
   }
-
   res.send(result);
 };
 
