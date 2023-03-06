@@ -89,11 +89,6 @@ const EditPetInfo = () => {
     alert('이미지는 수정이 불가합니다.');
   }
 
-  // 취소 버튼
-  function onResetPage() {
-    navigate('/');
-  }
-
   // 연, 월, 일 셀랙트 박스 값
   $(document).ready(function () {
     var now = new Date();
@@ -254,7 +249,7 @@ const EditPetInfo = () => {
             <div className={`${styles.submitButton}`}>
               <button
                 onClick={() => {
-                  onResetPage();
+                  navigate('/myPage');
                 }}
               >
                 취소

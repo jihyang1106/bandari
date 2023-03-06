@@ -41,11 +41,13 @@ router.post('/insert', petUpload.single('petImg'), async (req, res) => {
   res.send(result);
 });
 
+// 판매 글에서 한 개의 펫 정보 조회
 router.get('/getData', petController.getData);
 
 // 마이페이지 펫 정보 조회
 router.post('/checkPet', petController.checkPet);
 
+// 펫 타입 조회
 router.get('/getPetType', petController.getPetType);
 
 module.exports = router;

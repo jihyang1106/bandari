@@ -90,11 +90,6 @@ const PetProfile = () => {
     setImgState([]);
   }
 
-  // 취소 버튼
-  function onResetPage() {
-    navigate('/');
-  }
-
   // 연, 월, 일 셀랙트 박스 값
   $(document).ready(function () {
     let now = new Date();
@@ -213,7 +208,7 @@ const PetProfile = () => {
                   ></select>
                 </div>
                 <p className={styles.alret}>
-                  생년월일을 모르면, 임의로 부탁드립니다.
+                  생년월일을 모르면, 데려온 날로 설정해주세요!
                 </p>
               </div>
             </div>
@@ -266,7 +261,13 @@ const PetProfile = () => {
 
             {/* 취소 완료 버튼 */}
             <div className={`${styles.submitButton}`}>
-              <button onClick={onResetPage}>취소</button>
+              <button
+                onClick={() => {
+                  navigate('/myPage');
+                }}
+              >
+                취소
+              </button>
               <button type="button" onClick={onCompleteBtn}>
                 완료
               </button>

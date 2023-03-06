@@ -190,7 +190,6 @@ exports.getPopularPost = async (req, res) => {
       raw: true,
     })
     .then((result) => {
-      console.log('메인페이지 인기글 조회', result);
       res.send(result);
     });
 };
@@ -209,7 +208,6 @@ exports.getLikeCount = async (req, res) => {
 };
 
 exports.getImgs = async (req, res) => {
-  console.log(req.query);
   img
     .findAll({
       where: { suppliesId: req.query.suppliesId },
