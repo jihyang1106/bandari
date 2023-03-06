@@ -24,6 +24,7 @@ const MainPage = () => {
   const [Hot, setHot] = useState([]);
   const isLoggedIn = sessionStorage.getItem('userId');
 
+  const [havePop, setHavePop] = useState(false);
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const userLocation = useSelector((state) => state.location.userLocation);
 
@@ -56,6 +57,10 @@ const MainPage = () => {
         },
       })
       .then((res) => {
+        if (res.length === 0) {
+        } else {
+          setHavePop(true);
+        }
         let temp = [];
 
         res.data.sort((a, b) => {
@@ -67,7 +72,6 @@ const MainPage = () => {
         for (let i = 0; i < 4; i++) {
           temp.push(res.data[i]);
         }
-        console.log(res.data);
         setHot(temp);
       });
   };
@@ -82,7 +86,7 @@ const MainPage = () => {
       })
       .then((res) => {
         /*백에서 불러온 펫 데이터*/
-        console.log('데이터', res.data);
+        //console.log('데이터', res.data);
         dispatch(setPets(res.data));
         sessionStorage.setItem('pet', res.data);
       });
@@ -152,9 +156,15 @@ const MainPage = () => {
           <h1>인기글</h1>
           <div className={styles.cards}>
             <div>
-              {Hot.map((hot, index) => {
-                return <Card key={index} list={hot} />;
-              })}
+              {havePop ? (
+                <>
+                  {Hot.map((hot, index) => {
+                    return <Card key={index} list={hot} />;
+                  })}
+                </>
+              ) : (
+                <>인기글이 없습니다</>
+              )}
             </div>
           </div>
 

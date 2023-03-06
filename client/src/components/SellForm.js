@@ -22,6 +22,7 @@ export default function SellForm() {
   const petData = useSelector((state) => state.pets.pets);
   console.log(petData);
   const [pets, setPets] = useState([]);
+  const [petType, setpetType] = useState();
 
   const petSelectRef = useRef();
   const categorySelectRef = useRef();
@@ -38,6 +39,7 @@ export default function SellForm() {
       .then((res) => {
         console.log('유저의 펫 db 조회:', res.data);
         setPets(res.data);
+        setpetType(res.data.petType);
       });
   }, []);
 
@@ -62,14 +64,12 @@ export default function SellForm() {
       }
       setImgState(imageUrlLists);
     } else {
-      alert('이미지는 최대 4개 까지 등록 가능');
+      alert('이미지는 최대 4개 까지 등록 가능합니다.');
     }
   };
 
   /**판매 글쓰기 완료 함수 */
   const onCompleteBtn = async () => {
-    console.log('판매 글쓰기 완료 버튼 눌림');
-    console.log('imgLists', imgRef.current.files);
     const form = formInfoRef.current;
     const formData = new FormData();
 
@@ -79,6 +79,14 @@ export default function SellForm() {
       formData.append(`img`, img[i]);
     }
 
+    // 펫타입정의
+    let petType = '';
+    pets.forEach((el, idx) => {
+      if (el.id + '' === petSelectRef.current.value) {
+        petType = el.petType;
+      }
+    });
+
     //데이터
     const datas = {
       title: form.title.value,
@@ -86,9 +94,9 @@ export default function SellForm() {
       content: form.content.value,
       location: `${userLocation.region_2depth_name} ${userLocation.region_3depth_name}`,
       category: categorySelectRef.current.value,
-      deal: true,
       petId: petSelectRef.current.value,
       userId: userId,
+      petType: petType,
     };
     formData.append('datas', JSON.stringify(datas));
 

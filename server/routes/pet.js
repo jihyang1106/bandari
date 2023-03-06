@@ -35,12 +35,9 @@ const petUpload = multer({
 //펫 프로필 등록
 router.post('/insert', petUpload.single('petImg'), async (req, res) => {
   const datas = JSON.parse(req.body.datas);
-  console.log(datas);
   const petImg = req.file.filename;
   datas.petImg = `${petImg}`;
-  // console.log(datas);
   const result = await pet.create(datas);
-  // console.log(result);
   res.send(result);
 });
 

@@ -118,3 +118,20 @@ select {
     overflow: hidden;
     margin-bottom: 20px;
   }
+
+
+  /*1500px 미만*/
+  @media screen and (max-width : 1500px) {
+    .sellForm{
+      width: 100vw;
+  margin-top: calc(7vh + 72px + 36px);
+    }
+  }
+
+
+    /*1000px 미만*/
+    @media screen and (max-width : 1000px) {
+      .sellForm{
+    margin-top: 70px;
+      }
+    }

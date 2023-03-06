@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './css/MyPage.module.css';
 
@@ -8,21 +8,24 @@ import Category from '../components/Category';
 import EditUserInfoModal from '../components/EditUserInfoModal';
 import CustomCardSlider from '../components/CustomCardSlider';
 import CustomPetSlider from '../components/CustomPetSlider';
-
+import { setPets } from '../store/module/pets';
 import TestImg from '../assets/TestImg1.jpg';
 import { redirect, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const MyPage = (props) => {
+  const dispatch = useDispatch();
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const pets = useSelector((state) => state.pets.pets);
   const pet = localStorage.getItem('pet');
   const isLoggedIn = sessionStorage.getItem('userId');
   const [all, setAll] = useState([]); //전체목록
   const [sell, setSell] = useState([]); // 현재유저가 올린 판매글
+  const [buy, setBuy] = useState([]); // 현재유저가 구매한 글
   const [like, setLike] = useState([]);
   const [displayModal, setDisplayModal] = useState(false);
   const [petDatas, setPetDatas] = useState([]);
+  const [nickname, setNickname] = useState([]);
   let cardData;
   const navigate = useNavigate();
 
@@ -33,59 +36,68 @@ const MyPage = (props) => {
       navigate('/');
       return;
     } else {
-      getData();
+      getSellData();
       getLikeData();
-
+      getpetIds();
+      getBuyData();
       axios
         .post('pet/checkPet', {
           userID: isLoggedIn,
         })
         .then((res) => {
-          console.log('유저의 펫 db 조회:', res.data);
           setPetDatas(res.data);
         });
     }
   }, []);
 
+  // 유저 닉네임 가져오기
+  useEffect(() => {
+    axios
+      .get('kakao/getNickName', {
+        params: { id: isLoggedIn },
+      })
+      .then((res) => {
+        setNickname(res.data.nickname);
+      });
+  }, []);
+
+  const getpetIds = () => {
+    axios
+      .get('kakao/getPetId', {
+        params: {
+          userId: isLoggedIn,
+        },
+      })
+      .then((res) => {
+        /*백에서 불러온 펫 데이터*/
+        dispatch(setPets(res.data));
+        sessionStorage.setItem('pet', res.data);
+      });
+  };
+
   //회원 탈퇴
   function onUserDelete() {
     const access_token = localStorage.getItem('access_token');
     const userId = sessionStorage.getItem('userId');
-    axios
-      .delete('/kakao/userDelete', {
-        data: {
-          access_token,
-          userId,
-        },
-      })
-      .then(() => {
-        sessionStorage.clear();
-        localStorage.clear();
-        alert('회원 탈퇴가 완료 되었습니다.');
-        navigate('/');
-      });
-  }
 
-  /*로그인한 유저가올린 판매글 가져오는 함수* */
-  const getData = async () => {
-    axios
-      .get('supplies/getData', {
-        params: {
-          type: 'basic',
-          location: 'location',
-        },
-      })
-      .then((res) => {
-        console.log('판매글 getData  :', res.data);
-        cardData = res.data;
-        res.data.map((data) => {
-          if (data.userId === isLoggedIn) {
-            setSell([...sell, data]);
-          }
+    let confirm = window.confirm('정말로 탈퇴하시겠습니까?');
+
+    if (confirm) {
+      axios
+        .delete('/kakao/userDelete', {
+          data: {
+            access_token,
+            userId,
+          },
+        })
+        .then(() => {
+          sessionStorage.clear();
+          localStorage.clear();
+          alert('회원 탈퇴가 완료 되었습니다.');
+          navigate('/');
         });
-        setAll(res.data);
-      });
-  };
+    }
+  }
 
   /**로그인한 유저가 찜한 판매글 가져오는 함수*/
   const getLikeData = () => {
@@ -96,7 +108,6 @@ const MyPage = (props) => {
         },
       })
       .then((res) => {
-        console.log('찜', res.data);
         let userPick = [];
 
         for (let i = 0; i < res.data.length; i++) {
@@ -108,24 +119,48 @@ const MyPage = (props) => {
               userId: res.data[i].userId,
             },
           ];
+          supply['user'] = { nickname: res.data[i].user.nickname };
+
           userPick.push(supply);
         }
-        console.log('어레이', userPick);
         setLike(userPick);
       });
   };
 
-  /**펫 추가 이벤트 */
-  function petAddUpload() {
-    console.log('마이페이지 내 새꾸 프로필 추가)');
-    navigate('/petProfile');
-  }
-
-  /**회원정보수정모달 */
-  const onClickEditUserInfo = () => {
-    setDisplayModal(true);
+  /*로그인한 유저가올린 판매글 가져오는 함수* */
+  const getSellData = async () => {
+    axios
+      .get('supplies/getData', {
+        params: {
+          type: 'basic',
+          location: 'location',
+        },
+      })
+      .then((res) => {
+        cardData = res.data;
+        let myData = [];
+        res.data.map((el) => {
+          if (el.userId === isLoggedIn) {
+            setSell((prev) => [...prev, el]);
+          }
+        });
+      });
   };
 
+  /**로그인한 유저가 구매한 글 가져오는 함수 */
+  const getBuyData = () => {
+    axios
+      .get('supplies/getData', {
+        params: {
+          type: 'basic',
+          location: 'location',
+          buyer: isLoggedIn,
+        },
+      })
+      .then((res) => {
+        setBuy(res.data);
+      });
+  };
   return (
     <>
       <Nav />
@@ -138,8 +173,14 @@ const MyPage = (props) => {
               {/* 유저정보 */}
               <div>
                 <h1>마이 페이지</h1>
-                <h2>{isLoggedIn}님 안녕하세요</h2>
-                <p onClick={onClickEditUserInfo}>회원 정보 수정</p>
+                <h2>{nickname}님 안녕하세요</h2>
+                <p
+                  onClick={() => {
+                    setDisplayModal(true);
+                  }}
+                >
+                  회원 정보 수정
+                </p>
               </div>
 
               {/* 펫정보*/}
@@ -152,7 +193,9 @@ const MyPage = (props) => {
                     <p>등록된 펫이 없습니다</p>
                   )}
                   <button
-                    onClick={petAddUpload}
+                    onClick={() => {
+                      navigate('/petProfile');
+                    }}
                     className={`${styles[`${btnState}`]}`}
                   >
                     +
@@ -173,12 +216,18 @@ const MyPage = (props) => {
               </div>
 
               <h2 className={styles.titleIndex}>구매</h2>
-              <div className={styles.cards}></div>
+              <div className={styles.cards}>
+                <CustomCardSlider datas={buy} />
+              </div>
             </section>
             <button
               className={styles.deleteButton}
               onClick={() => {
-                onUserDelete();
+                if (window.confirm('정말 탈퇴하겠습니까?')) {
+                  onUserDelete();
+                } else {
+                  return;
+                }
               }}
             >
               회원 탈퇴

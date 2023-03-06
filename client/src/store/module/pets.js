@@ -3,7 +3,6 @@ const initialState = {
 };
 
 function setPets(pets) {
-  // console.log(pets);
   return {
     type: 'pets/SETPETS',
     pets,

@@ -11,27 +11,6 @@ import { useLocation } from 'react-router-dom';
 
 import axios from 'axios';
 
-const chatDatas = [
-  {
-    room: 1,
-    suppliesId: 1,
-    userId: 'a',
-    content: '내용입니다1',
-  },
-  {
-    room: 2,
-    suppliesId: 2,
-    userId: 'b',
-    content: '내용입니다2',
-  },
-  {
-    room: 3,
-    suppliesId: 3,
-    userId: 'c',
-    content: '내용입니다3',
-  },
-];
-
 const ChatPage = () => {
   const [selectChat, setSelectChat] = useState(false); //채팅방 선택 유무
   const [selectedChat, setSelectedChat] = useState({});
@@ -48,9 +27,7 @@ const ChatPage = () => {
 
   const chatRoomRef = useRef();
 
-  useEffect(() => {
-    console.log('selecttChat', selectChat);
-  }, [selectChat]);
+  useEffect(() => {}, [selectChat]);
 
   useEffect(() => {
     if (swtichType === 'basic') {
@@ -70,10 +47,6 @@ const ChatPage = () => {
   }, []);
 
   const onClickChatData = async (chatData) => {
-    console.log('채팅클릭', { chatData });
-    /**상대방 확인 하는 로직 chatData.other가 상대방 */
-    if (chatData.otherId !== user) chatData.other = chatData.otherId;
-    else chatData.other = chatData.userId;
     if (chatRoomRef.current) {
       chatRoomRef.current.classList.remove(`${styles.transparent}`);
     }
@@ -101,15 +74,6 @@ const ChatPage = () => {
             >
               <h1>채팅목록</h1>
               <div>
-                {/* {chatDatas.map((chatData, index) => {
-                  return (
-                    <ChatList
-                      key={index}
-                      chatData={chatData}
-                      onClickChatData={onClickChatData}
-                    />
-                  );
-                })} */}
                 {chatRoom.length > 0 ? (
                   chatRoom.map((chatData, idx) => {
                     return (

@@ -1,5 +1,5 @@
 const { pick } = require('../model');
-const { supplies } = require('../model');
+const { supplies, user } = require('../model');
 const { img } = require('../model');
 const { Op } = require('sequelize');
 
@@ -77,18 +77,12 @@ exports.userPick = async (req, res) => {
       {
         model: supplies,
       },
+      {
+        model: user,
+        attributes: ['nickname'],
+      },
     ],
   });
-  await console.log(result);
-  // result
-  //   .map((el) => {
-  //     img.findAll({
-  //       where: { suppliesId: el.suppliesId },
-  //     });
-  //   })
-  //   .then((respones) => {
-  //     console.log('리스', response);
-  //   });
 
   res.send(result);
 };

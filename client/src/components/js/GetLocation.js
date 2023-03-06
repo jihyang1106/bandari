@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+
 import { setUserLocation } from '../../store/module/location';
 
 const GetLocation = async (dispatch) => {
@@ -28,9 +29,8 @@ const GetLocation = async (dispatch) => {
       }
     )
     .then((res) => {
-      // console.log(res.data.documents[0].address.address_name);
-      // console.log(res.data.documents[0].address);
       dispatch(setUserLocation(res.data.documents[0].address, true));
+      console.log(res.data.documents[0].address);
     })
     .catch((e) => {
       console.warn(`${e.message}, 로그인 버튼 누르기 전에 허용 해주세요`);

@@ -33,7 +33,7 @@ input {
   margin-top: 50PX;
 }
 
-.BannerImg {
+.BannerImg{
   width: 100%;
   margin-bottom: 50px;
 }
@@ -47,6 +47,7 @@ input {
   width: 50vw;
   text-align: center;
 }
+
 
 
 /*1200px이하*/

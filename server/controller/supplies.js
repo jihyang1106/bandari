@@ -1,14 +1,12 @@
-const { supplies, pick, img, pet, Sequelize } = require('../model');
+const { supplies, pick, img, pet, Sequelize, user } = require('../model');
 const Op = Sequelize.Op;
 
 // 용품 판매글 조회 & 메인페이지 인기글 조회
 exports.getData = async (req, res) => {
   let petType = req.query.type;
-  console.log('petType', petType);
-  console.log('req.query', req.query.location);
 
   // 메인 페이지 에서 렌더 시 및 판매페이지에서 위치 기준으로 렌더시
-  if (petType === 'basic') {
+  if (petType === 'basic' && !req.query.buyer) {
     // 메인페이지에서 렌더 시
     if (req.query.location === 'location') {
       const mypage = await supplies.findAll({
@@ -21,7 +19,13 @@ exports.getData = async (req, res) => {
             model: pick,
             required: false,
           },
+          {
+            model: user,
+            required: false,
+            attributes: ['nickname'],
+          },
         ],
+        order: [['id', 'DESC']],
       });
       res.send(mypage);
     } else {
@@ -36,14 +40,21 @@ exports.getData = async (req, res) => {
             model: pick,
             required: false,
           },
+          {
+            model: user,
+            required: false,
+            attributes: ['nickname'],
+          },
         ],
         where: {
           location: { [Op.startsWith]: req.query.location.region_2depth_name },
         },
+        order: [['id', 'DESC']],
       });
       res.send(basic);
     }
   } else if (petType === 'puppy') {
+    petType = '강아지';
     const puppy = await supplies.findAll({
       include: [
         {
@@ -54,21 +65,53 @@ exports.getData = async (req, res) => {
           model: pick,
           required: false,
         },
+      ],
+      where: {
+        location: { [Op.startsWith]: req.query.location.region_2depth_name },
+        petType: petType,
+      },
+      order: [['id', 'DESC']],
+    });
+    res.send(puppy);
+  } else if (petType === 'cat') {
+    petType = '고양이';
+    const cat = await supplies.findAll({
+      include: [
         {
-          model: pet,
+          model: img,
           required: false,
-          attributes: ['id'],
-          where: {
-            petType: '강아지',
-          },
+        },
+        {
+          model: pick,
+          required: false,
         },
       ],
       where: {
         location: { [Op.startsWith]: req.query.location.region_2depth_name },
+        petType: petType,
       },
+      order: [['id', 'DESC']],
     });
-    res.send(puppy);
-  } else if (petType === 'cat') {
+    res.send(cat);
+  } else if (
+    // 로그인 한 유저가 구매한 글 가져오기
+    petType === 'basic' &&
+    req.query.location === 'location' &&
+    req.query.buyer
+  ) {
+    const buyItem = await supplies.findAll({
+      where: {
+        deal: req.query.buyer,
+      },
+      include: [
+        {
+          model: pick,
+          required: false,
+        },
+      ],
+      order: [['id', 'DESC']],
+    });
+    res.send(buyItem);
   }
 };
 
@@ -102,22 +145,31 @@ exports.postSearch = async (req, res) => {
           },
         ],
       },
+      order: [['id', 'DESC']],
     })
     .then((result) => {
-      // console.log('디비 조회', result);
       res.json(result);
     });
 };
 
 // 판매 완료 확인
 exports.patchUpdateDeal = async (req, res) => {
-  console.log(req.body.id);
-  const result = await supplies.update(
-    { deal: false },
-    { where: { id: req.body.id } }
-  );
-  console.log('result', result);
-  res.send(result);
+  const soldOut = await supplies.findOne({
+    where: { id: req.body.id },
+    attributes: ['deal'],
+    raw: true,
+  });
+
+  // null이 아니면 이미 판매 완료된 상품, null이면 판매 완료 성공!
+  if (soldOut.deal != null) {
+    res.send(soldOut);
+  } else {
+    const result = await supplies.update(
+      { deal: req.body.buyer },
+      { where: { id: req.body.id } }
+    );
+    res.send(result);
+  }
 };
 
 // 메인페이지 인기글 조회
@@ -163,7 +215,6 @@ exports.getImgs = async (req, res) => {
       where: { suppliesId: req.query.suppliesId },
     })
     .then((result) => {
-      console.log('리절', result);
       res.send(result);
     });
 };
@@ -182,7 +233,6 @@ exports.patchSupplies = async (req, res) => {
 };
 
 exports.deleteSupplies = async (req, res) => {
-  console.log(req.body.suppliesId);
   await supplies.destroy({
     where: { id: req.body.suppliesId },
   });

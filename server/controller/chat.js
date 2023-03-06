@@ -7,8 +7,6 @@ exports.postInsert = async (req, res) => {
 };
 
 exports.getData = async (req, res) => {
-  console.log('채팅 select', req.query.id);
-  console.log('test req.query', req.query);
   const result = await chat.findAll({
     where: { roomId: req.query.id },
     attributes: ['id', 'msg', 'time', 'userId', 'roomId'],

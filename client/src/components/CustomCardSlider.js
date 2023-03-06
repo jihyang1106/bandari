@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import styled from 'styled-components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -77,7 +77,6 @@ export const StyledSlider = styled(Slider)`
 `;
 
 const CustomSlider = ({ datas }) => {
-  console.log({ datas });
   const settings = {
     dots: true,
     infinite: false,
