@@ -117,20 +117,7 @@ const Card = ({ list }) => {
         <div className={styles.cardFooter}>
           <h3>{listData.title}</h3>
           <p>{listData.price} 원</p>
-          <p>
-            {/* {' '}
-            {userLocation ? (
-              <>
-                {' '}
-                {userLocation.region_2depth_name +
-                  ' ' +
-                  userLocation.region_3depth_name}
-              </>
-            ) : (
-              <>전체</>
-            )} */}
-            {listData.location}
-          </p>
+          <p>{listData.location}</p>
         </div>
         <div className={styles.likeButton}>
           <span className={styles.likeCount}>{likeCount}</span>

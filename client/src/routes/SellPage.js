@@ -43,8 +43,8 @@ const SellPage = () => {
   const [count, setCount] = useState(0); // 아이템 총 개수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지. default 값으로 1
   const [postPerPage] = useState(8); // 한 페이지에 보여질 아이템 수
-  const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
-  const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
+  // const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
+  // const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
   const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
 
   const [getAll, setGetAll] = useState(true); //초반에는 전체글, 버튼클릭시 위치로 가져오며 false된다
@@ -71,17 +71,41 @@ const SellPage = () => {
 
   useEffect(() => {
     // 처음 basic이 들어오면 전체라는 거니까 전체 정보를 갖고 있는 all
-    if (sellState === 'basic') setCurrentPosts([...all]);
-    else {
+
+    let arr = [];
+    if (sellState === 'basic') {
+      arr = all;
+    } else {
       // 전체에서 filter을 걸어야 하잖아요.
       // 현재 sell은 이미 다른 filter가 걸려있는 친구. ( all에서 filter을 진행)
       // 이때 filter을 하는 조건이 all 리스트에 들어있는 친구들의 category가 내가 누른 btnState에 맞는 한글이어야 해요.
       // 이걸 하나씩 if문으로 하는 게 아니라 위에 json 형태로 만들어놓고 btnState 즉, 영어로 들어온 값이 맞춰서 검색을 하는 거지
-      const newArray = all.filter((data) => data.category == state[sellState]);
-      setCurrentPosts([...newArray]);
-      // setPage();
+
+      arr = all.filter((data) => data.category == state[sellState]);
+      // setCurrentPosts([...newArray]);
     }
+
+    // const indexLast = 1 * postPerPage;
+    setProducts([...arr]);
+    // setCount([...arr].length);
+    // setIndexOfLastPost(indexLast);
+    // setIndexOfFirstPost(indexLast - postPerPage);
+    // setCurrentPosts([...arr].slice(indexLast - postPerPage, indexLast));
   }, [sellState]);
+
+  useEffect(() => {
+    // setCurrentPage(1);
+    const indexLast = currentPage * postPerPage;
+    // setProducts([...products]);
+    setCount([...products].length);
+    // setIndexOfLastPost(indexLast);
+    // setIndexOfFirstPost(indexLast - postPerPage);
+    setCurrentPosts([...products].slice(indexLast - postPerPage, indexLast));
+  }, [currentPage, products, postPerPage]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [products]);
 
   /*전체판매글 가져오는 함수* */
   const getAllData = async () => {
@@ -96,12 +120,12 @@ const SellPage = () => {
         setSell(res.data);
         setAll(res.data);
 
-        const indexLast = currentPage * postPerPage;
+        // const indexLast = currentPage * postPerPage;
         setProducts(res.data);
-        setCount(res.data.length);
-        setIndexOfLastPost(indexLast);
-        setIndexOfFirstPost(indexLast - postPerPage);
-        setCurrentPosts(res.data.slice(indexLast - postPerPage, indexLast));
+        // setCount(res.data.length);
+        // setIndexOfLastPost(indexLast);
+        // setIndexOfFirstPost(indexLast - postPerPage);
+        // setCurrentPosts(res.data.slice(indexLast - postPerPage, indexLast));
       });
   };
 
@@ -118,12 +142,12 @@ const SellPage = () => {
         setSell(res.data);
         setAll(res.data);
 
-        const indexLast = currentPage * postPerPage;
+        // const indexLast = currentPage * postPerPage;
         setProducts(res.data);
-        setCount(res.data.length);
-        setIndexOfLastPost(indexLast);
-        setIndexOfFirstPost(indexLast - postPerPage);
-        setCurrentPosts(res.data.slice(indexLast - postPerPage, indexLast));
+        // setCount(res.data.length);
+        // setIndexOfLastPost(indexLast);
+        // setIndexOfFirstPost(indexLast - postPerPage);
+        // setCurrentPosts(res.data.slice(indexLast - postPerPage, indexLast));
       });
   };
 
@@ -137,12 +161,12 @@ const SellPage = () => {
 
   // 페이지네이션 페이지 조정
   const setPage = (pageNum) => {
-    console.log('eeeeeeeeeeeeeeeeeeeeeeee : ', pageNum);
+    // console.log('페이지 번호: ', pageNum);
     setCurrentPage(pageNum);
-    const indexLast = pageNum * postPerPage;
-    setIndexOfLastPost(indexLast);
-    setIndexOfFirstPost(indexLast - postPerPage);
-    setCurrentPosts(products.slice(indexLast - postPerPage, indexLast));
+    // const indexLast = pageNum * postPerPage;
+    // // setIndexOfLastPost(indexLast);
+    // // setIndexOfFirstPost(indexLast - postPerPage);
+    // setCurrentPosts(products.slice(indexLast - postPerPage, indexLast));
   };
 
   const setPagination = (postNum) => {
@@ -160,7 +184,7 @@ const SellPage = () => {
             <SellCategory
               getAll={getAll}
               setGetAll={setGetAll}
-              setCurrentPosts={setCurrentPosts}
+              setProducts={setProducts}
               setPagination={setPagination}
             />
             <div className={styles.cardContainer}>
@@ -170,17 +194,16 @@ const SellPage = () => {
                   <img src={Catbanner} alt="배너" />
                 </StyledSlider>
               </div>
-              <div>
-                {currentPosts && products.length > 0 ? (
-                  <>
-                    {currentPosts.map((list, index) => {
-                      return <Card key={index} list={list} />;
-                    })}
-                  </>
-                ) : (
-                  <div>로딩중...</div>
-                )}
-              </div>
+
+              {currentPosts && products.length > 0 ? (
+                <>
+                  {currentPosts.map((list, index) => {
+                    return <Card key={index} list={list} />;
+                  })}
+                </>
+              ) : (
+                <div>로딩중...</div>
+              )}
             </div>
             <div className={styles.pagings}>
               <Paging page={currentPage} count={count} setPage={setPage} />

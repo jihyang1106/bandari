@@ -15,7 +15,9 @@ const ChatList = ({ chatData, onClickChatData, setSelectChat }) => {
         {chatData['supply.user.nickname'] ? (
           <>
             <span>판매하는 사람</span>
-            <h1>{chatData['supply.user.nickname']}</h1>
+            <h1 className={styles.h1margin}>
+              {chatData['supply.user.nickname']}
+            </h1>
           </>
         ) : (
           <>

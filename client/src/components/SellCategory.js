@@ -126,7 +126,7 @@ export default function SellCategory(props) {
       .then((res) => {
         console.log('검색 결과 값 :', res.data);
         // 검색시 페이지네이션 조절 sellpage setPagination()함수에 값 보냄
-        props.setCurrentPosts(res.data);
+        props.setProducts(res.data);
         props.setPagination(res.data.length);
       });
   };
