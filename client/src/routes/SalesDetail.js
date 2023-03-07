@@ -10,7 +10,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import styled, { keyframes, css } from 'styled-components';
-import $ from 'jquery';
+
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -38,10 +38,12 @@ export const StyledSlider = styled(Slider)`
     left: -45px;
   }
 
+  /* 
   .slick-next:before {
     color: black;
     right: -45px;
   }
+
   .slick-prev:before,
   .slick-next:before {
     font-size: 25px;
@@ -49,7 +51,7 @@ export const StyledSlider = styled(Slider)`
 
   .slick-next {
     right: -45px;
-  }
+  } */
 
   @media screen and (max-width: 2200px) {
   }
@@ -77,14 +79,18 @@ const SalesDetail = () => {
   const priceRef = useRef();
   const contentRef = useRef();
 
+  // slick-carousel settings
   const settings = {
-    dots: true,
+    dots: false,
     infinite: false,
-    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 1500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0,
   };
+
   /* img값이 2개 이상일 때 null 값을 제외한 이미지 배열  */
   // let newImgs = [];
 

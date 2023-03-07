@@ -26,6 +26,9 @@
   display: inline-block;
 }
 
+.h1margin {
+  margin: 5px 0 10px 0;
+}
 /*1200px이하*/
 @media screen and (max-width: 1200px) {
   .chatList {
