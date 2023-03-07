@@ -73,7 +73,8 @@ input {
 
 /*1000px이하*/
 @media screen and (max-width: 1000px) {
-  .sellPage {
+  .cardContainer {
+    justify-content: center;
   }
 
   .sellPage > section > .AvailSaleContainer {

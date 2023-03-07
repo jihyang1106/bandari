@@ -26,6 +26,7 @@ export const StyledSlider = styled(Slider)`
   .slick-dots {
     //슬라이드의 위치
     margin-top: 70px;
+    display: none !important;
   }
   .slick-track {
     //이건 잘 모르겠음

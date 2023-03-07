@@ -170,17 +170,16 @@ const SellPage = () => {
                   <img src={Catbanner} alt="배너" />
                 </StyledSlider>
               </div>
-              <div>
-                {currentPosts && products.length > 0 ? (
-                  <>
-                    {currentPosts.map((list, index) => {
-                      return <Card key={index} list={list} />;
-                    })}
-                  </>
-                ) : (
-                  <div>로딩중...</div>
-                )}
-              </div>
+
+              {currentPosts && products.length > 0 ? (
+                <>
+                  {currentPosts.map((list, index) => {
+                    return <Card key={index} list={list} />;
+                  })}
+                </>
+              ) : (
+                <div>로딩중...</div>
+              )}
             </div>
             <div className={styles.pagings}>
               <Paging page={currentPage} count={count} setPage={setPage} />
