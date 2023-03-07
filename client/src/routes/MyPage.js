@@ -205,19 +205,25 @@ const MyPage = (props) => {
             </section>
 
             <section>
-              <h2 className={styles.titleIndex}>찜</h2>
-              <div className={styles.cards}>
-                <CustomCardSlider datas={like} />
+              <div>
+                <h2 className={styles.titleIndex}>찜</h2>
+                <div className={styles.cards}>
+                  <CustomCardSlider datas={like} />
+                </div>
               </div>
 
-              <h2 className={styles.titleIndex}>판매</h2>
-              <div className={styles.cards}>
-                <CustomCardSlider datas={sell} />
+              <div>
+                <h2 className={styles.titleIndex}>판매</h2>
+                <div className={styles.cards}>
+                  <CustomCardSlider datas={sell} />
+                </div>
               </div>
 
-              <h2 className={styles.titleIndex}>구매</h2>
-              <div className={styles.cards}>
-                <CustomCardSlider datas={buy} />
+              <div>
+                <h2 className={styles.titleIndex}>구매</h2>
+                <div className={styles.cards}>
+                  <CustomCardSlider datas={buy} />
+                </div>
               </div>
             </section>
             <button
