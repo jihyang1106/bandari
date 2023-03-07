@@ -5,9 +5,14 @@ const Op = Sequelize.Op;
 exports.getData = async (req, res) => {
   let petType = req.query.type;
 
-  // 메인 페이지 에서 렌더 시 및 판매페이지에서 위치 기준으로 렌더시
+  // 1. 메인페이지에서 렌더 시, 판매 페이지에서 위치 기준으로 렌더시
+  // 2. petType이 강아지인 모든 글 가져오기, petType이 강아지이면서 내 위치 기준으로 가져오기
+  // 3. petType이 고양이인 모든 글 가져오기, petType이 고양이이면서 내 위치 기준으로 가져오기
+  // 4. 로그인 한 유저가 구매한 글 가져오기
+
+  // 1. 메인 페이지 에서 렌더 시 및 판매페이지에서 위치 기준으로 렌더시
   if (petType === 'basic' && !req.query.buyer) {
-    // 메인페이지에서 렌더 시
+    // 1-1. 메인페이지에서 렌더 시
     if (req.query.location === 'location') {
       const mypage = await supplies.findAll({
         include: [
@@ -29,7 +34,7 @@ exports.getData = async (req, res) => {
       });
       res.send(mypage);
     } else {
-      // 판매 페이지에서 위치 기준으로 렌더시
+      // 1-2. 판매 페이지에서 위치 기준으로 렌더시
       const basic = await supplies.findAll({
         include: [
           {
@@ -53,48 +58,94 @@ exports.getData = async (req, res) => {
       });
       res.send(basic);
     }
-  } else if (petType === 'puppy') {
+    // 2. petType이 강아지이고, 모든 글 또는 현재 위치 기준 렌더시
+  } else if (petType === 'puppy' && !req.query.buyer) {
     petType = '강아지';
-    const puppy = await supplies.findAll({
-      include: [
-        {
-          model: img,
-          required: false,
+    // 2-1. petType이 강아지인 모든 글 가져오기
+    if (req.query.location === 'location') {
+      const puppy = await supplies.findAll({
+        include: [
+          {
+            model: img,
+            required: false,
+          },
+          {
+            model: pick,
+            required: false,
+          },
+        ],
+        where: {
+          petType: petType,
         },
-        {
-          model: pick,
-          required: false,
+        order: [['id', 'DESC']],
+      });
+      res.send(puppy);
+      // 2-2. petType이 강아지이면서 내 위치 기준으로 가져오기
+    } else {
+      const puppy = await supplies.findAll({
+        include: [
+          {
+            model: img,
+            required: false,
+          },
+          {
+            model: pick,
+            required: false,
+          },
+        ],
+        where: {
+          location: { [Op.startsWith]: req.query.location.region_2depth_name },
+          petType: petType,
         },
-      ],
-      where: {
-        location: { [Op.startsWith]: req.query.location.region_2depth_name },
-        petType: petType,
-      },
-      order: [['id', 'DESC']],
-    });
-    res.send(puppy);
-  } else if (petType === 'cat') {
+        order: [['id', 'DESC']],
+      });
+      res.send(puppy);
+    }
+    // 3. petType이 고양이이고, 모든 글 또는 현재 위치 기준 렌더시
+  } else if (petType === 'cat' && !req.query.buyer) {
     petType = '고양이';
-    const cat = await supplies.findAll({
-      include: [
-        {
-          model: img,
-          required: false,
+    // 3-1. petType이 고양이인 모든 글 가져오기
+    if (req.query.location === 'location') {
+      const cat = await supplies.findAll({
+        include: [
+          {
+            model: img,
+            required: false,
+          },
+          {
+            model: pick,
+            required: false,
+          },
+        ],
+        where: {
+          petType: petType,
         },
-        {
-          model: pick,
-          required: false,
+        order: [['id', 'DESC']],
+      });
+      res.send(cat);
+      // 3-2. petType이 고양이면서 내 위치 기준으로 가져오기
+    } else {
+      const cat = await supplies.findAll({
+        include: [
+          {
+            model: img,
+            required: false,
+          },
+          {
+            model: pick,
+            required: false,
+          },
+        ],
+        where: {
+          location: { [Op.startsWith]: req.query.location.region_2depth_name },
+          petType: petType,
         },
-      ],
-      where: {
-        location: { [Op.startsWith]: req.query.location.region_2depth_name },
-        petType: petType,
-      },
-      order: [['id', 'DESC']],
-    });
-    res.send(cat);
+        order: [['id', 'DESC']],
+      });
+      res.send(cat);
+    }
+    // 4. 로그인 한 유저가 구매한 글 가져오기
   } else if (
-    // 로그인 한 유저가 구매한 글 가져오기
     petType === 'basic' &&
     req.query.location === 'location' &&
     req.query.buyer

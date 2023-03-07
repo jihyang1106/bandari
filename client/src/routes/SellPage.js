@@ -107,48 +107,73 @@ const SellPage = () => {
     setCurrentPage(1);
   }, [products]);
 
+  useEffect(() => {
+    getAllData();
+  }, [idxBtnState]);
   /*전체판매글 가져오는 함수* */
   const getAllData = async () => {
     axios
       .get('supplies/getData', {
         params: {
-          type: 'basic',
+          type: idxBtnState,
           location: 'location',
         },
       })
       .then((res) => {
         setSell(res.data);
         setAll(res.data);
-
-        // const indexLast = currentPage * postPerPage;
         setProducts(res.data);
-        // setCount(res.data.length);
-        // setIndexOfLastPost(indexLast);
-        // setIndexOfFirstPost(indexLast - postPerPage);
-        // setCurrentPosts(res.data.slice(indexLast - postPerPage, indexLast));
       });
   };
 
   /**위치값에 따른 글 가져오기 */
   const getLocationData = async () => {
-    axios
-      .get('supplies/getData', {
-        params: {
-          type: idxBtnState,
-          location: userLocation,
-        },
-      })
-      .then((res) => {
-        setSell(res.data);
-        setAll(res.data);
+    if (idxBtnState === 'puppy') {
+      axios
+        .get('supplies/getData', {
+          params: {
+            type: idxBtnState,
+            location: userLocation,
+          },
+        })
+        .then((res) => {
+          setSell(res.data);
+          setAll(res.data);
+          setProducts(res.data);
+        });
+    } else if (idxBtnState === 'cat') {
+      axios
+        .get('supplies/getData', {
+          params: {
+            type: idxBtnState,
+            location: userLocation,
+          },
+        })
+        .then((res) => {
+          setSell(res.data);
+          setAll(res.data);
+          setProducts(res.data);
+        });
+    } else {
+      axios
+        .get('supplies/getData', {
+          params: {
+            type: idxBtnState,
+            location: userLocation,
+          },
+        })
+        .then((res) => {
+          setSell(res.data);
+          setAll(res.data);
 
-        // const indexLast = currentPage * postPerPage;
-        setProducts(res.data);
-        // setCount(res.data.length);
-        // setIndexOfLastPost(indexLast);
-        // setIndexOfFirstPost(indexLast - postPerPage);
-        // setCurrentPosts(res.data.slice(indexLast - postPerPage, indexLast));
-      });
+          // const indexLast = currentPage * postPerPage;
+          setProducts(res.data);
+          // setCount(res.data.length);
+          // setIndexOfLastPost(indexLast);
+          // setIndexOfFirstPost(indexLast - postPerPage);
+          // setCurrentPosts(res.data.slice(indexLast - postPerPage, indexLast));
+        });
+    }
   };
 
   useEffect(() => {
@@ -161,7 +186,6 @@ const SellPage = () => {
 
   // 페이지네이션 페이지 조정
   const setPage = (pageNum) => {
-    // console.log('페이지 번호: ', pageNum);
     setCurrentPage(pageNum);
     // const indexLast = pageNum * postPerPage;
     // // setIndexOfLastPost(indexLast);
