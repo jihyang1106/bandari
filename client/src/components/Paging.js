@@ -8,7 +8,8 @@ const Paging = ({ page, count, setPage }) => {
     <div>
       <Pagination
         activePage={page}
-        itemsCountPerPage={5}
+        // sellpage postPerPage 아이템 갯수랑 맞춰야한다.
+        itemsCountPerPage={8}
         totalItemsCount={count}
         pageRangeDisplayed={5}
         prevPageText={'<'}

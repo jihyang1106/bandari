@@ -18,7 +18,8 @@ input {
 }
 
 .cardContainer {
-  width: 70vw;
+  /* width: 70vw; */
+  width: 45vw;
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
@@ -30,7 +31,9 @@ input {
 }
 
 .pagings {
-  margin-top: 50PX;
+    margin-top: 50PX;
+    margin-bottom: 50px;
+  
 }
 
 .BannerImg{

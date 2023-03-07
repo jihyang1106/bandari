@@ -23,7 +23,7 @@ import axios from 'axios';
 
 export const StyledSlider = styled(Slider)`
   .slick-slide img {
-    width: 80% !important;
+    width: 85% !important;
   }
 `;
 
@@ -42,7 +42,7 @@ const SellPage = () => {
   const [products, setProducts] = useState([]); // 리스트에 나타낼 아이템들
   const [count, setCount] = useState(0); // 아이템 총 개수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지. default 값으로 1
-  const [postPerPage] = useState(12); // 한 페이지에 보여질 아이템 수
+  const [postPerPage] = useState(8); // 한 페이지에 보여질 아이템 수
   const [indexOfLastPost, setIndexOfLastPost] = useState(0); // 현재 페이지의 마지막 아이템 인덱스
   const [indexOfFirstPost, setIndexOfFirstPost] = useState(0); // 현재 페이지의 첫번째 아이템 인덱스
   const [currentPosts, setCurrentPosts] = useState(0); // 현재 페이지에서 보여지는 아이템들
@@ -170,15 +170,17 @@ const SellPage = () => {
                   <img src={Catbanner} alt="배너" />
                 </StyledSlider>
               </div>
-              {currentPosts && products.length > 0 ? (
-                <>
-                  {currentPosts.map((list, index) => {
-                    return <Card key={index} list={list} />;
-                  })}
-                </>
-              ) : (
-                <div>로딩중...</div>
-              )}
+              <div>
+                {currentPosts && products.length > 0 ? (
+                  <>
+                    {currentPosts.map((list, index) => {
+                      return <Card key={index} list={list} />;
+                    })}
+                  </>
+                ) : (
+                  <div>로딩중...</div>
+                )}
+              </div>
             </div>
             <div className={styles.pagings}>
               <Paging page={currentPage} count={count} setPage={setPage} />
