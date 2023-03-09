@@ -70,14 +70,16 @@
   margin-top: 10px;
 }
 
-.chatRoom > .item > div:first-child div span {
+.chatRoom > .item > div:first-child div p {
   font-size: 12px;
+  height: 60px;
+  overflow: hidden;
+  line-height: 15px;
 }
 
 .chatRoom > .item > div:last-child {
   display: flex;
   justify-content: space-around;
-  margin-top: 5px;
 }
 
 .chatRoom > .item > div:last-child .checkSoldBtn {
@@ -188,7 +190,7 @@
   border: none;
   background-color: #ffffff;
   border-radius: 42px;
-  margin-right: 5px;
+  margin-right: 10px;
   font-size: 15px;
   padding: 10px;
   outline: none;
@@ -254,6 +256,11 @@
 @media screen and (max-width: 500px) {
   .chatRoom {
     width: 85vw;
+  }
+
+  .chatRoom > .item > div:first-child div p {
+
+    height: 40px;
   }
 
   .chatRoom > .item {

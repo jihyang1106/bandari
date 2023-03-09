@@ -44,9 +44,7 @@ const supplies = (Sequelize, DataTypes) => {
         defaultValue: 0,
       },
       deal: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: true,
+        type: DataTypes.STRING(40),
       },
       userId: {
         type: DataTypes.STRING(40),

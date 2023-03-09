@@ -140,6 +140,7 @@
 
 .petInfo {
   margin-left: 20px;
+
 }
 
 .petInfo h1 {
@@ -149,7 +150,11 @@
 }
 
 .petInfo p {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
   margin-bottom: 10px;
+  line-height: 20px;
 }
 .petInfo p:nth-child(1) {
   font-size: 20px;

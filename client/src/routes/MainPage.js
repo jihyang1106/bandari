@@ -72,7 +72,6 @@ const MainPage = () => {
         for (let i = 0; i < 4; i++) {
           temp.push(res.data[i]);
         }
-        console.log(res.data);
         setHot(temp);
       });
   };
@@ -87,7 +86,7 @@ const MainPage = () => {
       })
       .then((res) => {
         /*백에서 불러온 펫 데이터*/
-        console.log('데이터', res.data);
+        //console.log('데이터', res.data);
         dispatch(setPets(res.data));
         sessionStorage.setItem('pet', res.data);
       });

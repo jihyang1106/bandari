@@ -20,8 +20,6 @@ const EditUserInfoModal = ({ display, setDisplay }) => {
     const name = userNameRef.current.value; //변경이름
     const phoneNum = userPhoneNumberRef.current.value; //변경폰번호
 
-    console.log('회원정보수정 완료버튼클릭');
-    console.log(userId);
     axios({
       method: 'patch',
       url: '/mypage/patchUser',
@@ -31,8 +29,10 @@ const EditUserInfoModal = ({ display, setDisplay }) => {
         userId: userId,
       },
     }).then((res) => {
-      alert('사용자 변경 완료');
-      window.location.href = 'http://13.124.185.47:3000/myPage';
+      if (res.data) {
+        alert('회원정보수정이 성공적으로 되었습니다!');
+        navigate('/');
+      }
     });
   };
   return (

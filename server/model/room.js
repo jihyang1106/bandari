@@ -13,11 +13,11 @@ const room = (Sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      userId: {
+      buyer: {
         type: DataTypes.STRING(40),
         allowNull: false,
       },
-      otherId: {
+      seller: {
         type: DataTypes.STRING(40),
         allowNull: false,
       },

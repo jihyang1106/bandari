@@ -6,6 +6,7 @@
   height: 400px;
 }
 
+
 /*탈퇴버튼*/
 .MyPageContainer > button{
   border: none;
@@ -139,7 +140,6 @@ flex-direction: column;
 
 
 
-
 .titleIndex {
   font-size: 16px;
   font-weight: 600;
@@ -169,6 +169,7 @@ flex-direction: column;
   .MyPageContainer {
     align-items: center;
     margin-top: calc(7vh + 72px + 36px);
+    width: 100vw;
   }
 
   .MyPageContainer > div,
@@ -180,6 +181,7 @@ flex-direction: column;
   .cards {
     margin-left: -2%;
   }
+
 }
 
 
@@ -202,6 +204,12 @@ flex-direction: column;
   .MyPageContainer > section {
     width: 80vw;
     margin-left: 0px;
+  }
+
+  .MyPageContainer > section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .MyPageContainer > div > h1{

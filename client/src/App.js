@@ -20,26 +20,18 @@ function App() {
   const userId = sessionStorage.getItem('userId');
   const [init, setInit] = useState(true);
 
-  // const mousePosition = useMousePosition();
-  // const prefersReducedMotion = usePrefersReducedMotion();
-
-  // const transform = prefersReducedMotion
-  //   ? null
-  //   : `translate(${mousePosition.x}px, ${mousePosition.y}px)`;
-  // const cursorRef = useRef();
-
   const dispatch = useDispatch();
 
   /* axios 요청 */
   // axios.defaults.baseURL = 'http://localhost:5000';
   axios.defaults.baseURL = 'http://13.124.185.47:5000';
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     GetLocation(dispatch);
-
-    // return () => {
-    //   window.removeEventListener('mousemove', handleMouseMove);
-    // };
+    if (userId) {
+      dispatch({ type: 'SETUSERINFO', isLogin: userId });
+    }
   }, []);
 
   return (

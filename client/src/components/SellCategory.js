@@ -126,9 +126,13 @@ export default function SellCategory(props) {
       .then((res) => {
         console.log('검색 결과 값 :', res.data);
         // 검색시 페이지네이션 조절 sellpage setPagination()함수에 값 보냄
-        props.setCurrentPosts(res.data);
+        props.setProducts(res.data);
         props.setPagination(res.data.length);
       });
+  };
+
+  const onChangeGetData = () => {
+    props.setGetAll((prev) => !prev);
   };
 
   return (
@@ -136,53 +140,64 @@ export default function SellCategory(props) {
       {/* 상단 카테고리, 검색 & 판매 버튼 누르면, 판매 글 폼 열림 */}
 
       <div className="categoryButtonContainer">
-        <div className={`adressPickButton ${btnState}`}>
-          <img src={locationIcon} alt="주소지 버튼 아이콘" />
-          {userLocation ? (
-            <>
-              {' '}
-              {userLocation.region_2depth_name +
-                ' ' +
-                userLocation.region_3depth_name}
-            </>
-          ) : (
-            <>전체</>
-          )}
-        </div>
-        <div className={`changeBtn ${btnState}`}>
-          <button
-            ref={basicBtnRef}
-            className="categoryButton basicBtn"
-            value="basic"
-            onClick={clickedBtn}
-          >
-            전체
+        {props.getAll ? (
+          <button className="getAllBtn" onClick={onChangeGetData}>
+            주변 글 가져오기
           </button>
-          <button
-            ref={peedBtnRef}
-            className="categoryButton peedBtn"
-            value="peed"
-            onClick={clickedBtn}
-          >
-            사료
-          </button>
-          <button
-            ref={snackBtnRef}
-            className="categoryButton snackBtn"
-            value="snack"
-            onClick={clickedBtn}
-          >
-            간식
-          </button>
-          <button
-            ref={productBtnRef}
-            className="categoryButton productBtn"
-            value="product"
-            onClick={clickedBtn}
-          >
-            용품
-          </button>
-        </div>
+        ) : (
+          <>
+            <button className="getAllBtn" onClick={onChangeGetData}>
+              모든 위치 글 가져오기
+            </button>
+            <div className={`adressPickButton ${btnState}`}>
+              <img src={locationIcon} alt="주소지 버튼 아이콘" />
+              {userLocation ? (
+                <>
+                  {' '}
+                  {userLocation.region_2depth_name +
+                    ' ' +
+                    userLocation.region_3depth_name}
+                </>
+              ) : (
+                <>전체</>
+              )}
+            </div>
+          </>
+        )}
+      </div>
+      <div className={`changeBtn ${btnState}`}>
+        <button
+          ref={basicBtnRef}
+          className="categoryButton basicBtn"
+          value="basic"
+          onClick={clickedBtn}
+        >
+          전체
+        </button>
+        <button
+          ref={peedBtnRef}
+          className="categoryButton peedBtn"
+          value="peed"
+          onClick={clickedBtn}
+        >
+          사료
+        </button>
+        <button
+          ref={snackBtnRef}
+          className="categoryButton snackBtn"
+          value="snack"
+          onClick={clickedBtn}
+        >
+          간식
+        </button>
+        <button
+          ref={productBtnRef}
+          className="categoryButton productBtn"
+          value="product"
+          onClick={clickedBtn}
+        >
+          용품
+        </button>
       </div>
       <div className="searchNav">
         <input

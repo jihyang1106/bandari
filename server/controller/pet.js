@@ -2,7 +2,6 @@ const { pet } = require('../model');
 
 // 용품 판매글 조회
 exports.getData = async (req, res) => {
-  console.log('req.query', req.query.id);
   const result = await pet.findOne({ where: { id: req.query.id }, raw: true });
   console.log(result);
   res.send(result);
@@ -24,6 +23,5 @@ exports.checkPet = async (req, res) => {
 exports.getPetType = async (req, res) => {
   const result = await pet.findAll({}).then((result) => {
     res.send(result);
-    // console.log('펫 타입', result);
   });
 };

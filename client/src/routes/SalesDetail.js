@@ -10,7 +10,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import styled, { keyframes, css } from 'styled-components';
-import $ from 'jquery';
+
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -38,10 +38,12 @@ export const StyledSlider = styled(Slider)`
     left: -45px;
   }
 
+  /* 
   .slick-next:before {
     color: black;
     right: -45px;
   }
+
   .slick-prev:before,
   .slick-next:before {
     font-size: 25px;
@@ -49,7 +51,7 @@ export const StyledSlider = styled(Slider)`
 
   .slick-next {
     right: -45px;
-  }
+  } */
 
   @media screen and (max-width: 2200px) {
   }
@@ -62,6 +64,7 @@ export const StyledSlider = styled(Slider)`
 `;
 
 const SalesDetail = () => {
+  const [nickname, setNickname] = useState([]);
   const navigate = useNavigate();
   // state 취득
   const location = useLocation();
@@ -70,21 +73,24 @@ const SalesDetail = () => {
   const btnState = useSelector((state) => state.typeSwitch.switchState);
   const [newImgs, setnewImgs] = useState([]);
   const userId = sessionStorage.getItem('userId');
-  console.log('datas 판매 상세페이지 : ', datas);
-  console.log('datas 판매 상세페이지 : ', datas.price);
+
   const { id } = useParams();
   const titleRef = useRef();
   const priceRef = useRef();
   const contentRef = useRef();
 
+  // slick-carousel settings
   const settings = {
-    dots: true,
+    dots: false,
     infinite: false,
-    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 1500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0,
   };
+
   /* img값이 2개 이상일 때 null 값을 제외한 이미지 배열  */
   // let newImgs = [];
 
@@ -96,7 +102,6 @@ const SalesDetail = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         if (res.data.length > 0) {
           const imgs = [res.data[0].img1, res.data[0].img2, res.data[0].img3];
           newImgs.push(imgs.filter((el) => el != null));
@@ -106,7 +111,7 @@ const SalesDetail = () => {
     const imgs = [datas.imgs[0].img1, datas.imgs[0].img2, datas.imgs[0].img3];
     newImgs.push(imgs.filter((el) => el != null));
   }
-  console.log(newImgs);
+
   // 상세페이지 렌더 시 글에 맞는 펫 정보 가져오기
   useEffect(() => {
     axios
@@ -118,14 +123,25 @@ const SalesDetail = () => {
       });
   }, []);
 
+  // 유저 닉네임 가져오기
+  useEffect(() => {
+    axios
+      .get('kakao/getNickName', {
+        params: { id: userId },
+      })
+      .then((res) => {
+        setNickname(res.data.nickname);
+      });
+  }, []);
+
   // 프론트로 보내는 데이터
   const result = { pet: pet, supplies: datas };
 
   // 서버로 보내는 데이터
   const backData = {
     suppliesId: datas.id, // 글 id
-    userId: userId, // 로그인한 유저 id
-    otherId: datas.userId, // 글 작성 id
+    buyer: userId, // 로그인한 유저 id
+    seller: datas.userId, // 글 작성 id
   };
 
   // 채팅하기 버튼
@@ -138,47 +154,51 @@ const SalesDetail = () => {
         alert('로그인 후 연락해주세요');
         navigate('/');
       } else {
-        axios.post('room/insert', backData).then((res) => {
-          console.log('생성 판별 여부', res.data);
+        axios.post('room/insert', backData).then(() => {
+          navigate('/chatPage');
+          window.location.reload();
         });
-        navigate('/chatPage');
-        window.location.reload();
       }
     }
   };
-  // console.log('priceRef.current.value', priceRef.current.value);
-  // console.log(Number(priceRef.current.value));
-  /**수정하기1!!!!!!!!!!!!! */
+
+  /**수정하기 */
   const onClickEdit = () => {
-    console.log(Number(priceRef.current.value));
-    if (Number(priceRef.current.value) == 0)
-      alert('가격에 숫자를 입력해주세요');
-    else {
+    if (window.confirm('정말 글을 수정하시겠습니까?')) {
+      console.log(Number(priceRef.current.value));
+      if (Number(priceRef.current.value) == 0)
+        alert('가격에 숫자를 입력해주세요');
+      else {
+        axios
+          .patch('/supplies/patchSupplies', {
+            data: {
+              suppliesId: datas.id,
+              title: titleRef.current.value,
+              price: priceRef.current.value,
+              content: contentRef.current.value,
+            },
+          })
+          .then((res) => {
+            alert(` ${titleRef.current.value}상품의 정보가 수정되었습니다.`);
+            navigate('/sellPage');
+          });
+      }
+    } else return;
+  };
+
+  /**상품 글 삭제하기 */
+  const onClickDel = () => {
+    if (window.confirm('정말 글을 삭제하시겠습니까?')) {
+      console.log(datas.id);
       axios
-        .patch('/supplies/patchSupplies', {
-          data: {
-            suppliesId: datas.id,
-            title: titleRef.current.value,
-            price: priceRef.current.value,
-            content: contentRef.current.value,
-          },
+        .delete('/supplies/deleteSupplies', {
+          data: { suppliesId: datas.id },
         })
-        .then((res) => {
-          alert(` ${titleRef.current.value}상품의 정보가 수정되었습니다.`);
+        .then(() => {
+          alert('상품 글이 삭제되었습니다.');
           navigate('/sellPage');
         });
-    }
-  };
-  const onClickDel = () => {
-    console.log(datas.id);
-    axios
-      .delete('/supplies/deleteSupplies', {
-        data: { suppliesId: datas.id },
-      })
-      .then(() => {
-        alert('상품 글이 삭제되었습니다.');
-        navigate('/sellPage');
-      });
+    } else return;
   };
 
   return (
@@ -215,7 +235,7 @@ const SalesDetail = () => {
 
             {/* 작성자 / 제목 / 가격 데이터 */}
             <p className={`${styles.formUserInfo} ${styles.formUserInfo_1}`}>
-              {datas.userId}
+              {datas.user.nickname}
             </p>
             {/* 유저 아이디 대신 닉네임으로 대체 예정 */}
             <p className={styles.formUserInfo}>{datas.location}</p>

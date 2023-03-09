@@ -7,10 +7,6 @@ const CLIENT_ID = process.env.KAKAO_CLIENTID;
 const REDIRECT_URI = process.env.KAKAO_REDIRECTURI;
 const CLIENT_SECRET = process.env.KAKAO_CLIENTSECRET;
 
-// exports.kakaoLogin = async (req,res) =>{
-//   const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=http://localhost:5000/kakao/code`;
-//   res.redirect(kakaoAuthUrl)
-// }
 exports.token = async (req, res) => {
   await axios({
     method: 'POST',
@@ -26,7 +22,6 @@ exports.token = async (req, res) => {
       client_secret: CLIENT_SECRET,
     },
   }).then((result) => {
-    // console.log(result.data)
     res.send(result.data);
   });
 };
@@ -43,8 +38,6 @@ exports.getKakaoUser = async (req, res) => {
       'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
     },
   }).then((response) => {
-    // console.log(response.data.kakao_account)
-    //console.log('유저 정보', user);
     userData = {
       id: response.data.kakao_account.email,
       nickname: response.data.kakao_account.profile.nickname,
@@ -64,23 +57,6 @@ exports.kakaoLogout = (req, res) => {
   console.log(true);
   res.send(true);
 };
-
-// exports.isLogin = (req, res) => {
-//   if (userData !== false) {
-//     console.log('로그인 유저데이터', userData);
-//     res.send({ isLogin: userData.id });
-//   } else {
-//     console.log('로그아웃 유저데이터', userData);
-//     res.send({ isLogin: false });
-//   }
-// };
-
-// exports.cleanUp = (req, res) => {
-//   userData = {
-//     id: false,
-//     nickname: false,
-//   };
-// };
 
 exports.getPetId = async (req, res) => {
   console.log('쿼리', req.query);
@@ -107,4 +83,19 @@ exports.userDelete = async (req, res) => {
     user.destroy({ where: { id: userId } });
   });
   res.send(true);
+};
+
+exports.getNickName = async (req, res) => {
+  try {
+    console.log('아이디', req.query.id);
+    const result = await user.findOne({
+      where: { id: req.query.id },
+      attributes: ['nickname'],
+      raw: true,
+    });
+    console.log(result);
+    res.send(result);
+  } catch {
+    res.send('로그인 정보가 없습니다.');
+  }
 };

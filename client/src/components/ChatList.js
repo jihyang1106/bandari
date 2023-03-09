@@ -12,8 +12,19 @@ const ChatList = ({ chatData, onClickChatData, setSelectChat }) => {
       className={styles.chatList}
     >
       <div>
-        <h1>{chatData['supply.user.nickname']}</h1>
-        <h1>{chatData['user.nickname']}</h1>
+        {chatData['supply.user.nickname'] ? (
+          <>
+            <span>판매하는 사람</span>
+            <h1 className={styles.h1margin}>
+              {chatData['supply.user.nickname']}
+            </h1>
+          </>
+        ) : (
+          <>
+            <span>연락준 사람</span>
+            <h1>{chatData['user.nickname']}</h1>
+          </>
+        )}
         <span>{chatData['supply.title']}</span>
       </div>
       <img src={`/uploadImg/${chatData['supply.cover']}`} alt="" />

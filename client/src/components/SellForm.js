@@ -64,14 +64,12 @@ export default function SellForm() {
       }
       setImgState(imageUrlLists);
     } else {
-      alert('이미지는 최대 4개 까지 등록 가능');
+      alert('이미지는 최대 4개 까지 등록 가능합니다.');
     }
   };
 
   /**판매 글쓰기 완료 함수 */
   const onCompleteBtn = async () => {
-    console.log('판매 글쓰기 완료 버튼 눌림');
-    console.log('imgLists', imgRef.current.files);
     const form = formInfoRef.current;
     const formData = new FormData();
 
@@ -96,17 +94,11 @@ export default function SellForm() {
       content: form.content.value,
       location: `${userLocation.region_2depth_name} ${userLocation.region_3depth_name}`,
       category: categorySelectRef.current.value,
-      deal: true,
       petId: petSelectRef.current.value,
       userId: userId,
       petType: petType,
     };
     formData.append('datas', JSON.stringify(datas));
-
-    // formData의 value 확인
-    for (var value of formData.values()) {
-      console.log(value);
-    }
 
     await axios
       .post('supplies/insert', formData, {
@@ -115,23 +107,20 @@ export default function SellForm() {
         },
       })
       .then((res) => {
-        alert('글 등록에 성공하셨습니다!');
+        if (res.data) {
+          alert('글 등록에 성공하셨습니다!');
+        } else {
+          alert('글 등록에 실패하였습니다!');
+        }
       })
       .then(navigate('/SellPage'));
   };
-
-  // 반려동물 번호 로 정보 요청 > name 값 가져오기
-  //petData = [{ name: '보리' }, { name: '수남' }, { name: '밤이' }];
 
   /**업로드 버튼 클릭 시 이전 값 초기화  */
   function onImgUpload() {
     setImgState([]); //
   }
 
-  // 취소 버튼
-  function onResetPage() {
-    navigate('/sellPage');
-  }
   return (
     <>
       {/* 판매글 폼 */}
@@ -246,7 +235,7 @@ export default function SellForm() {
         <div className={`${styles.submitButton}`}>
           <button
             onClick={() => {
-              onResetPage();
+              navigate('/sellPage');
             }}
           >
             취소

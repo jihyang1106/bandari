@@ -1,19 +1,16 @@
 const { pick } = require('../model');
-const { supplies } = require('../model');
+const { supplies, user } = require('../model');
 const { img } = require('../model');
 const { Op } = require('sequelize');
 
 // 판매페이지에서 pick 데이터 조회
 exports.getLike = async (req, res) => {
-  console.log('getLike req.query 뷰값 오나요?', req.query);
   const result = await pick.findAll({ raw: true });
-  console.log('pick 조회 :', result);
   res.send(result);
 };
 
 // 판매글 좋아요 카운트, 상태
 exports.postLikePlus = async (req, res) => {
-  console.log('좋아요 값', req.body.likeCount);
   await pick.create(
     {
       suppliesId: req.body.id,
@@ -35,7 +32,6 @@ exports.postLikePlus = async (req, res) => {
 };
 
 exports.postLikeminus = async (req, res) => {
-  console.log(req.body);
   await pick.destroy({
     where: { userId: req.body.userId, suppliesId: req.body.id },
     raw: true,
@@ -57,7 +53,6 @@ exports.postLikeminus = async (req, res) => {
 
 // 카드에서 아이디값 좋아요 정보 조회
 exports.getPick = async (req, res) => {
-  console.log('로그인값', req.body.userId);
   const result = await pick.findAll({
     where: {
       userId: req.body.userId,
@@ -68,7 +63,6 @@ exports.getPick = async (req, res) => {
 };
 
 exports.userPick = async (req, res) => {
-  console.log('쿼리', req.query.userId);
   const result = await pick.findAll({
     where: {
       userId: req.query.userId,
@@ -77,18 +71,12 @@ exports.userPick = async (req, res) => {
       {
         model: supplies,
       },
+      {
+        model: user,
+        attributes: ['nickname'],
+      },
     ],
   });
-  await console.log(result);
-  // result
-  //   .map((el) => {
-  //     img.findAll({
-  //       where: { suppliesId: el.suppliesId },
-  //     });
-  //   })
-  //   .then((respones) => {
-  //     console.log('리스', response);
-  //   });
 
   res.send(result);
 };

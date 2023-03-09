@@ -4,31 +4,29 @@ const { user } = require('../model');
 
 const { Op } = require('sequelize');
 exports.postInsert = async (req, res) => {
-  // 똑같은 값이 없을 때 room 테이블에 create 있을 때 findOne
+  // 똑같은 값이 없을 때 room 테이블에 create, 값이 있을 때 findOne
   const [result, created] = await room.findOrCreate({
     where: {
       suppliesId: req.body.suppliesId,
-      userId: req.body.userId,
-      otherId: req.body.otherId,
+      buyer: req.body.userId,
+      seller: req.body.otherId,
     },
     raw: true,
   });
-
   res.send(created);
 };
 
 exports.getData = async (req, res) => {
-  // console.log('room의 데이터', req.query);
-
-  // 다른 사람이 쓴 글에 내가 연락해서 만든 채팅방
+  // 다른 사람이 쓴 글에 내가 연락하기
+  // seller는 다른 유저, buyer는 연락한 로그인한 유저
   const userId = await room.findAll({
     where: {
-      userId: req.query.id,
+      buyer: req.query.id,
     },
     include: [
       {
         model: supplies,
-        attributes: ['title', 'price', 'content', 'deal', 'cover', 'userId'],
+        attributes: ['title', 'price', 'content', 'deal', 'cover'],
         include: [
           {
             model: user,
@@ -41,17 +39,17 @@ exports.getData = async (req, res) => {
     order: [['id', 'desc']],
   });
 
-  console.log('내가 만든 채팅방', userId);
-
-  // 내가 쓴 글에 다른 유저가 연락해서 만든 채팅방
+  // 내가 쓴 글에 다른 유저가 연락해옴
+  // seller는 로그인 한 유저, buyer는 연락받은 유저
   const otherId = await room.findAll({
     where: {
-      otherId: req.query.id,
+      seller: req.query.id,
     },
     include: [
+      { model: user },
       {
         model: supplies,
-        attributes: ['title', 'price', 'content', 'deal', 'cover', 'userId'],
+        attributes: ['title', 'price', 'content', 'deal', 'cover'],
       },
       {
         model: user,
@@ -61,8 +59,6 @@ exports.getData = async (req, res) => {
     raw: true,
     order: [['id', 'desc']],
   });
-
-  console.log('다른 유저가 만든 채팅방', otherId);
 
   // 내림차순 정렬
   let result = [];
@@ -88,14 +84,11 @@ exports.getData = async (req, res) => {
       result.push(el);
     });
   }
-
-  // console.log(result);
   res.send(result);
 };
 
+// 채팅 방 삭제
 exports.delete = async (req, res) => {
-  console.log('삭제할 room ', req.body);
   const result = await room.destroy({ where: { id: req.body.id } });
-  console.log('delete result', result);
   res.send({ result: result });
 };
