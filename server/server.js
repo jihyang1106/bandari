@@ -27,7 +27,7 @@ const cors = require('cors');
 app.use(cors());
 app.use(
   cors({
-    origin: ['http://13.124.185.47:3000', 'http://localhost:3000'],
+    origin: ['*'],
     credentials: true,
   })
 );
@@ -72,7 +72,7 @@ app.use('/chat', chatRouter);
 const http = require('http').createServer(app);
 const io = require('socket.io')(http, {
   cors: {
-    orgin: ['http://13.124.185.47:3000', 'http://localhost:3000'],
+    orgin: ['*'],
     method: ['GET', 'POST'],
   },
 });
