@@ -15,7 +15,7 @@ const ViewKakao = () => {
     const CLIENT_SECRET = process.env.REACT_APP_KAKAO_CLIENTSECRETE;
     axios({
       method: 'post',
-      url: 'kakao/token',
+      url: '/kakao/token',
       data: {
         code: code,
       },
