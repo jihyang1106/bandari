@@ -7,10 +7,6 @@ const CLIENT_ID = process.env.KAKAO_CLIENTID;
 const REDIRECT_URI = process.env.KAKAO_REDIRECTURI;
 const CLIENT_SECRET = process.env.KAKAO_CLIENTSECRET;
 
-// exports.kakaoLogin = async (req,res) =>{
-//   const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=http://localhost:5000/kakao/code`;
-//   res.redirect(kakaoAuthUrl)
-// }
 exports.token = async (req, res) => {
   await axios({
     method: 'POST',
