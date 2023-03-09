@@ -11,10 +11,10 @@ const path = require('path');
 
 // upload 할 petImg 폴더 없을 시 생성
 try {
-  fs.readdirSync('../client/build/petImg');
+  fs.readdirSync('../client/public/petImg');
 } catch (err) {
   console.error('upload할 petImg 폴더가 없습니다. 폴더를 생성합니다.');
-  fs.mkdirSync('../client/build/petImg');
+  fs.mkdirSync('../client/public/petImg');
 }
 
 // multer
@@ -22,7 +22,7 @@ const petUpload = multer({
   storage: multer.diskStorage({
     destination(req, file, done) {
       // 저장되는 path
-      done(null, '../client/build/petImg');
+      done(null, '../client/public/petImg');
     },
     filename(req, file, done) {
       const datas = JSON.parse(req.body.datas);
