@@ -3,7 +3,14 @@ import axios from 'axios';
 
 import { setUserLocation } from '../../store/module/location';
 
-const GetLocation = async (dispatch) => {
+const instance = axios.create({
+  baseURL: 'https://dapi.kakao.com/v2/local/geo',
+  headers: {
+    Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_API_KEY}`,
+  },
+});
+
+const GetLocation = (dispatch) => {
   let options = {
     enableHighAccuracy: true, // 정확한 위치 요청
     timeout: 4000, // 위치 정보를 얻을 때까지 기다릴 시간
@@ -36,22 +43,18 @@ const GetLocation = async (dispatch) => {
   //     dispatch(setUserLocation(null, false));
   //   });
 
-  //알아낸 좌표를 kakaoAPI 요청
+  // 알아낸 좌표를 kakaoAPI 요청
   const success = (position) => {
-    // console.log(position.coords.latitude, position.coords.longitude);
     const y = position.coords.latitude;
     const x = position.coords.longitude;
-    axios
-      .get(
-        `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${x}&y=${y}`,
-        {
-          headers: {
-            Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_API_KEY}`,
-          },
-        }
-      )
+    instance
+      .get(`/coord2address.json?x=${x}&y=${y}`)
       .then((res) => {
         dispatch(setUserLocation(res.data.documents[0].address, true));
+      })
+      .catch((e) => {
+        console.warn(`${e.message}, 로그인 버튼 누르기 전에 허용 해주세요`);
+        dispatch(setUserLocation(null, false));
       });
   };
 

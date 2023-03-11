@@ -15,22 +15,21 @@ app.use(
   })
 );
 
+/**client와의 통신 */
+const cors = require('cors');
+app.use(
+  cors({
+    origin: ['http://localhost:443'],
+    credentials: true,
+  })
+);
+
 const path = require('path');
 /**dotenv 설정 */
 const dotenv = require('dotenv');
 dotenv.config({
   path: path.join(__dirname, '../.env'),
 });
-
-/**client와의 통신 */
-const cors = require('cors');
-app.use(cors());
-app.use(
-  cors({
-    origin: ['*'],
-    credentials: true,
-  })
-);
 
 app.use(express.static(path.join(__dirname, 'public'))); // 요청시 기본 경로 설정
 app.use(express.json()); // json 파싱, 유저가 보낸 데이터 출력하기 위해 필요
@@ -74,6 +73,7 @@ const io = require('socket.io')(http, {
   cors: {
     orgin: ['*'],
     method: ['GET', 'POST'],
+    credentials: true,
   },
 });
 
