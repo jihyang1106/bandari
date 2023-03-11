@@ -19,14 +19,14 @@ const NavCategoryHamburger = ({ categoryType }) => {
   const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECTURI;
   const LOGOUT_REDIRECT_URI = process.env.REACT_APP_KAKAO_LOGOUT_REDIRECTURI;
   const onClickLogin = async () => {
-    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=https://13.124.185.47/kakao/login`;
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=https://bandari.store/kakao/login`;
     await (window.location.href = kakaoAuthUrl);
   };
 
   /**로그아웃 클릭시 실행되는 함수*/
   const onClickLogout = async () => {
     sessionStorage.removeItem('userData');
-    const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=https://13.124.185.47/kakao/logout`;
+    const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=https://bandari.store/kakao/logout`;
     await (window.location.href = kakaoLogoutUrl);
   };
 
