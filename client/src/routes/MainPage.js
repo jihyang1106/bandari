@@ -73,6 +73,9 @@ const MainPage = () => {
           temp.push(res.data[i]);
         }
         setHot(temp);
+      })
+      .catch((e) => {
+        console.log('인기글 error', e);
       });
   };
 
