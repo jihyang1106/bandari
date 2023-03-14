@@ -5,11 +5,13 @@ const { user } = require('../model');
 const { Op } = require('sequelize');
 exports.postInsert = async (req, res) => {
   // 똑같은 값이 없을 때 room 테이블에 create, 값이 있을 때 findOne
+
+  console.log(req.body);
   const [result, created] = await room.findOrCreate({
     where: {
       suppliesId: req.body.suppliesId,
-      buyer: req.body.userId,
-      seller: req.body.otherId,
+      buyer: req.body.buyer,
+      seller: req.body.seller,
     },
     raw: true,
   });

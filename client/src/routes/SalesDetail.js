@@ -121,6 +121,7 @@ const SalesDetail = () => {
       .then((res) => {
         setPet(res.data);
       });
+    console.log(datas);
   }, []);
 
   // 유저 닉네임 가져오기
@@ -132,6 +133,7 @@ const SalesDetail = () => {
       .then((res) => {
         setNickname(res.data.nickname);
       });
+    console.log(userId);
   }, []);
 
   // 프론트로 보내는 데이터
@@ -147,13 +149,14 @@ const SalesDetail = () => {
   // 채팅하기 버튼
   const onChattingBtn = () => {
     // 판매완료시
-    if (!datas.deal) {
+    if (datas.deal) {
       alert('판매완료된 상품입니다');
     } else {
       if (userId === false) {
         alert('로그인 후 연락해주세요');
         navigate('/');
       } else {
+        console.log(backData);
         axios.post('room/insert', backData).then(() => {
           navigate('/chatPage');
           window.location.reload();
