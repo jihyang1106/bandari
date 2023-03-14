@@ -121,7 +121,6 @@ const SalesDetail = () => {
       .then((res) => {
         setPet(res.data);
       });
-    console.log(datas);
   }, []);
 
   // 유저 닉네임 가져오기
@@ -133,7 +132,6 @@ const SalesDetail = () => {
       .then((res) => {
         setNickname(res.data.nickname);
       });
-    console.log(userId);
   }, []);
 
   // 프론트로 보내는 데이터
@@ -156,7 +154,6 @@ const SalesDetail = () => {
         alert('로그인 후 연락해주세요');
         navigate('/');
       } else {
-        console.log(backData);
         axios.post('room/insert', backData).then(() => {
           navigate('/chatPage');
           window.location.reload();
@@ -168,7 +165,6 @@ const SalesDetail = () => {
   /**수정하기 */
   const onClickEdit = () => {
     if (window.confirm('정말 글을 수정하시겠습니까?')) {
-      console.log(Number(priceRef.current.value));
       if (Number(priceRef.current.value) == 0)
         alert('가격에 숫자를 입력해주세요');
       else {
@@ -192,7 +188,6 @@ const SalesDetail = () => {
   /**상품 글 삭제하기 */
   const onClickDel = () => {
     if (window.confirm('정말 글을 삭제하시겠습니까?')) {
-      console.log(datas.id);
       axios
         .delete('/supplies/deleteSupplies', {
           data: { suppliesId: datas.id },

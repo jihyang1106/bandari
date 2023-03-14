@@ -12,7 +12,6 @@ const NavCategoryHamburger = ({ categoryType }) => {
   const dispatch = useDispatch();
 
   const onClickOpenCategory = () => {
-    // console.log(HamburgerDivRef.current.classList);
     HamburgerDivRef.current.classList.toggle(`${styles.open}`);
   };
 
@@ -21,7 +20,7 @@ const NavCategoryHamburger = ({ categoryType }) => {
   const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECTURI;
   const LOGOUT_REDIRECT_URI = process.env.REACT_APP_KAKAO_LOGOUT_REDIRECTURI;
   const onClickLogin = async () => {
-    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=http://localhost:443/kakao/login`;
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`;
     await (window.location.href = kakaoAuthUrl);
   };
 
@@ -29,7 +28,7 @@ const NavCategoryHamburger = ({ categoryType }) => {
   const onClickLogout = async () => {
     dispatch(logout());
     sessionStorage.clear();
-    const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=http://localhost:443/kakao/logout`;
+    const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=${LOGOUT_REDIRECT_URI}`;
     await (window.location.href = kakaoLogoutUrl);
   };
 

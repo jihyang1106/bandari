@@ -19,7 +19,6 @@ function logout() {
 function user(state = initialState, action) {
   switch (action.type) {
     case 'SETUSERINFO':
-      console.log('res.data.isLogin', action.isLogin);
       return {
         ...state,
         user: {

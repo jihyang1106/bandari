@@ -17,7 +17,6 @@ const EditPetInfo = () => {
   const location = useLocation();
   const petInfo = location.state.pet.pet;
   const userId = sessionStorage.getItem('userId');
-  console.log(petInfo);
 
   const navigate = useNavigate();
   const imgRef = useRef();
@@ -58,10 +57,6 @@ const EditPetInfo = () => {
 
     formData.append('datas', JSON.stringify(datas));
 
-    // formData의 value 확인
-    for (var value of formData.values()) {
-      console.log(' formData의 value 확인', value);
-    }
     const age = `${form.yy.value}년${form.mm.value}월${form.dd.value}일생`;
 
     await axios

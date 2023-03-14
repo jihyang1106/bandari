@@ -89,7 +89,6 @@ const MainPage = () => {
       })
       .then((res) => {
         /*백에서 불러온 펫 데이터*/
-        //console.log('데이터', res.data);
         dispatch(setPets(res.data));
         sessionStorage.setItem('pet', res.data);
       });
