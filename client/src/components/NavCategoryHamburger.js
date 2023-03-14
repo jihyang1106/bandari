@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './css/NavCategoryHamburger.module.css';
 import HamburgerIcon from '../assets/HamburgerIcon.png';
+import { logout } from '../store/module/user';
 
 const NavCategoryHamburger = ({ categoryType }) => {
   const HamburgerDivRef = useRef();
   const isLoggedIn = sessionStorage.getItem('userId');
+  const dispatch = useDispatch();
 
   const onClickOpenCategory = () => {
     // console.log(HamburgerDivRef.current.classList);
@@ -19,14 +21,15 @@ const NavCategoryHamburger = ({ categoryType }) => {
   const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECTURI;
   const LOGOUT_REDIRECT_URI = process.env.REACT_APP_KAKAO_LOGOUT_REDIRECTURI;
   const onClickLogin = async () => {
-    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=https://localhost:443/kakao/login`;
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=http://localhost:443/kakao/login`;
     await (window.location.href = kakaoAuthUrl);
   };
 
   /**로그아웃 클릭시 실행되는 함수*/
   const onClickLogout = async () => {
-    sessionStorage.removeItem('userData');
-    const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=https://localhost:443/kakao/logout`;
+    dispatch(logout());
+    sessionStorage.clear();
+    const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=http://localhost:443/kakao/logout`;
     await (window.location.href = kakaoLogoutUrl);
   };
 
