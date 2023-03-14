@@ -1,6 +1,24 @@
 const express = require('express');
 const app = express();
 const session = require('express-session');
+const fs = require('fs');
+
+const options = {
+  ca: fs.readFileSync('./fullchain.pem'),
+  key: fs.readFileSync('./privkey.pem', 'utf8'),
+  cert: fs.readFileSync('./cert.pem', 'utf8'),
+};
+
+const https = require('https').createServer(options, app);
+const path = require('path');
+
+const io = require('socket.io')(https, {
+  cors: {
+    orgin: ['*'],
+    method: ['GET', 'POST'],
+    credentials: true,
+  },
+});
 
 /**morgan 설정 */
 const morgan = require('morgan');
@@ -24,7 +42,6 @@ app.use(
   })
 );
 
-const path = require('path');
 /**dotenv 설정 */
 const dotenv = require('dotenv');
 dotenv.config({
@@ -68,14 +85,6 @@ app.use('/pick', pickRouter);
 app.use('/chat', chatRouter);
 
 // 소켓을 위한 서버 설정
-const http = require('http').createServer(app);
-const io = require('socket.io')(http, {
-  cors: {
-    orgin: ['*'],
-    method: ['GET', 'POST'],
-    credentials: true,
-  },
-});
 
 const moment = require('moment');
 // 접속한 유저, 방 번호, 방
@@ -115,6 +124,6 @@ io.on('connection', (socket) => {
   });
 });
 
-http.listen(process.env.PORT, () => {
+https.listen(process.env.PORT, () => {
   console.log(`${process.env.PORT} server running`);
 });

@@ -23,8 +23,8 @@ function App() {
   const dispatch = useDispatch();
 
   /* axios 요청 */
-  axios.defaults.baseURL = 'http://localhost:5000';
-  // axios.defaults.baseURL = 'http://13.124.185.47:5000';
+  // axios.defaults.baseURL = 'http://localhost:5000';
+  axios.defaults.baseURL = 'https://bandari.store:5000';
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
