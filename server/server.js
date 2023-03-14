@@ -19,7 +19,7 @@ app.use(
 const cors = require('cors');
 app.use(
   cors({
-    origin: ['http://localhost:443'],
+    origin: ['http://localhost:443', 'https://bandari.store'],
     credentials: true,
   })
 );
