@@ -147,7 +147,7 @@ const SalesDetail = () => {
   // 채팅하기 버튼
   const onChattingBtn = () => {
     // 판매완료시
-    if (!datas.deal) {
+    if (datas.deal) {
       alert('판매완료된 상품입니다');
     } else {
       if (userId === false) {
@@ -165,7 +165,6 @@ const SalesDetail = () => {
   /**수정하기 */
   const onClickEdit = () => {
     if (window.confirm('정말 글을 수정하시겠습니까?')) {
-      console.log(Number(priceRef.current.value));
       if (Number(priceRef.current.value) == 0)
         alert('가격에 숫자를 입력해주세요');
       else {
@@ -189,7 +188,6 @@ const SalesDetail = () => {
   /**상품 글 삭제하기 */
   const onClickDel = () => {
     if (window.confirm('정말 글을 삭제하시겠습니까?')) {
-      console.log(datas.id);
       axios
         .delete('/supplies/deleteSupplies', {
           data: { suppliesId: datas.id },

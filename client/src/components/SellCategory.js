@@ -33,7 +33,6 @@ export default function SellCategory(props) {
     (state) => state.sellCategorySwitch.switchState
   );
   const pets = useSelector((state) => state.pets.pets);
-  // console.log(pets);
   const userLocation = useSelector((state) => state.location.userLocation);
   const isLogin = sessionStorage.getItem('userId');
 
@@ -118,13 +117,11 @@ export default function SellCategory(props) {
 
   // db에 검색 값 조회
   const onSearch = () => {
-    // console.log('검색값 :', search);
     axios
       .post('supplies/postSearch', {
         searchData: search,
       })
       .then((res) => {
-        console.log('검색 결과 값 :', res.data);
         // 검색시 페이지네이션 조절 sellpage setPagination()함수에 값 보냄
         props.setProducts(res.data);
         props.setPagination(res.data.length);

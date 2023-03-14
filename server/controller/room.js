@@ -8,8 +8,8 @@ exports.postInsert = async (req, res) => {
   const [result, created] = await room.findOrCreate({
     where: {
       suppliesId: req.body.suppliesId,
-      buyer: req.body.userId,
-      seller: req.body.otherId,
+      buyer: req.body.buyer,
+      seller: req.body.seller,
     },
     raw: true,
   });

@@ -9,7 +9,6 @@ const ViewKakao = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get('code');
-    console.log(code);
     const CLIENT_ID = process.env.REACT_APP_KAKAO_CLIENTID;
     const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECTURI;
     const CLIENT_SECRET = process.env.REACT_APP_KAKAO_CLIENTSECRETE;
@@ -21,7 +20,6 @@ const ViewKakao = () => {
       },
     })
       .then((res) => {
-        console.log(res.data.access_token);
         if (res.data.access_token) {
           localStorage.setItem('access_token', res.data.access_token);
         } else {
@@ -36,7 +34,6 @@ const ViewKakao = () => {
             },
           })
           .then((response) => {
-            console.log(response.data);
             sessionStorage.setItem('userId', response.data);
             dispatch({ type: 'SETUSERINFO', isLogin: response.data });
             navigate('/');

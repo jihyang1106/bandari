@@ -12,14 +12,6 @@ const options = {
 const https = require('https').createServer(options, app);
 const path = require('path');
 
-const io = require('socket.io')(https, {
-  cors: {
-    orgin: ['*'],
-    method: ['GET', 'POST'],
-    credentials: true,
-  },
-});
-
 /**morgan 설정 */
 const morgan = require('morgan');
 app.use(morgan('dev')); // 로그
@@ -37,7 +29,7 @@ app.use(
 const cors = require('cors');
 app.use(
   cors({
-    origin: ['http://localhost:443', 'https://bandari.store'],
+    origin: ['https://bandari.store'],
     credentials: true,
   })
 );
@@ -91,6 +83,12 @@ const moment = require('moment');
 let loginUser = '';
 let roomId = '';
 let rooms = [];
+const io = require('socket.io')(https, {
+  cors: {
+    orgin: ['https://bandari.store'],
+    credentials: true,
+  },
+});
 
 io.on('connection', (socket) => {
   // 방 입장 시 로그인 한 유저와 방이름
@@ -107,13 +105,10 @@ io.on('connection', (socket) => {
 
   // 메시지 데이터
   socket.on('sendMsg', (data) => {
-    console.log('메시지 데이터', data);
     io.to(roomId).emit('newMsg', data);
   });
-
   // x버튼으로 채팅방 나가기
   socket.on('disconnect', () => {
-    console.log('rooms체크', rooms);
     rooms.forEach((el, idx) => {
       if (el == roomId) {
         rooms.splice(idx, 1);

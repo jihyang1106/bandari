@@ -181,6 +181,10 @@ exports.postSearch = async (req, res) => {
           model: pick,
           required: false,
         },
+        {
+          model: user,
+          attributes: ['nickname'],
+        },
       ],
       where: {
         [Op.or]: [

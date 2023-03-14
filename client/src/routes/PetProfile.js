@@ -52,7 +52,6 @@ const PetProfile = () => {
       info: form.content.value,
       userId: userId,
     };
-    console.log('datas : ', datas);
     if (
       datas.name === '' ||
       datas.petSpeices === '' ||
@@ -66,10 +65,6 @@ const PetProfile = () => {
     formData.append('datas', JSON.stringify(datas));
     // 이미지
     formData.append('petImg', imgRef.current.files[0]);
-
-    for (var value of formData.values()) {
-      console.log('form.data value', value);
-    }
 
     await axios
       .post('pet/insert', formData, {

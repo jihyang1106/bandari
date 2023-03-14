@@ -18,9 +18,7 @@ export default function SellForm() {
   const userLocation = useSelector((state) => state.location.userLocation);
   const userId = sessionStorage.getItem('userId');
   const petsidx = useSelector((state) => state.pets.pets);
-  console.log(petsidx);
   const petData = useSelector((state) => state.pets.pets);
-  console.log(petData);
   const [pets, setPets] = useState([]);
   const [petType, setpetType] = useState();
 
@@ -37,7 +35,6 @@ export default function SellForm() {
         userID: userId,
       })
       .then((res) => {
-        console.log('유저의 펫 db 조회:', res.data);
         setPets(res.data);
         setpetType(res.data.petType);
       });
