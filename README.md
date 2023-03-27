@@ -22,7 +22,7 @@
 ![Axios](https://img.shields.io/badge/-Axios-%235A29E4)
 ![Socket.io](https://img.shields.io/badge/-Socket.io-%23%23010101)
 
-![Github](https://img.shields.io/badge/-Github-%23181717)
+![Git](https://img.shields.io/badge/-Git-%23F05032)
 ![Pigma](https://img.shields.io/badge/-Pigma-%23F24E1E)
 ![Notion](https://img.shields.io/badge/-Notion-%23000000)
 
