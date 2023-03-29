@@ -17,32 +17,6 @@ const GetLocation = (dispatch) => {
     maximumAge: 0, // 캐시된 위치 정보의 유효 시간(밀리초)
   };
 
-  // let x = '';
-  // let y = '';
-  // await fetch('https://geolocation-db.com/json/')
-  //   .then((res) => res.json())
-  //   .then((res) => {
-  //     x = res.longitude;
-  //     y = res.latitude;
-  //   });
-
-  // await axios
-  //   .get(
-  //     `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${x}&y=${y}`,
-  //     {
-  //       headers: {
-  //         Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_API_KEY}`,
-  //       },
-  //     }
-  //   )
-  //   .then((res) => {
-  //     dispatch(setUserLocation(res.data.documents[0].address, true));
-  //   })
-  //   .catch((e) => {
-  //     console.warn(`${e.message}, 로그인 버튼 누르기 전에 허용 해주세요`);
-  //     dispatch(setUserLocation(null, false));
-  //   });
-
   // 알아낸 좌표를 kakaoAPI 요청
   const success = (position) => {
     const y = position.coords.latitude;
