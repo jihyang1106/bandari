@@ -31,23 +31,17 @@ const MyPage = (props) => {
 
   useEffect(() => {
     // 로그인 값이 있으면, 펫 데이터 체크
-    if (!isLoggedIn) {
-      alert('로그인 해주세요');
-      navigate('/');
-      return;
-    } else {
-      getSellData();
-      getLikeData();
-      getpetIds();
-      getBuyData();
-      axios
-        .post('pet/checkPet', {
-          userID: isLoggedIn,
-        })
-        .then((res) => {
-          setPetDatas(res.data);
-        });
-    }
+    getSellData();
+    getLikeData();
+    getpetIds();
+    getBuyData();
+    axios
+      .post('pet/checkPet', {
+        userID: isLoggedIn,
+      })
+      .then((res) => {
+        setPetDatas(res.data);
+      });
   }, []);
 
   // 유저 닉네임 가져오기

@@ -53,7 +53,6 @@ const ChatRoom = ({ chatData, categoryType, chatRef, setSelectChat }) => {
   // let socket = io.connect('http://localhost:5000');
   let socket = io.connect('https://bandari.store:5000');
 
-
   const closeBtnRef = useRef();
 
   // 현재 채팅에 들어온 유저와 방 번호

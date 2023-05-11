@@ -17,7 +17,6 @@ const ChatPage = () => {
   const [selected, setSelected] = useState(false);
   const [categoryType, setCategoryType] = useState('');
   const swtichType = useSelector((state) => state.typeSwitch.switchState);
-
   // 채팅방
   const [chatRoom, setChatRoom] = useState([]);
 
