@@ -24,14 +24,6 @@ const Category = () => {
     }
   }, [swtichType]);
 
-  // 로그인 체크 함수 ( 채팅 / 마이페이지 )
-  // const loginCheck = () => {
-  //   if (!isLoggedIn) {
-  //     alert('기능을 사용하시려면, 로그인 부탁드립니다');
-  //     navigate('/');
-  //     return;
-  //   }
-  // };
   return (
     <div className={styles.category}>
       <CategoryHamburger categoryType={categoryType} />
