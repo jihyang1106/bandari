@@ -2,15 +2,21 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const fs = require('fs');
+const path = require('path');
+
+/**dotenv 설정 */
+const dotenv = require('dotenv');
+dotenv.config({
+  path: path.join(__dirname, '../.env'),
+});
 
 const options = {
-  ca: fs.readFileSync('./fullchain.pem'),
-  key: fs.readFileSync('./privkey.pem', 'utf8'),
-  cert: fs.readFileSync('./cert.pem', 'utf8'),
+  ca: fs.readFileSync(`${process.env.SSL_PATH}/fullchain.pem`),
+  key: fs.readFileSync(`${process.env.SSL_PATH}/privkey.pem`, 'utf8'),
+  cert: fs.readFileSync(`${process.env.SSL_PATH}/cert.pem`, 'utf8'),
 };
 
 const https = require('https').createServer(options, app);
-const path = require('path');
 
 /**morgan 설정 */
 const morgan = require('morgan');
@@ -33,12 +39,6 @@ app.use(
     credentials: true,
   })
 );
-
-/**dotenv 설정 */
-const dotenv = require('dotenv');
-dotenv.config({
-  path: path.join(__dirname, '../.env'),
-});
 
 app.use(express.static(path.join(__dirname, 'public'))); // 요청시 기본 경로 설정
 app.use(express.json()); // json 파싱, 유저가 보낸 데이터 출력하기 위해 필요
